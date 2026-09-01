@@ -186,10 +186,10 @@
     background:var(--panel); padding:26px; display:flex; flex-direction:column; gap:14px;
   }
   .card .thumb{
-    aspect-ratio:4/3; background:var(--canvas); display:flex; align-items:center; justify-content:center;
-    border:1px dashed var(--line);
+    aspect-ratio:4/3; background:var(--canvas); overflow:hidden;
+    border:1px solid var(--line);
   }
-  .card .thumb svg{width:58%; height:58%;}
+  .card .thumb img{width:100%; height:100%; object-fit:cover; display:block;}
   .card-head{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
   .card-head h3{font-size:1.18rem; font-weight:600;}
   .price{font-family:'Playfair Display'; font-weight:600; font-size:1.15rem; white-space:nowrap;}
@@ -455,6 +455,12 @@
   // Edita este arreglo para agregar, quitar o actualizar productos.
   // "stock" = unidades disponibles en inventario para ese producto.
   // ---------------------------------------------------------------
+  // Fotos con licencia libre (Unsplash License — uso comercial permitido, sin costo).
+  // Crédito de buena práctica: Sincerely Media, TuanAnh Blue, Tamara Harhai — unsplash.com
+  const FOTO_BLANCA = "https://images.unsplash.com/photo-1564859228273-274232fdb516?w=600&h=600&fit=crop&auto=format&q=80";
+  const FOTO_SURTIDO = "https://images.unsplash.com/photo-1716951984700-64ea15a06f13?w=600&h=600&fit=crop&auto=format&q=80";
+  const FOTO_RAYADA = "https://images.unsplash.com/photo-1603280778469-88ff52a978ce?w=600&h=600&fit=crop&auto=format&q=80";
+
   const productos = [
     {
       nombre: "Camisa Lino Costa",
@@ -462,7 +468,8 @@
       precio: "L 780",
       colores: ["#33524A", "#BE8329", "#221D16"],
       tallas: ["S","M","L","XL"],
-      stock: 24
+      stock: 24,
+      foto: FOTO_BLANCA
     },
     {
       nombre: "Camisa Sábana Cuadros",
@@ -470,7 +477,8 @@
       precio: "L 890",
       colores: ["#5B5245", "#9C4A32"],
       tallas: ["M","L","XL"],
-      stock: 6
+      stock: 6,
+      foto: FOTO_SURTIDO
     },
     {
       nombre: "Camisa Tela Cruda",
@@ -478,7 +486,8 @@
       precio: "L 720",
       colores: ["#C9BFA9", "#221D16"],
       tallas: ["S","M","L"],
-      stock: 0
+      stock: 0,
+      foto: FOTO_SURTIDO
     },
     {
       nombre: "Camisa Popelina Lisa",
@@ -486,7 +495,8 @@
       precio: "L 850",
       colores: ["#33524A", "#221D16", "#5B5245"],
       tallas: ["S","M","L","XL"],
-      stock: 15
+      stock: 15,
+      foto: FOTO_BLANCA
     },
     {
       nombre: "Camisa Rayada Puerto",
@@ -494,7 +504,8 @@
       precio: "L 760",
       colores: ["#BE8329", "#33524A"],
       tallas: ["M","L"],
-      stock: 3
+      stock: 3,
+      foto: FOTO_RAYADA
     },
     {
       nombre: "Camisa Denim Ligera",
@@ -502,7 +513,8 @@
       precio: "L 980",
       colores: ["#33524A"],
       tallas: ["S","M","L","XL"],
-      stock: 11
+      stock: 11,
+      foto: FOTO_BLANCA
     }
   ];
 
@@ -525,7 +537,7 @@
     const ctaTexto = p.stock === 0 ? "Sin existencias" : "Consultar disponibilidad";
     return `
       <article class="card">
-        <div class="thumb">${shirtIcon(p.colores[0])}</div>
+        <div class="thumb"><img src="${p.foto}" alt="${p.nombre}" loading="lazy"></div>
         <div class="card-head">
           <h3>${p.nombre}</h3>
           <span class="price">${p.precio}</span>
