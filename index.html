@@ -12,15 +12,16 @@
 
   <style>
     :root{
-      --ink:#171715;
-      --cream:#f7f2ea;
-      --cream-2:#fffaf4;
-      --wine:#a21f32;
-      --wine-dark:#7a1625;
-      --muted:#6f6a64;
-      --line:rgba(23,23,21,.12);
+      --bg:#f5efe7;
+      --paper:#fffaf3;
+      --ink:#171512;
+      --muted:#746d65;
+      --wine:#a11d31;
+      --wine-dark:#741325;
+      --cream:#f4eee5;
+      --line:rgba(23,21,18,.12);
       --white:#fff;
-      --shadow:0 14px 34px rgba(0,0,0,.10);
+      --shadow:0 16px 40px rgba(0,0,0,.10);
     }
 
     *{
@@ -35,8 +36,8 @@
 
     body{
       font-family:"DM Sans",sans-serif;
-      background:var(--cream);
       color:var(--ink);
+      background:var(--bg);
       overflow-x:hidden;
     }
 
@@ -55,23 +56,26 @@
     }
 
     .wrap{
-      width:min(1400px,calc(100% - 32px));
+      width:min(1320px,calc(100% - 34px));
       margin:auto;
     }
 
-    /* TOP BAR */
+    /* =========================
+       TOP BAR
+    ========================= */
+
     .topbar{
-      background:#171715;
+      background:#171714;
       color:#fff;
     }
 
     .topbar-inner{
-      min-height:44px;
+      min-height:42px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
-      font-size:13px;
+      gap:20px;
+      font-size:12px;
       font-weight:700;
     }
 
@@ -82,46 +86,49 @@
       flex-wrap:wrap;
     }
 
-    .sep{
+    .top-left .sep{
       opacity:.35;
     }
 
-    .socials{
+    .top-social{
       display:flex;
       gap:10px;
     }
 
-    .social{
-      width:30px;
-      height:30px;
-      border-radius:50%;
+    .top-social a{
+      width:28px;
+      height:28px;
       border:1px solid rgba(255,255,255,.18);
+      border-radius:50%;
       display:grid;
       place-items:center;
       transition:.25s;
     }
 
-    .social:hover{
+    .top-social a:hover{
       background:var(--wine);
       border-color:var(--wine);
     }
 
-    /* HEADER */
+    /* =========================
+       HEADER
+    ========================= */
+
     header{
       position:sticky;
       top:0;
-      z-index:50;
-      background:rgba(255,250,244,.97);
+      z-index:60;
+      background:rgba(255,250,243,.96);
       backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
 
     .nav{
-      min-height:148px;
+      min-height:145px;
       display:grid;
-      grid-template-columns:300px 1fr 120px;
+      grid-template-columns:280px 1fr 110px;
       align-items:center;
-      gap:26px;
+      gap:28px;
     }
 
     .brand{
@@ -131,8 +138,8 @@
     }
 
     .brand img{
-      width:270px;
-      height:128px;
+      width:250px;
+      height:120px;
       object-fit:contain;
       object-position:left center;
       mix-blend-mode:multiply;
@@ -142,60 +149,59 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
     }
 
     .menu a{
       display:flex;
       align-items:center;
-      gap:10px;
-      padding:15px 20px;
+      gap:8px;
+      padding:14px 18px;
       border-radius:999px;
-      font-size:17px;
       font-weight:800;
+      font-size:16px;
       transition:.25s;
       white-space:nowrap;
     }
 
     .menu a:hover,
     .menu a.active{
-      background:var(--wine);
       color:#fff;
+      background:var(--wine);
+      box-shadow:0 12px 28px rgba(161,29,49,.22);
       transform:translateY(-2px);
-      box-shadow:0 10px 24px rgba(162,31,50,.22);
-    }
-
-    .menu-icon{
-      font-size:18px;
     }
 
     .nav-actions{
       display:flex;
       justify-content:flex-end;
-      gap:10px;
+      gap:14px;
     }
 
     .round-action{
-      width:44px;
-      height:44px;
+      width:42px;
+      height:42px;
       border-radius:50%;
       display:grid;
       place-items:center;
-      font-size:24px;
+      font-size:22px;
       transition:.25s;
     }
 
     .round-action:hover{
-      background:#eee5d9;
+      background:#eee3d6;
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
+
     .hero{
       position:relative;
       height:570px;
-      background:#2b2723;
       overflow:hidden;
+      background:#201d19;
     }
 
     .slide{
@@ -211,64 +217,78 @@
       pointer-events:auto;
     }
 
-    .hero-main{
+    /* Fondo borroso que rellena toda la fila */
+    .slide .hero-bg{
+      position:absolute;
+      inset:-24px;
+      width:calc(100% + 48px);
+      height:calc(100% + 48px);
+      object-fit:cover;
+      filter:blur(18px) brightness(.78);
+      transform:scale(1.05);
+    }
+
+    /* Foto principal completa, sin recorte */
+    .slide .hero-main{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
-      object-fit:cover;
-      object-position:center center;
+      object-fit:contain;
+      object-position:center;
+      z-index:1;
     }
 
     .slide::after{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(
-        90deg,
-        rgba(0,0,0,.34) 0%,
-        rgba(0,0,0,.26) 34%,
-        rgba(0,0,0,.10) 58%,
-        rgba(0,0,0,.03) 100%
-      );
-      z-index:1;
+      z-index:2;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(13,12,11,.56) 0%,
+          rgba(13,12,11,.36) 33%,
+          rgba(13,12,11,.12) 58%,
+          rgba(13,12,11,.03) 100%
+        );
     }
 
     .hero-content{
       position:relative;
-      z-index:2;
+      z-index:3;
       height:570px;
       display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:flex-start;
-      max-width:640px;
-      padding-left:330px;
+      max-width:610px;
       color:#fff;
+      padding-left:290px;
     }
 
     .kicker{
-      color:#f3d096;
+      color:#f4d29a;
       text-transform:uppercase;
-      letter-spacing:.18em;
-      font-size:14px;
+      letter-spacing:.17em;
+      font-size:13px;
       font-weight:800;
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
 
     .hero h1{
-      font:800 clamp(52px,5.8vw,84px)/.92 "Manrope",sans-serif;
+      font:800 clamp(48px,5.5vw,76px)/.93 "Manrope",sans-serif;
       letter-spacing:-.055em;
       text-transform:uppercase;
       margin-bottom:22px;
-      text-shadow:0 2px 16px rgba(0,0,0,.24);
+      text-shadow:0 2px 18px rgba(0,0,0,.20);
     }
 
     .hero p{
-      font-size:20px;
+      font-size:19px;
       line-height:1.55;
-      max-width:570px;
-      color:rgba(255,255,255,.96);
+      max-width:560px;
+      color:rgba(255,255,255,.94);
       margin-bottom:26px;
     }
 
@@ -276,34 +296,34 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:16px 26px;
+      padding:15px 24px;
       border-radius:999px;
       background:var(--wine);
       color:#fff;
       font-weight:800;
-      font-size:15px;
-      border:1px solid rgba(255,255,255,.50);
-      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      font-size:14px;
+      border:1px solid rgba(255,255,255,.48);
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
       transition:.25s;
     }
 
     .hero-btn:hover{
-      background:var(--wine-dark);
       transform:translateY(-2px);
+      background:var(--wine-dark);
     }
 
     .hero-arrow{
       position:absolute;
+      z-index:6;
       top:50%;
       transform:translateY(-50%);
-      z-index:5;
-      width:52px;
-      height:52px;
+      width:50px;
+      height:50px;
       border-radius:50%;
       border:1px solid rgba(255,255,255,.40);
-      background:rgba(0,0,0,.48);
+      background:rgba(0,0,0,.52);
       color:#fff;
-      font-size:30px;
+      font-size:28px;
       cursor:pointer;
       transition:.25s;
     }
@@ -313,47 +333,50 @@
     }
 
     .hero-arrow.prev{
-      left:24px;
+      left:22px;
     }
 
     .hero-arrow.next{
-      right:24px;
+      right:22px;
     }
 
     .hero-dots{
       position:absolute;
-      z-index:5;
+      z-index:6;
       left:50%;
-      bottom:24px;
+      bottom:25px;
       transform:translateX(-50%);
       display:flex;
-      gap:9px;
+      gap:8px;
     }
 
     .dot{
-      width:13px;
-      height:13px;
+      width:12px;
+      height:12px;
       border-radius:50%;
       border:0;
-      background:rgba(255,255,255,.86);
+      background:rgba(255,255,255,.82);
       cursor:pointer;
     }
 
     .dot.active{
       background:var(--wine);
-      outline:2px solid rgba(255,255,255,.9);
+      outline:2px solid rgba(255,255,255,.86);
     }
 
-    /* BENEFITS STRIP */
+    /* =========================
+       BENEFITS
+    ========================= */
+
     .benefits-bar{
-      background:var(--cream-2);
+      background:var(--paper);
       border-bottom:1px solid var(--line);
     }
 
     .benefits-grid{
-      min-height:100px;
       display:grid;
       grid-template-columns:repeat(4,1fr);
+      min-height:95px;
     }
 
     .benefit{
@@ -371,24 +394,24 @@
 
     .benefit-icon{
       font-size:31px;
-      min-width:36px;
-      text-align:center;
     }
 
     .benefit strong{
       display:block;
-      font-size:16px;
-      margin-bottom:4px;
+      font-size:15px;
+      margin-bottom:3px;
     }
 
     .benefit span{
-      display:block;
       color:var(--muted);
-      font-size:14px;
+      font-size:13px;
     }
 
-    /* BELOW THE FOLD */
-    section.content-section{
+    /* =========================
+       COLLECTION
+    ========================= */
+
+    section{
       padding:84px 0;
     }
 
@@ -396,7 +419,7 @@
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
-      gap:24px;
+      gap:25px;
       margin-bottom:32px;
     }
 
@@ -442,8 +465,8 @@
 
     .product-photo{
       height:320px;
-      background:#eee7dd;
       padding:8px;
+      background:#eee7dd;
     }
 
     .product-photo img{
@@ -451,7 +474,7 @@
       height:100%;
       object-fit:contain;
       object-position:center;
-      border-radius:14px;
+      border-radius:15px;
       background:#eee7dd;
     }
 
@@ -469,13 +492,131 @@
       font-size:12px;
     }
 
-    .cta-box{
-      background:linear-gradient(135deg,#efb357,#d78e32);
-      border-radius:30px;
-      padding:54px;
+    .promos{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:20px;
+    }
+
+    .promo{
+      min-height:150px;
+      border-radius:24px;
+      padding:30px;
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:18px;
+    }
+
+    .promo.red{
+      color:#fff;
+      background:linear-gradient(135deg,var(--wine),var(--wine-dark));
+    }
+
+    .promo.cream{
+      background:linear-gradient(135deg,#fff8ef,#ead8c1);
+    }
+
+    .promo h3{
+      font:800 25px "Manrope",sans-serif;
+      margin-bottom:6px;
+    }
+
+    .promo p{
+      opacity:.80;
+    }
+
+    .promo a{
+      border:1px solid currentColor;
+      border-radius:999px;
+      padding:12px 18px;
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    /* =========================
+       BRAND
+    ========================= */
+
+    .brand-section{
+      padding-top:30px;
+    }
+
+    .brand-panel{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      background:#171512;
+      color:#fff;
+      border-radius:30px;
+      overflow:hidden;
+    }
+
+    .brand-photo{
+      min-height:570px;
+      background:#201e1b;
+    }
+
+    .brand-photo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+    }
+
+    .brand-copy{
+      padding:56px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .brand-copy h2{
+      font:800 clamp(38px,5vw,66px)/.98 "Manrope",sans-serif;
+      letter-spacing:-.05em;
+      margin:14px 0 22px;
+    }
+
+    .brand-copy p{
+      color:#c9c2ba;
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .mini-benefits{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:32px;
+    }
+
+    .mini-benefit{
+      border-top:1px solid #45413d;
+      padding-top:16px;
+    }
+
+    .mini-benefit strong{
+      display:block;
+      margin-bottom:6px;
+    }
+
+    .mini-benefit span{
+      color:#a29b92;
+      font-size:13px;
+    }
+
+    /* =========================
+       CTA / FOOTER
+    ========================= */
+
+    .cta-box{
+      background:linear-gradient(135deg,#f0b65b,#d88f33);
+      border-radius:30px;
+      padding:54px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
       gap:24px;
     }
 
@@ -486,7 +627,7 @@
     }
 
     .cta-box a{
-      background:#171715;
+      background:#171512;
       color:#fff;
       padding:15px 22px;
       border-radius:999px;
@@ -495,8 +636,8 @@
     }
 
     footer{
-      padding:42px 0;
       border-top:1px solid var(--line);
+      padding:42px 0;
     }
 
     .footer{
@@ -510,41 +651,44 @@
 
     .whatsapp{
       position:fixed;
-      right:26px;
-      bottom:22px;
-      z-index:70;
+      right:24px;
+      bottom:20px;
+      z-index:80;
       background:#25D366;
       color:#07391f;
       padding:15px 20px;
       border-radius:999px;
       font-weight:800;
-      box-shadow:0 14px 36px rgba(0,0,0,.18);
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
     }
 
-    /* RESPONSIVE */
-    @media(max-width:1150px){
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:1120px){
       .nav{
-        grid-template-columns:250px 1fr;
+        grid-template-columns:240px 1fr;
       }
 
       .nav-actions{
         display:none;
       }
 
-      .hero-content{
-        padding-left:180px;
-      }
-
       .products{
         grid-template-columns:repeat(3,1fr);
+      }
+
+      .hero-content{
+        padding-left:140px;
       }
     }
 
     @media(max-width:900px){
       .nav{
         grid-template-columns:1fr;
+        gap:10px;
         padding:14px 0;
-        gap:8px;
       }
 
       .brand{
@@ -552,15 +696,15 @@
       }
 
       .brand img{
-        width:240px;
-        height:100px;
+        width:230px;
+        height:95px;
         object-position:center;
       }
 
       .menu{
         justify-content:flex-start;
-        flex-wrap:nowrap;
         overflow-x:auto;
+        flex-wrap:nowrap;
         padding-bottom:4px;
       }
 
@@ -570,8 +714,8 @@
       }
 
       .hero-content{
-        padding:40px 78px;
-        max-width:640px;
+        padding:40px 75px;
+        max-width:630px;
       }
 
       .benefits-grid{
@@ -581,6 +725,19 @@
       .benefit:nth-child(2){
         border-right:0;
       }
+
+      .brand-panel{
+        grid-template-columns:1fr;
+      }
+
+      .promos{
+        grid-template-columns:1fr;
+      }
+
+      .cta-box{
+        flex-direction:column;
+        align-items:flex-start;
+      }
     }
 
     @media(max-width:620px){
@@ -588,7 +745,7 @@
         justify-content:center;
       }
 
-      .socials{
+      .top-social{
         display:none;
       }
 
@@ -598,7 +755,7 @@
       }
 
       .hero-content{
-        padding:34px 58px;
+        padding:36px 58px;
       }
 
       .hero h1{
@@ -647,10 +804,20 @@
         height:240px;
       }
 
+      .brand-photo{
+        min-height:420px;
+      }
+
+      .brand-copy{
+        padding:34px 24px;
+      }
+
+      .mini-benefits{
+        grid-template-columns:1fr;
+      }
+
       .cta-box{
         padding:34px 24px;
-        flex-direction:column;
-        align-items:flex-start;
       }
     }
 
@@ -668,8 +835,10 @@
 
 <body>
 
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="wrap topbar-inner">
+
       <div class="top-left">
         <span>🚚 ENVÍOS EN HONDURAS</span>
         <span class="sep">|</span>
@@ -680,15 +849,17 @@
         <span>♥ CALIDAD EN CADA PRENDA</span>
       </div>
 
-      <div class="socials">
-        <a class="social" href="#" aria-label="Instagram">◎</a>
-        <a class="social" href="#" aria-label="Facebook">f</a>
-        <a class="social" href="#" aria-label="TikTok">♪</a>
-        <a class="social" href="#" aria-label="WhatsApp">◔</a>
+      <div class="top-social">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="WhatsApp">◔</a>
       </div>
+
     </div>
   </div>
 
+  <!-- HEADER -->
   <header>
     <div class="wrap nav">
 
@@ -697,17 +868,17 @@
       </a>
 
       <nav class="menu">
-        <a href="#" class="active"><span class="menu-icon">⌂</span>Inicio</a>
-        <a href="#coleccion"><span class="menu-icon">👕</span>Colección</a>
-        <a href="#cristiana"><span class="menu-icon">✚</span>Colección Cristiana</a>
-        <a href="#estilo"><span class="menu-icon">☆</span>Estilo</a>
-        <a href="#marca"><span class="menu-icon">◇</span>La Marca</a>
-        <a href="#contacto"><span class="menu-icon">✉</span>Contacto</a>
+        <a class="active" href="#">⌂ Inicio</a>
+        <a href="#coleccion">👕 Colección</a>
+        <a href="#cristiana">✚ Colección Cristiana</a>
+        <a href="#estilo">☆ Estilo</a>
+        <a href="#marca">◇ La Marca</a>
+        <a href="#contacto">✉ Contacto</a>
       </nav>
 
       <div class="nav-actions">
         <a class="round-action" href="#coleccion" aria-label="Buscar">⌕</a>
-        <a class="round-action" href="#contacto" aria-label="Carrito">♧</a>
+        <a class="round-action" href="#contacto" aria-label="Pedido">♧</a>
       </div>
 
     </div>
@@ -715,36 +886,40 @@
 
   <main>
 
+    <!-- HERO -->
     <section class="hero">
 
       <div class="slide active">
+        <img class="hero-bg" src="assets/JS.png" alt="">
         <img class="hero-main" src="assets/JS.png" alt="Colección cristiana para niños, mujeres y hombres">
 
         <div class="wrap hero-content">
           <span class="kicker">Diseños con propósito</span>
-          <h1>Viste tu fe<br>con estilo</h1>
+          <h1>Viste tu fe con estilo</h1>
           <p>Opciones para niños, mujeres y hombres con diseños que transmiten un mensaje.</p>
           <a class="hero-btn" href="#cristiana">Ver colección cristiana →</a>
         </div>
       </div>
 
       <div class="slide">
-        <img class="hero-main" src="assets/negr.png" alt="Pareja con camisas cristianas">
+        <img class="hero-bg" src="assets/negr.png" alt="">
+        <img class="hero-main" src="assets/negr.png" alt="Pareja usando camisas con diseños cristianos">
 
         <div class="wrap hero-content">
-          <span class="kicker">Nueva colección</span>
-          <h1>Viste tu forma<br>de ser</h1>
+          <span class="kicker">Nueva colección 2026</span>
+          <h1>Viste tu forma de ser</h1>
           <p>Camisas casuales de algodón, cómodas y con diseños que te representan.</p>
           <a class="hero-btn" href="#coleccion">Explorar colección →</a>
         </div>
       </div>
 
       <div class="slide">
+        <img class="hero-bg" src="assets/verd1.png" alt="">
         <img class="hero-main" src="assets/verd1.png" alt="Camisa verde oliva">
 
         <div class="wrap hero-content">
           <span class="kicker">Comodidad y calidad</span>
-          <h1>Diseños que se<br>adaptan a ti</h1>
+          <h1>Diseños que se adaptan a ti</h1>
           <p>Elige tu color, tu estilo y personaliza tu camisa con impresión DTF.</p>
           <a class="hero-btn" href="#contacto">Solicitar diseño →</a>
         </div>
@@ -761,6 +936,7 @@
 
     </section>
 
+    <!-- BENEFITS -->
     <div class="benefits-bar">
       <div class="wrap benefits-grid">
 
@@ -799,7 +975,8 @@
       </div>
     </div>
 
-    <section class="content-section" id="coleccion">
+    <!-- COLLECTION -->
+    <section id="coleccion">
       <div class="wrap">
 
         <div class="section-head">
@@ -807,7 +984,11 @@
             <span class="eyebrow">Nuestra colección</span>
             <h2>Diseños que se adaptan a ti</h2>
           </div>
-          <p>Camisas casuales y cristianas para diferentes gustos, edades y ocasiones.</p>
+
+          <p>
+            Camisas casuales y cristianas para diferentes gustos,
+            edades y ocasiones.
+          </p>
         </div>
 
         <div class="products">
@@ -824,7 +1005,7 @@
 
           <article class="product">
             <div class="product-photo">
-              <img src="assets/vino.png" alt="Camisa vino">
+              <img src="assets/vino.png" alt="Camisa color vino">
             </div>
             <div class="product-info">
               <h3>Color Vino</h3>
@@ -864,17 +1045,163 @@
 
         </div>
 
+        <div class="promos">
+
+          <div class="promo red">
+            <div>
+              <h3>¿Diseño personalizado?</h3>
+              <p>Cuéntanos tu idea y la hacemos realidad.</p>
+            </div>
+            <a href="#contacto">Solicitar diseño →</a>
+          </div>
+
+          <div class="promo cream" id="cristiana">
+            <div>
+              <h3>Regalos con propósito</h3>
+              <p>Camisas que inspiran y conectan.</p>
+            </div>
+            <a href="#estilo">Ver diseños cristianos →</a>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
-    <section class="content-section" id="contacto">
+    <!-- BRAND -->
+    <section class="brand-section" id="marca">
       <div class="wrap">
+
+        <div class="brand-panel">
+
+          <div class="brand-photo">
+            <img src="assets/negr.png" alt="Pareja usando camisas cristianas">
+          </div>
+
+          <div class="brand-copy">
+            <span class="eyebrow" style="color:#e8bd81;">Nuestra esencia</span>
+            <h2>Más que moda, un mensaje.</h2>
+
+            <p>
+              Moda Casual ofrece camisas de algodón pensadas para acompañarte
+              todos los días. Puedes elegir entre nuestros diseños disponibles
+              o personalizar una camisa con impresión DTF.
+            </p>
+
+            <div class="mini-benefits">
+
+              <div class="mini-benefit">
+                <strong>Algodón cómodo</strong>
+                <span>Ideal para uso diario.</span>
+              </div>
+
+              <div class="mini-benefit">
+                <strong>Diseños DTF</strong>
+                <span>Estampados personalizados.</span>
+              </div>
+
+              <div class="mini-benefit">
+                <strong>Variedad</strong>
+                <span>Colores, estilos y tallas.</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STYLE -->
+    <section id="estilo">
+      <div class="wrap">
+
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Estilo</span>
+            <h2>Encuentra el diseño que va contigo.</h2>
+          </div>
+
+          <p>
+            Diseños casuales, familiares y cristianos para expresar tu estilo
+            de una forma diferente.
+          </p>
+        </div>
+
+        <div class="products">
+
+          <article class="product">
+            <div class="product-photo">
+              <img src="assets/JS.png" alt="Colección para familia">
+            </div>
+            <div class="product-info">
+              <h3>Fe para toda la familia</h3>
+              <p>Niños · Mujeres · Hombres</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="product-photo">
+              <img src="assets/negr.png" alt="Pareja con camisas">
+            </div>
+            <div class="product-info">
+              <h3>Diseños con propósito</h3>
+              <p>Mensajes que inspiran</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="product-photo">
+              <img src="assets/bat1.jpg" alt="Camisa negra">
+            </div>
+            <div class="product-info">
+              <h3>Diseño posterior</h3>
+              <p>Estilo urbano</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="product-photo">
+              <img src="assets/ver.png" alt="Camisa Vision">
+            </div>
+            <div class="product-info">
+              <h3>Vision</h3>
+              <p>Diseño DTF</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="product-photo">
+              <img src="assets/vino.png" alt="Camisa vino">
+            </div>
+            <div class="product-info">
+              <h3>Color y personalidad</h3>
+              <p>Estilo que destaca</p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contacto">
+      <div class="wrap">
+
         <div class="cta-box">
           <h2>¿Encontraste una camisa que va contigo?</h2>
-          <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">
+
+          <a
+            href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Pedir por WhatsApp →
           </a>
         </div>
+
       </div>
     </section>
 
@@ -888,7 +1215,12 @@
     </div>
   </footer>
 
-  <a class="whatsapp" href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">
+  <a
+    class="whatsapp"
+    href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     WhatsApp
   </a>
 
