@@ -106,13 +106,19 @@
     }
     .brand{
       display:flex;align-items:center;justify-content:flex-end;
-      min-width:270px;
+      min-width:300px;
     }
     .brand img{
-      width:240px;
-      height:88px;
+      width:285px;
+      height:92px;
       object-fit:contain;
       object-position:right center;
+    }
+    .brand-fallback{
+      display:none;
+      font:800 24px "Manrope",sans-serif;
+      letter-spacing:-.04em;
+      color:var(--wine);
     }
 
     /* HERO SLIDER */
@@ -120,7 +126,7 @@
       position:relative;
       background:#2b2925;
       overflow:hidden;
-      min-height:560px;
+      min-height:500px;
     }
     .slide{
       position:absolute;inset:0;
@@ -132,10 +138,18 @@
       content:"";position:absolute;inset:0;
       background:linear-gradient(90deg,rgba(16,15,14,.72) 0%,rgba(16,15,14,.48) 42%,rgba(16,15,14,.10) 72%,rgba(16,15,14,.04) 100%);
     }
-    .slide img{position:absolute;inset:0}
+    .slide img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center center;
+      background:#211f1c;
+    }
     .slide-content{
       position:relative;z-index:2;
-      min-height:560px;
+      min-height:500px;
       display:flex;
       flex-direction:column;
       justify-content:center;
@@ -235,7 +249,16 @@
       transition:.3s;
     }
     .product:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-    .product-photo{height:300px;background:#ddd}
+    .product-photo{
+      height:270px;
+      background:#eee9e1;
+      padding:8px;
+    }
+    .product-photo img{
+      object-fit:contain;
+      object-position:center;
+      border-radius:15px;
+    }
     .product-info{padding:14px 14px 18px}
     .product-info h3{font-size:16px;margin-bottom:4px}
     .product-info p{font-size:12px;color:var(--muted)}
@@ -263,7 +286,16 @@
     .brand-grid{
       display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
     }
-    .brand-photo{height:600px;border-radius:28px;overflow:hidden}
+    .brand-photo{
+      height:540px;
+      border-radius:28px;
+      overflow:hidden;
+      background:#25231f;
+    }
+    .brand-photo img{
+      object-fit:contain;
+      object-position:center;
+    }
     .brand-copy h2{
       font:800 clamp(38px,5vw,66px)/.98 "Manrope",sans-serif;
       letter-spacing:-.05em;margin:14px 0 22px;
@@ -318,7 +350,7 @@
       .topbar-inner{justify-content:center}
       .top-right{display:none}
       .brand img{width:180px;height:72px}
-      .hero,.slide-content{min-height:520px}
+      .hero,.slide-content{min-height:460px}
       .slide h1{font-size:46px}
       .slide p{font-size:17px}
       .hero-arrow{width:40px;height:40px}
@@ -368,8 +400,10 @@
         <a href="#contacto"><span class="menu-icon">✉</span>Contacto</a>
       </nav>
 
-      <a class="brand" href="#">
-        <img src="assets/logo.png" alt="Logo Moda Casual">
+      <a class="brand" href="#" aria-label="Moda Casual">
+        <img src="assets/logo.png" alt="Logo Moda Casual"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="brand-fallback">MC · MODA CASUAL</span>
       </a>
     </div>
   </header>
