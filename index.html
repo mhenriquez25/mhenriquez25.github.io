@@ -15,30 +15,17 @@
   >
 
   <style>
-
     :root {
       --bg: #f4f0e8;
       --ink: #11120f;
       --muted: #6f716a;
-
       --wine: #6e1d2c;
       --orange: #f29a27;
       --green: #34472c;
-
       --white: #ffffff;
-
       --line: rgba(17,18,15,.12);
-
-      --radius: 28px;
-
-      --shadow:
-        0 18px 50px rgba(0,0,0,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.08);
     }
-
-
-    /* =============================
-       RESET
-    ============================= */
 
     * {
       box-sizing: border-box;
@@ -53,16 +40,13 @@
     body {
       background: var(--bg);
       color: var(--ink);
-
       font-family: "DM Sans", sans-serif;
     }
 
     img {
       display: block;
-
       width: 100%;
       height: 100%;
-
       object-fit: cover;
     }
 
@@ -72,79 +56,50 @@
     }
 
     .wrap {
-      width: min(
-        1220px,
-        calc(100% - 40px)
-      );
-
+      width: min(1220px, calc(100% - 40px));
       margin: auto;
     }
 
-
-    /* =============================
+    /* =========================
        BARRA SUPERIOR
-    ============================= */
+    ========================= */
 
     .topbar {
       background: #11120f;
-
       color: #fff;
-
       padding: 10px 18px;
-
       text-align: center;
-
       font-size: 11px;
       font-weight: 700;
-
       letter-spacing: .14em;
-
       text-transform: uppercase;
     }
 
-
-    /* =============================
+    /* =========================
        HEADER
-    ============================= */
+    ========================= */
 
     header {
       position: sticky;
-
       top: 0;
-
       z-index: 50;
-
-      background:
-        rgba(244,240,232,.92);
-
-      backdrop-filter:
-        blur(18px);
-
-      border-bottom:
-        1px solid var(--line);
+      background: rgba(244,240,232,.94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
     }
 
     .nav {
       height: 78px;
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
       gap: 24px;
     }
 
     .logo {
-      font-family:
-        Manrope,
-        sans-serif;
-
+      font-family: Manrope, sans-serif;
       font-weight: 800;
-
       font-size: 23px;
-
       letter-spacing: -.05em;
     }
 
@@ -154,9 +109,7 @@
 
     .menu {
       display: flex;
-
       gap: 30px;
-
       font-size: 14px;
     }
 
@@ -170,1150 +123,687 @@
 
     .pill {
       display: inline-flex;
-
       align-items: center;
-
       justify-content: center;
-
       padding: 13px 20px;
-
       border-radius: 999px;
-
       background: var(--ink);
-
       color: #fff;
-
       font-size: 13px;
-
       font-weight: 700;
-
       transition: .25s;
     }
 
     .pill:hover {
-      transform:
-        translateY(-2px);
+      transform: translateY(-2px);
     }
 
-
-    /* =============================
+    /* =========================
        HERO
-    ============================= */
+    ========================= */
 
     .hero {
       min-height: 710px;
-
-      padding:
-        28px 0
-        68px;
-
+      padding: 28px 0 68px;
       display: grid;
-
-      grid-template-columns:
-        .82fr 1.18fr;
-
+      grid-template-columns: .82fr 1.18fr;
       gap: 24px;
     }
 
     .hero-copy {
       border-radius: 34px;
-
       padding: 62px;
-
       color: #fff;
-
-      background:
-        linear-gradient(
-          145deg,
-          #7b2133,
-          #651826
-        );
-
+      background: linear-gradient(145deg, #7b2133, #651826);
       display: flex;
-
       flex-direction: column;
-
       justify-content: center;
-
       position: relative;
-
       overflow: hidden;
     }
 
     .hero-copy::after {
       content: "";
-
       position: absolute;
-
       width: 420px;
-
       height: 420px;
-
       border-radius: 50%;
-
-      background:
-        rgba(255,255,255,.05);
-
+      background: rgba(255,255,255,.05);
       right: -180px;
-
       top: -120px;
     }
 
     .eyebrow {
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .16em;
-
+      text-transform: uppercase;
+      letter-spacing: .16em;
       font-size: 11px;
-
       font-weight: 700;
-
       opacity: .78;
     }
 
     .hero h1 {
-      font-family:
-        Manrope,
-        sans-serif;
-
-      font-size:
-        clamp(
-          52px,
-          6vw,
-          84px
-        );
-
+      font-family: Manrope, sans-serif;
+      font-size: clamp(52px, 6vw, 84px);
       line-height: .93;
-
-      letter-spacing:
-        -.065em;
-
-      margin:
-        22px 0
-        28px;
-
+      letter-spacing: -.065em;
+      margin: 22px 0 28px;
       position: relative;
-
       z-index: 1;
     }
 
     .hero p {
       max-width: 480px;
-
       font-size: 17px;
-
       line-height: 1.72;
-
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          .84
-        );
-
+      color: rgba(255,255,255,.84);
       position: relative;
-
       z-index: 1;
     }
 
     .hero-actions {
       display: flex;
-
       gap: 10px;
-
       flex-wrap: wrap;
-
       margin-top: 30px;
-
       position: relative;
-
       z-index: 1;
     }
 
     .btn {
-      padding:
-        14px 20px;
-
-      border-radius:
-        999px;
-
-      font-size:
-        13px;
-
-      font-weight:
-        700;
-
-      transition:
-        .25s;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: .25s;
     }
 
     .btn:hover {
-      transform:
-        translateY(-2px);
+      transform: translateY(-2px);
     }
 
     .btn-white {
-      background:
-        #fff;
-
-      color:
-        #111;
+      background: #fff;
+      color: #111;
     }
 
     .btn-ghost {
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          .42
-        );
-
-      color:
-        #fff;
+      border: 1px solid rgba(255,255,255,.42);
+      color: #fff;
     }
 
-
-    /* =============================
-       GALERÍA HERO
-    ============================= */
+    /* =========================
+       HERO IMÁGENES
+    ========================= */
 
     .hero-gallery {
       display: grid;
-
-      grid-template-columns:
-        1.15fr .85fr;
-
-      grid-template-rows:
-        1fr 1fr;
-
+      grid-template-columns: 1.15fr .85fr;
+      grid-template-rows: 1fr 1fr;
       gap: 12px;
     }
 
     .hero-card {
       border-radius: 28px;
-
       overflow: hidden;
-
       position: relative;
-
       background: #ddd;
-
       min-height: 260px;
     }
 
     .hero-card:first-child {
-      grid-row:
-        1 / 3;
+      grid-row: 1 / 3;
     }
 
     .hero-card img {
-      transition:
-        .6s;
+      transition: .6s;
     }
 
     .hero-card:hover img {
-      transform:
-        scale(1.025);
+      transform: scale(1.025);
     }
 
     .tag {
       position: absolute;
-
       left: 18px;
-
       bottom: 18px;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          .92
-        );
-
-      backdrop-filter:
-        blur(10px);
-
-      border-radius:
-        999px;
-
-      padding:
-        10px 14px;
-
-      font-size:
-        12px;
-
-      font-weight:
-        700;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-
-    /* =============================
+    /* =========================
        TICKER
-    ============================= */
+    ========================= */
 
     .ticker {
-      border-top:
-        1px solid
-        var(--line);
-
-      border-bottom:
-        1px solid
-        var(--line);
-
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
       overflow: hidden;
-
       white-space: nowrap;
-
-      padding:
-        18px 0;
+      padding: 18px 0;
     }
 
     .ticker-track {
-      width:
-        max-content;
-
-      font:
-        700 13px
-        Manrope,
-        sans-serif;
-
-      letter-spacing:
-        .09em;
-
-      animation:
-        scroll
-        24s
-        linear
-        infinite;
+      width: max-content;
+      font: 700 13px Manrope, sans-serif;
+      letter-spacing: .09em;
+      animation: scroll 24s linear infinite;
     }
 
     @keyframes scroll {
-
       to {
-        transform:
-          translateX(-50%);
+        transform: translateX(-50%);
       }
-
     }
 
-
-    /* =============================
+    /* =========================
        SECCIONES
-    ============================= */
+    ========================= */
 
     section {
-      padding:
-        100px 0;
+      padding: 100px 0;
     }
 
     .section-head {
       display: flex;
-
-      align-items:
-        flex-end;
-
-      justify-content:
-        space-between;
-
+      align-items: flex-end;
+      justify-content: space-between;
       gap: 30px;
-
-      margin-bottom:
-        42px;
+      margin-bottom: 42px;
     }
 
     .section-head h2 {
-      font:
-        800
-        clamp(
-          38px,
-          5vw,
-          66px
-        )/.98
-        Manrope,
-        sans-serif;
-
-      letter-spacing:
-        -.055em;
-
-      max-width:
-        760px;
-
-      margin-top:
-        8px;
+      font: 800 clamp(38px, 5vw, 66px)/.98 Manrope, sans-serif;
+      letter-spacing: -.055em;
+      max-width: 760px;
+      margin-top: 8px;
     }
 
     .section-head p {
-      max-width:
-        390px;
-
-      color:
-        var(--muted);
-
-      line-height:
-        1.7;
+      max-width: 390px;
+      color: var(--muted);
+      line-height: 1.7;
     }
 
-
-    /* =============================
+    /* =========================
        PRODUCTOS
-    ============================= */
+    ========================= */
 
     .products {
       display: grid;
-
-      grid-template-columns:
-        repeat(12,1fr);
-
+      grid-template-columns: repeat(12, 1fr);
       gap: 16px;
     }
 
     .product {
-      background:
-        #fff;
-
-      border-radius:
-        28px;
-
-      overflow:
-        hidden;
-
-      transition:
-        .3s;
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: .3s;
+      grid-column: span 4;
     }
 
     .product:hover {
-      transform:
-        translateY(-5px);
-
-      box-shadow:
-        var(--shadow);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
     }
 
     .product:nth-child(1) {
-      grid-column:
-        span 7;
+      grid-column: span 7;
     }
 
     .product:nth-child(2) {
-      grid-column:
-        span 5;
-    }
-
-    .product:nth-child(3),
-    .product:nth-child(4),
-    .product:nth-child(5) {
-      grid-column:
-        span 4;
+      grid-column: span 5;
     }
 
     .product-photo {
-      height:
-        510px;
-
-      overflow:
-        hidden;
-
-      background:
-        #ddd;
+      height: 420px;
+      overflow: hidden;
+      background: #ddd;
     }
 
-    .product:nth-child(n+3)
-    .product-photo {
-      height:
-        390px;
+    .product:nth-child(1) .product-photo,
+    .product:nth-child(2) .product-photo {
+      height: 510px;
     }
 
     .product-photo img {
-      transition:
-        .55s;
+      transition: .55s;
     }
 
     .product:hover img {
-      transform:
-        scale(1.025);
+      transform: scale(1.025);
     }
 
     .product-info {
-      padding:
-        20px
-        22px
-        24px;
-
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      gap:
-        16px;
+      padding: 20px 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
     }
 
     .product-info h3 {
-      font:
-        700
-        17px
-        Manrope,
-        sans-serif;
-
-      margin-bottom:
-        5px;
+      font: 700 17px Manrope, sans-serif;
+      margin-bottom: 5px;
     }
 
     .product-info small {
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
     .stock {
-      font-weight:
-        800;
-
-      font-size:
-        13px;
-
-      white-space:
-        nowrap;
+      font-weight: 800;
+      font-size: 13px;
+      white-space: nowrap;
     }
 
+    /* =========================
+       COLECCIÓN CRISTIANA
+    ========================= */
 
-    /* =============================
-       HISTORIA
-    ============================= */
+    .christian-section {
+      padding-top: 20px;
+    }
+
+    .christian-banner {
+      background: #fff;
+      border-radius: 34px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      min-height: 580px;
+      box-shadow: var(--shadow);
+    }
+
+    .christian-image {
+      min-height: 580px;
+      overflow: hidden;
+    }
+
+    .christian-image img {
+      object-position: center;
+    }
+
+    .christian-content {
+      padding: 65px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .christian-content h2 {
+      font: 800 clamp(42px, 5vw, 68px)/.98 Manrope, sans-serif;
+      letter-spacing: -.055em;
+      margin: 15px 0 25px;
+    }
+
+    .christian-content p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 17px;
+      margin-bottom: 28px;
+    }
+
+    /* =========================
+       MARCA
+    ========================= */
 
     .showcase {
-      background:
-        #161814;
-
-      color:
-        #fff;
+      background: #161814;
+      color: #fff;
     }
 
     .showcase-grid {
-      display:
-        grid;
-
-      grid-template-columns:
-        1.1fr .9fr;
-
-      gap:
-        70px;
-
-      align-items:
-        center;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 70px;
+      align-items: center;
     }
 
     .showcase-photo {
-      height:
-        650px;
-
-      border-radius:
-        32px;
-
-      overflow:
-        hidden;
+      height: 650px;
+      border-radius: 32px;
+      overflow: hidden;
     }
 
     .showcase h2 {
-      font:
-        800
-        clamp(
-          42px,
-          5vw,
-          70px
-        )/.98
-        Manrope,
-        sans-serif;
-
-      letter-spacing:
-        -.055em;
-
-      margin:
-        15px 0
-        24px;
+      font: 800 clamp(42px, 5vw, 70px)/.98 Manrope, sans-serif;
+      letter-spacing: -.055em;
+      margin: 15px 0 24px;
     }
 
     .showcase p {
-      color:
-        #b9bcb3;
-
-      line-height:
-        1.8;
-
-      font-size:
-        17px;
+      color: #b9bcb3;
+      line-height: 1.8;
+      font-size: 17px;
     }
 
     .benefits {
-      margin-top:
-        34px;
-
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          1fr
-        );
-
-      gap:
-        12px;
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
 
     .benefit {
-      border-top:
-        1px solid
-        #42463e;
-
-      padding-top:
-        16px;
+      border-top: 1px solid #42463e;
+      padding-top: 16px;
     }
 
     .benefit strong {
-      display:
-        block;
-
-      font:
-        700
-        16px
-        Manrope,
-        sans-serif;
-
-      margin-bottom:
-        6px;
+      display: block;
+      font: 700 16px Manrope, sans-serif;
+      margin-bottom: 6px;
     }
 
     .benefit span {
-      color:
-        #92978e;
-
-      font-size:
-        13px;
-
-      line-height:
-        1.5;
+      color: #92978e;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
-
-    /* =============================
+    /* =========================
        LOOKBOOK
-    ============================= */
-
-    .gallery-section {
-      padding-top:
-        95px;
-    }
+    ========================= */
 
     .lookbook {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          1fr
-        );
-
-      gap:
-        14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     .lookbook figure {
-      height:
-        440px;
-
-      border-radius:
-        26px;
-
-      overflow:
-        hidden;
-
-      margin:
-        0;
+      height: 500px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #ddd;
     }
 
+    .lookbook figure.featured {
+      grid-column: span 2;
+      height: 620px;
+    }
 
-    /* =============================
+    /* =========================
        CTA
-    ============================= */
+    ========================= */
 
     .cta {
-      padding:
-        90px 0;
+      padding: 90px 0;
     }
 
     .cta-box {
-      background:
-        var(--orange);
-
-      border-radius:
-        34px;
-
-      padding:
-        70px;
-
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr auto;
-
-      align-items:
-        center;
-
-      gap:
-        28px;
+      background: var(--orange);
+      border-radius: 34px;
+      padding: 70px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 28px;
     }
 
     .cta h2 {
-      font:
-        800
-        clamp(
-          40px,
-          5vw,
-          66px
-        )/.96
-        Manrope,
-        sans-serif;
-
-      letter-spacing:
-        -.055em;
-
-      max-width:
-        760px;
+      font: 800 clamp(40px, 5vw, 66px)/.96 Manrope, sans-serif;
+      letter-spacing: -.055em;
+      max-width: 760px;
     }
 
-
-    /* =============================
+    /* =========================
        FOOTER
-    ============================= */
+    ========================= */
 
     footer {
-      border-top:
-        1px solid
-        var(--line);
-
-      padding:
-        42px 0;
+      border-top: 1px solid var(--line);
+      padding: 42px 0;
     }
 
     .footer {
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      gap:
-        24px;
-
-      flex-wrap:
-        wrap;
-
-      color:
-        var(--muted);
-
-      font-size:
-        13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-
-    /* =============================
+    /* =========================
        WHATSAPP
-    ============================= */
+    ========================= */
 
     .whatsapp {
-      position:
-        fixed;
-
-      right:
-        22px;
-
-      bottom:
-        22px;
-
-      z-index:
-        99;
-
-      background:
-        #25D366;
-
-      color:
-        #07391f;
-
-      padding:
-        15px 19px;
-
-      border-radius:
-        999px;
-
-      font-weight:
-        800;
-
-      box-shadow:
-        0 12px 34px
-        rgba(
-          0,
-          0,
-          0,
-          .16
-        );
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 99;
+      background: #25D366;
+      color: #07391f;
+      padding: 15px 19px;
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: 0 12px 34px rgba(0,0,0,.16);
     }
 
+    /* =========================
+       RESPONSIVE
+    ========================= */
 
-    /* =============================
-       TABLET
-    ============================= */
-
-    @media(max-width:900px) {
-
+    @media(max-width: 900px) {
       .menu {
-        display:
-          none;
+        display: none;
       }
 
       .hero {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
       .hero-copy {
-        padding:
-          44px 32px;
+        padding: 44px 32px;
       }
 
       .hero-gallery {
-        height:
-          640px;
+        height: 640px;
       }
 
       .products {
-        display:
-          block;
+        display: block;
       }
 
       .product {
-        margin-bottom:
-          16px;
+        margin-bottom: 16px;
+      }
+
+      .christian-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .christian-content {
+        padding: 45px 32px;
       }
 
       .showcase-grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .lookbook {
-        grid-template-columns:
-          1fr 1fr;
+        grid-template-columns: 1fr;
       }
 
       .cta-box {
-        grid-template-columns:
-          1fr;
-
-        padding:
-          44px 30px;
+        grid-template-columns: 1fr;
+        padding: 44px 30px;
       }
-
     }
 
-
-    /* =============================
-       CELULAR
-    ============================= */
-
-    @media(max-width:560px) {
-
+    @media(max-width: 560px) {
       .wrap {
-        width:
-          calc(
-            100% - 24px
-          );
+        width: calc(100% - 24px);
       }
 
       .hero {
-        padding-top:
-          14px;
+        padding-top: 14px;
       }
 
       .hero-gallery {
-        height:
-          auto;
-
-        grid-template-columns:
-          1fr;
-
-        grid-template-rows:
-          auto;
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
       }
 
       .hero-card,
       .hero-card:first-child {
-        grid-row:
-          auto;
-
-        min-height:
-          360px;
+        grid-row: auto;
+        min-height: 360px;
       }
 
       .hero h1 {
-        font-size:
-          52px;
-      }
-
-      .product-photo,
-      .product:nth-child(n+3)
-      .product-photo {
-        height:
-          420px;
+        font-size: 52px;
       }
 
       .section-head {
-        display:
-          block;
+        display: block;
       }
 
       .section-head p {
-        margin-top:
-          18px;
+        margin-top: 18px;
+      }
+
+      .product-photo,
+      .product:nth-child(1) .product-photo,
+      .product:nth-child(2) .product-photo {
+        height: 420px;
+      }
+
+      .christian-image {
+        min-height: 420px;
       }
 
       .showcase-photo {
-        height:
-          460px;
+        height: 460px;
       }
 
       .benefits {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
       .lookbook {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
-      .lookbook figure {
-        height:
-          420px;
+      .lookbook figure,
+      .lookbook figure.featured {
+        grid-column: auto;
+        height: 420px;
       }
-
     }
-
   </style>
-
 </head>
 
 <body>
 
-
-  <!-- =========================================
-       BARRA SUPERIOR
-  ========================================== -->
-
   <div class="topbar">
-
     Envíos en Honduras · Camisas de algodón · Diseños con personalidad
-
   </div>
 
-
-
-  <!-- =========================================
-       HEADER
-  ========================================== -->
-
   <header>
-
     <div class="wrap nav">
 
-      <a
-        href="#"
-        class="logo"
-      >
-
+      <a href="#" class="logo">
         MODA<span>CASUAL</span>
-
       </a>
 
-
       <nav class="menu">
-
-        <a href="#coleccion">
-          Colección
-        </a>
-
-        <a href="#estilo">
-          Estilo
-        </a>
-
-        <a href="#marca">
-          La marca
-        </a>
-
-        <a href="#contacto">
-          Contacto
-        </a>
-
+        <a href="#coleccion">Colección</a>
+        <a href="#cristiana">Colección cristiana</a>
+        <a href="#estilo">Estilo</a>
+        <a href="#marca">La marca</a>
+        <a href="#contacto">Contacto</a>
       </nav>
 
-
-      <a
-        href="#coleccion"
-        class="pill"
-      >
-
+      <a href="#coleccion" class="pill">
         Ver camisas →
-
       </a>
 
     </div>
-
   </header>
-
-
-
-  <!-- =========================================
-       CONTENIDO
-  ========================================== -->
 
   <main>
 
-
-    <!-- =========================================
+    <!-- =========================
          HERO
-    ========================================== -->
+    ========================== -->
 
     <div class="wrap hero">
-
-
-      <!-- TEXTO -->
 
       <div class="hero-copy">
 
         <span class="eyebrow">
-
           Nueva colección · 2026
-
         </span>
 
-
         <h1>
-
           Viste tu<br>
           forma de<br>
           ser.
-
         </h1>
 
-
         <p>
-
-          Camisas casuales de algodón,
-          cómodas y versátiles,
-          con diseños que convierten
-          una prenda básica en algo
-          mucho más personal.
-
+          Camisas casuales de algodón, cómodas y versátiles,
+          con diseños que convierten una prenda básica
+          en algo mucho más personal.
         </p>
-
 
         <div class="hero-actions">
 
-          <a
-            href="#coleccion"
-            class="btn btn-white"
-          >
-
+          <a href="#coleccion" class="btn btn-white">
             Explorar colección
-
           </a>
 
-
-          <a
-            href="#contacto"
-            class="btn btn-ghost"
-          >
-
+          <a href="#contacto" class="btn btn-ghost">
             Hacer un pedido
-
           </a>
 
         </div>
 
       </div>
 
-
-
-      <!-- GALERÍA PRINCIPAL -->
-
       <div class="hero-gallery">
 
-
         <figure class="hero-card">
-
           <img
             src="assets/verd1.png"
-            alt="Camisa verde con diseños"
+            alt="Camisa verde casual"
           >
-
           <span class="tag">
-
             Verde oliva · Casual
-
           </span>
-
         </figure>
 
-
         <figure class="hero-card">
-
           <img
             src="assets/vino.png"
             alt="Camisa color vino"
           >
-
           <span class="tag">
-
             Color vino
-
           </span>
-
         </figure>
 
-
         <figure class="hero-card">
-
           <img
             src="assets/cat.jpg"
             alt="Modelo con camisa naranja"
           >
-
           <span class="tag">
-
             Color vibrante
-
           </span>
-
         </figure>
-
 
       </div>
 
     </div>
 
-
-
-    <!-- =========================================
+    <!-- =========================
          TICKER
-    ========================================== -->
+    ========================== -->
 
     <div class="ticker">
 
@@ -1335,16 +825,13 @@
 
     </div>
 
-
-
-    <!-- =========================================
+    <!-- =========================
          COLECCIÓN
-    ========================================== -->
+    ========================== -->
 
     <section id="coleccion">
 
       <div class="wrap">
-
 
         <div class="section-head">
 
@@ -1354,241 +841,205 @@
               class="eyebrow"
               style="color:var(--wine)"
             >
-
               Selección destacada
-
             </span>
 
-
             <h2>
-
-              Camisas para expresarte
-              a tu manera.
-
+              Camisas para expresarte a tu manera.
             </h2>
 
           </div>
 
-
           <p>
-
-            Diseños casuales para el
-            día a día, combinando
-            comodidad, color y
-            personalidad.
-
+            Diseños casuales para el día a día,
+            combinando comodidad, color y personalidad.
           </p>
 
         </div>
 
-
-
         <div class="products">
-
 
           <!-- PRODUCTO 1 -->
 
           <article class="product">
 
             <div class="product-photo">
-
               <img
                 src="assets/verd1.png"
-                alt="Camisa verde diseño gato"
+                alt="Camisa verde"
               >
-
             </div>
-
 
             <div class="product-info">
 
               <div>
-
-                <h3>
-                  Olive Cat
-                </h3>
-
-                <small>
-                  Algodón · Manga corta
-                </small>
-
+                <h3>Verde Oliva</h3>
+                <small>Algodón · Manga corta</small>
               </div>
 
-
               <span class="stock">
-
                 Disponible
-
               </span>
 
             </div>
 
           </article>
-
-
 
           <!-- PRODUCTO 2 -->
 
           <article class="product">
 
             <div class="product-photo">
-
               <img
                 src="assets/vino.png"
                 alt="Camisa color vino"
               >
-
             </div>
-
 
             <div class="product-info">
 
               <div>
-
-                <h3>
-                  Wine Edition
-                </h3>
-
-                <small>
-                  Algodón · Diseño frontal
-                </small>
-
+                <h3>Wine Edition</h3>
+                <small>Algodón · Diseño frontal</small>
               </div>
 
-
               <span class="stock">
-
                 Disponible
-
               </span>
 
             </div>
 
           </article>
-
-
 
           <!-- PRODUCTO 3 -->
 
           <article class="product">
 
             <div class="product-photo">
-
               <img
                 src="assets/cat.jpg"
                 alt="Modelo con camisa naranja"
               >
-
             </div>
-
 
             <div class="product-info">
 
               <div>
-
-                <h3>
-                  Orange Trip
-                </h3>
-
-                <small>
-                  Casual · Manga corta
-                </small>
-
+                <h3>Orange Trip</h3>
+                <small>Casual · Manga corta</small>
               </div>
 
-
               <span class="stock">
-
                 Disponible
-
               </span>
 
             </div>
 
           </article>
-
-
 
           <!-- PRODUCTO 4 -->
 
           <article class="product">
 
             <div class="product-photo">
-
               <img
                 src="assets/ver.png"
-                alt="Camisa verde diseño Vision"
+                alt="Camisa diseño Vision"
               >
-
             </div>
-
 
             <div class="product-info">
 
               <div>
-
-                <h3>
-                  Vision
-                </h3>
-
-                <small>
-                  Diseño frontal · DTF
-                </small>
-
+                <h3>Vision</h3>
+                <small>Diseño frontal · DTF</small>
               </div>
 
-
               <span class="stock">
-
                 Disponible
-
               </span>
 
             </div>
 
           </article>
-
-
 
           <!-- PRODUCTO 5 -->
 
           <article class="product">
 
             <div class="product-photo">
-
               <img
                 src="assets/bat.jpg"
                 alt="Modelo con camisa negra"
               >
-
             </div>
-
 
             <div class="product-info">
 
               <div>
-
-                <h3>
-                  Dark Edition
-                </h3>
-
-                <small>
-                  Diseño posterior · Manga corta
-                </small>
-
+                <h3>Dark Edition</h3>
+                <small>Diseño posterior · Manga corta</small>
               </div>
 
-
               <span class="stock">
-
                 Disponible
-
               </span>
 
             </div>
 
           </article>
 
+          <!-- NUEVA IMAGEN 1 -->
+
+          <article class="product">
+
+            <div class="product-photo">
+              <img
+                src="assets/JS.png"
+                alt="Colección cristiana para niños mujeres y hombres"
+              >
+            </div>
+
+            <div class="product-info">
+
+              <div>
+                <h3>Colección Fe</h3>
+                <small>Niños · Mujeres · Hombres</small>
+              </div>
+
+              <span class="stock">
+                Nuevo
+              </span>
+
+            </div>
+
+          </article>
+
+          <!-- NUEVA IMAGEN 2 -->
+
+          <article class="product">
+
+            <div class="product-photo">
+              <img
+                src="assets/negr.png"
+                alt="Pareja con camisas cristianas"
+              >
+            </div>
+
+            <div class="product-info">
+
+              <div>
+                <h3>Inspiración</h3>
+                <small>Diseños cristianos · DTF</small>
+              </div>
+
+              <span class="stock">
+                Nuevo
+              </span>
+
+            </div>
+
+          </article>
 
         </div>
 
@@ -1596,11 +1047,68 @@
 
     </section>
 
+    <!-- =========================
+         NUEVA COLECCIÓN CRISTIANA
+    ========================== -->
 
+    <section
+      id="cristiana"
+      class="christian-section"
+    >
 
-    <!-- =========================================
+      <div class="wrap">
+
+        <div class="christian-banner">
+
+          <div class="christian-image">
+
+            <img
+              src="assets/JS.png"
+              alt="Camisas cristianas para toda la familia"
+            >
+
+          </div>
+
+          <div class="christian-content">
+
+            <span
+              class="eyebrow"
+              style="color:var(--wine)"
+            >
+              Diseños con propósito
+            </span>
+
+            <h2>
+              Viste tu fe.
+            </h2>
+
+            <p>
+              Camisas con mensajes cristianos para niños,
+              jóvenes y adultos. Diseños pensados para
+              expresar tu fe con estilo, comodidad
+              y personalidad.
+            </p>
+
+            <div>
+              <a
+                href="#contacto"
+                class="pill"
+              >
+                Consultar diseños →
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
          NUESTRA MARCA
-    ========================================== -->
+    ========================== -->
 
     <section
       class="showcase"
@@ -1608,7 +1116,6 @@
     >
 
       <div class="wrap showcase-grid">
-
 
         <div class="showcase-photo">
 
@@ -1619,95 +1126,61 @@
 
         </div>
 
-
         <div>
 
           <span class="eyebrow">
-
             Nuestra esencia
-
           </span>
 
-
           <h2>
-
-            Comodidad que también
-            tiene personalidad.
-
+            Comodidad que también tiene personalidad.
           </h2>
 
-
           <p>
+            Moda Casual ofrece camisas de algodón pensadas
+            para acompañarte todos los días.
 
-            Moda Casual ofrece camisas
-            de algodón pensadas para
-            acompañarte todos los días.
-
-            Puedes elegir entre nuestros
-            diseños disponibles o
-            personalizar una camisa con
-            impresión DTF.
-
+            Puedes elegir entre nuestros diseños disponibles
+            o personalizar una camisa con impresión DTF.
           </p>
-
-
 
           <div class="benefits">
 
-
             <div class="benefit">
 
               <strong>
-
                 Algodón cómodo
-
               </strong>
 
               <span>
-
-                Ideal para uso diario
-                y climas cálidos.
-
+                Ideal para uso diario y climas cálidos.
               </span>
 
             </div>
 
-
             <div class="benefit">
 
               <strong>
-
                 Diseños DTF
-
               </strong>
 
               <span>
-
-                Estampados llamativos
-                y personalizados.
-
+                Estampados llamativos y personalizados.
               </span>
 
             </div>
-
 
             <div class="benefit">
 
               <strong>
-
                 Variedad
-
               </strong>
 
               <span>
-
-                Colores, estilos
-                y tallas para elegir.
-
+                Colores, estilos y tallas para elegir.
               </span>
 
             </div>
-
 
           </div>
 
@@ -1717,19 +1190,13 @@
 
     </section>
 
+    <!-- =========================
+         ESTILO / LOOKBOOK
+    ========================== -->
 
-
-    <!-- =========================================
-         LOOKBOOK
-    ========================================== -->
-
-    <section
-      class="gallery-section"
-      id="estilo"
-    >
+    <section id="estilo">
 
       <div class="wrap">
-
 
         <div class="section-head">
 
@@ -1739,36 +1206,34 @@
               class="eyebrow"
               style="color:var(--wine)"
             >
-
               Así se ven
-
             </span>
 
-
             <h2>
-
-              De la percha
-              a tu outfit.
-
+              Diseños para cada estilo.
             </h2>
 
           </div>
 
-
           <p>
-
-            Fotografías reales de nuestras
-            camisas y ejemplos de cómo
-            se ven puestas.
-
+            Conoce algunos de nuestros diseños y
+            mira cómo lucen nuestras camisas puestas.
           </p>
 
         </div>
 
-
-
         <div class="lookbook">
 
+          <!-- NUEVA IMAGEN GRANDE -->
+
+          <figure class="featured">
+
+            <img
+              src="assets/negr.png"
+              alt="Pareja con diseños cristianos"
+            >
+
+          </figure>
 
           <figure>
 
@@ -1779,7 +1244,6 @@
 
           </figure>
 
-
           <figure>
 
             <img
@@ -1789,16 +1253,23 @@
 
           </figure>
 
+          <figure>
+
+            <img
+              src="assets/JS.png"
+              alt="Colección cristiana"
+            >
+
+          </figure>
 
           <figure>
 
             <img
               src="assets/ver.png"
-              alt="Modelo con camisa Vision"
+              alt="Camisa verde con diseño"
             >
 
           </figure>
-
 
         </div>
 
@@ -1806,11 +1277,9 @@
 
     </section>
 
-
-
-    <!-- =========================================
+    <!-- =========================
          CONTACTO
-    ========================================== -->
+    ========================== -->
 
     <section
       class="cta"
@@ -1819,19 +1288,11 @@
 
       <div class="wrap">
 
-
         <div class="cta-box">
 
-
           <h2>
-
-            ¿Encontraste una camisa
-            que va contigo?
-
+            ¿Encontraste una camisa que va contigo?
           </h2>
-
-
-          <!-- CAMBIA EL NÚMERO -->
 
           <a
             class="pill"
@@ -1839,11 +1300,8 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-
             Pedir por WhatsApp →
-
           </a>
-
 
         </div>
 
@@ -1851,50 +1309,35 @@
 
     </section>
 
-
   </main>
 
-
-
-  <!-- =========================================
+  <!-- =========================
        FOOTER
-  ========================================== -->
+  ========================== -->
 
   <footer>
 
     <div class="wrap footer">
 
-
       <strong class="logo">
-
         MODA<span>CASUAL</span>
-
       </strong>
 
-
       <span>
-
         Tegucigalpa, Honduras · © 2026
-
       </span>
-
 
       <span>
-
         Instagram · Facebook · TikTok
-
       </span>
-
 
     </div>
 
   </footer>
 
-
-
-  <!-- =========================================
-       WHATSAPP FLOTANTE
-  ========================================== -->
+  <!-- =========================
+       WHATSAPP
+  ========================== -->
 
   <a
     class="whatsapp"
@@ -1902,11 +1345,8 @@
     target="_blank"
     rel="noopener noreferrer"
   >
-
     WhatsApp
-
   </a>
-
 
 </body>
 </html>
