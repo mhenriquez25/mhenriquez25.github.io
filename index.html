@@ -1,1686 +1,1912 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Moda Casual | Camisas de Algodón</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <style>
-
-        :root {
-            --bg: #f5f2eb;
-            --white: #ffffff;
-            --black: #10110f;
-            --wine: #751c2d;
-            --wine-light: #92263b;
-            --orange: #f49a25;
-            --green: #34472c;
-            --gray: #6e7069;
-            --line: rgba(17, 18, 15, .12);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--black);
-            font-family: "DM Sans", sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+  <title>Moda Casual | Camisas de algodón con estilo</title>
 
-        img {
-            display: block;
-            width: 100%;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        .wrap {
-            width: min(1220px, calc(100% - 40px));
-            margin: auto;
-        }
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
+  <style>
 
-        /* ========================================
-           TOP
-        ======================================== */
+    :root {
+      --bg: #f4f0e8;
+      --ink: #11120f;
+      --muted: #6f716a;
 
-        .topbar {
-            background: var(--black);
-            color: white;
-            text-align: center;
-            padding: 8px 15px;
+      --wine: #6e1d2c;
+      --orange: #f29a27;
+      --green: #34472c;
 
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
+      --white: #ffffff;
 
+      --line: rgba(17,18,15,.12);
 
-        /* ========================================
-           HEADER
-        ======================================== */
+      --radius: 28px;
 
-        header {
-            background: rgba(245, 242, 235, .94);
-            backdrop-filter: blur(16px);
+      --shadow:
+        0 18px 50px rgba(0,0,0,.08);
+    }
 
-            border-bottom: 1px solid var(--line);
 
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* =============================
+       RESET
+    ============================= */
 
-        .nav {
-            height: 78px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .logo {
-            font-family: "Manrope";
-            font-weight: 800;
-            font-size: 23px;
+    body {
+      background: var(--bg);
+      color: var(--ink);
 
-            letter-spacing: -.05em;
-        }
+      font-family: "DM Sans", sans-serif;
+    }
 
-        .logo span {
-            color: var(--wine);
-        }
+    img {
+      display: block;
 
-        .menu {
-            display: flex;
-            gap: 35px;
+      width: 100%;
+      height: 100%;
 
-            font-size: 14px;
-        }
+      object-fit: cover;
+    }
 
-        .menu a {
-            transition: .3s;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .menu a:hover {
-            color: var(--wine);
-        }
+    .wrap {
+      width: min(
+        1220px,
+        calc(100% - 40px)
+      );
 
-        .header-button {
-            background: var(--black);
-            color: white;
+      margin: auto;
+    }
 
-            padding: 14px 22px;
 
-            border-radius: 100px;
+    /* =============================
+       BARRA SUPERIOR
+    ============================= */
 
-            font-weight: 700;
-            font-size: 13px;
+    .topbar {
+      background: #11120f;
 
-            transition: .3s;
-        }
+      color: #fff;
 
-        .header-button:hover {
-            transform: translateY(-2px);
-        }
+      padding: 10px 18px;
 
+      text-align: center;
 
-        /* ========================================
-           HERO
-        ======================================== */
+      font-size: 11px;
+      font-weight: 700;
 
-        .hero {
-            display: grid;
+      letter-spacing: .14em;
 
-            grid-template-columns: .8fr 1.2fr;
+      text-transform: uppercase;
+    }
 
-            gap: 26px;
 
-            min-height: 690px;
+    /* =============================
+       HEADER
+    ============================= */
 
-            padding-top: 27px;
-            padding-bottom: 70px;
-        }
+    header {
+      position: sticky;
 
+      top: 0;
 
-        /* TEXTO */
+      z-index: 50;
 
-        .hero-content {
-            background:
-                linear-gradient(
-                    145deg,
-                    var(--wine),
-                    #691727
-                );
+      background:
+        rgba(244,240,232,.92);
 
-            border-radius: 35px;
+      backdrop-filter:
+        blur(18px);
 
-            color: white;
+      border-bottom:
+        1px solid var(--line);
+    }
 
-            padding: 62px;
+    .nav {
+      height: 78px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+      display: flex;
 
-            overflow: hidden;
-            position: relative;
-        }
+      align-items: center;
 
-        .hero-content::after {
-            content: "";
+      justify-content: space-between;
 
-            position: absolute;
+      gap: 24px;
+    }
 
-            width: 350px;
-            height: 350px;
+    .logo {
+      font-family:
+        Manrope,
+        sans-serif;
 
-            border-radius: 50%;
+      font-weight: 800;
 
-            background: rgba(255,255,255,.045);
+      font-size: 23px;
 
-            right: -120px;
-            top: -100px;
-        }
+      letter-spacing: -.05em;
+    }
 
-        .small-title {
-            font-size: 11px;
-            font-weight: 700;
+    .logo span {
+      color: var(--wine);
+    }
 
-            letter-spacing: .18em;
+    .menu {
+      display: flex;
 
-            text-transform: uppercase;
+      gap: 30px;
 
-            opacity: .78;
+      font-size: 14px;
+    }
 
-            position: relative;
-            z-index: 2;
-        }
+    .menu a {
+      transition: .25s;
+    }
 
-        h1 {
-            font-family: "Manrope";
+    .menu a:hover {
+      color: var(--wine);
+    }
 
-            font-size: clamp(52px, 6vw, 82px);
+    .pill {
+      display: inline-flex;
 
-            line-height: .94;
+      align-items: center;
 
-            letter-spacing: -.065em;
+      justify-content: center;
 
-            margin: 25px 0 32px;
+      padding: 13px 20px;
 
-            position: relative;
-            z-index: 2;
-        }
+      border-radius: 999px;
 
-        .hero-content p {
-            max-width: 500px;
+      background: var(--ink);
 
-            line-height: 1.75;
+      color: #fff;
 
-            font-size: 17px;
+      font-size: 13px;
 
-            color: rgba(255,255,255,.85);
+      font-weight: 700;
 
-            position: relative;
-            z-index: 2;
-        }
+      transition: .25s;
+    }
 
-        .hero-buttons {
-            display: flex;
+    .pill:hover {
+      transform:
+        translateY(-2px);
+    }
 
-            flex-wrap: wrap;
 
-            gap: 12px;
+    /* =============================
+       HERO
+    ============================= */
 
-            margin-top: 32px;
+    .hero {
+      min-height: 710px;
 
-            position: relative;
-            z-index: 2;
-        }
+      padding:
+        28px 0
+        68px;
 
-        .btn {
-            padding: 14px 21px;
+      display: grid;
 
-            border-radius: 100px;
+      grid-template-columns:
+        .82fr 1.18fr;
 
-            font-size: 13px;
-            font-weight: 700;
+      gap: 24px;
+    }
 
-            transition: .3s;
-        }
+    .hero-copy {
+      border-radius: 34px;
 
-        .btn:hover {
-            transform: translateY(-2px);
-        }
+      padding: 62px;
 
-        .btn-white {
-            background: white;
-            color: black;
-        }
+      color: #fff;
 
-        .btn-border {
-            border: 1px solid rgba(255,255,255,.4);
-            color: white;
-        }
+      background:
+        linear-gradient(
+          145deg,
+          #7b2133,
+          #651826
+        );
 
+      display: flex;
 
-        /* ========================================
-           IMÁGENES HERO
-        ======================================== */
+      flex-direction: column;
 
-        .hero-images {
-            display: grid;
+      justify-content: center;
 
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+      position: relative;
 
-            gap: 12px;
-        }
+      overflow: hidden;
+    }
 
-        .image-box {
-            border-radius: 28px;
+    .hero-copy::after {
+      content: "";
 
-            overflow: hidden;
+      position: absolute;
 
-            position: relative;
+      width: 420px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #deddd9,
-                    #c8c7c2
-                );
+      height: 420px;
 
-            min-height: 280px;
-        }
+      border-radius: 50%;
 
-        .image-box:first-child {
-            grid-row: 1 / 3;
-        }
+      background:
+        rgba(255,255,255,.05);
 
-        .image-box img {
-            width: 100%;
-            height: 100%;
+      right: -180px;
 
-            object-fit: cover;
+      top: -120px;
+    }
 
-            position: absolute;
-            inset: 0;
+    .eyebrow {
+      text-transform:
+        uppercase;
 
-            transition: transform .6s;
-        }
+      letter-spacing:
+        .16em;
 
-        .image-box:hover img {
-            transform: scale(1.025);
-        }
+      font-size: 11px;
 
-        .photo-label {
-            position: absolute;
+      font-weight: 700;
 
-            left: 18px;
-            bottom: 18px;
+      opacity: .78;
+    }
 
-            background: rgba(255,255,255,.92);
+    .hero h1 {
+      font-family:
+        Manrope,
+        sans-serif;
 
-            backdrop-filter: blur(10px);
+      font-size:
+        clamp(
+          52px,
+          6vw,
+          84px
+        );
 
-            padding: 10px 14px;
+      line-height: .93;
 
-            border-radius: 100px;
+      letter-spacing:
+        -.065em;
 
-            font-size: 12px;
-            font-weight: 700;
+      margin:
+        22px 0
+        28px;
 
-            z-index: 4;
-        }
+      position: relative;
 
+      z-index: 1;
+    }
 
-        /* MENSAJE SI NO SE ENCUENTRA LA FOTO */
+    .hero p {
+      max-width: 480px;
 
-        .image-error {
-            position: absolute;
-            inset: 0;
+      font-size: 17px;
 
-            display: none;
+      line-height: 1.72;
 
-            justify-content: center;
-            align-items: center;
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .84
+        );
 
-            text-align: center;
+      position: relative;
 
-            padding: 25px;
+      z-index: 1;
+    }
 
-            color: #686864;
+    .hero-actions {
+      display: flex;
 
-            font-size: 13px;
+      gap: 10px;
 
-            line-height: 1.6;
-        }
+      flex-wrap: wrap;
 
+      margin-top: 30px;
 
-        /* ========================================
-           TICKER
-        ======================================== */
+      position: relative;
 
-        .ticker {
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
+      z-index: 1;
+    }
 
-            overflow: hidden;
+    .btn {
+      padding:
+        14px 20px;
 
-            white-space: nowrap;
+      border-radius:
+        999px;
 
-            padding: 18px 0;
-        }
+      font-size:
+        13px;
 
-        .ticker-track {
-            width: max-content;
+      font-weight:
+        700;
 
-            font-family: Manrope;
-            font-weight: 700;
+      transition:
+        .25s;
+    }
 
-            font-size: 13px;
+    .btn:hover {
+      transform:
+        translateY(-2px);
+    }
 
-            letter-spacing: .1em;
+    .btn-white {
+      background:
+        #fff;
 
-            animation: ticker 25s linear infinite;
-        }
+      color:
+        #111;
+    }
 
-        @keyframes ticker {
+    .btn-ghost {
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .42
+        );
 
-            from {
-                transform: translateX(0);
-            }
+      color:
+        #fff;
+    }
 
-            to {
-                transform: translateX(-50%);
-            }
 
-        }
+    /* =============================
+       GALERÍA HERO
+    ============================= */
 
+    .hero-gallery {
+      display: grid;
 
-        /* ========================================
-           SECCIONES
-        ======================================== */
+      grid-template-columns:
+        1.15fr .85fr;
 
-        section {
-            padding: 105px 0;
-        }
+      grid-template-rows:
+        1fr 1fr;
 
-        .section-header {
-            display: flex;
+      gap: 12px;
+    }
 
-            align-items: flex-end;
+    .hero-card {
+      border-radius: 28px;
 
-            justify-content: space-between;
+      overflow: hidden;
 
-            gap: 30px;
+      position: relative;
 
-            margin-bottom: 45px;
-        }
+      background: #ddd;
 
-        .section-header h2 {
-            font-family: Manrope;
+      min-height: 260px;
+    }
 
-            font-size: clamp(38px, 5vw, 65px);
+    .hero-card:first-child {
+      grid-row:
+        1 / 3;
+    }
 
-            line-height: .98;
+    .hero-card img {
+      transition:
+        .6s;
+    }
 
-            letter-spacing: -.055em;
+    .hero-card:hover img {
+      transform:
+        scale(1.025);
+    }
 
-            max-width: 720px;
+    .tag {
+      position: absolute;
 
-            margin-top: 10px;
-        }
+      left: 18px;
 
-        .section-header p {
-            max-width: 380px;
+      bottom: 18px;
 
-            line-height: 1.7;
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .92
+        );
 
-            color: var(--gray);
-        }
+      backdrop-filter:
+        blur(10px);
 
+      border-radius:
+        999px;
 
-        /* ========================================
-           PRODUCTOS
-        ======================================== */
+      padding:
+        10px 14px;
 
-        .products {
-            display: grid;
+      font-size:
+        12px;
 
-            grid-template-columns: repeat(12, 1fr);
+      font-weight:
+        700;
+    }
 
-            gap: 16px;
-        }
 
-        .product {
-            background: white;
+    /* =============================
+       TICKER
+    ============================= */
 
-            border-radius: 28px;
+    .ticker {
+      border-top:
+        1px solid
+        var(--line);
 
-            overflow: hidden;
+      border-bottom:
+        1px solid
+        var(--line);
 
-            transition: .3s;
-        }
+      overflow: hidden;
 
-        .product:hover {
-            transform: translateY(-5px);
+      white-space: nowrap;
 
-            box-shadow: 0 20px 50px rgba(0,0,0,.08);
-        }
+      padding:
+        18px 0;
+    }
 
-        .product:nth-child(1) {
-            grid-column: span 7;
-        }
+    .ticker-track {
+      width:
+        max-content;
 
-        .product:nth-child(2) {
-            grid-column: span 5;
-        }
+      font:
+        700 13px
+        Manrope,
+        sans-serif;
 
-        .product:nth-child(3),
-        .product:nth-child(4),
-        .product:nth-child(5) {
-            grid-column: span 4;
-        }
+      letter-spacing:
+        .09em;
 
-        .product-photo {
-            height: 500px;
+      animation:
+        scroll
+        24s
+        linear
+        infinite;
+    }
 
-            background: #ddd;
+    @keyframes scroll {
 
-            overflow: hidden;
+      to {
+        transform:
+          translateX(-50%);
+      }
 
-            position: relative;
-        }
+    }
 
-        .product:nth-child(n+3) .product-photo {
-            height: 390px;
-        }
 
-        .product-photo img {
-            width: 100%;
-            height: 100%;
+    /* =============================
+       SECCIONES
+    ============================= */
 
-            object-fit: cover;
+    section {
+      padding:
+        100px 0;
+    }
 
-            transition: .5s;
-        }
+    .section-head {
+      display: flex;
 
-        .product:hover img {
-            transform: scale(1.025);
-        }
+      align-items:
+        flex-end;
 
-        .product-info {
-            padding: 21px 22px 24px;
+      justify-content:
+        space-between;
 
-            display: flex;
-            justify-content: space-between;
+      gap: 30px;
 
-            gap: 15px;
-        }
+      margin-bottom:
+        42px;
+    }
 
-        .product-info h3 {
-            font-family: Manrope;
+    .section-head h2 {
+      font:
+        800
+        clamp(
+          38px,
+          5vw,
+          66px
+        )/.98
+        Manrope,
+        sans-serif;
 
-            font-size: 17px;
+      letter-spacing:
+        -.055em;
 
-            margin-bottom: 5px;
-        }
+      max-width:
+        760px;
 
-        .product-info small {
-            color: var(--gray);
-        }
+      margin-top:
+        8px;
+    }
 
-        .availability {
-            font-weight: 800;
+    .section-head p {
+      max-width:
+        390px;
 
-            font-size: 13px;
+      color:
+        var(--muted);
 
-            white-space: nowrap;
-        }
+      line-height:
+        1.7;
+    }
 
 
-        /* ========================================
-           HISTORIA
-        ======================================== */
+    /* =============================
+       PRODUCTOS
+    ============================= */
 
-        .story {
-            background: #171914;
+    .products {
+      display: grid;
 
-            color: white;
-        }
+      grid-template-columns:
+        repeat(12,1fr);
 
-        .story-grid {
-            display: grid;
+      gap: 16px;
+    }
 
-            grid-template-columns: 1fr 1fr;
+    .product {
+      background:
+        #fff;
 
-            align-items: center;
+      border-radius:
+        28px;
 
-            gap: 70px;
-        }
+      overflow:
+        hidden;
 
-        .story-image {
-            height: 630px;
+      transition:
+        .3s;
+    }
 
-            border-radius: 32px;
+    .product:hover {
+      transform:
+        translateY(-5px);
 
-            overflow: hidden;
+      box-shadow:
+        var(--shadow);
+    }
 
-            position: relative;
+    .product:nth-child(1) {
+      grid-column:
+        span 7;
+    }
 
-            background: #292b27;
-        }
+    .product:nth-child(2) {
+      grid-column:
+        span 5;
+    }
 
-        .story-image img {
-            height: 100%;
-            width: 100%;
+    .product:nth-child(3),
+    .product:nth-child(4),
+    .product:nth-child(5) {
+      grid-column:
+        span 4;
+    }
 
-            object-fit: cover;
-        }
+    .product-photo {
+      height:
+        510px;
 
-        .story h2 {
-            font-family: Manrope;
+      overflow:
+        hidden;
 
-            font-size: clamp(42px, 5vw, 70px);
+      background:
+        #ddd;
+    }
 
-            line-height: .98;
+    .product:nth-child(n+3)
+    .product-photo {
+      height:
+        390px;
+    }
 
-            letter-spacing: -.055em;
+    .product-photo img {
+      transition:
+        .55s;
+    }
 
-            margin: 14px 0 25px;
-        }
+    .product:hover img {
+      transform:
+        scale(1.025);
+    }
 
-        .story-text {
-            color: #b5b8b0;
+    .product-info {
+      padding:
+        20px
+        22px
+        24px;
 
-            font-size: 17px;
+      display:
+        flex;
 
-            line-height: 1.8;
-        }
+      justify-content:
+        space-between;
 
-        .benefits {
-            display: grid;
+      gap:
+        16px;
+    }
 
-            grid-template-columns: repeat(3, 1fr);
+    .product-info h3 {
+      font:
+        700
+        17px
+        Manrope,
+        sans-serif;
 
-            gap: 12px;
+      margin-bottom:
+        5px;
+    }
 
-            margin-top: 35px;
-        }
+    .product-info small {
+      color:
+        var(--muted);
+    }
 
-        .benefit {
-            padding-top: 18px;
+    .stock {
+      font-weight:
+        800;
 
-            border-top: 1px solid #41443d;
-        }
+      font-size:
+        13px;
 
-        .benefit strong {
-            display: block;
+      white-space:
+        nowrap;
+    }
 
-            font-size: 16px;
 
-            margin-bottom: 7px;
-        }
+    /* =============================
+       HISTORIA
+    ============================= */
 
-        .benefit span {
-            color: #94988f;
+    .showcase {
+      background:
+        #161814;
 
-            font-size: 13px;
-        }
+      color:
+        #fff;
+    }
 
+    .showcase-grid {
+      display:
+        grid;
 
-        /* ========================================
-           CTA
-        ======================================== */
+      grid-template-columns:
+        1.1fr .9fr;
 
-        .cta {
-            padding: 90px 0;
-        }
+      gap:
+        70px;
 
-        .cta-box {
-            background: var(--orange);
+      align-items:
+        center;
+    }
 
-            border-radius: 34px;
+    .showcase-photo {
+      height:
+        650px;
 
-            padding: 70px;
+      border-radius:
+        32px;
 
-            display: grid;
+      overflow:
+        hidden;
+    }
 
-            grid-template-columns: 1fr auto;
+    .showcase h2 {
+      font:
+        800
+        clamp(
+          42px,
+          5vw,
+          70px
+        )/.98
+        Manrope,
+        sans-serif;
 
-            align-items: center;
+      letter-spacing:
+        -.055em;
 
-            gap: 30px;
-        }
+      margin:
+        15px 0
+        24px;
+    }
 
-        .cta-box h2 {
-            font-family: Manrope;
+    .showcase p {
+      color:
+        #b9bcb3;
 
-            font-size: clamp(40px, 5vw, 65px);
+      line-height:
+        1.8;
 
-            line-height: .98;
+      font-size:
+        17px;
+    }
 
-            letter-spacing: -.055em;
-        }
+    .benefits {
+      margin-top:
+        34px;
 
+      display:
+        grid;
 
-        /* ========================================
-           FOOTER
-        ======================================== */
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
 
-        footer {
-            border-top: 1px solid var(--line);
+      gap:
+        12px;
+    }
 
-            padding: 42px 0;
-        }
+    .benefit {
+      border-top:
+        1px solid
+        #42463e;
 
-        .footer-content {
-            display: flex;
+      padding-top:
+        16px;
+    }
 
-            justify-content: space-between;
+    .benefit strong {
+      display:
+        block;
 
-            gap: 30px;
+      font:
+        700
+        16px
+        Manrope,
+        sans-serif;
 
-            flex-wrap: wrap;
+      margin-bottom:
+        6px;
+    }
 
-            color: var(--gray);
+    .benefit span {
+      color:
+        #92978e;
 
-            font-size: 13px;
-        }
+      font-size:
+        13px;
 
+      line-height:
+        1.5;
+    }
 
-        /* ========================================
-           WHATSAPP
-        ======================================== */
 
-        .whatsapp {
-            position: fixed;
+    /* =============================
+       LOOKBOOK
+    ============================= */
 
-            right: 24px;
-            bottom: 24px;
+    .gallery-section {
+      padding-top:
+        95px;
+    }
 
-            z-index: 999;
+    .lookbook {
+      display:
+        grid;
 
-            background: #22d26f;
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
 
-            color: #073a20;
+      gap:
+        14px;
+    }
 
-            font-weight: 800;
+    .lookbook figure {
+      height:
+        440px;
 
-            padding: 16px 21px;
+      border-radius:
+        26px;
 
-            border-radius: 100px;
+      overflow:
+        hidden;
 
-            box-shadow: 0 12px 35px rgba(0,0,0,.15);
+      margin:
+        0;
+    }
 
-            transition: .3s;
-        }
 
-        .whatsapp:hover {
-            transform: translateY(-3px);
-        }
+    /* =============================
+       CTA
+    ============================= */
 
+    .cta {
+      padding:
+        90px 0;
+    }
 
-        /* ========================================
-           ANIMACIONES
-        ======================================== */
+    .cta-box {
+      background:
+        var(--orange);
 
-        .reveal {
-            opacity: 0;
+      border-radius:
+        34px;
 
-            transform: translateY(20px);
+      padding:
+        70px;
 
-            transition: .7s;
-        }
+      display:
+        grid;
 
-        .reveal.visible {
-            opacity: 1;
+      grid-template-columns:
+        1fr auto;
 
-            transform: translateY(0);
-        }
+      align-items:
+        center;
 
+      gap:
+        28px;
+    }
 
-        /* ========================================
-           TABLET
-        ======================================== */
+    .cta h2 {
+      font:
+        800
+        clamp(
+          40px,
+          5vw,
+          66px
+        )/.96
+        Manrope,
+        sans-serif;
 
-        @media(max-width: 850px) {
+      letter-spacing:
+        -.055em;
 
-            .menu {
-                display: none;
-            }
+      max-width:
+        760px;
+    }
 
-            .hero {
-                grid-template-columns: 1fr;
-            }
 
-            .hero-content {
-                padding: 45px 32px;
-            }
+    /* =============================
+       FOOTER
+    ============================= */
 
-            .hero-images {
-                height: 650px;
-            }
+    footer {
+      border-top:
+        1px solid
+        var(--line);
 
-            .products {
-                display: block;
-            }
+      padding:
+        42px 0;
+    }
 
-            .product {
-                margin-bottom: 18px;
-            }
+    .footer {
+      display:
+        flex;
 
-            .story-grid {
-                grid-template-columns: 1fr;
-            }
+      justify-content:
+        space-between;
 
-            .benefits {
-                grid-template-columns: 1fr;
-            }
+      gap:
+        24px;
 
-            .cta-box {
-                grid-template-columns: 1fr;
-                padding: 45px 30px;
-            }
+      flex-wrap:
+        wrap;
 
-        }
+      color:
+        var(--muted);
 
+      font-size:
+        13px;
+    }
 
-        /* ========================================
-           CELULAR
-        ======================================== */
 
-        @media(max-width: 520px) {
+    /* =============================
+       WHATSAPP
+    ============================= */
 
-            .wrap {
-                width: calc(100% - 24px);
-            }
+    .whatsapp {
+      position:
+        fixed;
 
-            .header-button {
-                padding: 11px 15px;
-                font-size: 11px;
-            }
+      right:
+        22px;
 
-            .hero {
-                padding-top: 14px;
-            }
+      bottom:
+        22px;
 
-            .hero-content {
-                padding: 40px 26px;
-            }
+      z-index:
+        99;
 
-            h1 {
-                font-size: 51px;
-            }
+      background:
+        #25D366;
 
-            .hero-images {
-                height: 570px;
-            }
+      color:
+        #07391f;
 
-            .hero-images .image-box:first-child {
-                grid-column: 1 / 3;
-                grid-row: auto;
-            }
+      padding:
+        15px 19px;
 
-            .product-photo,
-            .product:nth-child(n+3) .product-photo {
-                height: 420px;
-            }
+      border-radius:
+        999px;
 
-            .story-image {
-                height: 450px;
-            }
+      font-weight:
+        800;
 
-            section {
-                padding: 75px 0;
-            }
+      box-shadow:
+        0 12px 34px
+        rgba(
+          0,
+          0,
+          0,
+          .16
+        );
+    }
 
-            .section-header {
-                display: block;
-            }
 
-            .section-header p {
-                margin-top: 20px;
-            }
+    /* =============================
+       TABLET
+    ============================= */
 
-        }
+    @media(max-width:900px) {
 
-    </style>
+      .menu {
+        display:
+          none;
+      }
+
+      .hero {
+        grid-template-columns:
+          1fr;
+      }
+
+      .hero-copy {
+        padding:
+          44px 32px;
+      }
+
+      .hero-gallery {
+        height:
+          640px;
+      }
+
+      .products {
+        display:
+          block;
+      }
+
+      .product {
+        margin-bottom:
+          16px;
+      }
+
+      .showcase-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .lookbook {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .cta-box {
+        grid-template-columns:
+          1fr;
+
+        padding:
+          44px 30px;
+      }
+
+    }
+
+
+    /* =============================
+       CELULAR
+    ============================= */
+
+    @media(max-width:560px) {
+
+      .wrap {
+        width:
+          calc(
+            100% - 24px
+          );
+      }
+
+      .hero {
+        padding-top:
+          14px;
+      }
+
+      .hero-gallery {
+        height:
+          auto;
+
+        grid-template-columns:
+          1fr;
+
+        grid-template-rows:
+          auto;
+      }
+
+      .hero-card,
+      .hero-card:first-child {
+        grid-row:
+          auto;
+
+        min-height:
+          360px;
+      }
+
+      .hero h1 {
+        font-size:
+          52px;
+      }
+
+      .product-photo,
+      .product:nth-child(n+3)
+      .product-photo {
+        height:
+          420px;
+      }
+
+      .section-head {
+        display:
+          block;
+      }
+
+      .section-head p {
+        margin-top:
+          18px;
+      }
+
+      .showcase-photo {
+        height:
+          460px;
+      }
+
+      .benefits {
+        grid-template-columns:
+          1fr;
+      }
+
+      .lookbook {
+        grid-template-columns:
+          1fr;
+      }
+
+      .lookbook figure {
+        height:
+          420px;
+      }
+
+    }
+
+  </style>
 
 </head>
-
 
 <body>
 
 
-    <!-- BARRA SUPERIOR -->
+  <!-- =========================================
+       BARRA SUPERIOR
+  ========================================== -->
 
-    <div class="topbar">
-        Envíos en Honduras · 100% estilo · Diseños personalizados
+  <div class="topbar">
+
+    Envíos en Honduras · Camisas de algodón · Diseños con personalidad
+
+  </div>
+
+
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header>
+
+    <div class="wrap nav">
+
+      <a
+        href="#"
+        class="logo"
+      >
+
+        MODA<span>CASUAL</span>
+
+      </a>
+
+
+      <nav class="menu">
+
+        <a href="#coleccion">
+          Colección
+        </a>
+
+        <a href="#estilo">
+          Estilo
+        </a>
+
+        <a href="#marca">
+          La marca
+        </a>
+
+        <a href="#contacto">
+          Contacto
+        </a>
+
+      </nav>
+
+
+      <a
+        href="#coleccion"
+        class="pill"
+      >
+
+        Ver camisas →
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================================
+       CONTENIDO
+  ========================================== -->
+
+  <main>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+
+    <div class="wrap hero">
+
+
+      <!-- TEXTO -->
+
+      <div class="hero-copy">
+
+        <span class="eyebrow">
+
+          Nueva colección · 2026
+
+        </span>
+
+
+        <h1>
+
+          Viste tu<br>
+          forma de<br>
+          ser.
+
+        </h1>
+
+
+        <p>
+
+          Camisas casuales de algodón,
+          cómodas y versátiles,
+          con diseños que convierten
+          una prenda básica en algo
+          mucho más personal.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+          <a
+            href="#coleccion"
+            class="btn btn-white"
+          >
+
+            Explorar colección
+
+          </a>
+
+
+          <a
+            href="#contacto"
+            class="btn btn-ghost"
+          >
+
+            Hacer un pedido
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- GALERÍA PRINCIPAL -->
+
+      <div class="hero-gallery">
+
+
+        <figure class="hero-card">
+
+          <img
+            src="assets/verde_gato.png"
+            alt="Camisa verde con diseños"
+          >
+
+          <span class="tag">
+
+            Verde oliva · Casual
+
+          </span>
+
+        </figure>
+
+
+        <figure class="hero-card">
+
+          <img
+            src="assets/vino_harry.png"
+            alt="Camisa color vino"
+          >
+
+          <span class="tag">
+
+            Color vino
+
+          </span>
+
+        </figure>
+
+
+        <figure class="hero-card">
+
+          <img
+            src="assets/naranja_modelo.jpg"
+            alt="Modelo con camisa naranja"
+          >
+
+          <span class="tag">
+
+            Color vibrante
+
+          </span>
+
+        </figure>
+
+
+      </div>
+
     </div>
 
 
-    <!-- HEADER -->
 
-    <header>
+    <!-- =========================================
+         TICKER
+    ========================================== -->
 
-        <div class="wrap nav">
+    <div class="ticker">
 
-            <a href="#" class="logo">
-                MODA<span>CASUAL</span>
-            </a>
+      <div class="ticker-track">
 
-            <nav class="menu">
+        ALGODÓN •
+        DISEÑOS DTF •
+        COLORES PARA TU ESTILO •
+        TALLAS S · M · L · XL •
+        PERSONALIZA TU CAMISA •
 
-                <a href="#coleccion">
-                    Colección
-                </a>
+        ALGODÓN •
+        DISEÑOS DTF •
+        COLORES PARA TU ESTILO •
+        TALLAS S · M · L · XL •
+        PERSONALIZA TU CAMISA •
 
-                <a href="#marca">
-                    La marca
-                </a>
+      </div>
 
-                <a href="#contacto">
-                    Contacto
-                </a>
+    </div>
 
-            </nav>
 
-            <a href="#coleccion" class="header-button">
-                Ver camisas →
-            </a>
 
-        </div>
+    <!-- =========================================
+         COLECCIÓN
+    ========================================== -->
 
-    </header>
+    <section id="coleccion">
 
+      <div class="wrap">
 
 
-    <!-- HERO -->
+        <div class="section-head">
 
-    <main>
+          <div>
 
-        <div class="wrap hero">
+            <span
+              class="eyebrow"
+              style="color:var(--wine)"
+            >
 
+              Selección destacada
 
-            <!-- TEXTO -->
-
-            <div class="hero-content">
-
-                <span class="small-title">
-                    Nueva colección · 2026
-                </span>
-
-                <h1>
-                    Viste tu<br>
-                    forma de<br>
-                    ser.
-                </h1>
-
-                <p>
-                    Camisas casuales de algodón con diseños
-                    que transforman un básico en algo tuyo.
-                    Cómodas, versátiles y listas para
-                    acompañarte todos los días.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#coleccion" class="btn btn-white">
-                        Explorar colección
-                    </a>
-
-                    <a href="#contacto" class="btn btn-border">
-                        Hacer un pedido
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- GALERÍA -->
-
-            <div class="hero-images">
-
-                <div class="image-box">
-
-                    <img
-                        data-photo="naranja"
-                        alt="Modelo con camisa casual naranja"
-                    >
-
-                    <div class="image-error">
-                        No se encontró naranja.jpg,
-                        naranja.png o naranja.webp
-                        dentro de la carpeta assets.
-                    </div>
-
-                    <span class="photo-label">
-                        Casual · Cómoda · Original
-                    </span>
-
-                </div>
-
-
-                <div class="image-box">
-
-                    <img
-                        data-photo="verde"
-                        alt="Camisa verde"
-                    >
-
-                    <div class="image-error">
-                        No se encontró verde.jpg,
-                        verde.png o verde.webp.
-                    </div>
-
-                </div>
-
-
-                <div class="image-box">
-
-                    <img
-                        data-photo="vino"
-                        alt="Camisa color vino"
-                    >
-
-                    <div class="image-error">
-                        No se encontró vino.jpg,
-                        vino.png o vino.webp.
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- TICKER -->
-
-        <div class="ticker">
-
-            <div class="ticker-track">
-
-                ALGODÓN •
-                DISEÑOS DTF •
-                COLORES PARA TU ESTILO •
-                TALLAS S · M · L · XL •
-                PERSONALIZA TU CAMISA •
-                ALGODÓN •
-                DISEÑOS DTF •
-                COLORES PARA TU ESTILO •
-                TALLAS S · M · L · XL •
-                PERSONALIZA TU CAMISA •
-
-            </div>
-
-        </div>
-
-
-
-        <!-- COLECCIÓN -->
-
-        <section id="coleccion">
-
-            <div class="wrap">
-
-                <div class="section-header reveal">
-
-                    <div>
-
-                        <span class="small-title" style="color:#751c2d">
-                            Selección destacada
-                        </span>
-
-                        <h2>
-                            No vendemos solo camisas.
-                            Vendemos estilo.
-                        </h2>
-
-                    </div>
-
-                    <p>
-                        Una colección creada para quienes
-                        quieren comodidad, personalidad
-                        y un estilo que destaque.
-                    </p>
-
-                </div>
-
-
-                <div class="products">
-
-
-                    <!-- PRODUCTO 1 -->
-
-                    <article class="product reveal">
-
-                        <div class="product-photo">
-
-                            <img
-                                data-photo="verde"
-                                alt="Camisa verde"
-                            >
-
-                            <div class="image-error">
-                                Agrega verde.jpg o verde.png
-                                en la carpeta assets.
-                            </div>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-
-                                <h3>
-                                    Olive Edition
-                                </h3>
-
-                                <small>
-                                    Algodón · Manga corta
-                                </small>
-
-                            </div>
-
-                            <span class="availability">
-                                Disponible
-                            </span>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- PRODUCTO 2 -->
-
-                    <article class="product reveal">
-
-                        <div class="product-photo">
-
-                            <img
-                                data-photo="vino"
-                                alt="Camisa vino"
-                            >
-
-                            <div class="image-error">
-                                Agrega vino.jpg o vino.png
-                                en assets.
-                            </div>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-
-                                <h3>
-                                    Wine Edition
-                                </h3>
-
-                                <small>
-                                    Algodón · Manga corta
-                                </small>
-
-                            </div>
-
-                            <span class="availability">
-                                Disponible
-                            </span>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- PRODUCTO 3 -->
-
-                    <article class="product reveal">
-
-                        <div class="product-photo">
-
-                            <img
-                                data-photo="naranja"
-                                alt="Camisa naranja"
-                            >
-
-                            <div class="image-error">
-                                Agrega naranja.jpg o naranja.png
-                                en assets.
-                            </div>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-
-                                <h3>
-                                    Orange Edition
-                                </h3>
-
-                                <small>
-                                    Algodón · Casual
-                                </small>
-
-                            </div>
-
-                            <span class="availability">
-                                Disponible
-                            </span>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- PRODUCTO 4 -->
-
-                    <article class="product reveal">
-
-                        <div class="product-photo">
-
-                            <img
-                                data-photo="vision"
-                                alt="Camisa Vision"
-                            >
-
-                            <div class="image-error">
-                                Agrega vision.jpg o vision.png
-                                en assets.
-                            </div>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-
-                                <h3>
-                                    Vision
-                                </h3>
-
-                                <small>
-                                    Diseño DTF · Algodón
-                                </small>
-
-                            </div>
-
-                            <span class="availability">
-                                Disponible
-                            </span>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- PRODUCTO 5 -->
-
-                    <article class="product reveal">
-
-                        <div class="product-photo">
-
-                            <img
-                                data-photo="negra"
-                                alt="Camisa negra"
-                            >
-
-                            <div class="image-error">
-                                Agrega negra.jpg o negra.png
-                                en assets.
-                            </div>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-
-                                <h3>
-                                    Dark Edition
-                                </h3>
-
-                                <small>
-                                    Algodón · Casual
-                                </small>
-
-                            </div>
-
-                            <span class="availability">
-                                Disponible
-                            </span>
-
-                        </div>
-
-                    </article>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- MARCA -->
-
-        <section class="story" id="marca">
-
-            <div class="wrap story-grid">
-
-                <div class="story-image reveal">
-
-                    <img
-                        data-photo="negra"
-                        alt="Camisa negra Moda Casual"
-                    >
-
-                    <div class="image-error">
-                        Agrega negra.jpg o negra.png
-                        dentro de assets.
-                    </div>
-
-                </div>
-
-
-                <div class="reveal">
-
-                    <span class="small-title">
-                        Nuestra esencia
-                    </span>
-
-                    <h2>
-                        Tu camisa.<br>
-                        Tu diseño.<br>
-                        Tu manera.
-                    </h2>
-
-                    <p class="story-text">
-                        Creemos que una camisa puede ser mucho más
-                        que una prenda básica. Seleccionamos camisas
-                        casuales de algodón cómodas, versátiles y
-                        preparadas para acompañarte todos los días.
-                        <br><br>
-                        Elige uno de nuestros diseños o personaliza
-                        tu camisa mediante impresión DTF.
-                    </p>
-
-
-                    <div class="benefits">
-
-                        <div class="benefit">
-
-                            <strong>
-                                Algodón cómodo
-                            </strong>
-
-                            <span>
-                                Suave y perfecto para uso diario.
-                            </span>
-
-                        </div>
-
-
-                        <div class="benefit">
-
-                            <strong>
-                                Personalización DTF
-                            </strong>
-
-                            <span>
-                                Convierte tu idea en una camisa.
-                            </span>
-
-                        </div>
-
-
-                        <div class="benefit">
-
-                            <strong>
-                                Diferentes estilos
-                            </strong>
-
-                            <span>
-                                Colores y tallas para todos.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- CONTACTO -->
-
-        <section class="cta" id="contacto">
-
-            <div class="wrap">
-
-                <div class="cta-box reveal">
-
-                    <h2>
-                        ¿Encontraste una que va contigo?
-                    </h2>
-
-                    <a
-                        class="header-button"
-                        href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
-                        target="_blank"
-                    >
-                        Pedir por WhatsApp →
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="wrap footer-content">
-
-            <strong class="logo">
-                MODA<span>CASUAL</span>
-            </strong>
-
-            <span>
-                Tegucigalpa, Honduras · © 2026
             </span>
 
-            <span>
-                Instagram · Facebook · TikTok
-            </span>
+
+            <h2>
+
+              Camisas para expresarte
+              a tu manera.
+
+            </h2>
+
+          </div>
+
+
+          <p>
+
+            Diseños casuales para el
+            día a día, combinando
+            comodidad, color y
+            personalidad.
+
+          </p>
 
         </div>
 
-    </footer>
+
+
+        <div class="products">
+
+
+          <!-- PRODUCTO 1 -->
+
+          <article class="product">
+
+            <div class="product-photo">
+
+              <img
+                src="assets/verde_gato.png"
+                alt="Camisa verde diseño gato"
+              >
+
+            </div>
+
+
+            <div class="product-info">
+
+              <div>
+
+                <h3>
+                  Olive Cat
+                </h3>
+
+                <small>
+                  Algodón · Manga corta
+                </small>
+
+              </div>
+
+
+              <span class="stock">
+
+                Disponible
+
+              </span>
+
+            </div>
+
+          </article>
 
 
 
-    <!-- WHATSAPP -->
+          <!-- PRODUCTO 2 -->
 
-    <a
-        class="whatsapp"
-        href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
-        target="_blank"
+          <article class="product">
+
+            <div class="product-photo">
+
+              <img
+                src="assets/vino_harry.png"
+                alt="Camisa color vino"
+              >
+
+            </div>
+
+
+            <div class="product-info">
+
+              <div>
+
+                <h3>
+                  Wine Edition
+                </h3>
+
+                <small>
+                  Algodón · Diseño frontal
+                </small>
+
+              </div>
+
+
+              <span class="stock">
+
+                Disponible
+
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- PRODUCTO 3 -->
+
+          <article class="product">
+
+            <div class="product-photo">
+
+              <img
+                src="assets/naranja_modelo.jpg"
+                alt="Modelo con camisa naranja"
+              >
+
+            </div>
+
+
+            <div class="product-info">
+
+              <div>
+
+                <h3>
+                  Orange Trip
+                </h3>
+
+                <small>
+                  Casual · Manga corta
+                </small>
+
+              </div>
+
+
+              <span class="stock">
+
+                Disponible
+
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- PRODUCTO 4 -->
+
+          <article class="product">
+
+            <div class="product-photo">
+
+              <img
+                src="assets/vision_modelo.png"
+                alt="Camisa verde diseño Vision"
+              >
+
+            </div>
+
+
+            <div class="product-info">
+
+              <div>
+
+                <h3>
+                  Vision
+                </h3>
+
+                <small>
+                  Diseño frontal · DTF
+                </small>
+
+              </div>
+
+
+              <span class="stock">
+
+                Disponible
+
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- PRODUCTO 5 -->
+
+          <article class="product">
+
+            <div class="product-photo">
+
+              <img
+                src="assets/negra_modelo.jpg"
+                alt="Modelo con camisa negra"
+              >
+
+            </div>
+
+
+            <div class="product-info">
+
+              <div>
+
+                <h3>
+                  Dark Edition
+                </h3>
+
+                <small>
+                  Diseño posterior · Manga corta
+                </small>
+
+              </div>
+
+
+              <span class="stock">
+
+                Disponible
+
+              </span>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         NUESTRA MARCA
+    ========================================== -->
+
+    <section
+      class="showcase"
+      id="marca"
     >
-        WhatsApp
-    </a>
 
+      <div class="wrap showcase-grid">
 
 
-    <script>
+        <div class="showcase-photo">
 
-        /* =====================================================
-           CARGADOR AUTOMÁTICO DE IMÁGENES
-           
-           Busca automáticamente:
-           
-           assets/nombre.jpg
-           assets/nombre.jpeg
-           assets/nombre.png
-           assets/nombre.webp
-           
-           y también prueba si la foto está junto al index.html
-        ====================================================== */
+          <img
+            src="assets/camisas_apiladas.png"
+            alt="Camisas casuales dobladas"
+          >
 
-        const extensiones = [
-            ".jpg",
-            ".jpeg",
-            ".png",
-            ".webp",
-            ".JPG",
-            ".JPEG",
-            ".PNG",
-            ".WEBP"
-        ];
+        </div>
 
 
-        function cargarImagen(img) {
+        <div>
 
-            const nombre = img.dataset.photo;
+          <span class="eyebrow">
 
-            if (!nombre) {
-                return;
-            }
+            Nuestra esencia
 
+          </span>
 
-            const rutas = [];
 
+          <h2>
 
-            /* Primero busca dentro de assets */
+            Comodidad que también
+            tiene personalidad.
 
-            extensiones.forEach(extension => {
+          </h2>
 
-                rutas.push(
-                    "assets/" + nombre + extension
-                );
 
-            });
+          <p>
 
+            Moda Casual ofrece camisas
+            de algodón pensadas para
+            acompañarte todos los días.
 
-            /* Después busca junto al index.html */
+            Puedes elegir entre nuestros
+            diseños disponibles o
+            personalizar una camisa con
+            impresión DTF.
 
-            extensiones.forEach(extension => {
+          </p>
 
-                rutas.push(
-                    nombre + extension
-                );
 
-            });
 
+          <div class="benefits">
 
-            let posicion = 0;
 
+            <div class="benefit">
 
-            function intentar() {
+              <strong>
 
-                if (posicion >= rutas.length) {
+                Algodón cómodo
 
-                    img.style.display = "none";
+              </strong>
 
-                    const contenedor =
-                        img.parentElement;
+              <span>
 
-                    const error =
-                        contenedor.querySelector(
-                            ".image-error"
-                        );
+                Ideal para uso diario
+                y climas cálidos.
 
-                    if (error) {
+              </span>
 
-                        error.style.display = "flex";
+            </div>
 
-                    }
 
+            <div class="benefit">
 
-                    console.error(
-                        "No se encontró la imagen:",
-                        nombre,
-                        "Se probaron:",
-                        rutas
-                    );
+              <strong>
 
-                    return;
-                }
+                Diseños DTF
 
+              </strong>
 
-                const rutaActual =
-                    rutas[posicion];
+              <span>
 
+                Estampados llamativos
+                y personalizados.
 
-                const prueba =
-                    new Image();
+              </span>
 
+            </div>
 
-                prueba.onload = function () {
 
-                    img.src = rutaActual;
+            <div class="benefit">
 
-                    img.style.display = "block";
+              <strong>
 
-                    console.log(
-                        "Imagen cargada:",
-                        rutaActual
-                    );
+                Variedad
 
-                };
+              </strong>
 
+              <span>
 
-                prueba.onerror = function () {
+                Colores, estilos
+                y tallas para elegir.
 
-                    posicion++;
+              </span>
 
-                    intentar();
+            </div>
 
-                };
 
+          </div>
 
-                prueba.src =
-                    rutaActual;
+        </div>
 
-            }
+      </div>
 
+    </section>
 
-            intentar();
 
-        }
 
+    <!-- =========================================
+         LOOKBOOK
+    ========================================== -->
 
-        document
-            .querySelectorAll(
-                "img[data-photo]"
-            )
-            .forEach(cargarImagen);
+    <section
+      class="gallery-section"
+      id="estilo"
+    >
 
+      <div class="wrap">
 
 
-        /* =====================================================
-           ANIMACIONES
-        ====================================================== */
+        <div class="section-head">
 
-        const elementos =
-            document.querySelectorAll(
-                ".reveal"
-            );
+          <div>
 
+            <span
+              class="eyebrow"
+              style="color:var(--wine)"
+            >
 
-        if (
-            "IntersectionObserver"
-            in window
-        ) {
+              Así se ven
 
-            const observer =
-                new IntersectionObserver(
+            </span>
 
-                    entries => {
 
-                        entries.forEach(
-                            entry => {
+            <h2>
 
-                                if (
-                                    entry.isIntersecting
-                                ) {
+              De la percha
+              a tu outfit.
 
-                                    entry.target
-                                        .classList
-                                        .add(
-                                            "visible"
-                                        );
+            </h2>
 
-                                    observer
-                                        .unobserve(
-                                            entry.target
-                                        );
+          </div>
 
-                                }
 
-                            }
-                        );
+          <p>
 
-                    },
+            Fotografías reales de nuestras
+            camisas y ejemplos de cómo
+            se ven puestas.
 
-                    {
-                        threshold: .12
-                    }
+          </p>
 
-                );
+        </div>
 
 
-            elementos.forEach(
-                elemento => {
 
-                    observer.observe(
-                        elemento
-                    );
+        <div class="lookbook">
 
-                }
-            );
 
-        } else {
+          <figure>
 
-            elementos.forEach(
-                elemento => {
+            <img
+              src="assets/negra_colgada.jpg"
+              alt="Camisa negra colgada"
+            >
 
-                    elemento
-                        .classList
-                        .add(
-                            "visible"
-                        );
+          </figure>
 
-                }
-            );
 
-        }
+          <figure>
 
-    </script>
+            <img
+              src="assets/negra_modelo.jpg"
+              alt="Modelo con camisa negra"
+            >
+
+          </figure>
+
+
+          <figure>
+
+            <img
+              src="assets/vision_modelo.png"
+              alt="Modelo con camisa Vision"
+            >
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         CONTACTO
+    ========================================== -->
+
+    <section
+      class="cta"
+      id="contacto"
+    >
+
+      <div class="wrap">
+
+
+        <div class="cta-box">
+
+
+          <h2>
+
+            ¿Encontraste una camisa
+            que va contigo?
+
+          </h2>
+
+
+          <!-- CAMBIA EL NÚMERO -->
+
+          <a
+            class="pill"
+            href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            Pedir por WhatsApp →
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer>
+
+    <div class="wrap footer">
+
+
+      <strong class="logo">
+
+        MODA<span>CASUAL</span>
+
+      </strong>
+
+
+      <span>
+
+        Tegucigalpa, Honduras · © 2026
+
+      </span>
+
+
+      <span>
+
+        Instagram · Facebook · TikTok
+
+      </span>
+
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================================
+       WHATSAPP FLOTANTE
+  ========================================== -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+
+    WhatsApp
+
+  </a>
 
 
 </body>
-
 </html>
