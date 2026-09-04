@@ -1,1352 +1,616 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Moda Casual | Camisas de algodón con estilo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moda Casual | Camisas de calidad</title>
+  <meta name="description" content="Camisas casuales de algodón, diseños personalizados y colección cristiana en Honduras." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #f4f0e8;
-      --ink: #11120f;
-      --muted: #6f716a;
-      --wine: #6e1d2c;
-      --orange: #f29a27;
-      --green: #34472c;
-      --white: #ffffff;
-      --line: rgba(17,18,15,.12);
-      --shadow: 0 18px 50px rgba(0,0,0,.08);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "DM Sans", sans-serif;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .wrap {
-      width: min(1220px, calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* =========================
-       BARRA SUPERIOR
-    ========================= */
-
-    .topbar {
-      background: #11120f;
-      color: #fff;
-      padding: 10px 18px;
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(244,240,232,.94);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .logo {
-      font-family: Manrope, sans-serif;
-      font-weight: 800;
-      font-size: 23px;
-      letter-spacing: -.05em;
-    }
-
-    .logo span {
-      color: var(--wine);
-    }
-
-    .menu {
-      display: flex;
-      gap: 30px;
-      font-size: 14px;
-    }
-
-    .menu a {
-      transition: .25s;
-    }
-
-    .menu a:hover {
-      color: var(--wine);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 20px;
-      border-radius: 999px;
-      background: var(--ink);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .25s;
-    }
-
-    .pill:hover {
-      transform: translateY(-2px);
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      min-height: 710px;
-      padding: 28px 0 68px;
-      display: grid;
-      grid-template-columns: .82fr 1.18fr;
-      gap: 24px;
-    }
-
-    .hero-copy {
-      border-radius: 34px;
-      padding: 62px;
-      color: #fff;
-      background: linear-gradient(145deg, #7b2133, #651826);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-copy::after {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.05);
-      right: -180px;
-      top: -120px;
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      font-size: 11px;
-      font-weight: 700;
-      opacity: .78;
-    }
-
-    .hero h1 {
-      font-family: Manrope, sans-serif;
-      font-size: clamp(52px, 6vw, 84px);
-      line-height: .93;
-      letter-spacing: -.065em;
-      margin: 22px 0 28px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero p {
-      max-width: 480px;
-      font-size: 17px;
-      line-height: 1.72;
-      color: rgba(255,255,255,.84);
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .btn {
-      padding: 14px 20px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .25s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-white {
-      background: #fff;
-      color: #111;
-    }
-
-    .btn-ghost {
-      border: 1px solid rgba(255,255,255,.42);
-      color: #fff;
-    }
-
-    /* =========================
-       HERO IMÁGENES
-    ========================= */
-
-    .hero-gallery {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .hero-card {
-      border-radius: 28px;
-      overflow: hidden;
-      position: relative;
-      background: #ddd;
-      min-height: 260px;
-    }
-
-    .hero-card:first-child {
-      grid-row: 1 / 3;
-    }
-
-    .hero-card img {
-      transition: .6s;
-    }
-
-    .hero-card:hover img {
-      transform: scale(1.025);
-    }
-
-    .tag {
-      position: absolute;
-      left: 18px;
-      bottom: 18px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    /* =========================
-       TICKER
-    ========================= */
-
-    .ticker {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 18px 0;
-    }
-
-    .ticker-track {
-      width: max-content;
-      font: 700 13px Manrope, sans-serif;
-      letter-spacing: .09em;
-      animation: scroll 24s linear infinite;
-    }
-
-    @keyframes scroll {
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* =========================
-       SECCIONES
-    ========================= */
-
-    section {
-      padding: 100px 0;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 30px;
-      margin-bottom: 42px;
-    }
-
-    .section-head h2 {
-      font: 800 clamp(38px, 5vw, 66px)/.98 Manrope, sans-serif;
-      letter-spacing: -.055em;
-      max-width: 760px;
-      margin-top: 8px;
-    }
-
-    .section-head p {
-      max-width: 390px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* =========================
-       PRODUCTOS
-    ========================= */
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-    }
-
-    .product {
-      background: #fff;
-      border-radius: 28px;
-      overflow: hidden;
-      transition: .3s;
-      grid-column: span 4;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-
-    .product:nth-child(1) {
-      grid-column: span 7;
-    }
-
-    .product:nth-child(2) {
-      grid-column: span 5;
-    }
-
-    .product-photo {
-      height: 420px;
-      overflow: hidden;
-      background: #ddd;
-    }
-
-    .product:nth-child(1) .product-photo,
-    .product:nth-child(2) .product-photo {
-      height: 510px;
-    }
-
-    .product-photo img {
-      transition: .55s;
-    }
-
-    .product:hover img {
-      transform: scale(1.025);
-    }
-
-    .product-info {
-      padding: 20px 22px 24px;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .product-info h3 {
-      font: 700 17px Manrope, sans-serif;
-      margin-bottom: 5px;
-    }
-
-    .product-info small {
-      color: var(--muted);
-    }
-
-    .stock {
-      font-weight: 800;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    /* =========================
-       COLECCIÓN CRISTIANA
-    ========================= */
-
-    .christian-section {
-      padding-top: 20px;
-    }
-
-    .christian-banner {
-      background: #fff;
-      border-radius: 34px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      min-height: 580px;
-      box-shadow: var(--shadow);
-    }
-
-    .christian-image {
-      min-height: 580px;
-      overflow: hidden;
-    }
-
-    .christian-image img {
-      object-position: center;
-    }
-
-    .christian-content {
-      padding: 65px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .christian-content h2 {
-      font: 800 clamp(42px, 5vw, 68px)/.98 Manrope, sans-serif;
-      letter-spacing: -.055em;
-      margin: 15px 0 25px;
-    }
-
-    .christian-content p {
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 17px;
-      margin-bottom: 28px;
-    }
-
-    /* =========================
-       MARCA
-    ========================= */
-
-    .showcase {
-      background: #161814;
-      color: #fff;
-    }
-
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .showcase-photo {
-      height: 650px;
-      border-radius: 32px;
-      overflow: hidden;
-    }
-
-    .showcase h2 {
-      font: 800 clamp(42px, 5vw, 70px)/.98 Manrope, sans-serif;
-      letter-spacing: -.055em;
-      margin: 15px 0 24px;
-    }
-
-    .showcase p {
-      color: #b9bcb3;
-      line-height: 1.8;
-      font-size: 17px;
-    }
-
-    .benefits {
-      margin-top: 34px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .benefit {
-      border-top: 1px solid #42463e;
-      padding-top: 16px;
-    }
-
-    .benefit strong {
-      display: block;
-      font: 700 16px Manrope, sans-serif;
-      margin-bottom: 6px;
-    }
-
-    .benefit span {
-      color: #92978e;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    /* =========================
-       LOOKBOOK
-    ========================= */
-
-    .lookbook {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .lookbook figure {
-      height: 500px;
-      border-radius: 26px;
-      overflow: hidden;
-      background: #ddd;
-    }
-
-    .lookbook figure.featured {
-      grid-column: span 2;
-      height: 620px;
-    }
-
-    /* =========================
-       CTA
-    ========================= */
-
-    .cta {
-      padding: 90px 0;
-    }
-
-    .cta-box {
-      background: var(--orange);
-      border-radius: 34px;
-      padding: 70px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .cta h2 {
-      font: 800 clamp(40px, 5vw, 66px)/.96 Manrope, sans-serif;
-      letter-spacing: -.055em;
-      max-width: 760px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 42px 0;
-    }
-
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* =========================
-       WHATSAPP
-    ========================= */
-
-    .whatsapp {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 99;
-      background: #25D366;
-      color: #07391f;
-      padding: 15px 19px;
-      border-radius: 999px;
-      font-weight: 800;
-      box-shadow: 0 12px 34px rgba(0,0,0,.16);
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media(max-width: 900px) {
-      .menu {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy {
-        padding: 44px 32px;
-      }
-
-      .hero-gallery {
-        height: 640px;
-      }
-
-      .products {
-        display: block;
-      }
-
-      .product {
-        margin-bottom: 16px;
-      }
-
-      .christian-banner {
-        grid-template-columns: 1fr;
-      }
-
-      .christian-content {
-        padding: 45px 32px;
-      }
-
-      .showcase-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-box {
-        grid-template-columns: 1fr;
-        padding: 44px 30px;
-      }
-    }
-
-    @media(max-width: 560px) {
-      .wrap {
-        width: calc(100% - 24px);
-      }
-
-      .hero {
-        padding-top: 14px;
-      }
-
-      .hero-gallery {
-        height: auto;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
-
-      .hero-card,
-      .hero-card:first-child {
-        grid-row: auto;
-        min-height: 360px;
-      }
-
-      .hero h1 {
-        font-size: 52px;
-      }
-
-      .section-head {
-        display: block;
-      }
-
-      .section-head p {
-        margin-top: 18px;
-      }
-
-      .product-photo,
-      .product:nth-child(1) .product-photo,
-      .product:nth-child(2) .product-photo {
-        height: 420px;
-      }
-
-      .christian-image {
-        min-height: 420px;
-      }
-
-      .showcase-photo {
-        height: 460px;
-      }
-
-      .benefits {
-        grid-template-columns: 1fr;
-      }
-
-      .lookbook {
-        grid-template-columns: 1fr;
-      }
-
-      .lookbook figure,
-      .lookbook figure.featured {
-        grid-column: auto;
-        height: 420px;
-      }
+    :root{
+      --bg:#f4efe7;
+      --paper:#fbf8f2;
+      --ink:#171714;
+      --muted:#6f6b64;
+      --line:rgba(23,23,20,.12);
+      --wine:#8b1e2d;
+      --wine-dark:#651522;
+      --gold:#c88b4a;
+      --cream:#efe5d7;
+      --white:#fff;
+      --shadow:0 18px 45px rgba(0,0,0,.10);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+    .wrap{width:min(1240px,calc(100% - 34px));margin:auto}
+
+    /* TOPBAR */
+    .topbar{
+      background:#171714;
+      color:#fff;
+      font-size:12px;
+      letter-spacing:.04em;
+    }
+    .topbar-inner{
+      min-height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .top-left,.top-right{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .sep{opacity:.35}
+    .social{
+      width:26px;height:26px;border:1px solid rgba(255,255,255,.18);
+      border-radius:50%;display:grid;place-items:center;font-size:12px;
+    }
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(244,239,231,.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      min-height:112px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:28px;
+    }
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .menu a{
+      display:flex;align-items:center;gap:8px;
+      padding:14px 18px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:15px;
+      transition:.25s ease;
+    }
+    .menu a:hover,.menu a.active{
+      background:var(--wine);
+      color:#fff;
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(139,30,45,.22);
+    }
+    .menu-icon{
+      width:22px;height:22px;display:grid;place-items:center;
+      font-size:16px;
+    }
+    .brand{
+      display:flex;align-items:center;justify-content:flex-end;
+      min-width:270px;
+    }
+    .brand img{
+      width:240px;
+      height:88px;
+      object-fit:contain;
+      object-position:right center;
+    }
+
+    /* HERO SLIDER */
+    .hero{
+      position:relative;
+      background:#2b2925;
+      overflow:hidden;
+      min-height:560px;
+    }
+    .slide{
+      position:absolute;inset:0;
+      opacity:0;pointer-events:none;
+      transition:opacity .7s ease;
+    }
+    .slide.active{opacity:1;pointer-events:auto}
+    .slide::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg,rgba(16,15,14,.72) 0%,rgba(16,15,14,.48) 42%,rgba(16,15,14,.10) 72%,rgba(16,15,14,.04) 100%);
+    }
+    .slide img{position:absolute;inset:0}
+    .slide-content{
+      position:relative;z-index:2;
+      min-height:560px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      max-width:620px;
+      color:#fff;
+      padding:64px 0;
+    }
+    .slide-kicker{
+      font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+      margin-bottom:16px;color:#f4d9b7;
+    }
+    .slide h1{
+      font:800 clamp(48px,6.5vw,84px)/.92 "Manrope",sans-serif;
+      letter-spacing:-.05em;
+      margin-bottom:22px;
+      text-transform:uppercase;
+    }
+    .slide p{
+      font-size:20px;line-height:1.55;max-width:560px;
+      color:rgba(255,255,255,.9);
+      margin-bottom:28px;
+    }
+    .hero-btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:16px 26px;border-radius:999px;
+      background:var(--wine);color:#fff;
+      border:1px solid rgba(255,255,255,.45);
+      font-weight:800;font-size:14px;
+      box-shadow:0 12px 30px rgba(0,0,0,.2);
+    }
+    .hero-meta{
+      position:absolute;left:50%;bottom:24px;transform:translateX(-50%);
+      z-index:4;display:flex;gap:8px;
+    }
+    .dot{
+      width:12px;height:12px;border-radius:50%;
+      border:0;background:rgba(255,255,255,.7);cursor:pointer;
+    }
+    .dot.active{background:var(--wine);outline:2px solid rgba(255,255,255,.8)}
+    .hero-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      z-index:4;width:48px;height:48px;border-radius:50%;
+      border:0;background:rgba(0,0,0,.48);color:#fff;
+      font-size:24px;cursor:pointer;
+      transition:.25s;
+    }
+    .hero-arrow:hover{background:var(--wine)}
+    .hero-arrow.prev{left:18px}
+    .hero-arrow.next{right:18px}
+
+    /* TRUST BAR */
+    .trust{
+      background:var(--paper);
+      border-bottom:1px solid var(--line);
+    }
+    .trust-grid{
+      min-height:86px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+    }
+    .trust-item{
+      display:flex;align-items:center;justify-content:center;gap:14px;
+      padding:18px;border-right:1px solid var(--line);
+    }
+    .trust-item:last-child{border-right:0}
+    .trust-icon{font-size:28px}
+    .trust-item strong{display:block;font-size:15px}
+    .trust-item span{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+
+    /* SECTIONS */
+    section{padding:86px 0}
+    .section-head{
+      display:flex;justify-content:space-between;align-items:end;gap:24px;
+      margin-bottom:34px;
+    }
+    .eyebrow{
+      color:var(--wine);font-size:12px;letter-spacing:.18em;
+      font-weight:800;text-transform:uppercase;
+    }
+    .section-head h2{
+      font:800 clamp(34px,4.5vw,58px)/1 "Manrope",sans-serif;
+      letter-spacing:-.045em;
+      margin-top:8px;
+    }
+    .section-head p{max-width:390px;color:var(--muted);line-height:1.7}
+
+    /* PRODUCT STRIP */
+    .products{
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:14px;
+    }
+    .product{
+      background:#fff;border-radius:22px;overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      transition:.3s;
+    }
+    .product:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+    .product-photo{height:300px;background:#ddd}
+    .product-info{padding:14px 14px 18px}
+    .product-info h3{font-size:16px;margin-bottom:4px}
+    .product-info p{font-size:12px;color:var(--muted)}
+
+    /* PROMOS */
+    .promos{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;
+      margin-top:20px;
+    }
+    .promo{
+      border-radius:24px;padding:30px;
+      min-height:150px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+    }
+    .promo.red{background:linear-gradient(135deg,var(--wine),var(--wine-dark));color:#fff}
+    .promo.cream{background:linear-gradient(135deg,#fff8ef,#eadbc6)}
+    .promo h3{font:800 25px "Manrope",sans-serif;margin-bottom:6px}
+    .promo p{opacity:.8}
+    .promo a{
+      border:1px solid currentColor;border-radius:999px;padding:12px 18px;
+      font-weight:800;font-size:13px;white-space:nowrap;
+    }
+
+    /* BRAND SECTION */
+    .brand-section{background:#171714;color:#fff}
+    .brand-grid{
+      display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+    }
+    .brand-photo{height:600px;border-radius:28px;overflow:hidden}
+    .brand-copy h2{
+      font:800 clamp(38px,5vw,66px)/.98 "Manrope",sans-serif;
+      letter-spacing:-.05em;margin:14px 0 22px;
+    }
+    .brand-copy p{color:#c2beb8;line-height:1.8;font-size:17px}
+    .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+    .benefit{border-top:1px solid #45413d;padding-top:16px}
+    .benefit strong{display:block;margin-bottom:6px}
+    .benefit span{font-size:13px;color:#97928d}
+
+    /* CTA */
+    .cta-box{
+      background:linear-gradient(135deg,#f0b95e,#d89436);
+      border-radius:30px;padding:56px;
+      display:flex;align-items:center;justify-content:space-between;gap:24px;
+    }
+    .cta-box h2{
+      font:800 clamp(36px,4.5vw,58px)/1 "Manrope",sans-serif;
+      letter-spacing:-.045em;max-width:760px;
+    }
+    .cta-box a{
+      background:#171714;color:#fff;border-radius:999px;
+      padding:15px 22px;font-weight:800;white-space:nowrap;
+    }
+
+    footer{padding:42px 0;border-top:1px solid var(--line)}
+    .footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+
+    .whatsapp{
+      position:fixed;right:22px;bottom:22px;z-index:60;
+      background:#25D366;color:#07391f;padding:15px 18px;border-radius:999px;
+      font-weight:800;box-shadow:0 14px 36px rgba(0,0,0,.18);
+    }
+
+    @media(max-width:1100px){
+      .products{grid-template-columns:repeat(3,1fr)}
+      .brand{min-width:220px}.brand img{width:210px}
+    }
+    @media(max-width:900px){
+      .nav{grid-template-columns:1fr;gap:10px;padding:14px 0}
+      .brand{justify-content:flex-start;order:-1}
+      .menu{overflow:auto;flex-wrap:nowrap;padding-bottom:4px}
+      .menu a{white-space:nowrap}
+      .slide-content{padding-left:22px;padding-right:22px}
+      .trust-grid{grid-template-columns:1fr 1fr}
+      .trust-item:nth-child(2){border-right:0}
+      .brand-grid{grid-template-columns:1fr}
+      .promos{grid-template-columns:1fr}
+      .cta-box{flex-direction:column;align-items:flex-start}
+    }
+    @media(max-width:620px){
+      .topbar-inner{justify-content:center}
+      .top-right{display:none}
+      .brand img{width:180px;height:72px}
+      .hero,.slide-content{min-height:520px}
+      .slide h1{font-size:46px}
+      .slide p{font-size:17px}
+      .hero-arrow{width:40px;height:40px}
+      .products{grid-template-columns:1fr 1fr}
+      .product-photo{height:240px}
+      .trust-grid{grid-template-columns:1fr}
+      .trust-item{border-right:0;border-bottom:1px solid var(--line)}
+      .trust-item:last-child{border-bottom:0}
+      .section-head{display:block}
+      .section-head p{margin-top:14px}
+      .benefits{grid-template-columns:1fr}
+      .brand-photo{height:440px}
+      .cta-box{padding:34px 24px}
     }
   </style>
 </head>
-
 <body>
 
   <div class="topbar">
-    Envíos en Honduras · Camisas de algodón · Diseños con personalidad
+    <div class="wrap topbar-inner">
+      <div class="top-left">
+        <span>🚚 ENVÍOS EN HONDURAS</span>
+        <span class="sep">|</span>
+        <span>🛡 PAGOS SEGUROS</span>
+        <span class="sep">|</span>
+        <span>💎 DISEÑOS PERSONALIZADOS</span>
+        <span class="sep">|</span>
+        <span>♥ CALIDAD EN CADA PRENDA</span>
+      </div>
+      <div class="top-right">
+        <span class="social">◎</span>
+        <span class="social">f</span>
+        <span class="social">♪</span>
+        <span class="social">◔</span>
+      </div>
+    </div>
   </div>
 
   <header>
     <div class="wrap nav">
-
-      <a href="#" class="logo">
-        MODA<span>CASUAL</span>
-      </a>
-
       <nav class="menu">
-        <a href="#coleccion">Colección</a>
-        <a href="#cristiana">Colección cristiana</a>
-        <a href="#estilo">Estilo</a>
-        <a href="#marca">La marca</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#" class="active"><span class="menu-icon">⌂</span>Inicio</a>
+        <a href="#coleccion"><span class="menu-icon">👕</span>Colección</a>
+        <a href="#cristiana"><span class="menu-icon">✚</span>Colección Cristiana</a>
+        <a href="#estilo"><span class="menu-icon">☆</span>Estilo</a>
+        <a href="#marca"><span class="menu-icon">◇</span>La Marca</a>
+        <a href="#contacto"><span class="menu-icon">✉</span>Contacto</a>
       </nav>
 
-      <a href="#coleccion" class="pill">
-        Ver camisas →
+      <a class="brand" href="#">
+        <img src="assets/logo.png" alt="Logo Moda Casual">
       </a>
-
     </div>
   </header>
 
   <main>
 
-    <!-- =========================
-         HERO
-    ========================== -->
-
-    <div class="wrap hero">
-
-      <div class="hero-copy">
-
-        <span class="eyebrow">
-          Nueva colección · 2026
-        </span>
-
-        <h1>
-          Viste tu<br>
-          forma de<br>
-          ser.
-        </h1>
-
-        <p>
-          Camisas casuales de algodón, cómodas y versátiles,
-          con diseños que convierten una prenda básica
-          en algo mucho más personal.
-        </p>
-
-        <div class="hero-actions">
-
-          <a href="#coleccion" class="btn btn-white">
-            Explorar colección
-          </a>
-
-          <a href="#contacto" class="btn btn-ghost">
-            Hacer un pedido
-          </a>
-
+    <section class="hero" aria-label="Carrusel principal">
+      <div class="slide active">
+        <img src="assets/negr.png" alt="Modelo usando camisa casual negra con diseño">
+        <div class="wrap slide-content">
+          <span class="slide-kicker">Nueva colección 2026</span>
+          <h1>Viste tu forma de ser</h1>
+          <p>Camisas casuales de algodón, cómodas y con diseños que te representan.</p>
+          <a class="hero-btn" href="#coleccion">Explorar colección →</a>
         </div>
-
       </div>
 
-      <div class="hero-gallery">
-
-        <figure class="hero-card">
-          <img
-            src="assets/verd1.png"
-            alt="Camisa verde casual"
-          >
-          <span class="tag">
-            Verde oliva · Casual
-          </span>
-        </figure>
-
-        <figure class="hero-card">
-          <img
-            src="assets/vino.png"
-            alt="Camisa color vino"
-          >
-          <span class="tag">
-            Color vino
-          </span>
-        </figure>
-
-        <figure class="hero-card">
-          <img
-            src="assets/cat.jpg"
-            alt="Modelo con camisa naranja"
-          >
-          <span class="tag">
-            Color vibrante
-          </span>
-        </figure>
-
+      <div class="slide">
+        <img src="assets/JS.png" alt="Colección cristiana para niños, mujeres y hombres">
+        <div class="wrap slide-content">
+          <span class="slide-kicker">Diseños con propósito</span>
+          <h1>Viste tu fe con estilo</h1>
+          <p>Opciones para niños, mujeres y hombres con diseños que transmiten un mensaje.</p>
+          <a class="hero-btn" href="#cristiana">Ver colección cristiana →</a>
+        </div>
       </div>
 
+      <div class="slide">
+        <img src="assets/verd1.png" alt="Camisa casual verde oliva">
+        <div class="wrap slide-content">
+          <span class="slide-kicker">Comodidad y calidad</span>
+          <h1>Diseños que se adaptan a ti</h1>
+          <p>Elige tu color, tu estilo y personaliza tu camisa con impresión DTF.</p>
+          <a class="hero-btn" href="#contacto">Solicitar diseño →</a>
+        </div>
+      </div>
+
+      <button class="hero-arrow prev" aria-label="Anterior">‹</button>
+      <button class="hero-arrow next" aria-label="Siguiente">›</button>
+
+      <div class="hero-meta">
+        <button class="dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="wrap trust-grid">
+        <div class="trust-item"><span class="trust-icon">👕</span><div><strong>Múltiples tallas</strong><span>S · M · L · XL · XXL</span></div></div>
+        <div class="trust-item"><span class="trust-icon">🎨</span><div><strong>Variedad de colores</strong><span>Para cada estilo</span></div></div>
+        <div class="trust-item"><span class="trust-icon">🚚</span><div><strong>Envíos en Honduras</strong><span>Rápido y seguro</span></div></div>
+        <div class="trust-item"><span class="trust-icon">💎</span><div><strong>Diseños personalizados</strong><span>Tu idea en una camisa</span></div></div>
+      </div>
     </div>
-
-    <!-- =========================
-         TICKER
-    ========================== -->
-
-    <div class="ticker">
-
-      <div class="ticker-track">
-
-        ALGODÓN •
-        DISEÑOS DTF •
-        COLORES PARA TU ESTILO •
-        TALLAS S · M · L · XL •
-        PERSONALIZA TU CAMISA •
-
-        ALGODÓN •
-        DISEÑOS DTF •
-        COLORES PARA TU ESTILO •
-        TALLAS S · M · L · XL •
-        PERSONALIZA TU CAMISA •
-
-      </div>
-
-    </div>
-
-    <!-- =========================
-         COLECCIÓN
-    ========================== -->
 
     <section id="coleccion">
-
       <div class="wrap">
-
         <div class="section-head">
-
           <div>
-
-            <span
-              class="eyebrow"
-              style="color:var(--wine)"
-            >
-              Selección destacada
-            </span>
-
-            <h2>
-              Camisas para expresarte a tu manera.
-            </h2>
-
+            <span class="eyebrow">Nuestra colección</span>
+            <h2>Diseños que se adaptan a ti</h2>
           </div>
-
-          <p>
-            Diseños casuales para el día a día,
-            combinando comodidad, color y personalidad.
-          </p>
-
+          <p>Camisas casuales y cristianas para diferentes gustos, edades y ocasiones.</p>
         </div>
 
         <div class="products">
-
-          <!-- PRODUCTO 1 -->
-
           <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/verd1.png"
-                alt="Camisa verde"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Verde Oliva</h3>
-                <small>Algodón · Manga corta</small>
-              </div>
-
-              <span class="stock">
-                Disponible
-              </span>
-
-            </div>
-
+            <div class="product-photo"><img src="assets/verd1.png" alt="Camisa verde oliva"></div>
+            <div class="product-info"><h3>Verde Oliva</h3><p>Diseño casual</p></div>
           </article>
 
-          <!-- PRODUCTO 2 -->
-
           <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/vino.png"
-                alt="Camisa color vino"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Wine Edition</h3>
-                <small>Algodón · Diseño frontal</small>
-              </div>
-
-              <span class="stock">
-                Disponible
-              </span>
-
-            </div>
-
+            <div class="product-photo"><img src="assets/vino.png" alt="Camisa color vino"></div>
+            <div class="product-info"><h3>Color Vino</h3><p>Estilo casual</p></div>
           </article>
 
-          <!-- PRODUCTO 3 -->
-
           <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/cat.jpg"
-                alt="Modelo con camisa naranja"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Orange Trip</h3>
-                <small>Casual · Manga corta</small>
-              </div>
-
-              <span class="stock">
-                Disponible
-              </span>
-
-            </div>
-
+            <div class="product-photo"><img src="assets/cat.jpg" alt="Camisa naranja"></div>
+            <div class="product-info"><h3>Naranja</h3><p>Diseño llamativo</p></div>
           </article>
 
-          <!-- PRODUCTO 4 -->
-
           <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/ver.png"
-                alt="Camisa diseño Vision"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Vision</h3>
-                <small>Diseño frontal · DTF</small>
-              </div>
-
-              <span class="stock">
-                Disponible
-              </span>
-
-            </div>
-
+            <div class="product-photo"><img src="assets/bat.jpg" alt="Camisa negra con diseño posterior"></div>
+            <div class="product-info"><h3>Negra</h3><p>Diseño posterior</p></div>
           </article>
 
-          <!-- PRODUCTO 5 -->
-
           <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/bat.jpg"
-                alt="Modelo con camisa negra"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Dark Edition</h3>
-                <small>Diseño posterior · Manga corta</small>
-              </div>
-
-              <span class="stock">
-                Disponible
-              </span>
-
-            </div>
-
+            <div class="product-photo"><img src="assets/tal%202.png" alt="Camisas apiladas"></div>
+            <div class="product-info"><h3>Variedad de colores</h3><p>Opciones para elegir</p></div>
           </article>
 
-          <!-- NUEVA IMAGEN 1 -->
-
           <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/JS.png"
-                alt="Colección cristiana para niños mujeres y hombres"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Colección Fe</h3>
-                <small>Niños · Mujeres · Hombres</small>
-              </div>
-
-              <span class="stock">
-                Nuevo
-              </span>
-
-            </div>
-
+            <div class="product-photo"><img src="assets/JS.png" alt="Colección cristiana"></div>
+            <div class="product-info"><h3>Colección Cristiana</h3><p>Para toda la familia</p></div>
           </article>
-
-          <!-- NUEVA IMAGEN 2 -->
-
-          <article class="product">
-
-            <div class="product-photo">
-              <img
-                src="assets/negr.png"
-                alt="Pareja con camisas cristianas"
-              >
-            </div>
-
-            <div class="product-info">
-
-              <div>
-                <h3>Inspiración</h3>
-                <small>Diseños cristianos · DTF</small>
-              </div>
-
-              <span class="stock">
-                Nuevo
-              </span>
-
-            </div>
-
-          </article>
-
         </div>
 
-      </div>
-
-    </section>
-
-    <!-- =========================
-         NUEVA COLECCIÓN CRISTIANA
-    ========================== -->
-
-    <section
-      id="cristiana"
-      class="christian-section"
-    >
-
-      <div class="wrap">
-
-        <div class="christian-banner">
-
-          <div class="christian-image">
-
-            <img
-              src="assets/JS.png"
-              alt="Camisas cristianas para toda la familia"
-            >
-
-          </div>
-
-          <div class="christian-content">
-
-            <span
-              class="eyebrow"
-              style="color:var(--wine)"
-            >
-              Diseños con propósito
-            </span>
-
-            <h2>
-              Viste tu fe.
-            </h2>
-
-            <p>
-              Camisas con mensajes cristianos para niños,
-              jóvenes y adultos. Diseños pensados para
-              expresar tu fe con estilo, comodidad
-              y personalidad.
-            </p>
-
+        <div class="promos">
+          <div class="promo red">
             <div>
-              <a
-                href="#contacto"
-                class="pill"
-              >
-                Consultar diseños →
-              </a>
+              <h3>¿Diseño personalizado?</h3>
+              <p>Cuéntanos tu idea y la hacemos realidad.</p>
             </div>
-
+            <a href="#contacto">Solicitar diseño →</a>
           </div>
 
+          <div class="promo cream" id="cristiana">
+            <div>
+              <h3>Regalos con propósito</h3>
+              <p>Camisas que inspiran y conectan.</p>
+            </div>
+            <a href="#estilo">Ver diseños cristianos →</a>
+          </div>
         </div>
-
       </div>
-
     </section>
 
-    <!-- =========================
-         NUESTRA MARCA
-    ========================== -->
-
-    <section
-      class="showcase"
-      id="marca"
-    >
-
-      <div class="wrap showcase-grid">
-
-        <div class="showcase-photo">
-
-          <img
-            src="assets/tal%202.png"
-            alt="Camisas casuales dobladas"
-          >
-
+    <section class="brand-section" id="marca">
+      <div class="wrap brand-grid">
+        <div class="brand-photo">
+          <img src="assets/negr.png" alt="Pareja usando camisas con diseños cristianos">
         </div>
-
-        <div>
-
-          <span class="eyebrow">
-            Nuestra esencia
-          </span>
-
-          <h2>
-            Comodidad que también tiene personalidad.
-          </h2>
-
-          <p>
-            Moda Casual ofrece camisas de algodón pensadas
-            para acompañarte todos los días.
-
-            Puedes elegir entre nuestros diseños disponibles
-            o personalizar una camisa con impresión DTF.
-          </p>
+        <div class="brand-copy">
+          <span class="eyebrow" style="color:#e7bd82">Nuestra esencia</span>
+          <h2>Comodidad que también tiene personalidad.</h2>
+          <p>Moda Casual ofrece camisas de algodón pensadas para acompañarte todos los días. Puedes elegir entre nuestros diseños disponibles o personalizar una camisa con impresión DTF.</p>
 
           <div class="benefits">
-
-            <div class="benefit">
-
-              <strong>
-                Algodón cómodo
-              </strong>
-
-              <span>
-                Ideal para uso diario y climas cálidos.
-              </span>
-
-            </div>
-
-            <div class="benefit">
-
-              <strong>
-                Diseños DTF
-              </strong>
-
-              <span>
-                Estampados llamativos y personalizados.
-              </span>
-
-            </div>
-
-            <div class="benefit">
-
-              <strong>
-                Variedad
-              </strong>
-
-              <span>
-                Colores, estilos y tallas para elegir.
-              </span>
-
-            </div>
-
+            <div class="benefit"><strong>Algodón cómodo</strong><span>Ideal para el uso diario.</span></div>
+            <div class="benefit"><strong>Diseños DTF</strong><span>Estampados llamativos y personalizados.</span></div>
+            <div class="benefit"><strong>Variedad</strong><span>Colores, estilos y tallas.</span></div>
           </div>
-
         </div>
-
       </div>
-
     </section>
-
-    <!-- =========================
-         ESTILO / LOOKBOOK
-    ========================== -->
 
     <section id="estilo">
-
       <div class="wrap">
-
         <div class="section-head">
-
           <div>
-
-            <span
-              class="eyebrow"
-              style="color:var(--wine)"
-            >
-              Así se ven
-            </span>
-
-            <h2>
-              Diseños para cada estilo.
-            </h2>
-
+            <span class="eyebrow">Estilo</span>
+            <h2>Más que moda, un mensaje.</h2>
           </div>
-
-          <p>
-            Conoce algunos de nuestros diseños y
-            mira cómo lucen nuestras camisas puestas.
-          </p>
-
+          <p>Diseños casuales, familiares y cristianos para expresar tu estilo de una forma diferente.</p>
         </div>
 
-        <div class="lookbook">
+        <div class="products">
+          <article class="product">
+            <div class="product-photo"><img src="assets/JS.png" alt="Camisas cristianas para familia"></div>
+            <div class="product-info"><h3>Fe para toda la familia</h3><p>Niños · Mujeres · Hombres</p></div>
+          </article>
 
-          <!-- NUEVA IMAGEN GRANDE -->
+          <article class="product">
+            <div class="product-photo"><img src="assets/negr.png" alt="Pareja con camisas cristianas"></div>
+            <div class="product-info"><h3>Diseños con propósito</h3><p>Mensajes que inspiran</p></div>
+          </article>
 
-          <figure class="featured">
+          <article class="product">
+            <div class="product-photo"><img src="assets/bat1.jpg" alt="Camisa negra colgada"></div>
+            <div class="product-info"><h3>Diseños posteriores</h3><p>Estilo urbano</p></div>
+          </article>
 
-            <img
-              src="assets/negr.png"
-              alt="Pareja con diseños cristianos"
-            >
+          <article class="product">
+            <div class="product-photo"><img src="assets/ver.png" alt="Camisa Vision"></div>
+            <div class="product-info"><h3>Vision</h3><p>Diseño DTF</p></div>
+          </article>
 
-          </figure>
+          <article class="product">
+            <div class="product-photo"><img src="assets/cat1.jpg" alt="Camisa naranja casual"></div>
+            <div class="product-info"><h3>Casual</h3><p>Diseño para el día a día</p></div>
+          </article>
 
-          <figure>
-
-            <img
-              src="assets/bat1.jpg"
-              alt="Camisa negra colgada"
-            >
-
-          </figure>
-
-          <figure>
-
-            <img
-              src="assets/bat.jpg"
-              alt="Modelo con camisa negra"
-            >
-
-          </figure>
-
-          <figure>
-
-            <img
-              src="assets/JS.png"
-              alt="Colección cristiana"
-            >
-
-          </figure>
-
-          <figure>
-
-            <img
-              src="assets/ver.png"
-              alt="Camisa verde con diseño"
-            >
-
-          </figure>
-
+          <article class="product">
+            <div class="product-photo"><img src="assets/vino.png" alt="Camisa vino"></div>
+            <div class="product-info"><h3>Color y personalidad</h3><p>Estilo que destaca</p></div>
+          </article>
         </div>
-
       </div>
-
     </section>
 
-    <!-- =========================
-         CONTACTO
-    ========================== -->
-
-    <section
-      class="cta"
-      id="contacto"
-    >
-
+    <section id="contacto">
       <div class="wrap">
-
         <div class="cta-box">
-
-          <h2>
-            ¿Encontraste una camisa que va contigo?
-          </h2>
-
-          <a
-            class="pill"
-            href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pedir por WhatsApp →
-          </a>
-
+          <h2>¿Encontraste una camisa que va contigo?</h2>
+          <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp →</a>
         </div>
-
       </div>
-
     </section>
 
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
   <footer>
-
     <div class="wrap footer">
-
-      <strong class="logo">
-        MODA<span>CASUAL</span>
-      </strong>
-
-      <span>
-        Tegucigalpa, Honduras · © 2026
-      </span>
-
-      <span>
-        Instagram · Facebook · TikTok
-      </span>
-
+      <span>Moda Casual · Tegucigalpa, Honduras</span>
+      <span>Camisas de calidad · Diferentes colores · Diseños</span>
+      <span>© 2026</span>
     </div>
-
   </footer>
 
-  <!-- =========================
-       WHATSAPP
-  ========================== -->
+  <a class="whatsapp" href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">WhatsApp</a>
 
-  <a
-    class="whatsapp"
-    href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    WhatsApp
-  </a>
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const dots = [...document.querySelectorAll('.dot')];
+    const prev = document.querySelector('.hero-arrow.prev');
+    const next = document.querySelector('.hero-arrow.next');
 
+    let current = 0;
+    let timer;
+
+    function showSlide(index){
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    }
+
+    function startAuto(){
+      clearInterval(timer);
+      timer = setInterval(() => showSlide(current + 1), 2000);
+    }
+
+    prev.addEventListener('click', () => {
+      showSlide(current - 1);
+      startAuto();
+    });
+
+    next.addEventListener('click', () => {
+      showSlide(current + 1);
+      startAuto();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showSlide(i);
+        startAuto();
+      });
+    });
+
+    showSlide(0);
+    startAuto();
+  </script>
 </body>
 </html>
