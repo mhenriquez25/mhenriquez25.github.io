@@ -1100,10 +1100,86 @@
       display:none !important;
     }
 
+  
+    /* =========================
+       NAVEGACIÓN Y SECCIONES
+    ========================= */
+    .page-anchor{
+      position:absolute;
+      top:0;
+      left:0;
+    }
+
+    main > section{
+      position:relative;
+      scroll-margin-top:150px;
+    }
+
+    main > section + section{
+      border-top:1px solid rgba(23,21,18,.10);
+    }
+
+    #coleccion{
+      background:#fffaf3;
+    }
+
+    #videos{
+      background:
+        radial-gradient(circle at top left, rgba(161,29,49,.10), transparent 32%),
+        linear-gradient(180deg,#f7eee5 0%,#fffaf3 100%);
+    }
+
+    #marca{
+      background:#efe5d9;
+    }
+
+    #estilo{
+      background:#fffaf3;
+    }
+
+    #contacto{
+      background:#f5efe7;
+    }
+
+    .menu a{
+      position:relative;
+    }
+
+    .menu a.active{
+      color:#fff;
+      background:var(--wine);
+      box-shadow:0 12px 28px rgba(161,29,49,.22);
+      transform:translateY(-2px);
+    }
+
+    .menu a.active::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-8px;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--wine);
+      transform:translateX(-50%);
+    }
+
+    .section-head{
+      padding-bottom:22px;
+      border-bottom:1px solid rgba(23,21,18,.09);
+    }
+
+    @media(max-width:900px){
+      main > section{
+        scroll-margin-top:190px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+  <div id="inicio" class="page-anchor" aria-hidden="true"></div>
 
   <!-- TOP BAR -->
   <div class="topbar">
@@ -1138,9 +1214,8 @@
       </a>
 
       <nav class="menu">
-        <a class="active" href="#"><span class="icon icon-home"><i class="fa-solid fa-house"></i></span>Inicio</a>
+        <a href="#inicio"><span class="icon icon-home"><i class="fa-solid fa-house"></i></span>Inicio</a>
         <a href="#coleccion"><span class="icon icon-collection"><i class="fa-solid fa-bag-shopping"></i></span>Colección</a>
-        <a href="#cristiana"><span class="icon icon-cross"><i class="fa-solid fa-cross"></i></span>Colección Cristiana</a>
         <a href="#estilo"><span class="icon icon-style"><i class="fa-solid fa-wand-magic-sparkles"></i></span>Estilo</a>
         <a href="#videos"><span class="icon icon-style"><i class="fa-solid fa-circle-play"></i></span>Videos</a>
         <a href="#marca"><span class="icon icon-brand"><i class="fa-solid fa-store"></i></span>La Marca</a>
@@ -1326,12 +1401,12 @@
             <a href="#contacto">Solicitar diseño →</a>
           </div>
 
-          <div class="promo cream" id="cristiana">
+          <div class="promo cream">
             <div>
               <h3>Regalos con propósito</h3>
               <p>Camisas que inspiran y conectan.</p>
             </div>
-            <a href="#estilo">Ver diseños cristianos →</a>
+            <a href="#estilo">Ver diseños →</a>
           </div>
 
         </div>
@@ -1689,6 +1764,52 @@
       }
     });
 
+
+  
+    /* =========================================
+       MENÚ ACTIVO SEGÚN LA SECCIÓN VISIBLE
+    ========================================= */
+    const navLinks = [...document.querySelectorAll(".menu a[href^='#']")];
+
+    function setActiveNav(id){
+      navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+      });
+    }
+
+    const trackedSections = ["coleccion", "videos", "marca", "estilo", "contacto"]
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visibleEntries = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visibleEntries.length) {
+        setActiveNav(visibleEntries[0].target.id);
+      }
+    }, {
+      rootMargin:"-28% 0px -55% 0px",
+      threshold:[0.01, 0.15, 0.35]
+    });
+
+    trackedSections.forEach(section => sectionObserver.observe(section));
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < 260) {
+        setActiveNav("inicio");
+      }
+    }, { passive:true });
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        const id = link.getAttribute("href").slice(1);
+        if (id) setActiveNav(id);
+      });
+    });
+
+    setActiveNav("inicio");
 
   </script>
 
