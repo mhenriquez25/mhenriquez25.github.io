@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
     :root{
@@ -664,6 +665,113 @@
       box-shadow:0 14px 34px rgba(0,0,0,.18);
     }
 
+
+    /* =========================
+       PROFESSIONAL ICONS
+    ========================= */
+
+    .icon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      line-height:1;
+    }
+
+    .menu .icon{
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      font-size:13px;
+      transition:.25s;
+    }
+
+    .menu .icon-home{ color:#d6286e; }
+    .menu .icon-collection{ color:#20b86a; }
+    .menu .icon-cross{ color:#e1a617; }
+    .menu .icon-style{ color:#7b3fd5; }
+    .menu .icon-brand{ color:#2f80ed; }
+    .menu .icon-contact{ color:#9c27b0; }
+
+    .menu a:hover .icon,
+    .menu a.active .icon{
+      color:#fff;
+    }
+
+    .top-left .top-icon{
+      width:24px;
+      height:24px;
+      border-radius:7px;
+      margin-right:7px;
+      font-size:12px;
+      border:1px solid currentColor;
+      background:rgba(255,255,255,.03);
+    }
+
+    .top-icon.ship{ color:#3da5ff; }
+    .top-icon.secure{ color:#43d17a; }
+    .top-icon.custom{ color:#e7b930; }
+    .top-icon.quality{ color:#ff5c8a; }
+
+    .top-social a{
+      font-size:15px;
+      border-color:rgba(255,255,255,.14);
+    }
+
+    .top-social a.instagram{ color:#e1306c; }
+    .top-social a.facebook{ color:#1877f2; }
+    .top-social a.tiktok{ color:#fff; }
+    .top-social a.whatsapp-social{ color:#25d366; }
+
+    .top-social a:hover{
+      background:#fff;
+      border-color:#fff;
+      transform:translateY(-2px);
+    }
+
+    .round-action{
+      color:#171512;
+      border:1px solid rgba(23,21,18,.10);
+      background:#fff9f2;
+    }
+
+    .round-action i{
+      font-size:18px;
+    }
+
+    .round-action:hover{
+      color:#fff;
+      background:var(--wine);
+      border-color:var(--wine);
+    }
+
+    .benefit-icon{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:21px;
+      background:#fff;
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow:0 8px 20px rgba(0,0,0,.06);
+    }
+
+    .benefit-icon.cotton{ color:#23a66f; }
+    .benefit-icon.shipping{ color:#2f80ed; }
+    .benefit-icon.payment{ color:#7b3fd5; }
+    .benefit-icon.customize{ color:#d6286e; }
+
+    .whatsapp{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .whatsapp i{
+      font-size:20px;
+    }
+
     /* =========================
        RESPONSIVE
     ========================= */
@@ -842,20 +950,20 @@
     <div class="wrap topbar-inner">
 
       <div class="top-left">
-        <span>🚚 ENVÍOS EN HONDURAS</span>
+        <span><i class="fa-solid fa-truck-fast icon top-icon ship"></i>ENVÍOS EN HONDURAS</span>
         <span class="sep">|</span>
-        <span>🛡 PAGOS SEGUROS</span>
+        <span><i class="fa-solid fa-shield-halved icon top-icon secure"></i>PAGOS SEGUROS</span>
         <span class="sep">|</span>
-        <span>💎 DISEÑOS PERSONALIZADOS</span>
+        <span><i class="fa-solid fa-shirt icon top-icon custom"></i>DISEÑOS PERSONALIZADOS</span>
         <span class="sep">|</span>
-        <span>♥ CALIDAD EN CADA PRENDA</span>
+        <span><i class="fa-solid fa-gem icon top-icon quality"></i>CALIDAD EN CADA PRENDA</span>
       </div>
 
       <div class="top-social">
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="TikTok">♪</a>
-        <a href="#" aria-label="WhatsApp">◔</a>
+        <a class="instagram" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a class="facebook" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="tiktok" href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a class="whatsapp-social" href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
 
     </div>
@@ -870,17 +978,17 @@
       </a>
 
       <nav class="menu">
-        <a class="active" href="#">⌂ Inicio</a>
-        <a href="#coleccion">👕 Colección</a>
-        <a href="#cristiana">✚ Colección Cristiana</a>
-        <a href="#estilo">☆ Estilo</a>
-        <a href="#marca">◇ La Marca</a>
-        <a href="#contacto">✉ Contacto</a>
+        <a class="active" href="#"><span class="icon icon-home"><i class="fa-solid fa-house"></i></span>Inicio</a>
+        <a href="#coleccion"><span class="icon icon-collection"><i class="fa-solid fa-bag-shopping"></i></span>Colección</a>
+        <a href="#cristiana"><span class="icon icon-cross"><i class="fa-solid fa-cross"></i></span>Colección Cristiana</a>
+        <a href="#estilo"><span class="icon icon-style"><i class="fa-solid fa-wand-magic-sparkles"></i></span>Estilo</a>
+        <a href="#marca"><span class="icon icon-brand"><i class="fa-solid fa-store"></i></span>La Marca</a>
+        <a href="#contacto"><span class="icon icon-contact"><i class="fa-solid fa-envelope"></i></span>Contacto</a>
       </nav>
 
       <div class="nav-actions">
-        <a class="round-action" href="#coleccion" aria-label="Buscar">⌕</a>
-        <a class="round-action" href="#contacto" aria-label="Pedido">♧</a>
+        <a class="round-action" href="#coleccion" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a class="round-action" href="#contacto" aria-label="Pedido"><i class="fa-solid fa-cart-shopping"></i></a>
       </div>
 
     </div>
@@ -943,7 +1051,7 @@
       <div class="wrap benefits-grid">
 
         <div class="benefit">
-          <span class="benefit-icon">🌿</span>
+          <span class="benefit-icon cotton"><i class="fa-solid fa-leaf"></i></span>
           <div>
             <strong>100% Algodón</strong>
             <span>Suavidad y comodidad</span>
@@ -951,7 +1059,7 @@
         </div>
 
         <div class="benefit">
-          <span class="benefit-icon">🚚</span>
+          <span class="benefit-icon shipping"><i class="fa-solid fa-truck-fast"></i></span>
           <div>
             <strong>Envíos en Honduras</strong>
             <span>Rápido y seguro</span>
@@ -959,7 +1067,7 @@
         </div>
 
         <div class="benefit">
-          <span class="benefit-icon">🛡</span>
+          <span class="benefit-icon payment"><i class="fa-solid fa-shield-halved"></i></span>
           <div>
             <strong>Pagos seguros</strong>
             <span>Compra con confianza</span>
@@ -967,7 +1075,7 @@
         </div>
 
         <div class="benefit">
-          <span class="benefit-icon">👕</span>
+          <span class="benefit-icon customize"><i class="fa-solid fa-shirt"></i></span>
           <div>
             <strong>Diseños personalizados</strong>
             <span>Tu idea en una camisa</span>
@@ -1223,7 +1331,7 @@
     target="_blank"
     rel="noopener noreferrer"
   >
-    WhatsApp
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
   </a>
 
   <script>
