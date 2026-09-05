@@ -1091,6 +1091,15 @@
       }
     }
 
+  
+    .process-video{
+      background:#171512;
+    }
+
+    .process-video::-webkit-media-controls{
+      display:none !important;
+    }
+
   </style>
 </head>
 
@@ -1349,8 +1358,8 @@
         <div class="videos-grid">
 
           <article class="video-card">
-            <video class="process-video" muted loop playsinline preload="metadata" poster="assets/verd1.png">
-              <source src="video/video1.mp4" type="video/mp4">
+            <video class="process-video" autoplay muted loop playsinline preload="auto">
+              <source src="./video/video1.mp4?v=2" type="video/mp4">
               Tu navegador no puede reproducir este video.
             </video>
 
@@ -1366,8 +1375,8 @@
           </article>
 
           <article class="video-card">
-            <video class="process-video" muted loop playsinline preload="metadata" poster="assets/tal%202.png">
-              <source src="video/video2.mp4" type="video/mp4">
+            <video class="process-video" autoplay muted loop playsinline preload="auto">
+              <source src="./video/video2.mp4?v=2" type="video/mp4">
               Tu navegador no puede reproducir este video.
             </video>
 
@@ -1383,8 +1392,8 @@
           </article>
 
           <article class="video-card">
-            <video class="process-video" muted loop playsinline preload="metadata" poster="assets/negr.png">
-              <source src="video/video3.mp4" type="video/mp4">
+            <video class="process-video" autoplay muted loop playsinline preload="auto">
+              <source src="./video/video3.mp4?v=2" type="video/mp4">
               Tu navegador no puede reproducir este video.
             </video>
 
@@ -1609,26 +1618,77 @@
     showSlide(0);
     startAuto();
 
-    /* VIDEOS: autoplay silencioso al entrar en pantalla */
+    /* =========================================
+       VIDEOS: AUTOPLAY SILENCIOSO Y ROBUSTO
+    ========================================= */
     const processVideos = [...document.querySelectorAll(".process-video")];
 
+    function intentarReproducir(video){
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+
+      const promesa = video.play();
+
+      if (promesa !== undefined) {
+        promesa.catch(() => {
+          // Si el navegador todavía no está listo, se vuelve a intentar al cargar datos.
+        });
+      }
+    }
+
+    processVideos.forEach((video) => {
+      video.muted = true;
+      video.defaultMuted = true;
+
+      // Forzar carga del archivo MP4.
+      video.load();
+
+      // Intentar apenas haya datos suficientes.
+      video.addEventListener("loadeddata", () => {
+        intentarReproducir(video);
+      });
+
+      video.addEventListener("canplay", () => {
+        intentarReproducir(video);
+      }, { once:true });
+
+      // Si hubo un error de carga, mostrarlo en consola para facilitar diagnóstico.
+      video.addEventListener("error", () => {
+        console.error("No se pudo cargar el video:", video.currentSrc);
+      });
+    });
+
+    // Comenzar reproducción antes de que la tarjeta esté completamente visible.
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
 
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
-          video.muted = true;
-          video.play().catch(() => {});
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          intentarReproducir(video);
         } else {
           video.pause();
         }
       });
-    }, { threshold: [0, 0.45, 0.75] });
+    }, {
+      threshold: [0, 0.12, 0.35, 0.65]
+    });
 
     processVideos.forEach((video) => {
-      video.muted = true;
       videoObserver.observe(video);
     });
+
+    // Reintentar al volver a la pestaña.
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        processVideos.forEach((video) => {
+          const rect = video.getBoundingClientRect();
+          const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+          if (visible) intentarReproducir(video);
+        });
+      }
+    });
+
 
   </script>
 
