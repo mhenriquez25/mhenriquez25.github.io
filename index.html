@@ -563,12 +563,20 @@
     .video-card{
       position:relative;
       min-height:560px;
+      aspect-ratio:9 / 16;
       border-radius:28px;
       overflow:hidden;
       background:#171512;
       border:1px solid rgba(0,0,0,.06);
       box-shadow:0 18px 48px rgba(0,0,0,.13);
       isolation:isolate;
+      transform:translateZ(0);
+      transition:transform .35s ease, box-shadow .35s ease;
+    }
+
+    .video-card:hover{
+      transform:translateY(-7px);
+      box-shadow:0 24px 58px rgba(0,0,0,.18);
     }
 
     .video-card video{
@@ -640,35 +648,7 @@
       line-height:1.6;
     }
 
-    .video-sound{
-      position:absolute;
-      z-index:3;
-      right:18px;
-      top:18px;
-      width:42px;
-      height:42px;
-      border:1px solid rgba(255,255,255,.26);
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      color:#fff;
-      background:rgba(17,15,13,.62);
-      backdrop-filter:blur(8px);
-      cursor:pointer;
-      transition:.25s;
-    }
 
-    .video-sound:hover{
-      background:var(--wine);
-      transform:translateY(-2px);
-    }
-
-    .videos-note{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
-    }
 
     /* =========================
        BRAND
@@ -1071,6 +1051,46 @@
         height:310px;
       }
     }
+
+    @media(max-width:900px){
+      .videos-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+
+      .video-card{
+        min-height:520px;
+      }
+    }
+
+    @media(max-width:620px){
+      .videos-grid{
+        display:flex;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        gap:14px;
+        padding:4px 2px 16px;
+        scrollbar-width:none;
+      }
+
+      .videos-grid::-webkit-scrollbar{
+        display:none;
+      }
+
+      .video-card{
+        flex:0 0 84%;
+        min-height:500px;
+        scroll-snap-align:center;
+      }
+
+      .video-copy{
+        padding:26px 22px;
+      }
+
+      .video-copy h3{
+        font-size:24px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1316,14 +1336,13 @@
 
         <div class="section-head">
           <div class="videos-intro">
-            <span class="eyebrow">Detrás de cada diseño</span>
+            <span class="eyebrow">Conoce nuestro proceso</span>
             <h2>Así creamos tu camisa.</h2>
           </div>
 
           <p>
-            Mira el proceso de cerca: preparación del diseño, impresión DTF
-            y aplicación final sobre la camisa. Los videos comienzan a
-            reproducirse automáticamente cuando aparecen en pantalla.
+            Desde la elección de la prenda hasta el acabado final.
+            Mira de cerca el cuidado y la calidad detrás de cada camisa.
           </p>
         </div>
 
@@ -1331,58 +1350,56 @@
 
           <article class="video-card">
             <video class="process-video" muted loop playsinline preload="metadata" poster="assets/verd1.png">
-              <source src="assets/video-diseno.mp4" type="video/mp4">
+              <source src="video/video1.mp4" type="video/mp4">
               Tu navegador no puede reproducir este video.
             </video>
-            <span class="video-label"><i class="fa-solid fa-pen-ruler"></i> Diseño</span>
-            <button class="video-sound" type="button" aria-label="Activar sonido">
-              <i class="fa-solid fa-volume-xmark"></i>
-            </button>
+
+            <span class="video-label">
+              <i class="fa-solid fa-shirt"></i> Selección
+            </span>
+
             <div class="video-copy">
               <span class="step-number">Paso 01</span>
-              <h3>Preparamos tu diseño</h3>
-              <p>Ajustamos el arte para que tenga el tamaño, detalle y acabado ideal antes de imprimirlo.</p>
+              <h3>Elige tu camisa</h3>
+              <p>Seleccionamos la prenda, el color y el estilo que mejor se adapta a tu idea.</p>
             </div>
           </article>
 
           <article class="video-card">
             <video class="process-video" muted loop playsinline preload="metadata" poster="assets/tal%202.png">
-              <source src="assets/video-dtf.mp4" type="video/mp4">
+              <source src="video/video2.mp4" type="video/mp4">
               Tu navegador no puede reproducir este video.
             </video>
-            <span class="video-label"><i class="fa-solid fa-print"></i> Impresión DTF</span>
-            <button class="video-sound" type="button" aria-label="Activar sonido">
-              <i class="fa-solid fa-volume-xmark"></i>
-            </button>
+
+            <span class="video-label">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Diseño
+            </span>
+
             <div class="video-copy">
               <span class="step-number">Paso 02</span>
-              <h3>Imprimimos en DTF</h3>
-              <p>El diseño se imprime con colores definidos y se prepara para transferirlo a la prenda.</p>
+              <h3>Creamos tu diseño</h3>
+              <p>Preparamos cada detalle para lograr un estampado definido, limpio y con excelente presentación.</p>
             </div>
           </article>
 
           <article class="video-card">
             <video class="process-video" muted loop playsinline preload="metadata" poster="assets/negr.png">
-              <source src="assets/video-planchado.mp4" type="video/mp4">
+              <source src="video/video3.mp4" type="video/mp4">
               Tu navegador no puede reproducir este video.
             </video>
-            <span class="video-label"><i class="fa-solid fa-shirt"></i> Aplicación</span>
-            <button class="video-sound" type="button" aria-label="Activar sonido">
-              <i class="fa-solid fa-volume-xmark"></i>
-            </button>
+
+            <span class="video-label">
+              <i class="fa-solid fa-gem"></i> Acabado
+            </span>
+
             <div class="video-copy">
               <span class="step-number">Paso 03</span>
-              <h3>Aplicamos y revisamos</h3>
-              <p>Transferimos el diseño a la camisa, dejamos enfriar y comprobamos el acabado final.</p>
+              <h3>DTF y acabado final</h3>
+              <p>Revisamos el resultado para entregar una camisa con un acabado atractivo y de calidad.</p>
             </div>
           </article>
 
         </div>
-
-        <p class="videos-note">
-          Coloca tus archivos MP4 dentro de la carpeta <strong>assets</strong> con estos nombres:
-          <strong>video-diseno.mp4</strong>, <strong>video-dtf.mp4</strong> y <strong>video-planchado.mp4</strong>.
-        </p>
 
       </div>
     </section>
@@ -1592,39 +1609,27 @@
     showSlide(0);
     startAuto();
 
-    /* VIDEOS: se reproducen al entrar en pantalla y se pausan al salir */
+    /* VIDEOS: autoplay silencioso al entrar en pantalla */
     const processVideos = [...document.querySelectorAll(".process-video")];
 
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
 
-        if(entry.isIntersecting && entry.intersectionRatio >= .45){
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+          video.muted = true;
           video.play().catch(() => {});
-        }else{
+        } else {
           video.pause();
         }
       });
-    }, { threshold:[0,.45,.75] });
+    }, { threshold: [0, 0.45, 0.75] });
 
-    processVideos.forEach((video) => videoObserver.observe(video));
-
-    document.querySelectorAll(".video-sound").forEach((button) => {
-      button.addEventListener("click", () => {
-        const video = button.closest(".video-card").querySelector("video");
-        const icon = button.querySelector("i");
-
-        video.muted = !video.muted;
-        icon.className = video.muted
-          ? "fa-solid fa-volume-xmark"
-          : "fa-solid fa-volume-high";
-
-        button.setAttribute(
-          "aria-label",
-          video.muted ? "Activar sonido" : "Silenciar video"
-        );
-      });
+    processVideos.forEach((video) => {
+      video.muted = true;
+      videoObserver.observe(video);
     });
+
   </script>
 
 </body>
