@@ -125,7 +125,7 @@ function initProcessVideos() {
 ================================================== */
 function initScrollNav() {
   const navLinks = [...document.querySelectorAll(".menu a[href^='#']")];
-  const sections = ["coleccion", "videos", "marca", "estilo", "contacto"]
+  const sections = ["nosotros", "catalogo", "contacto"]
     .map(id => document.getElementById(id))
     .filter(Boolean);
 
@@ -136,12 +136,12 @@ function initScrollNav() {
   const observer = new IntersectionObserver(entries => {
     const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio);
     if (visible.length) setActive(visible[0].target.id);
-  }, { rootMargin: "-25% 0px -55% 0px", threshold: [0.01, 0.2] });
+  }, { rootMargin: "-15% 0px -40% 0px", threshold: [0.01, 0.2] });
 
   sections.forEach(s => observer.observe(s));
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY < 240) setActive("inicio");
+    if (window.scrollY < 150) setActive("nosotros");
   }, { passive: true });
 }
 

@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moda Casual | Catálogo y Tienda de Camisas en Tegucigalpa</title>
-  <meta name="description" content="Catálogo online de camisas casuales, colección cristiana y diseños personalizados DTF en Tegucigalpa, Honduras. Entregas en los principales Malls." />
+  <title>Moda Casual | Sobre Nosotros, Catálogo y Contacto en Tegucigalpa</title>
+  <meta name="description" content="Moda Casual en Tegucigalpa, Honduras. Camisas 100% algodón con estampado DTF. Colección cristiana, casual y personalizada con entregas en Malls." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=2.2">
-  <link rel="stylesheet" href="css/store.css?v=2.2">
+  <link rel="stylesheet" href="css/main.css?v=3.0">
+  <link rel="stylesheet" href="css/store.css?v=3.0">
 
   <!-- Base de datos gratuita en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -21,13 +21,13 @@
 
 <body>
 
-  <!-- TOP BAR INFORMATIVA -->
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="wrap topbar-inner">
       <div class="top-left">
-        <span><i class="fa-solid fa-location-dot top-icon ship"></i> ENTREGAS EXCLUSIVAS EN TEGUCIGALPA</span>
+        <span><i class="fa-solid fa-location-dot top-icon custom"></i> UBICADOS EN TEGUCIGALPA, HONDURAS</span>
         <span class="sep">|</span>
-        <span><i class="fa-solid fa-building top-icon custom"></i> PUNTOS DE ENTREGA EN MALLS</span>
+        <span><i class="fa-solid fa-truck-fast top-icon ship"></i> ENTREGAS EN MALLS DE TEGUCIGALPA</span>
         <span class="sep">|</span>
         <span><i class="fa-solid fa-shield-halved top-icon secure"></i> PAGOS CONFIABLES</span>
       </div>
@@ -41,18 +41,18 @@
     </div>
   </div>
 
-  <!-- HEADER PRINCIPAL -->
+  <!-- HEADER (DE IZQUIERDA A DERECHA: SOBRE NOSOTROS, CATÁLOGO, CONTACTO) -->
   <header>
     <div class="wrap nav">
-      <a class="brand" href="index.html">
+      <a class="brand" href="#nosotros">
         <img src="assets/logo.png" alt="Moda Casual">
       </a>
 
+      <!-- SOLO ESTOS 3 ELEMENTOS EN EL MENÚ -->
       <nav class="menu">
-        <a href="index.html" class="active"><i class="fa-solid fa-shirt"></i> Catálogo de Camisas</a>
-        <a href="info.html"><i class="fa-solid fa-circle-info"></i> Sobre Nosotros y Entregas</a>
-        <a href="info.html#malls"><i class="fa-solid fa-location-dot"></i> Malls de Tegucigalpa</a>
-        <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank"><i class="fa-brands fa-whatsapp"></i> Contacto</a>
+        <a href="#nosotros"><i class="fa-solid fa-circle-info"></i> Sobre Nosotros</a>
+        <a href="#catalogo" class="active"><i class="fa-solid fa-shirt"></i> Catálogo</a>
+        <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
       </nav>
 
       <div class="nav-actions">
@@ -64,112 +64,242 @@
     </div>
   </header>
 
-  <!-- BANNER PRINCIPAL DE LA TIENDA -->
-  <section style="background: linear-gradient(135deg, #171512 0%, #241f1a 100%); color: #fff; padding: 48px 0 42px;">
-    <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap;">
-      <div style="max-width: 650px;">
-        <span class="eyebrow" style="color: #f4d29a;"><i class="fa-solid fa-bag-shopping"></i> Catálogo Oficial · Tegucigalpa</span>
-        <h1 style="font-family: 'Manrope', sans-serif; font-size: clamp(30px, 4.2vw, 50px); line-height: 1.05; font-weight: 800; margin: 10px 0 14px;">
-          Elige tus camisas favoritas con estilo y comodidad
-        </h1>
-        <p style="color: rgba(255, 255, 255, 0.85); font-size: 15px; line-height: 1.6; margin-bottom: 22px;">
-          Prendas en 100% algodón con estampados DTF de alta duración. Selecciona tu talla, tu color y recibe en tu Mall preferido de Tegucigalpa.
-        </p>
+  <main>
 
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="#catalogo" class="btn-primary" style="padding: 12px 22px;">
-            <i class="fa-solid fa-shirt"></i> Ver Colección Abajo ↓
+    <!-- ==============================================================
+         1. SOBRE NOSOTROS (DE QUÉ TRATA, UBICACIÓN Y MALLS DE ENTREGA)
+    ============================================================== -->
+    <section id="nosotros" style="padding: 40px 0 20px;">
+      <div class="wrap">
+
+        <!-- BANNER DE UBICACIÓN Y PRESENTACIÓN -->
+        <div class="location-header-card">
+          <div class="location-header-copy">
+            <span class="location-badge-pill"><i class="fa-solid fa-map-pin"></i> Ubicación Oficial</span>
+            <h2>Sobre Nosotros · Moda Casual</h2>
+            <p>
+              Somos una tienda especializada en camisas confeccionadas en <strong>100% algodón</strong> con estampado en tecnología <strong>DTF (Direct to Film)</strong> de alta durabilidad. 
+              Estamos ubicados en <strong>Tegucigalpa, Honduras</strong> y realizamos entregas en los principales centros comerciales de la ciudad.
+            </p>
+          </div>
+
+          <div>
+            <a href="#catalogo" class="btn-primary" style="font-size: 14px; padding: 13px 22px;">
+              <i class="fa-solid fa-shirt"></i> Ver Catálogo de Camisas ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- BENEFICIOS CLAVE -->
+        <div class="benefits-grid" style="margin-bottom: 30px;">
+          <div class="benefit">
+            <span class="benefit-icon cotton"><i class="fa-solid fa-leaf"></i></span>
+            <div>
+              <strong>100% Algodón</strong>
+              <span>Tela fresca y suave</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon customize"><i class="fa-solid fa-shirt"></i></span>
+            <div>
+              <strong>Estampado DTF</strong>
+              <span>No se agrieta al lavar</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon shipping"><i class="fa-solid fa-truck-fast"></i></span>
+            <div>
+              <strong>Tegucigalpa</strong>
+              <span>Entregas en Malls</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon payment"><i class="fa-solid fa-shield-halved"></i></span>
+            <div>
+              <strong>Pagos Confiables</strong>
+              <span>Transferencia o efectivo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PUNTOS DE ENTREGA EN MALLS DE TEGUCIGALPA -->
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Entregas en Tegucigalpa</span>
+            <h2>Malls donde Entregamos</h2>
+          </div>
+          <p>
+            Al comprar en el catálogo seleccionas el Mall que te quede más accesible y coordinamos la entrega por WhatsApp.
+          </p>
+        </div>
+
+        <div class="malls-grid">
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Multiplaza Tegucigalpa</h4>
+              <p>Bulevar San Juan Bosco</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Cascadas Mall</h4>
+              <p>Bulevar Fuerzas Armadas</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>City Mall Tegucigalpa</h4>
+              <p>Frente a Aeropuerto Toncontín</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Mall Premier</h4>
+              <p>Bulevar del Norte</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>MetroMall</h4>
+              <p>Bulevar Comunidad Económica Europea</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Novacentro (Los Próceres)</h4>
+              <p>Bulevar Los Próceres</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Mall El Dorado</h4>
+              <p>Bulevar Morazán</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Plaza Miraflores</h4>
+              <p>Bulevar Miraflores</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+
+          <div class="mall-card">
+            <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4>Mall Las Galerías</h4>
+              <p>Bulevar Morazán</p>
+              <span class="mall-status-tag">✅ Punto disponible</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         2. CATÁLOGO (SELECCIÓN DE PRENDAS, FILTROS, PRECIOS Y COMPRA)
+    ============================================================== -->
+    <section id="catalogo" style="background: #fffaf3; padding: 50px 0 60px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="wrap">
+
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Catálogo para Comprar</span>
+            <h2>Catálogo de Camisas</h2>
+          </div>
+          <p>
+            Elige tu prenda favorita, selecciona tu talla (S a XXL), color y finaliza tu pedido de forma rápida.
+          </p>
+        </div>
+
+        <!-- FILTROS Y BUSCADOR -->
+        <div class="catalog-toolbar">
+          <div class="catalog-filters">
+            <button class="filter-pill active" onclick="filterCatalog('all', this)">Todas las camisas</button>
+            <button class="filter-pill" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
+            <button class="filter-pill" onclick="filterCatalog('hombre', this)">Hombre</button>
+            <button class="filter-pill" onclick="filterCatalog('mujer', this)">Mujer</button>
+            <button class="filter-pill" onclick="filterCatalog('casual', this)">Casual</button>
+            <button class="filter-pill" onclick="filterCatalog('personalizada', this)">🎨 Diseños Personalizados</button>
+          </div>
+
+          <div class="catalog-search">
+            <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
+            <input type="text" id="catalogSearchInput" placeholder="Buscar camisa..." oninput="onCatalogSearch()">
+          </div>
+        </div>
+
+        <!-- CUADRÍCULA DINÁMICA DE PRODUCTOS -->
+        <div class="products-grid" id="catalogProductsContainer">
+          <!-- Renderizado en tiempo real por js/app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         3. CONTACTO (ATENCIÓN DIRECTA Y PEDIDOS PERSONALIZADOS)
+    ============================================================== -->
+    <section id="contacto" style="padding: 60px 0;">
+      <div class="wrap">
+        <div class="cta-box">
+          <div>
+            <span class="eyebrow" style="color: #171512; margin-bottom: 6px; display: inline-block;">Atención Personalizada</span>
+            <h2>¿Tienes dudas o buscas un diseño especial?</h2>
+            <p style="opacity: 0.9; margin-top: 8px; font-size: 15px;">
+              Escríbenos por WhatsApp para cotizaciones, pedidos por mayor o consultas sobre entregas en Tegucigalpa.
+            </p>
+          </div>
+
+          <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer" style="font-size: 15px; padding: 15px 28px;">
+            <i class="fa-brands fa-whatsapp"></i> Chatear por WhatsApp →
           </a>
-          <a href="info.html" class="btn-secondary" style="background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 12px 20px;">
-            <i class="fa-solid fa-location-dot"></i> Ver Malls de Entrega
-          </a>
         </div>
       </div>
-
-      <!-- TARJETA RÁPIDA DE BENEFICIOS -->
-      <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 24px; min-width: 260px;">
-        <div style="font-size: 13px; font-weight: 800; color: #f4d29a; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.05em;">
-          Ventajas de Comprar Aquí
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
-          <div><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i> 100% Algodón suave y fresco</div>
-          <div><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i> Estampado DTF de alta resistencia</div>
-          <div><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i> Entregas en Malls de Tegucigalpa</div>
-          <div><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i> Pago seguro: Transferencia o Efectivo</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTENIDO PRINCIPAL: CATÁLOGO Y COMPRA -->
-  <main class="wrap" id="catalogo" style="padding: 40px 0 70px;">
-
-    <!-- CABECERA DEL CATÁLOGO -->
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Catálogo para Comprar</span>
-        <h2>Selecciona tu Camisa</h2>
-      </div>
-      <p>
-        Toca cualquier prenda para elegir tu talla, color y agregarla a tu carrito de compras.
-      </p>
-    </div>
-
-    <!-- BARRA DE FILTROS Y BÚSQUEDA -->
-    <div class="catalog-toolbar">
-      <div class="catalog-filters">
-        <button class="filter-pill active" onclick="filterCatalog('all', this)">Todas las camisas</button>
-        <button class="filter-pill" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
-        <button class="filter-pill" onclick="filterCatalog('hombre', this)">Hombre</button>
-        <button class="filter-pill" onclick="filterCatalog('mujer', this)">Mujer</button>
-        <button class="filter-pill" onclick="filterCatalog('casual', this)">Casual</button>
-        <button class="filter-pill" onclick="filterCatalog('personalizada', this)">🎨 Diseños Personalizados</button>
-      </div>
-
-      <div class="catalog-search">
-        <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
-        <input type="text" id="catalogSearchInput" placeholder="Buscar por modelo o color..." oninput="onCatalogSearch()">
-      </div>
-    </div>
-
-    <!-- CUADRÍCULA DINÁMICA DE PRODUCTOS -->
-    <div class="products-grid" id="catalogProductsContainer">
-      <!-- Renderizado en tiempo real por js/app.js desde la base de datos gratuita / store -->
-    </div>
-
-    <!-- BANNER DE PEDIDOS PERSONALIZADOS -->
-    <div class="promos" style="margin-top: 50px;">
-      <div class="promo red">
-        <div>
-          <h3>¿Deseas tu propio diseño personalizado?</h3>
-          <p>Envíanos tu logo, texto o foto y te la estampamos con la mejor calidad DTF.</p>
-        </div>
-        <a href="https://wa.me/50400000000?text=Hola,%20quiero%20cotizar%20un%20diseño%20personalizado" target="_blank">
-          Cotizar por WhatsApp →
-        </a>
-      </div>
-
-      <div class="promo cream">
-        <div>
-          <h3>¿Dónde se hacen las entregas?</h3>
-          <p>Entregamos en los principales Malls de Tegucigalpa (Multiplaza, Cascadas, City Mall y más).</p>
-        </div>
-        <a href="info.html#malls">Ver lista de Malls →</a>
-      </div>
-    </div>
+    </section>
 
   </main>
 
-  <!-- PIE DE PÁGINA -->
+  <!-- PIE DE PÁGINA (DE IZQUIERDA A DERECHA) -->
   <footer>
     <div class="wrap footer-inner">
       <div>
-        <strong>Moda Casual</strong> · Tegucigalpa, Honduras · Camisas 100% algodón y estampado DTF
+        <strong>Moda Casual</strong> · Tegucigalpa, Honduras · Camisas 100% algodón
       </div>
-      <div style="display: flex; gap: 18px; flex-wrap: wrap;">
-        <a href="index.html" style="color: #f4d29a; text-decoration: underline;"><i class="fa-solid fa-shirt"></i> Catálogo de Camisas</a>
-        <a href="info.html" style="color: #fff; text-decoration: underline;"><i class="fa-solid fa-location-dot"></i> Sobre Nosotros y Malls de Entrega</a>
+
+      <!-- SOLO ESTOS 3 ELEMENTOS -->
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px;">
+        <a href="#nosotros" style="color: #fff; text-decoration: underline;">Sobre Nosotros</a>
+        <a href="#catalogo" style="color: #fff; text-decoration: underline;">Catálogo</a>
+        <a href="#contacto" style="color: #fff; text-decoration: underline;">Contacto</a>
       </div>
+
       <div>
         <a href="admin.html" class="footer-admin-link">
           <i class="fa-solid fa-lock"></i> Panel Administrador
@@ -178,13 +308,13 @@
     </div>
   </footer>
 
-  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-  <a class="whatsapp-float" href="https://wa.me/50400000000?text=Hola,%20quiero%20hacer%20un%20pedido%20en%20Moda%20Casual" target="_blank" rel="noopener noreferrer">
+  <!-- WHATSAPP FLOTANTE -->
+  <a class="whatsapp-float" href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">
     <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> WhatsApp
   </a>
 
   <!-- BOTÓN FLOTANTE DE CARRITO -->
-  <button class="floating-cart-btn" onclick="openCart()" aria-label="Ver carrito de compras">
+  <button class="floating-cart-btn" onclick="openCart()" aria-label="Ver carrito">
     <i class="fa-solid fa-cart-shopping"></i>
     <span id="floatingCartBadge" class="cart-badge">0</span>
   </button>
@@ -261,7 +391,7 @@
     </div>
   </div>
 
-  <!-- MODAL: PROCESO DE COMPRA (CHECKOUT EN TEGUCIGALPA) -->
+  <!-- MODAL: CHECKOUT EN TEGUCIGALPA -->
   <div id="checkoutModal" class="shop-modal-backdrop">
     <div class="shop-modal-card">
       <div class="shop-modal-header">
@@ -369,7 +499,7 @@
     </div>
   </div>
 
-  <!-- MODAL: PEDIDO COMPLETADO CON ÉXITO -->
+  <!-- MODAL: PEDIDO COMPLETADO -->
   <div id="orderSuccessModal" class="shop-modal-backdrop">
     <div class="shop-modal-card" style="max-width: 500px; text-align: center; padding: 32px 24px;">
       <div style="width: 70px; height: 70px; background: #ecfdf5; color: #10b981; border-radius: 50%; display: grid; place-items: center; font-size: 32px; margin: 0 auto 16px;">
@@ -383,7 +513,7 @@
       <div style="background: #f8f4ee; border-radius: 12px; padding: 16px; text-align: left; font-size: 13px; line-height: 1.6; margin-bottom: 20px;">
         <strong>Siguientes pasos:</strong><br>
         1. Se abrió una ventana de WhatsApp para enviar los datos de tu pedido.<br>
-        2. Un asesor de Moda Casual te confirmará la disponibilidad y la hora de entrega en el Mall.<br>
+        2. Un asesor de Moda Casual te confirmará la hora exacta de entrega en el Mall.<br>
         3. Si no se abrió WhatsApp automáticamente, toca el botón de abajo.
       </div>
 
@@ -397,9 +527,9 @@
     </div>
   </div>
 
-  <!-- Scripts modulares diferidos para carga ultra rápida -->
-  <script defer src="js/store.js?v=2.2"></script>
-  <script defer src="js/app.js?v=2.2"></script>
+  <!-- Scripts diferidos ultrarrápidos -->
+  <script defer src="js/store.js?v=3.0"></script>
+  <script defer src="js/app.js?v=3.0"></script>
 
 </body>
 </html>
