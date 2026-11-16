@@ -4,7 +4,7 @@
  */
 
 const DEFAULT_SETTINGS = {
-  whatsappNumber: "50433911316", // Número de WhatsApp para pruebas
+  whatsappNumber: "50400000000", // Reemplazar desde el panel admin con el número oficial
   currency: "L.",
   adminPin: "1234",
   businessName: "Moda Casual Honduras",
@@ -36,11 +36,7 @@ class StoreManager {
   loadSettings() {
     try {
       const stored = localStorage.getItem(LS_KEYS.SETTINGS);
-      const parsed = stored ? { ...DEFAULT_SETTINGS, ...JSON.parse(stored) } : { ...DEFAULT_SETTINGS };
-      if (!parsed.whatsappNumber || parsed.whatsappNumber === "50400000000") {
-        parsed.whatsappNumber = DEFAULT_SETTINGS.whatsappNumber;
-      }
-      return parsed;
+      return stored ? { ...DEFAULT_SETTINGS, ...JSON.parse(stored) } : { ...DEFAULT_SETTINGS };
     } catch (e) {
       return { ...DEFAULT_SETTINGS };
     }
@@ -350,7 +346,7 @@ ${itemsText}
 ¡Hola! Acabo de hacer este pedido desde su sitio web. ¿Me confirman disponibilidad y los datos para el envío?`;
 
     const encoded = encodeURIComponent(msg);
-    const phone = (this.settings.whatsappNumber || "50433911316").replace(/[^0-9]/g, "");
+    const phone = (this.settings.whatsappNumber || "50400000000").replace(/[^0-9]/g, "");
     return `https://wa.me/${phone}?text=${encoded}`;
   }
 

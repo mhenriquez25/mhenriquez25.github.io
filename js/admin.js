@@ -387,7 +387,7 @@ function testFirebaseConnection() {
 ================================================== */
 function fillSettingsForm() {
   const s = window.store.settings;
-  document.getElementById("settingWhatsapp").value = s.whatsappNumber || "50433911316";
+  document.getElementById("settingWhatsapp").value = s.whatsappNumber || "50400000000";
   document.getElementById("settingCurrency").value = s.currency || "L.";
   document.getElementById("settingBusinessName").value = s.businessName || "Moda Casual Honduras";
   document.getElementById("settingPin").value = s.adminPin || "1234";
