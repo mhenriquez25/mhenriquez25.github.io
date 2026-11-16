@@ -336,23 +336,84 @@ function renderCatalog() {
   }).join("");
 }
 
-function filterByGender(gender, btn) {
+/* ==================================================
+   MENÚS DESPLEGABLES VERTICALES DE FILTROS
+================================================== */
+function toggleFilterDropdown(id) {
+  const current = document.getElementById(id);
+  const isOpen = current && current.classList.contains("open");
+
+  // Cerrar todos los demás menús desplegables
+  document.querySelectorAll(".dropdown-filter").forEach(d => d.classList.remove("open"));
+
+  // Alternar el actual
+  if (current && !isOpen) {
+    current.classList.add("open");
+  }
+}
+
+// Cerrar cualquier dropdown al hacer clic fuera
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".dropdown-filter")) {
+    document.querySelectorAll(".dropdown-filter").forEach(d => d.classList.remove("open"));
+  }
+});
+
+function selectGenderOption(gender, label, btn) {
   catalogCurrentGender = gender;
-  document.querySelectorAll("[data-gender]").forEach(b => b.classList.toggle("active", b === btn));
+  const labelEl = document.getElementById("selectedGenderText");
+  if (labelEl) labelEl.innerText = label;
+
+  const container = document.getElementById("dropdownGender");
+  if (container) {
+    container.querySelectorAll(".dropdown-item").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    container.classList.remove("open");
+  }
+
   renderCatalog();
+}
+
+function selectPriceOption(priceRange, label, btn) {
+  catalogCurrentPriceRange = priceRange;
+  const labelEl = document.getElementById("selectedPriceText");
+  if (labelEl) labelEl.innerText = label;
+
+  const container = document.getElementById("dropdownPrice");
+  if (container) {
+    container.querySelectorAll(".dropdown-item").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    container.classList.remove("open");
+  }
+
+  renderCatalog();
+}
+
+function selectCategoryOption(category, label, btn) {
+  catalogCurrentFilter = category;
+  const labelEl = document.getElementById("selectedCategoryText");
+  if (labelEl) labelEl.innerText = label;
+
+  const container = document.getElementById("dropdownCategory");
+  if (container) {
+    container.querySelectorAll(".dropdown-item").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    container.classList.remove("open");
+  }
+
+  renderCatalog();
+}
+
+function filterByGender(gender, btn) {
+  selectGenderOption(gender, btn ? btn.innerText.trim() : "Todos", btn);
 }
 
 function filterByPrice(range, btn) {
-  catalogCurrentPriceRange = range;
-  document.querySelectorAll("[data-price]").forEach(b => b.classList.toggle("active", b === btn));
-  renderCatalog();
+  selectPriceOption(range, btn ? btn.innerText.trim() : "Todos", btn);
 }
 
 function filterCatalog(category, btn) {
-  catalogCurrentFilter = category;
-  document.querySelectorAll(".filter-pill").forEach(b => b.classList.remove("active"));
-  if (btn) btn.classList.add("active");
-  renderCatalog();
+  selectCategoryOption(category, btn ? btn.innerText.trim() : "Todas", btn);
 }
 
 function onCatalogSearch() {
@@ -369,9 +430,21 @@ function resetAllFilters() {
   const searchInput = document.getElementById("catalogSearchInput");
   if (searchInput) searchInput.value = "";
 
-  document.querySelectorAll("[data-gender]").forEach(b => b.classList.toggle("active", b.getAttribute("data-gender") === "all"));
-  document.querySelectorAll("[data-price]").forEach(b => b.classList.toggle("active", b.getAttribute("data-price") === "all"));
-  document.querySelectorAll(".filter-pill").forEach(b => b.classList.toggle("active", b.getAttribute("data-category") === "all" || !b.getAttribute("data-category")));
+  const genderLabel = document.getElementById("selectedGenderText");
+  if (genderLabel) genderLabel.innerText = "Todos";
+
+  const priceLabel = document.getElementById("selectedPriceText");
+  if (priceLabel) priceLabel.innerText = "Todos";
+
+  const catLabel = document.getElementById("selectedCategoryText");
+  if (catLabel) catLabel.innerText = "Todas";
+
+  document.querySelectorAll(".dropdown-filter").forEach(d => {
+    d.classList.remove("open");
+    d.querySelectorAll(".dropdown-item").forEach((b, idx) => {
+      b.classList.toggle("active", idx === 0);
+    });
+  });
 
   renderCatalog();
 }

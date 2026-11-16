@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.5">
-  <link rel="stylesheet" href="css/store.css?v=3.5">
+  <link rel="stylesheet" href="css/main.css?v=3.6">
+  <link rel="stylesheet" href="css/store.css?v=3.6">
 
   <!-- Base de datos en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -79,28 +79,78 @@
           </p>
         </div>
 
-        <!-- BARRA DE FILTROS HORIZONTAL EN EL LADO IZQUIERDO -->
+        <!-- BARRA DE FILTROS CON MENÚS DESPLEGABLES VERTICALES -->
         <div class="catalog-filters-bar">
           
-          <!-- 1. GÉNERO (Hombre, Mujer, Niño) -->
-          <div class="filter-group">
-            <span class="filter-label"><i class="fa-solid fa-user-group"></i> 1. Género:</span>
-            <div class="filter-pill-group">
-              <button type="button" class="filter-chip active" data-gender="all" onclick="filterByGender('all', this)">Todos</button>
-              <button type="button" class="filter-chip" data-gender="hombre" onclick="filterByGender('hombre', this)">Hombre</button>
-              <button type="button" class="filter-chip" data-gender="mujer" onclick="filterByGender('mujer', this)">Mujer</button>
-              <button type="button" class="filter-chip" data-gender="nino" onclick="filterByGender('nino', this)">Niño</button>
+          <!-- 1. MENÚ DESPLEGABLE: GÉNERO -->
+          <div class="dropdown-filter" id="dropdownGender">
+            <button type="button" class="dropdown-toggle" onclick="toggleFilterDropdown('dropdownGender')">
+              <i class="fa-solid fa-user-group"></i>
+              <span>1. Género: <strong id="selectedGenderText">Todos</strong></span>
+              <i class="fa-solid fa-chevron-down caret-icon"></i>
+            </button>
+            <div class="dropdown-menu-vertical">
+              <button type="button" class="dropdown-item active" data-gender="all" onclick="selectGenderOption('all', 'Todos', this)">
+                <i class="fa-solid fa-check check-icon"></i> Todos los géneros
+              </button>
+              <button type="button" class="dropdown-item" data-gender="hombre" onclick="selectGenderOption('hombre', 'Hombre', this)">
+                <i class="fa-solid fa-check check-icon"></i> Hombre
+              </button>
+              <button type="button" class="dropdown-item" data-gender="mujer" onclick="selectGenderOption('mujer', 'Mujer', this)">
+                <i class="fa-solid fa-check check-icon"></i> Mujer
+              </button>
+              <button type="button" class="dropdown-item" data-gender="nino" onclick="selectGenderOption('nino', 'Niño', this)">
+                <i class="fa-solid fa-check check-icon"></i> Niño
+              </button>
             </div>
           </div>
 
-          <!-- 2. PRECIO (100-200, 300-400, 500-600) -->
-          <div class="filter-group">
-            <span class="filter-label"><i class="fa-solid fa-tags"></i> 2. Precio:</span>
-            <div class="filter-pill-group">
-              <button type="button" class="filter-chip active" data-price="all" onclick="filterByPrice('all', this)">Todos</button>
-              <button type="button" class="filter-chip" data-price="100-200" onclick="filterByPrice('100-200', this)">L. 100 - 200</button>
-              <button type="button" class="filter-chip" data-price="300-400" onclick="filterByPrice('300-400', this)">L. 300 - 400</button>
-              <button type="button" class="filter-chip" data-price="500-600" onclick="filterByPrice('500-600', this)">L. 500 - 600</button>
+          <!-- 2. MENÚ DESPLEGABLE: PRECIO -->
+          <div class="dropdown-filter" id="dropdownPrice">
+            <button type="button" class="dropdown-toggle" onclick="toggleFilterDropdown('dropdownPrice')">
+              <i class="fa-solid fa-tags"></i>
+              <span>2. Precio: <strong id="selectedPriceText">Todos</strong></span>
+              <i class="fa-solid fa-chevron-down caret-icon"></i>
+            </button>
+            <div class="dropdown-menu-vertical">
+              <button type="button" class="dropdown-item active" data-price="all" onclick="selectPriceOption('all', 'Todos', this)">
+                <i class="fa-solid fa-check check-icon"></i> Todos los precios
+              </button>
+              <button type="button" class="dropdown-item" data-price="100-200" onclick="selectPriceOption('100-200', 'L. 100 - 200', this)">
+                <i class="fa-solid fa-check check-icon"></i> L. 100 - 200
+              </button>
+              <button type="button" class="dropdown-item" data-price="300-400" onclick="selectPriceOption('300-400', 'L. 300 - 400', this)">
+                <i class="fa-solid fa-check check-icon"></i> L. 300 - 400
+              </button>
+              <button type="button" class="dropdown-item" data-price="500-600" onclick="selectPriceOption('500-600', 'L. 500 - 600', this)">
+                <i class="fa-solid fa-check check-icon"></i> L. 500 - 600
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. MENÚ DESPLEGABLE: COLECCIÓN / CATEGORÍA -->
+          <div class="dropdown-filter" id="dropdownCategory">
+            <button type="button" class="dropdown-toggle" onclick="toggleFilterDropdown('dropdownCategory')">
+              <i class="fa-solid fa-shirt"></i>
+              <span>Colección: <strong id="selectedCategoryText">Todas</strong></span>
+              <i class="fa-solid fa-chevron-down caret-icon"></i>
+            </button>
+            <div class="dropdown-menu-vertical">
+              <button type="button" class="dropdown-item active" data-cat="all" onclick="selectCategoryOption('all', 'Todas', this)">
+                <i class="fa-solid fa-check check-icon"></i> Todas las colecciones
+              </button>
+              <button type="button" class="dropdown-item" data-cat="cristiana" onclick="selectCategoryOption('cristiana', 'Colección Cristiana', this)">
+                <i class="fa-solid fa-check check-icon"></i> ✨ Colección Cristiana
+              </button>
+              <button type="button" class="dropdown-item" data-cat="casual" onclick="selectCategoryOption('casual', 'Casual', this)">
+                <i class="fa-solid fa-check check-icon"></i> 👕 Casual
+              </button>
+              <button type="button" class="dropdown-item" data-cat="americana" onclick="selectCategoryOption('americana', 'Ropa Americana', this)">
+                <i class="fa-solid fa-check check-icon"></i> 🇺🇸 Ropa Americana
+              </button>
+              <button type="button" class="dropdown-item" data-cat="personalizada" onclick="selectCategoryOption('personalizada', 'Personalizados', this)">
+                <i class="fa-solid fa-check check-icon"></i> 🎨 Diseños Personalizados
+              </button>
             </div>
           </div>
 
@@ -117,19 +167,9 @@
 
         </div>
 
-        <!-- FILTROS SECUNDARIOS DE COLECCIÓN Y ESTILOS -->
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
-          <div class="catalog-filters">
-            <button class="filter-pill active" data-category="all" onclick="filterCatalog('all', this)">Todas las colecciones</button>
-            <button class="filter-pill" data-category="cristiana" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
-            <button class="filter-pill" data-category="casual" onclick="filterCatalog('casual', this)">Casual</button>
-            <button class="filter-pill" data-category="americana" onclick="filterCatalog('americana', this)">🇺🇸 Ropa Americana</button>
-            <button class="filter-pill" data-category="personalizada" onclick="filterCatalog('personalizada', this)">🎨 Diseños Personalizados</button>
-          </div>
-
-          <div style="font-size: 13px; font-weight: 700; color: var(--muted);">
-            <span id="catalogResultsCount">Cargando prendas...</span>
-          </div>
+        <!-- INDICADOR DE RESULTADOS -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-size: 13.5px; font-weight: 700; color: var(--muted);">
+          <span id="catalogResultsCount">Cargando prendas...</span>
         </div>
 
         <!-- CUADRÍCULA DINÁMICA DE PRODUCTOS -->
@@ -375,8 +415,8 @@
   </div>
 
   <!-- Scripts diferidos -->
-  <script defer src="js/store.js?v=3.5"></script>
-  <script defer src="js/app.js?v=3.5"></script>
+  <script defer src="js/store.js?v=3.6"></script>
+  <script defer src="js/app.js?v=3.6"></script>
 
 </body>
 </html>
