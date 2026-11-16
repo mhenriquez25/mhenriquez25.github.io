@@ -1,0 +1,87 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Colección Cristiana Familiar",
+    "price": 320,
+    "originalPrice": 380,
+    "category": "cristiana",
+    "image": "assets/JS.png",
+    "description": "Camisa 100% algodón con diseño cristiano de alta calidad en DTF. Disponible para niños, mujeres y hombres.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Negro", "Blanco"],
+    "badge": "Más vendido",
+    "inStock": true,
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "prod-2",
+    "name": "Camisa Verde Oliva Casual",
+    "price": 290,
+    "originalPrice": 350,
+    "category": "hombre",
+    "image": "assets/verd1.png",
+    "description": "Camisa casual fresca en tono verde oliva con corte moderno y confección suave de máxima comodidad.",
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "colors": ["Verde Oliva", "Negro"],
+    "badge": "Popular",
+    "inStock": true,
+    "createdAt": "2026-01-02T00:00:00.000Z"
+  },
+  {
+    "id": "prod-3",
+    "name": "Camisa Vino Elegante",
+    "price": 290,
+    "originalPrice": 350,
+    "category": "casual",
+    "image": "assets/vino.png",
+    "description": "Color vino con estilo casual premium. Perfecta para ocasiones especiales o uso diario.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Vino", "Negro"],
+    "badge": "Nuevo",
+    "inStock": true,
+    "createdAt": "2026-01-03T00:00:00.000Z"
+  },
+  {
+    "id": "prod-4",
+    "name": "Camisa Naranja Vibrante",
+    "price": 280,
+    "originalPrice": 320,
+    "category": "casual",
+    "image": "assets/cat.jpg",
+    "description": "Estilo llamativo y juvenil. Color naranja intenso con tela transpirable de excelente caída.",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Naranja", "Blanco"],
+    "badge": "Oferta",
+    "inStock": true,
+    "createdAt": "2026-01-04T00:00:00.000Z"
+  },
+  {
+    "id": "prod-5",
+    "name": "Diseños Personalizados DTF",
+    "price": 350,
+    "originalPrice": 400,
+    "category": "personalizada",
+    "image": "assets/tal 2.png",
+    "description": "Elige tu color, envía tu logo, frase o imagen favorita y la estampamos en técnica DTF de alta definición.",
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "colors": ["Negro", "Blanco", "Gris", "Azul Marino", "Verde"],
+    "badge": "Personalizable",
+    "inStock": true,
+    "createdAt": "2026-01-05T00:00:00.000Z"
+  },
+  {
+    "id": "prod-6",
+    "name": "Camisa Vision DTF",
+    "price": 310,
+    "originalPrice": 360,
+    "category": "urbano",
+    "image": "assets/ver.png",
+    "description": "Diseño urbano contemporáneo con estampado delantero y trasero de gran durabilidad al lavado.",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Verde", "Negro"],
+    "badge": "Destacado",
+    "inStock": true,
+    "createdAt": "2026-01-06T00:00:00.000Z"
+  }
+]
+

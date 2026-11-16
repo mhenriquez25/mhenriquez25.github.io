@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración | Moda Casual</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Estilos modulares del panel -->
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Firebase Compat SDK (Base de datos gratuita de Google) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <nav class="admin-nav">
+    <div class="admin-brand">
+      <i class="fa-solid fa-shirt" style="color: var(--wine)"></i>
+      <span>Moda Casual · Panel de Administración</span>
+    </div>
+
+    <div class="admin-nav-actions">
+      <div id="dbStatusBadge" class="db-status-pill">
+        <span class="db-dot"></span>
+        <span id="dbStatusText">Cargando base de datos...</span>
+      </div>
+
+      <a href="index.html" class="btn-outline-light" target="_blank">
+        <i class="fa-solid fa-store"></i> Ver Tienda
+      </a>
+
+      <button id="logoutBtn" class="btn-outline-light" style="display: none;" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i> Salir
+      </button>
+    </div>
+  </nav>
+
+  <!-- PANTALLA DE ACCESO / LOGIN PIN -->
+  <div id="loginScreen">
+    <div class="lock-icon"><i class="fa-solid fa-shield-halved"></i></div>
+    <h2>Acceso al Administrador</h2>
+    <p>Ingresa tu PIN de seguridad para gestionar productos y pedidos de Moda Casual.</p>
+    
+    <div id="loginError" class="alert alert-danger" style="display: none;">PIN incorrecto. Intenta de nuevo.</div>
+    
+    <input type="password" id="pinInput" class="pin-input" placeholder="••••" maxlength="8" autofocus onkeypress="if(event.key==='Enter') verifyPin()">
+    <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="verifyPin()">
+      <i class="fa-solid fa-lock-open"></i> Entrar al Panel
+    </button>
+    <p style="margin-top: 16px; font-size: 12px; color: var(--muted)">PIN inicial predeterminado: <strong>1234</strong></p>
+  </div>
+
+  <!-- CONTENIDO DEL PANEL DE ADMINISTRACIÓN -->
+  <main id="adminApp" class="admin-container" style="display: none;">
+
+    <!-- PESTAÑAS -->
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab('products', this)">
+        <i class="fa-solid fa-boxes-stacked"></i> Productos (<span id="totalProductsCount">0</span>)
+      </button>
+      <button class="tab-btn" onclick="switchTab('orders', this)">
+        <i class="fa-solid fa-clipboard-list"></i> Pedidos Recibidos (<span id="totalOrdersCount">0</span>)
+      </button>
+      <button class="tab-btn" onclick="switchTab('database', this)">
+        <i class="fa-solid fa-database"></i> Base de Datos Gratuita
+      </button>
+      <button class="tab-btn" onclick="switchTab('settings', this)">
+        <i class="fa-solid fa-gear"></i> Configuración del Negocio
+      </button>
+    </div>
+
+    <!-- PESTAÑA 1: PRODUCTOS -->
+    <section id="tab-products">
+      <div class="tab-top-bar">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <button class="btn-primary" onclick="openProductModal()">
+            <i class="fa-solid fa-plus"></i> Nuevo Producto
+          </button>
+          <button class="btn-secondary" onclick="exportProductsJson()">
+            <i class="fa-solid fa-file-arrow-down"></i> Descargar products.json
+          </button>
+        </div>
+
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
+          <input type="text" id="productSearchInput" placeholder="Buscar por nombre o categoría..." oninput="renderProductsList()">
+        </div>
+      </div>
+
+      <!-- Cuadrícula de productos -->
+      <div id="adminProductsContainer" class="admin-products-grid">
+        <!-- Renderizado dinámico -->
+      </div>
+    </section>
+
+    <!-- PESTAÑA 2: PEDIDOS RECIBIDOS -->
+    <section id="tab-orders" style="display: none;">
+      <div class="tab-top-bar">
+        <h2>Historial de pedidos de la tienda</h2>
+        <button class="btn-secondary" onclick="renderOrdersList()">
+          <i class="fa-solid fa-rotate"></i> Actualizar
+        </button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Ciudad / Dirección</th>
+              <th>Productos</th>
+              <th>Total</th>
+              <th>Pago</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Renderizado dinámico -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 3: BASE DE DATOS GRATUITA (FIREBASE) -->
+    <section id="tab-database" style="display: none;">
+      <div class="config-card">
+        <h3><i class="fa-solid fa-cloud" style="color: var(--wine)"></i> Conexión con Base de Datos Gratuita (Google Firebase)</h3>
+        
+        <div class="guide-box">
+          <strong>¿Cómo funciona la sincronización en la nube gratuita?</strong><br>
+          Al conectar Google Firebase Firestore (100% gratis de por vida para proyectos pequeños):
+          <ol>
+            <li>Cada producto que agregues o edites aquí se guarda en la nube al instante.</li>
+            <li>Cualquier cliente que entre a tu web en cualquier parte del mundo verá tus productos actualizados en tiempo real.</li>
+            <li><strong>Pasos sencillos para obtener tus llaves gratuitas:</strong>
+              <br>• Entra a <a href="https://console.firebase.google.com" target="_blank" rel="noopener">Firebase Console</a> con tu cuenta de Google.
+              <br>• Crea un proyecto gratis (ejemplo: <em>ModaCasual</em>).
+              <br>• En el menú izquierdo ve a <strong>Firestore Database</strong> -> Crear base de datos (elige 'Modo de prueba').
+              <br>• En Configuración del proyecto -> 'Tus apps', añade una app Web y copia el objeto <code>firebaseConfig</code>.
+            </li>
+          </ol>
+        </div>
+
+        <div id="dbSaveAlert" class="alert alert-success">¡Configuración guardada! Conectando a la base de datos...</div>
+
+        <form id="firebaseForm" onsubmit="saveFirebaseConfig(event)">
+          <div class="form-group">
+            <label class="form-label">Pega aquí tu configuración de Firebase (formato JSON):</label>
+            <textarea id="firebaseConfigJson" class="form-control" rows="8" placeholder='{
+  "apiKey": "AIzaSy...",
+  "authDomain": "modacasual.firebaseapp.com",
+  "projectId": "modacasual",
+  "storageBucket": "modacasual.appspot.com",
+  "messagingSenderId": "...",
+  "appId": "..."
+}'></textarea>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <button type="submit" class="btn-primary">
+              <i class="fa-solid fa-floppy-disk"></i> Guardar y Conectar Base de Datos
+            </button>
+            <button type="button" class="btn-secondary" onclick="testFirebaseConnection()">
+              <i class="fa-solid fa-plug"></i> Probar Conexión
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 4: CONFIGURACIÓN GENERAL -->
+    <section id="tab-settings" style="display: none;">
+      <div class="config-card">
+        <h3><i class="fa-solid fa-sliders" style="color: var(--wine)"></i> Información de tu Tienda</h3>
+        
+        <div id="settingsSaveAlert" class="alert alert-success">Configuración actualizada exitosamente.</div>
+
+        <form id="storeSettingsForm" onsubmit="saveStoreSettings(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Número de WhatsApp (con código de país, ej. 50499998888):</label>
+              <input type="text" id="settingWhatsapp" class="form-control" placeholder="50400000000" required>
+              <small style="color: var(--muted); font-size: 12px;">Aquí llegarán los pedidos completados por los clientes con todo el detalle.</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Moneda de la tienda:</label>
+              <input type="text" id="settingCurrency" class="form-control" placeholder="L." required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nombre del negocio:</label>
+              <input type="text" id="settingBusinessName" class="form-control" placeholder="Moda Casual Honduras">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">PIN de acceso al panel:</label>
+              <input type="password" id="settingPin" class="form-control" placeholder="1234">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: AGREGAR / EDITAR PRODUCTO -->
+  <div id="productModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Nuevo Producto</h3>
+        <button class="close-btn" onclick="closeProductModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="productForm" onsubmit="handleProductSubmit(event)">
+          <input type="hidden" id="prodId">
+
+          <div class="form-group">
+            <label class="form-label">Nombre de la camisa o producto *</label>
+            <input type="text" id="prodName" class="form-control" placeholder="Ej: Camisa Cristiana 'Fe y Victoria'" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Precio de Venta (L.) *</label>
+              <input type="number" id="prodPrice" class="form-control" placeholder="320" min="0" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Precio Regular / Anterior (L.) (Opcional)</label>
+              <input type="number" id="prodOriginalPrice" class="form-control" placeholder="380" min="0" step="0.01">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Categoría *</label>
+              <select id="prodCategory" class="form-control" required>
+                <option value="cristiana">Colección Cristiana</option>
+                <option value="hombre">Casual Hombre</option>
+                <option value="mujer">Casual Mujer</option>
+                <option value="casual">Casual Unisex</option>
+                <option value="personalizada">Diseño Personalizado</option>
+                <option value="urbano">Estilo Urbano</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Etiqueta / Badge (Opcional)</label>
+              <input type="text" id="prodBadge" class="form-control" placeholder="Ej: Nuevo, Más Vendido, DTF...">
+            </div>
+          </div>
+
+          <!-- SUBIR FOTO DEL PRODUCTO -->
+          <div class="form-group">
+            <label class="form-label">Foto del Producto *</label>
+            
+            <div class="image-drop-area" onclick="document.getElementById('imageFileInput').click()">
+              <i class="fa-solid fa-cloud-arrow-up" style="font-size: 28px; color: var(--wine); margin-bottom: 8px;"></i>
+              <p style="font-weight: 600; font-size: 14px;">Toca aquí para subir foto desde tu teléfono o computadora</p>
+              <span style="font-size: 12px; color: var(--muted);">Formatos: JPG, PNG o WebP (se optimiza automáticamente)</span>
+              <input type="file" id="imageFileInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+            </div>
+
+            <div style="margin-top: 10px; display: flex; gap: 10px; align-items: center;">
+              <span style="font-size: 12px; color: var(--muted);">O pega la ruta/URL de la imagen:</span>
+              <input type="text" id="prodImageUrl" class="form-control" style="flex: 1; padding: 6px 12px; font-size: 13px;" placeholder="assets/verd1.png o https://...">
+            </div>
+
+            <div id="imagePreviewBox" class="preview-box">
+              <img id="imagePreviewImg" src="" alt="Vista previa">
+            </div>
+          </div>
+
+          <!-- TALLAS DISPONIBLES -->
+          <div class="form-group">
+            <label class="form-label">Tallas disponibles</label>
+            <div class="chips-group" id="sizesGroup">
+              <label class="chip-item"><input type="checkbox" value="XS"><span>XS</span></label>
+              <label class="chip-item"><input type="checkbox" value="S" checked><span>S</span></label>
+              <label class="chip-item"><input type="checkbox" value="M" checked><span>M</span></label>
+              <label class="chip-item"><input type="checkbox" value="L" checked><span>L</span></label>
+              <label class="chip-item"><input type="checkbox" value="XL" checked><span>XL</span></label>
+              <label class="chip-item"><input type="checkbox" value="XXL"><span>XXL</span></label>
+            </div>
+          </div>
+
+          <!-- COLORES DISPONIBLES -->
+          <div class="form-group">
+            <label class="form-label">Colores disponibles (separados por coma)</label>
+            <input type="text" id="prodColors" class="form-control" placeholder="Negro, Blanco, Verde Oliva, Vino">
+          </div>
+
+          <!-- DESCRIPCIÓN -->
+          <div class="form-group">
+            <label class="form-label">Descripción del producto</label>
+            <textarea id="prodDesc" class="form-control" rows="3" placeholder="Detalles de la tela, tipo de estampado DTF, corte, etc."></textarea>
+          </div>
+
+          <!-- ESTADO DE STOCK -->
+          <div class="form-group">
+            <label class="form-label">Disponibilidad</label>
+            <select id="prodStock" class="form-control">
+              <option value="true">✅ Disponible para compra</option>
+              <option value="false">❌ Agotado temporalmente</option>
+            </select>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+            <button type="button" class="btn-secondary" onclick="closeProductModal()">Cancelar</button>
+            <button type="submit" class="btn-primary" id="saveProdBtn">
+              <i class="fa-solid fa-check"></i> Guardar Producto
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts modulares -->
+  <script src="js/store.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
