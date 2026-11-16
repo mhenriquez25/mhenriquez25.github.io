@@ -53,16 +53,15 @@
       </a>
 
       <nav class="menu">
-        <a href="#inicio"><i class="fa-solid fa-house"></i> Inicio</a>
-        <a href="#coleccion"><i class="fa-solid fa-bag-shopping"></i> Colección</a>
-        <a href="#estilo"><i class="fa-solid fa-wand-magic-sparkles"></i> Estilo</a>
-        <a href="#videos"><i class="fa-solid fa-circle-play"></i> Videos</a>
-        <a href="#marca"><i class="fa-solid fa-store"></i> La Marca</a>
-        <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
+        <a href="#tienda" onclick="switchMainView('shop'); return false;" class="menu-link-shop active"><i class="fa-solid fa-shirt"></i> Comprar Prendas</a>
+        <a href="#entregas" onclick="switchMainView('info', 'entregas'); return false;"><i class="fa-solid fa-location-dot"></i> Entregas en Tegucigalpa</a>
+        <a href="#marca" onclick="switchMainView('info', 'marca'); return false;"><i class="fa-solid fa-circle-info"></i> De Qué Trata la Tienda</a>
+        <a href="#videos" onclick="switchMainView('info', 'videos'); return false;"><i class="fa-solid fa-circle-play"></i> Proceso DTF</a>
+        <a href="#contacto" onclick="switchMainView('info', 'contacto'); return false;"><i class="fa-solid fa-envelope"></i> Contacto</a>
       </nav>
 
       <div class="nav-actions">
-        <a class="round-action" href="#coleccion" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a class="round-action" href="#coleccion" onclick="switchMainView('shop');" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
         <button class="round-action" onclick="openCart()" aria-label="Carrito de compras" style="position: relative;">
           <i class="fa-solid fa-cart-shopping"></i>
           <span id="cartCountBadge" class="cart-badge">0</span>
@@ -71,253 +70,439 @@
     </div>
   </header>
 
+  <!-- SELECTOR SUPERIOR DE VISTAS (COMPRAR PRENDAS vs INFORMACIÓN Y ENTREGAS) -->
+  <div class="main-view-switcher-bar">
+    <div class="wrap switcher-inner">
+      <button class="view-switch-btn view-switch-shop active" onclick="switchMainView('shop', this)">
+        <i class="fa-solid fa-shirt"></i> 1. Catálogo de Prendas (Comprar)
+      </button>
+      <button class="view-switch-btn view-switch-info" onclick="switchMainView('info', this)">
+        <i class="fa-solid fa-location-dot"></i> 2. Información y Entregas en Tegucigalpa
+      </button>
+    </div>
+  </div>
+
   <main>
 
-    <!-- HERO CARRUSEL -->
-    <section class="hero">
-      <div class="slide active">
-        <img class="hero-bg" src="assets/JS.png" alt="">
-        <img class="hero-main" src="assets/JS.png" alt="Colección cristiana para toda la familia">
+    <!-- ==============================================================
+         VISTA 1: TIENDA Y SELECCIÓN DE PRENDAS (CATÁLOGO INTERACTIVO)
+    ============================================================== -->
+    <div id="view-tienda" class="site-main-view">
 
-        <div class="wrap hero-content">
-          <span class="kicker">Diseños con propósito</span>
-          <h1>Viste tu fe con estilo</h1>
-          <p>Opciones para niños, mujeres y hombres con diseños que transmiten un mensaje positivo y transformador.</p>
-          <a class="hero-btn" href="#coleccion" onclick="filterCatalog('cristiana', null)">Ver colección cristiana →</a>
-        </div>
-      </div>
+      <!-- HERO CARRUSEL -->
+      <section class="hero">
+        <div class="slide active">
+          <img class="hero-bg" src="assets/JS.png" alt="">
+          <img class="hero-main" src="assets/JS.png" alt="Colección cristiana para toda la familia">
 
-      <div class="slide">
-        <img class="hero-bg" src="assets/negr.png" alt="">
-        <img class="hero-main" src="assets/negr.png" alt="Pareja usando camisas casuales">
-
-        <div class="wrap hero-content">
-          <span class="kicker">Nueva colección 2026</span>
-          <h1>Viste tu forma de ser</h1>
-          <p>Camisas casuales de algodón, cómodas, frescas y con diseños contemporáneos que te representan.</p>
-          <a class="hero-btn" href="#coleccion">Explorar catálogo →</a>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img class="hero-bg" src="assets/verd1.png" alt="">
-        <img class="hero-main" src="assets/verd1.png" alt="Camisa verde oliva">
-
-        <div class="wrap hero-content">
-          <span class="kicker">Comodidad y durabilidad</span>
-          <h1>Diseños que se adaptan a ti</h1>
-          <p>Elige tu color, tu estilo y personaliza tu camisa con estampado DTF de alta definición.</p>
-          <a class="hero-btn" href="#contacto">Solicitar diseño propio →</a>
-        </div>
-      </div>
-
-      <button class="hero-arrow prev" aria-label="Anterior">‹</button>
-      <button class="hero-arrow next" aria-label="Siguiente">›</button>
-
-      <div class="hero-dots">
-        <button class="dot active" data-slide="0" aria-label="Slide 1"></button>
-        <button class="dot" data-slide="1" aria-label="Slide 2"></button>
-        <button class="dot" data-slide="2" aria-label="Slide 3"></button>
-      </div>
-    </section>
-
-    <!-- BENEFICIOS -->
-    <div class="benefits-bar">
-      <div class="wrap benefits-grid">
-        <div class="benefit">
-          <span class="benefit-icon cotton"><i class="fa-solid fa-leaf"></i></span>
-          <div>
-            <strong>100% Algodón</strong>
-            <span>Máxima suavidad y frescura</span>
+          <div class="wrap hero-content">
+            <span class="kicker">Diseños con propósito</span>
+            <h1>Viste tu fe con estilo</h1>
+            <p>Opciones para niños, mujeres y hombres con diseños que transmiten un mensaje positivo y transformador.</p>
+            <a class="hero-btn" href="#coleccion" onclick="filterCatalog('cristiana', null)">Ver colección cristiana →</a>
           </div>
         </div>
 
-        <div class="benefit">
-          <span class="benefit-icon shipping"><i class="fa-solid fa-truck-fast"></i></span>
-          <div>
-            <strong>Envíos en Tegucigalpa</strong>
-            <span>Entregas en Malls o a domicilio</span>
+        <div class="slide">
+          <img class="hero-bg" src="assets/negr.png" alt="">
+          <img class="hero-main" src="assets/negr.png" alt="Pareja usando camisas casuales">
+
+          <div class="wrap hero-content">
+            <span class="kicker">Nueva colección 2026</span>
+            <h1>Viste tu forma de ser</h1>
+            <p>Camisas casuales de algodón, cómodas, frescas y con diseños contemporáneos que te representan.</p>
+            <a class="hero-btn" href="#coleccion">Explorar catálogo →</a>
           </div>
         </div>
 
-        <div class="benefit">
-          <span class="benefit-icon payment"><i class="fa-solid fa-shield-halved"></i></span>
-          <div>
-            <strong>Pagos Confiables</strong>
-            <span>Transferencias o contra entrega</span>
+        <div class="slide">
+          <img class="hero-bg" src="assets/verd1.png" alt="">
+          <img class="hero-main" src="assets/verd1.png" alt="Camisa verde oliva">
+
+          <div class="wrap hero-content">
+            <span class="kicker">Comodidad y durabilidad</span>
+            <h1>Diseños que se adaptan a ti</h1>
+            <p>Elige tu color, tu estilo y personaliza tu camisa con estampado DTF de alta definición.</p>
+            <a class="hero-btn" href="#contacto">Solicitar diseño propio →</a>
           </div>
         </div>
 
-        <div class="benefit">
-          <span class="benefit-icon customize"><i class="fa-solid fa-shirt"></i></span>
-          <div>
-            <strong>Estampado DTF Premium</strong>
-            <span>Colores vivos y gran durabilidad</span>
+        <button class="hero-arrow prev" aria-label="Anterior">‹</button>
+        <button class="hero-arrow next" aria-label="Siguiente">›</button>
+
+        <div class="hero-dots">
+          <button class="dot active" data-slide="0" aria-label="Slide 1"></button>
+          <button class="dot" data-slide="1" aria-label="Slide 2"></button>
+          <button class="dot" data-slide="2" aria-label="Slide 3"></button>
+        </div>
+      </section>
+
+      <!-- BENEFICIOS -->
+      <div class="benefits-bar">
+        <div class="wrap benefits-grid">
+          <div class="benefit">
+            <span class="benefit-icon cotton"><i class="fa-solid fa-leaf"></i></span>
+            <div>
+              <strong>100% Algodón</strong>
+              <span>Máxima suavidad y frescura</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon shipping"><i class="fa-solid fa-truck-fast"></i></span>
+            <div>
+              <strong>Envíos en Tegucigalpa</strong>
+              <span>Entregas en Malls o a domicilio</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon payment"><i class="fa-solid fa-shield-halved"></i></span>
+            <div>
+              <strong>Pagos Confiables</strong>
+              <span>Transferencias o contra entrega</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <span class="benefit-icon customize"><i class="fa-solid fa-shirt"></i></span>
+            <div>
+              <strong>Estampado DTF Premium</strong>
+              <span>Colores vivos y gran durabilidad</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- COLECCIÓN / TIENDA INTERACTIVA -->
+      <section id="coleccion">
+        <div class="wrap">
+
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Catálogo para Comprar</span>
+              <h2>Selecciona tus Prendas</h2>
+            </div>
+
+            <p>
+              Explora las camisas disponibles, elige tu talla y color, y realiza tu compra de forma rápida y sencilla.
+            </p>
+          </div>
+
+          <!-- BANNER INFORMATIVO HACIA ENTREGAS -->
+          <div style="background: #fffaf3; border: 1.5px dashed var(--wine); border-radius: 16px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <i class="fa-solid fa-location-dot" style="font-size: 20px; color: var(--wine);"></i>
+              <span style="font-size: 13px; font-weight: 700;">Estamos ubicados en Tegucigalpa · Entregas seguras en los principales Malls</span>
+            </div>
+            <button class="btn-secondary" style="font-size: 12px; padding: 6px 14px;" onclick="switchMainView('info', 'entregas')">
+              Ver Malls de Entrega →
+            </button>
+          </div>
+
+          <!-- FILTROS Y BUSCADOR -->
+          <div class="catalog-toolbar">
+            <div class="catalog-filters">
+              <button class="filter-pill active" onclick="filterCatalog('all', this)">Todas las camisas</button>
+              <button class="filter-pill" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
+              <button class="filter-pill" onclick="filterCatalog('hombre', this)">Hombre</button>
+              <button class="filter-pill" onclick="filterCatalog('mujer', this)">Mujer</button>
+              <button class="filter-pill" onclick="filterCatalog('casual', this)">Casual</button>
+              <button class="filter-pill" onclick="filterCatalog('personalizada', this)">🎨 Personalizadas</button>
+            </div>
+
+            <div class="catalog-search">
+              <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
+              <input type="text" id="catalogSearchInput" placeholder="Buscar por nombre o color..." oninput="onCatalogSearch()">
+            </div>
+          </div>
+
+          <!-- CUADRÍCULA DINÁMICA DE PRODUCTOS -->
+          <div class="products-grid" id="catalogProductsContainer">
+            <!-- Renderizado en tiempo real por js/app.js -->
+          </div>
+
+          <!-- BANNER DE PROMOCIÓN -->
+          <div class="promos">
+            <div class="promo red">
+              <div>
+                <h3>¿Deseas un diseño personalizado?</h3>
+                <p>Envíanos tu idea, logo o frase y la estampamos en tu camisa.</p>
+              </div>
+              <a href="#contacto" onclick="switchMainView('info', 'contacto')">Personalizar ahora →</a>
+            </div>
+
+            <div class="promo cream">
+              <div>
+                <h3>Regalos con propósito</h3>
+                <p>Detalles únicos para inspirar y bendecir a quienes más quieres.</p>
+              </div>
+              <a href="#coleccion" onclick="filterCatalog('cristiana', null)">Ver diseños →</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
 
-    <!-- COLECCIÓN / TIENDA INTERACTIVA -->
-    <section id="coleccion">
-      <div class="wrap">
+    <!-- ==============================================================
+         VISTA 2: INFORMACIÓN, UBICACIÓN Y ENTREGAS EN TEGUCIGALPA
+    ============================================================== -->
+    <div id="view-informacion" class="site-main-view" style="display: none;">
 
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Catálogo Disponible</span>
-            <h2>Nuestra Colección de Camisas</h2>
-          </div>
+      <!-- SECCIÓN: UBICACIÓN Y ENTREGAS EN TEGUCIGALPA -->
+      <section id="entregas" style="padding-top: 40px;">
+        <div class="wrap">
 
-          <p>
-            Explora nuestros modelos disponibles, selecciona tu talla y pide directamente de forma rápida e intuitiva.
-          </p>
-        </div>
+          <!-- BANNER DE UBICACIÓN -->
+          <div class="location-header-card">
+            <div class="location-header-copy">
+              <span class="location-badge-pill"><i class="fa-solid fa-map-pin"></i> Ubicación Oficial</span>
+              <h2>Estamos ubicados en Tegucigalpa, Honduras</h2>
+              <p>
+                Realizamos entregas coordinadas y seguras en los centros comerciales más importantes de la capital para que recibas tu pedido con total comodidad y confianza.
+              </p>
+            </div>
 
-        <!-- FILTROS Y BUSCADOR -->
-        <div class="catalog-toolbar">
-          <div class="catalog-filters">
-            <button class="filter-pill active" onclick="filterCatalog('all', this)">Todas las camisas</button>
-            <button class="filter-pill" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
-            <button class="filter-pill" onclick="filterCatalog('hombre', this)">Hombre</button>
-            <button class="filter-pill" onclick="filterCatalog('mujer', this)">Mujer</button>
-            <button class="filter-pill" onclick="filterCatalog('casual', this)">Casual</button>
-            <button class="filter-pill" onclick="filterCatalog('personalizada', this)">🎨 Personalizadas</button>
-          </div>
-
-          <div class="catalog-search">
-            <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
-            <input type="text" id="catalogSearchInput" placeholder="Buscar por nombre o color..." oninput="onCatalogSearch()">
-          </div>
-        </div>
-
-        <!-- CUADRÍCULA DINÁMICA DE PRODUCTOS -->
-        <div class="products-grid" id="catalogProductsContainer">
-          <!-- Renderizado en tiempo real por js/app.js -->
-        </div>
-
-        <!-- BANNER DE PROMOCIÓN -->
-        <div class="promos">
-          <div class="promo red">
             <div>
-              <h3>¿Deseas un diseño personalizado?</h3>
-              <p>Envíanos tu idea, logo o frase y la estampamos en tu camisa.</p>
+              <button class="btn-primary" style="font-size: 15px; padding: 14px 24px;" onclick="switchMainView('shop')">
+                <i class="fa-solid fa-shirt"></i> Ver Catálogo y Comprar
+              </button>
             </div>
-            <a href="#contacto">Personalizar ahora →</a>
           </div>
 
-          <div class="promo cream">
+          <div class="section-head">
             <div>
-              <h3>Regalos con propósito</h3>
-              <p>Detalles únicos para inspirar y bendecir a quienes más quieres.</p>
+              <span class="eyebrow">Puntos de Entrega</span>
+              <h2>Malls de Tegucigalpa donde Entregamos</h2>
             </div>
-            <a href="#coleccion" onclick="filterCatalog('cristiana', null)">Ver diseños →</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PROCESO DE CREACIÓN / VIDEOS -->
-    <section class="videos-section" id="videos">
-      <div class="wrap">
-
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Proceso de Calidad</span>
-            <h2>Así creamos tu camisa</h2>
-          </div>
-
-          <p>
-            Desde la selección de la prenda de algodón hasta el estampado DTF y planchado final.
-          </p>
-        </div>
-
-        <div class="videos-grid">
-          <article class="video-card">
-            <video class="process-video" autoplay muted loop playsinline preload="auto">
-              <source src="./video/video1.mp4?v=2" type="video/mp4">
-            </video>
-            <span class="video-label"><i class="fa-solid fa-shirt"></i> Selección</span>
-            <div class="video-copy">
-              <span class="step-number">Paso 01</span>
-              <h3>Elige tu prenda</h3>
-              <p>Seleccionamos la tela de algodón, el corte y el color que mejor se adapta a tu gusto.</p>
-            </div>
-          </article>
-
-          <article class="video-card">
-            <video class="process-video" autoplay muted loop playsinline preload="auto">
-              <source src="./video/video2.mp4?v=2" type="video/mp4">
-            </video>
-            <span class="video-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Diseño</span>
-            <div class="video-copy">
-              <span class="step-number">Paso 02</span>
-              <h3>Diseño y Detalle</h3>
-              <p>Preparamos cada línea y color para lograr un estampado definido, nítido y duradero.</p>
-            </div>
-          </article>
-
-          <article class="video-card">
-            <video class="process-video" autoplay muted loop playsinline preload="auto">
-              <source src="./video/video3.mp4?v=2" type="video/mp4">
-            </video>
-            <span class="video-label"><i class="fa-solid fa-gem"></i> Acabado</span>
-            <div class="video-copy">
-              <span class="step-number">Paso 03</span>
-              <h3>Fijación DTF</h3>
-              <p>Aplicamos calor y presión controlada para garantizar resistencia total al lavado.</p>
-            </div>
-          </article>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- LA MARCA -->
-    <section class="brand-section" id="marca">
-      <div class="wrap">
-        <div class="brand-panel">
-          <div class="brand-photo">
-            <img src="assets/negr.png" alt="Moda Casual">
-          </div>
-
-          <div class="brand-copy">
-            <span class="eyebrow" style="color: #f4d29a;">Sobre Nosotros</span>
-            <h2>Pasión por el detalle y el buen vestir</h2>
             <p>
-              En <strong>Moda Casual</strong> nos dedicamos a ofrecer prendas que combinan comodidad para el día a día con mensajes que transmiten valores, identidad y estilo propio.
+              Selecciona tu Mall preferido en el momento de hacer tu compra y un asesor coordinará contigo la entrega por WhatsApp.
             </p>
+          </div>
 
-            <div class="mini-benefits">
-              <div class="mini-benefit">
-                <strong>Diseños Originales</strong>
-                <span>Creatividad y mensaje</span>
+          <!-- CUADRÍCULA DE MALLS -->
+          <div class="malls-grid">
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Multiplaza Tegucigalpa</h4>
+                <p>Bulevar San Juan Bosco · Entregas en Food Court o entrada principal.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
               </div>
-              <div class="mini-benefit">
-                <strong>Tallas para Todos</strong>
-                <span>Desde S hasta XXL</span>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Cascadas Mall</h4>
+                <p>Bulevar Fuerzas Armadas · Entregas en pasillos centrales y área comercial.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
               </div>
-              <div class="mini-benefit">
-                <strong>Atención Cercana</strong>
-                <span>Asesoría directa</span>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>City Mall Tegucigalpa</h4>
+                <p>Frente a Aeropuerto Toncontín · Entregas en zona de restaurantes y tiendas.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Mall Premier</h4>
+                <p>Bulevar del Norte · Punto accesible para la zona norte de Tegucigalpa.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>MetroMall</h4>
+                <p>Bulevar Comunidad Económica Europea · Amplio parqueo y fácil acceso.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Novacentro (Los Próceres)</h4>
+                <p>Bulevar Los Próceres · Zona moderna y segura para recibir tu prenda.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Mall El Dorado</h4>
+                <p>Bulevar Morazán · Ubicación estratégica en el corazón de la capital.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Plaza Miraflores</h4>
+                <p>Bulevar Miraflores · Zona comercial céntrica y de fácil transporte.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+
+            <div class="mall-card">
+              <div class="mall-icon-box"><i class="fa-solid fa-building"></i></div>
+              <div>
+                <h4>Mall Las Galerías</h4>
+                <p>Bulevar Morazán · Cómodo punto de encuentro para entregas locales.</p>
+                <span class="mall-status-tag">✅ Punto disponible</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CÓMO FUNCIONA EL PROCESO DE ENTREGA -->
+          <div style="background: #fff; border-radius: 20px; padding: 36px; border: 1px solid var(--line); margin-bottom: 40px;">
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 22px; margin-bottom: 18px;">
+              <i class="fa-solid fa-route" style="color: var(--wine);"></i> ¿Cómo funciona el proceso de compra y entrega?
+            </h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+              <div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--wine); margin-bottom: 6px;">01</div>
+                <strong>Elige tus prendas</strong>
+                <p style="font-size: 13px; color: var(--muted); margin-top: 4px;">Explora el catálogo y selecciona tu talla y color en el carrito.</p>
+              </div>
+
+              <div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--wine); margin-bottom: 6px;">02</div>
+                <strong>Selecciona tu Mall</strong>
+                <p style="font-size: 13px; color: var(--muted); margin-top: 4px;">En el checkout elige el mall de Tegucigalpa que te quede más cerca.</p>
+              </div>
+
+              <div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--wine); margin-bottom: 6px;">03</div>
+                <strong>Coordinamos por WhatsApp</strong>
+                <p style="font-size: 13px; color: var(--muted); margin-top: 4px;">Te escribimos para confirmar el día, la hora y entregarte tu paquete.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECCIÓN: DE QUÉ TRATA LA TIENDA / LA MARCA -->
+      <section class="brand-section" id="marca">
+        <div class="wrap">
+          <div class="brand-panel">
+            <div class="brand-photo">
+              <img src="assets/negr.png" alt="Moda Casual">
+            </div>
+
+            <div class="brand-copy">
+              <span class="eyebrow" style="color: #f4d29a;">Sobre Nosotros</span>
+              <h2>¿De qué trata Moda Casual?</h2>
+              <p>
+                En <strong>Moda Casual</strong> nos especializamos en camisas confeccionadas en <strong>100% algodón</strong> de máxima comodidad, con estampados en tecnología <strong>DTF (Direct to Film)</strong> de alta durabilidad que no se caen ni se agrietan con las lavadas.
+              </p>
+              <p style="margin-top: 10px;">
+                Contamos con nuestra <strong>Colección Cristiana</strong> con mensajes inspiradores para toda la familia, estilos casuales modernos para damas y caballeros, y servicio de <strong>personalización total</strong> para que plasmes tu propio diseño.
+              </p>
+
+              <div class="mini-benefits">
+                <div class="mini-benefit">
+                  <strong>100% Algodón</strong>
+                  <span>Suave y fresco</span>
+                </div>
+                <div class="mini-benefit">
+                  <strong>Tallas S a XXL</strong>
+                  <span>Para todos los gustos</span>
+                </div>
+                <div class="mini-benefit">
+                  <strong>Tegucigalpa</strong>
+                  <span>Entregas directas</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CONTACTO Y LLAMADA A LA ACCIÓN -->
-    <section id="contacto">
-      <div class="wrap">
-        <div class="cta-box">
-          <h2>¿Tienes dudas o buscas un pedido al por mayor?</h2>
-          <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-whatsapp"></i> Chatear con un asesor
-          </a>
+      <!-- PROCESO DE CREACIÓN / VIDEOS -->
+      <section class="videos-section" id="videos">
+        <div class="wrap">
+
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Tecnología DTF</span>
+              <h2>Así creamos cada camisa</h2>
+            </div>
+            <p>
+              Mira de cerca la calidad y el esmero que ponemos en cada proceso de estampado.
+            </p>
+          </div>
+
+          <div class="videos-grid">
+            <article class="video-card">
+              <video class="process-video" autoplay muted loop playsinline preload="auto">
+                <source src="./video/video1.mp4?v=2" type="video/mp4">
+              </video>
+              <span class="video-label"><i class="fa-solid fa-shirt"></i> Selección</span>
+              <div class="video-copy">
+                <span class="step-number">Paso 01</span>
+                <h3>Elige tu prenda</h3>
+                <p>Seleccionamos la tela de algodón, el corte y el color que mejor se adapta a tu gusto.</p>
+              </div>
+            </article>
+
+            <article class="video-card">
+              <video class="process-video" autoplay muted loop playsinline preload="auto">
+                <source src="./video/video2.mp4?v=2" type="video/mp4">
+              </video>
+              <span class="video-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Diseño</span>
+              <div class="video-copy">
+                <span class="step-number">Paso 02</span>
+                <h3>Diseño y Detalle</h3>
+                <p>Preparamos cada línea y color para lograr un estampado definido, nítido y duradero.</p>
+              </div>
+            </article>
+
+            <article class="video-card">
+              <video class="process-video" autoplay muted loop playsinline preload="auto">
+                <source src="./video/video3.mp4?v=2" type="video/mp4">
+              </video>
+              <span class="video-label"><i class="fa-solid fa-gem"></i> Acabado</span>
+              <div class="video-copy">
+                <span class="step-number">Paso 03</span>
+                <h3>Fijación DTF</h3>
+                <p>Aplicamos calor y presión controlada para garantizar resistencia total al lavado.</p>
+              </div>
+            </article>
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- CONTACTO Y LLAMADA A LA ACCIÓN -->
+      <section id="contacto">
+        <div class="wrap">
+          <div class="cta-box">
+            <h2>¿Tienes alguna consulta sobre entregas o pedidos?</h2>
+            <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20entregas%20en%20Tegucigalpa" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-whatsapp"></i> Chatear con un asesor
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
 
   </main>
 
@@ -325,10 +510,12 @@
   <footer>
     <div class="wrap footer-inner">
       <div>
-        <strong>Moda Casual</strong> · Honduras · Camisas de calidad y diseños DTF
+        <strong>Moda Casual</strong> · Tegucigalpa, Honduras · Camisas de calidad y estampados DTF
       </div>
-      <div>
-        © 2026 Todos los derechos reservados.
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px;">
+        <a href="#tienda" onclick="switchMainView('shop'); return false;" style="color: #fff; text-decoration: underline;"><i class="fa-solid fa-shirt"></i> Comprar Prendas</a>
+        <a href="#entregas" onclick="switchMainView('info', 'entregas'); return false;" style="color: #fff; text-decoration: underline;"><i class="fa-solid fa-location-dot"></i> Malls de Entrega</a>
+        <a href="#marca" onclick="switchMainView('info', 'marca'); return false;" style="color: #fff; text-decoration: underline;"><i class="fa-solid fa-circle-info"></i> Sobre la Tienda</a>
       </div>
       <div>
         <a href="admin.html" class="footer-admin-link">

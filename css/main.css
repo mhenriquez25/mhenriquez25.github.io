@@ -840,3 +840,172 @@ footer {
   }
 }
 
+/* ==================================================
+   DIVISIÓN DE VISTAS (TIENDA VS INFORMACIÓN)
+================================================== */
+.main-view-switcher-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  position: sticky;
+  top: 90px;
+  z-index: 45;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.switcher-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.view-switch-btn {
+  border: 1.5px solid var(--line);
+  background: #fffaf3;
+  color: var(--ink);
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.25s;
+}
+
+.view-switch-btn:hover {
+  border-color: var(--wine);
+  color: var(--wine);
+}
+
+.view-switch-btn.active {
+  background: var(--wine);
+  color: #fff;
+  border-color: var(--wine);
+  box-shadow: 0 6px 18px rgba(161, 29, 49, 0.28);
+}
+
+/* BANNER DE UBICACIÓN Y ENTREGAS EN TEGUCIGALPA */
+.location-header-card {
+  background: linear-gradient(135deg, #171512 0%, #25211c 100%);
+  color: #fff;
+  border-radius: 26px;
+  padding: 44px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.location-header-copy h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800;
+  margin: 6px 0 10px;
+}
+
+.location-header-copy p {
+  color: #d1c8be;
+  font-size: 15px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.location-badge-pill {
+  background: rgba(244, 210, 154, 0.15);
+  border: 1px solid #f4d29a;
+  color: #f4d29a;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* CUADRÍCULA DE MALLS */
+.malls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin: 24px 0 36px;
+}
+
+.mall-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.mall-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(161, 29, 49, 0.12);
+  border-color: var(--wine);
+}
+
+.mall-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(161, 29, 49, 0.1);
+  color: var(--wine);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.mall-card h4 {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.mall-card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.mall-status-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+  background: #ecfdf5;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-top: 6px;
+}
+
+@media(max-width: 768px) {
+  .main-view-switcher-bar {
+    top: 70px;
+  }
+  .view-switch-btn {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+  .location-header-card {
+    padding: 26px 20px;
+  }
+}
+
+

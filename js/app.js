@@ -445,3 +445,49 @@ function closeSuccessModal() {
   document.getElementById("orderSuccessModal").classList.remove("open");
 }
 
+/* ==================================================
+   8. CAMBIO DE VISTA (TIENDA VS INFORMACIÓN/ENTREGAS)
+================================================== */
+function switchMainView(viewName, targetSection = null) {
+  const shopView = document.getElementById("view-tienda");
+  const infoView = document.getElementById("view-informacion");
+  if (!shopView || !infoView) return;
+
+  const shopBtns = document.querySelectorAll(".view-switch-shop");
+  const infoBtns = document.querySelectorAll(".view-switch-info");
+  const menuLinks = document.querySelectorAll(".menu a");
+
+  menuLinks.forEach(l => l.classList.remove("active"));
+
+  if (viewName === "shop") {
+    shopView.style.display = "block";
+    infoView.style.display = "none";
+    shopBtns.forEach(b => b.classList.add("active"));
+    infoBtns.forEach(b => b.classList.remove("active"));
+    document.querySelector(".menu-link-shop")?.classList.add("active");
+
+    if (targetSection) {
+      setTimeout(() => {
+        const el = document.getElementById(targetSection);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  } else {
+    shopView.style.display = "none";
+    infoView.style.display = "block";
+    shopBtns.forEach(b => b.classList.remove("active"));
+    infoBtns.forEach(b => b.classList.add("active"));
+
+    if (targetSection) {
+      setTimeout(() => {
+        const el = document.getElementById(targetSection);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+}
+
