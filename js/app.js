@@ -192,7 +192,7 @@ function renderCatalog() {
         ${prod.badge ? `<span class="product-badge">${prod.badge}</span>` : ""}
         
         <div class="product-photo-box" onclick="openProductDetailModal('${prod.id}')" title="Ver detalle">
-          <img src="${img}" alt="${prod.name}" onerror="this.src='assets/verd1.png'">
+          <img src="${img}" alt="${prod.name}" loading="lazy" decoding="async" onerror="this.src='assets/verd1.png'">
         </div>
 
         <div class="product-info-box">

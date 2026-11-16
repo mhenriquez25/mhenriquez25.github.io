@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=2.0">
-  <link rel="stylesheet" href="css/store.css?v=2.0">
+  <link rel="stylesheet" href="css/main.css?v=2.2">
+  <link rel="stylesheet" href="css/store.css?v=2.2">
 </head>
 
 <body>
@@ -258,8 +258,8 @@
 
         <div class="videos-grid">
           <article class="video-card">
-            <video class="process-video" autoplay muted loop playsinline preload="auto">
-              <source src="./video/video1.mp4?v=2" type="video/mp4">
+            <video class="process-video" muted loop playsinline preload="none" poster="assets/verd1.png">
+              <source src="./video/video1.mp4?v=3" type="video/mp4">
             </video>
             <span class="video-label"><i class="fa-solid fa-shirt"></i> Selección</span>
             <div class="video-copy">
@@ -270,8 +270,8 @@
           </article>
 
           <article class="video-card">
-            <video class="process-video" autoplay muted loop playsinline preload="auto">
-              <source src="./video/video2.mp4?v=2" type="video/mp4">
+            <video class="process-video" muted loop playsinline preload="none" poster="assets/JS.png">
+              <source src="./video/video2.mp4?v=3" type="video/mp4">
             </video>
             <span class="video-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Diseño</span>
             <div class="video-copy">
@@ -282,8 +282,8 @@
           </article>
 
           <article class="video-card">
-            <video class="process-video" autoplay muted loop playsinline preload="auto">
-              <source src="./video/video3.mp4?v=2" type="video/mp4">
+            <video class="process-video" muted loop playsinline preload="none" poster="assets/vino.png">
+              <source src="./video/video3.mp4?v=3" type="video/mp4">
             </video>
             <span class="video-label"><i class="fa-solid fa-gem"></i> Acabado</span>
             <div class="video-copy">
@@ -337,13 +337,29 @@
   </a>
 
   <script>
-    // Reproducción silenciosa de videos
-    document.querySelectorAll(".process-video").forEach(v => {
-      v.muted = true;
-      v.defaultMuted = true;
-      v.play().catch(() => {});
+    // Carga perezosa (lazy loading) de videos para no ralentizar la página
+    document.addEventListener("DOMContentLoaded", () => {
+      const videos = document.querySelectorAll(".process-video");
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const v = entry.target;
+          if (entry.isIntersecting) {
+            if (v.paused) {
+              v.load();
+              v.play().catch(() => {});
+            }
+          } else {
+            if (!v.paused) {
+              v.pause();
+            }
+          }
+        });
+      }, { threshold: 0.2 });
+
+      videos.forEach(v => videoObserver.observe(v));
     });
   </script>
 
 </body>
 </html>
+
