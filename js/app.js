@@ -397,25 +397,6 @@ function closeCheckout() {
   document.getElementById("checkoutModal").classList.remove("open");
 }
 
-function onMallSelectionChange() {
-  const mallSelect = document.getElementById("custMallSelect");
-  const detailInput = document.getElementById("custAddressDetail");
-  const label = document.getElementById("lblAddressDetail");
-  
-  if (!mallSelect || !detailInput || !label) return;
-
-  if (mallSelect.value === "Entrega a Domicilio") {
-    label.innerText = "Colonia y dirección exacta en Tegucigalpa *";
-    detailInput.placeholder = "Ej: Col. Miraflores, bloque 4, casa #12, frente al parque...";
-  } else if (mallSelect.value === "Otro punto de encuentro") {
-    label.innerText = "Lugar o punto de encuentro en Tegucigalpa *";
-    detailInput.placeholder = "Ej: Gasolinera Uno El Trapiche, Bulevar Morazán...";
-  } else {
-    label.innerText = "Punto de referencia o detalle dentro del Mall *";
-    detailInput.placeholder = "Ej: Cerca del food court, escaleras eléctricas o entrada principal...";
-  }
-}
-
 async function handleCheckoutSubmit(e) {
   e.preventDefault();
   const btn = document.getElementById("btnConfirmOrder");
@@ -424,16 +405,16 @@ async function handleCheckoutSubmit(e) {
 
   try {
     const paymentMethodEl = document.querySelector('input[name="paymentMethod"]:checked');
-    const mallValue = document.getElementById("custMallSelect")?.value || "Tegucigalpa";
-    const detailValue = document.getElementById("custAddressDetail")?.value.trim() || "";
-    const fullAddress = detailValue ? `${mallValue} - Ref: ${detailValue}` : mallValue;
+    const mallValue = document.getElementById("custAddress")?.value || "Tegucigalpa";
+    const spotValue = document.getElementById("custMallSpot")?.value.trim() || "";
+    const fullAddress = spotValue ? `${mallValue} (Punto: ${spotValue})` : mallValue;
 
     const customerData = {
       name: document.getElementById("custName").value.trim(),
       phone: document.getElementById("custPhone").value.trim(),
-      city: "Tegucigalpa, M.D.C.",
+      city: "Tegucigalpa",
       address: fullAddress,
-      notes: document.getElementById("custNotes").value.trim(),
+      notes: document.getElementById("custNotes")?.value.trim() || "",
       paymentMethod: paymentMethodEl ? paymentMethodEl.value : "Transferencia Bancaria"
     };
 
