@@ -27,7 +27,7 @@
   <div class="topbar">
     <div class="wrap topbar-inner">
       <div class="top-left">
-        <span><i class="fa-solid fa-truck-fast top-icon ship"></i> ENVÍOS EN HONDURAS</span>
+        <span><i class="fa-solid fa-truck-fast top-icon ship"></i> ENVÍOS EN TEGUCIGALPA</span>
         <span class="sep">|</span>
         <span><i class="fa-solid fa-shield-halved top-icon secure"></i> PAGOS SEGUROS</span>
         <span class="sep">|</span>
@@ -135,8 +135,8 @@
         <div class="benefit">
           <span class="benefit-icon shipping"><i class="fa-solid fa-truck-fast"></i></span>
           <div>
-            <strong>Envíos en Honduras</strong>
-            <span>Rápido y seguro hasta tu puerta</span>
+            <strong>Envíos en Tegucigalpa</strong>
+            <span>Entregas en Malls o a domicilio</span>
           </div>
         </div>
 
@@ -444,16 +444,36 @@
             </div>
           </div>
 
-          <div class="checkout-step-title"><i class="fa-solid fa-location-dot"></i> 2. Dirección de Entrega (Honduras)</div>
+          <div class="checkout-step-title"><i class="fa-solid fa-location-dot"></i> 2. Punto de Entrega en Tegucigalpa</div>
           <div class="checkout-row">
             <div class="checkout-form-group">
-              <label>Ciudad / Departamento *</label>
-              <input type="text" id="custCity" class="checkout-input" placeholder="Ej: Tegucigalpa, San Pedro Sula..." required>
+              <label>Ciudad de Envío *</label>
+              <select id="custCity" class="checkout-input" style="background: #f7eee4; font-weight: 700; color: var(--ink); cursor: not-allowed;" disabled>
+                <option value="Tegucigalpa, M.D.C." selected>📍 Tegucigalpa, M.D.C.</option>
+              </select>
+              <small style="display: block; color: var(--muted); font-size: 11px; margin-top: 4px;">Actualmente envíos exclusivos en Tegucigalpa.</small>
             </div>
+
             <div class="checkout-form-group">
-              <label>Dirección exacta / Colonia / Referencia *</label>
-              <input type="text" id="custAddress" class="checkout-input" placeholder="Colonia, bloque o punto de referencia" required>
+              <label>Punto de Entrega / Mall *</label>
+              <select id="custMallSelect" class="checkout-input" required onchange="onMallSelectionChange()">
+                <option value="" disabled selected>-- Elige el Mall o Punto --</option>
+                <option value="Multiplaza Tegucigalpa">Multiplaza Tegucigalpa</option>
+                <option value="Cascadas Mall">Cascadas Mall</option>
+                <option value="City Mall Tegucigalpa">City Mall Tegucigalpa</option>
+                <option value="Mall Premier">Mall Premier</option>
+                <option value="MetroMall">MetroMall</option>
+                <option value="Novacentro (Los Próceres)">Novacentro (Los Próceres)</option>
+                <option value="Mall El Dorado">Mall El Dorado</option>
+                <option value="Entrega a Domicilio">Entrega a domicilio en Tegucigalpa</option>
+                <option value="Otro punto de encuentro">Otro punto de encuentro en Tegucigalpa</option>
+              </select>
             </div>
+          </div>
+
+          <div class="checkout-form-group" style="margin-top: 4px;">
+            <label id="lblAddressDetail">Punto de referencia o detalle de entrega *</label>
+            <input type="text" id="custAddressDetail" class="checkout-input" placeholder="Ej: Cerca de las escaleras eléctricas, food court, entrada principal..." required>
           </div>
 
           <div class="checkout-step-title"><i class="fa-solid fa-money-bill-wave"></i> 3. Método de Pago Preferido</div>

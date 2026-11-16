@@ -408,3 +408,4 @@ function saveStoreSettings(e) {
   alertBox.style.display = "block";
   setTimeout(() => alertBox.style.display = "none", 3000);
 }
+
