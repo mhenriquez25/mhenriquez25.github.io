@@ -121,12 +121,20 @@ function initProcessVideos() {
 }
 
 /* ==================================================
-   3. SISTEMA DE VISTAS INDEPENDIENTES (SPA)
-   - Sobre Nosotros: Solo información del negocio
-   - Catálogo: Solo catálogo de productos y compra
-   - Contacto: Solo atención, WhatsApp y consultas
+   3. SISTEMA DE VISTAS INDEPENDIENTES
+   - Sobre Nosotros (index.html): Solo información del negocio
+   - Catálogo (catalogo.html): Solo catálogo de productos y compra
+   - Contacto (contacto.html): Solo atención, WhatsApp y consultas
 ================================================== */
 function navigateView(viewName, event) {
+  const hasMultipleViews = document.querySelectorAll(".page-view").length > 1;
+  if (!hasMultipleViews) {
+    if (viewName === "catalogo") window.location.href = "catalogo.html";
+    else if (viewName === "contacto") window.location.href = "contacto.html";
+    else window.location.href = "index.html";
+    return;
+  }
+
   if (event && event.preventDefault) {
     event.preventDefault();
   }
@@ -179,8 +187,10 @@ function navigateView(viewName, event) {
 }
 
 function initViewRouter() {
-  // Exponer globalmente
   window.navigateView = navigateView;
+
+  const hasMultipleViews = document.querySelectorAll(".page-view").length > 1;
+  if (!hasMultipleViews) return;
 
   // Detectar hash inicial (#nosotros, #catalogo, #contacto)
   const hash = (window.location.hash || "").replace("#", "").toLowerCase();

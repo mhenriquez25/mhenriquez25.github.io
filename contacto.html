@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto y Atención al Cliente | Moda Casual Tegucigalpa</title>
+  <meta name="description" content="Contáctanos para resolver dudas sobre pedidos, disponibilidad de camisas, cotizaciones al por mayor o diseños DTF personalizados en Tegucigalpa, Honduras." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="css/main.css?v=3.2">
+  <link rel="stylesheet" href="css/store.css?v=3.2">
+
+  <!-- Base de datos en la nube (Google Firebase) -->
+  <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="top-left">
+        <span><i class="fa-solid fa-location-dot top-icon custom"></i> UBICADOS EN TEGUCIGALPA, HONDURAS</span>
+        <span class="sep">|</span>
+        <span><i class="fa-solid fa-truck-fast top-icon ship"></i> ENTREGAS EN MALLS DE TEGUCIGALPA</span>
+        <span class="sep">|</span>
+        <span><i class="fa-solid fa-shield-halved top-icon secure"></i> PAGOS CONFIABLES</span>
+      </div>
+
+      <div class="top-social">
+        <a class="instagram" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a class="facebook" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="tiktok" href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a class="whatsapp-social" href="https://wa.me/50400000000" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER NAVEGACIÓN (DE IZQUIERDA A DERECHA: SOBRE NOSOTROS, CATÁLOGO, CONTACTO) -->
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.png" alt="Moda Casual">
+      </a>
+
+      <!-- SOLO ESTOS 3 ELEMENTOS EN EL MENÚ -->
+      <nav class="menu">
+        <a href="index.html"><i class="fa-solid fa-circle-info"></i> Sobre Nosotros</a>
+        <a href="catalogo.html"><i class="fa-solid fa-shirt"></i> Catálogo</a>
+        <a href="contacto.html" class="active"><i class="fa-solid fa-envelope"></i> Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="round-action" onclick="openCart()" aria-label="Carrito de compras" style="position: relative;" title="Ver Carrito">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cartCountBadge" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL: CONTACTO INDEPENDIENTE -->
+  <main>
+    <section style="padding: 55px 0 75px; min-height: 75vh;">
+      <div class="wrap">
+
+        <div class="section-head" style="margin-bottom: 34px;">
+          <div>
+            <span class="eyebrow">Atención al Cliente</span>
+            <h2>Contacto Directo</h2>
+          </div>
+          <p>
+            Comunícate con nuestro equipo para cotizaciones, pedidos por mayor o consultas sobre entregas en Tegucigalpa.
+          </p>
+        </div>
+
+        <!-- TARJETAS DE CONTACTO -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px; box-shadow: 0 4px 18px rgba(0,0,0,0.03);">
+            <div style="width: 52px; height: 52px; border-radius: 14px; background: #ecfdf5; color: #10b981; display: grid; place-items: center; font-size: 26px; margin-bottom: 16px;">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 8px;">WhatsApp Oficial</h3>
+            <p style="font-size: 14px; color: var(--muted); margin-bottom: 18px; line-height: 1.6;">
+              Atención inmediata para resolver dudas sobre pedidos, disponibilidad de tallas, colores o confirmar tu entrega.
+            </p>
+            <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; padding: 12px 22px; background: #10b981;">
+              <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Escribir por WhatsApp
+            </a>
+          </div>
+
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px; box-shadow: 0 4px 18px rgba(0,0,0,0.03);">
+            <div style="width: 52px; height: 52px; border-radius: 14px; background: #fdf2f2; color: var(--wine); display: grid; place-items: center; font-size: 24px; margin-bottom: 16px;">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 8px;">Ubicación y Entregas</h3>
+            <p style="font-size: 14px; color: var(--muted); margin-bottom: 10px; line-height: 1.6;">
+              <strong>Tegucigalpa, Francisco Morazán, Honduras</strong>
+            </p>
+            <p style="font-size: 13px; color: #827a71; line-height: 1.6;">
+              Realizamos entregas coordinadas en los principales centros comerciales (Malls) de la ciudad: Multiplaza, Cascadas, City Mall, Premier, MetroMall y más.
+            </p>
+          </div>
+
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px; box-shadow: 0 4px 18px rgba(0,0,0,0.03);">
+            <div style="width: 52px; height: 52px; border-radius: 14px; background: #fff8eb; color: #d97706; display: grid; place-items: center; font-size: 24px; margin-bottom: 16px;">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 8px;">Horario de Atención</h3>
+            <p style="font-size: 14px; color: var(--muted); margin-bottom: 6px; line-height: 1.6;">
+              <strong>Lunes a Sábado:</strong> 8:00 AM – 6:00 PM
+            </p>
+            <p style="font-size: 13px; color: #827a71; line-height: 1.6;">
+              Domingos: Atención por WhatsApp para consultas y pedidos en línea.
+            </p>
+          </div>
+        </div>
+
+        <!-- BANNER DE CONTACTO RÁPIDO / DISEÑOS PERSONALIZADOS -->
+        <div class="cta-box">
+          <div>
+            <span class="eyebrow" style="color: #171512; margin-bottom: 6px; display: inline-block;">Atención Personalizada</span>
+            <h2>¿Buscas un diseño especial o pedidos por mayor?</h2>
+            <p style="opacity: 0.9; margin-top: 8px; font-size: 15px;">
+              Escríbenos por WhatsApp con tu diseño o idea y te preparamos una cotización a tu medida.
+            </p>
+          </div>
+
+          <a href="https://wa.me/50400000000?text=Hola,%20quiero%20cotizar%20un%20diseño%20personalizado" target="_blank" rel="noopener noreferrer" style="font-size: 15px; padding: 15px 28px;">
+            <i class="fa-brands fa-whatsapp"></i> Chatear por WhatsApp →
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA (DE IZQUIERDA A DERECHA) -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <strong>Moda Casual</strong> · Tegucigalpa, Honduras · Camisas 100% algodón
+      </div>
+
+      <!-- SOLO ESTOS 3 ELEMENTOS -->
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px;">
+        <a href="index.html" style="color: #fff; text-decoration: underline;">Sobre Nosotros</a>
+        <a href="catalogo.html" style="color: #fff; text-decoration: underline;">Catálogo</a>
+        <a href="contacto.html" style="color: #fff; text-decoration: underline; font-weight: 700;">Contacto</a>
+      </div>
+
+      <div>
+        <a href="admin.html" class="footer-admin-link">
+          <i class="fa-solid fa-lock"></i> Panel Administrador
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOTANTE -->
+  <a class="whatsapp-float" href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> WhatsApp
+  </a>
+
+  <!-- BOTÓN FLOTANTE DE CARRITO -->
+  <button class="floating-cart-btn" onclick="openCart()" aria-label="Ver carrito">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="floatingCartBadge" class="cart-badge">0</span>
+  </button>
+
+  <!-- CARRITO LATERAL (DRAWER) -->
+  <div id="cartBackdrop" class="cart-backdrop" onclick="closeCart()"></div>
+  <aside id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-bag-shopping" style="color: var(--wine)"></i> Tu Carrito de Compra</h3>
+      <button class="btn-close-drawer" onclick="closeCart()">&times;</button>
+    </div>
+
+    <div id="cartItemsContainer" class="cart-items">
+      <!-- Se genera dinámicamente -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <span id="cartDrawerTotal">L. 0.00</span>
+      </div>
+      <a href="catalogo.html" class="btn-checkout" style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+        <i class="fa-solid fa-shirt"></i> Ver Catálogo para Comprar
+      </a>
+    </div>
+  </aside>
+
+  <!-- Scripts diferidos -->
+  <script defer src="js/store.js?v=3.2"></script>
+  <script defer src="js/app.js?v=3.2"></script>
+
+</body>
+</html>

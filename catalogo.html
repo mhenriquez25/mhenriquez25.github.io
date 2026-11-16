@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Camisas | Moda Casual Tegucigalpa</title>
+  <meta name="description" content="Explora nuestro catálogo de camisas 100% algodón con estampado DTF. Colección cristiana, casual y personalizada con entregas en Malls de Tegucigalpa." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="css/main.css?v=3.2">
+  <link rel="stylesheet" href="css/store.css?v=3.2">
+
+  <!-- Base de datos en la nube (Google Firebase) -->
+  <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="top-left">
+        <span><i class="fa-solid fa-location-dot top-icon custom"></i> UBICADOS EN TEGUCIGALPA, HONDURAS</span>
+        <span class="sep">|</span>
+        <span><i class="fa-solid fa-truck-fast top-icon ship"></i> ENTREGAS EN MALLS DE TEGUCIGALPA</span>
+        <span class="sep">|</span>
+        <span><i class="fa-solid fa-shield-halved top-icon secure"></i> PAGOS CONFIABLES</span>
+      </div>
+
+      <div class="top-social">
+        <a class="instagram" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a class="facebook" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="tiktok" href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a class="whatsapp-social" href="https://wa.me/50400000000" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER NAVEGACIÓN (DE IZQUIERDA A DERECHA: SOBRE NOSOTROS, CATÁLOGO, CONTACTO) -->
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.png" alt="Moda Casual">
+      </a>
+
+      <!-- SOLO ESTOS 3 ELEMENTOS EN EL MENÚ -->
+      <nav class="menu">
+        <a href="index.html"><i class="fa-solid fa-circle-info"></i> Sobre Nosotros</a>
+        <a href="catalogo.html" class="active"><i class="fa-solid fa-shirt"></i> Catálogo</a>
+        <a href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="round-action" onclick="openCart()" aria-label="Carrito de compras" style="position: relative;" title="Ver Carrito">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cartCountBadge" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL: CATÁLOGO INDEPENDIENTE -->
+  <main>
+    <section style="background: #fffaf3; padding: 45px 0 65px; min-height: 75vh;">
+      <div class="wrap">
+
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Catálogo para Comprar</span>
+            <h2>Catálogo de Camisas</h2>
+          </div>
+          <p>
+            Elige tu prenda favorita, selecciona tu talla (S a XXL), color y finaliza tu pedido de forma rápida.
+          </p>
+        </div>
+
+        <!-- FILTROS Y BUSCADOR -->
+        <div class="catalog-toolbar">
+          <div class="catalog-filters">
+            <button class="filter-pill active" onclick="filterCatalog('all', this)">Todas las camisas</button>
+            <button class="filter-pill" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
+            <button class="filter-pill" onclick="filterCatalog('hombre', this)">Hombre</button>
+            <button class="filter-pill" onclick="filterCatalog('mujer', this)">Mujer</button>
+            <button class="filter-pill" onclick="filterCatalog('casual', this)">Casual</button>
+            <button class="filter-pill" onclick="filterCatalog('personalizada', this)">🎨 Diseños Personalizados</button>
+          </div>
+
+          <div class="catalog-search">
+            <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
+            <input type="text" id="catalogSearchInput" placeholder="Buscar camisa..." oninput="onCatalogSearch()">
+          </div>
+        </div>
+
+        <!-- CUADRÍCULA DINÁMICA DE PRODUCTOS -->
+        <div class="products-grid" id="catalogProductsContainer">
+          <!-- Renderizado automáticamente por js/app.js -->
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA (DE IZQUIERDA A DERECHA) -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <strong>Moda Casual</strong> · Tegucigalpa, Honduras · Camisas 100% algodón
+      </div>
+
+      <!-- SOLO ESTOS 3 ELEMENTOS -->
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px;">
+        <a href="index.html" style="color: #fff; text-decoration: underline;">Sobre Nosotros</a>
+        <a href="catalogo.html" style="color: #fff; text-decoration: underline; font-weight: 700;">Catálogo</a>
+        <a href="contacto.html" style="color: #fff; text-decoration: underline;">Contacto</a>
+      </div>
+
+      <div>
+        <a href="admin.html" class="footer-admin-link">
+          <i class="fa-solid fa-lock"></i> Panel Administrador
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOTANTE -->
+  <a class="whatsapp-float" href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> WhatsApp
+  </a>
+
+  <!-- BOTÓN FLOTANTE DE CARRITO -->
+  <button class="floating-cart-btn" onclick="openCart()" aria-label="Ver carrito">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="floatingCartBadge" class="cart-badge">0</span>
+  </button>
+
+  <!-- CARRITO LATERAL (DRAWER) -->
+  <div id="cartBackdrop" class="cart-backdrop" onclick="closeCart()"></div>
+  <aside id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-bag-shopping" style="color: var(--wine)"></i> Tu Carrito de Compra</h3>
+      <button class="btn-close-drawer" onclick="closeCart()">&times;</button>
+    </div>
+
+    <div id="cartItemsContainer" class="cart-items">
+      <!-- Se genera dinámicamente -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <span id="cartDrawerTotal">L. 0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="openCheckout()">
+        <i class="fa-solid fa-lock"></i> Proceder a Comprar
+      </button>
+    </div>
+  </aside>
+
+  <!-- MODAL: DETALLE Y SELECCIÓN DE PRODUCTO -->
+  <div id="productDetailModal" class="shop-modal-backdrop">
+    <div class="shop-modal-card">
+      <div class="shop-modal-header">
+        <h3 id="modalProdTitle">Detalle de la camisa</h3>
+        <button class="btn-close-drawer" onclick="closeProductDetailModal()">&times;</button>
+      </div>
+
+      <div class="shop-modal-body">
+        <div class="detail-grid">
+          <div class="detail-img-box">
+            <img id="modalProdImg" src="" alt="Camisa">
+          </div>
+
+          <div class="detail-info">
+            <span id="modalProdCategory" style="font-size: 12px; font-weight: 800; color: var(--wine); text-transform: uppercase;">Categoría</span>
+            <h2 id="modalProdName" class="detail-title">Nombre</h2>
+            <div id="modalProdPrice" class="detail-price">L. 0.00</div>
+            <p id="modalProdDesc" style="color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 14px;">Descripción</p>
+
+            <label class="selector-label">Selecciona tu talla:</label>
+            <div id="modalSizesContainer" class="size-pills"></div>
+
+            <label class="selector-label">Selecciona el color:</label>
+            <select id="modalColorSelect" class="color-select"></select>
+
+            <label class="selector-label">Cantidad:</label>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+              <div class="cart-qty-ctrl" style="padding: 6px 14px; font-size: 15px;">
+                <button type="button" class="cart-qty-btn" onclick="changeDetailQty(-1)">-</button>
+                <span id="detailQtyDisplay">1</span>
+                <button type="button" class="cart-qty-btn" onclick="changeDetailQty(1)">+</button>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button class="btn-buy-card" style="padding: 14px; font-size: 13px; background: #171512;" onclick="addProductToCartFromModal(false)">
+                <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+              </button>
+              <button class="btn-buy-card" style="padding: 14px; font-size: 13px;" onclick="addProductToCartFromModal(true)">
+                <i class="fa-solid fa-bolt"></i> Comprar Ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CHECKOUT EN TEGUCIGALPA -->
+  <div id="checkoutModal" class="shop-modal-backdrop">
+    <div class="shop-modal-card">
+      <div class="shop-modal-header">
+        <h3><i class="fa-solid fa-truck-fast" style="color: var(--wine)"></i> Finalizar tu Pedido</h3>
+        <button class="btn-close-drawer" onclick="closeCheckout()">&times;</button>
+      </div>
+
+      <div class="shop-modal-body">
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+          
+          <div class="checkout-step-title"><i class="fa-solid fa-user"></i> 1. Tus Datos de Contacto</div>
+          <div class="checkout-row">
+            <div class="checkout-form-group">
+              <label>Nombre y Apellido *</label>
+              <input type="text" id="custName" class="checkout-input" placeholder="Ej: Carlos Mejía" required>
+            </div>
+            <div class="checkout-form-group">
+              <label>Teléfono / WhatsApp *</label>
+              <input type="tel" id="custPhone" class="checkout-input" placeholder="Ej: +504 9999-8888" required>
+            </div>
+          </div>
+
+          <div class="checkout-step-title"><i class="fa-solid fa-location-dot"></i> 2. Dirección de Entrega (Tegucigalpa)</div>
+          <div class="checkout-row">
+            <div class="checkout-form-group">
+              <label>Ciudad *</label>
+              <input type="text" id="custCity" class="checkout-input" value="Tegucigalpa" readonly style="background: #f7eee4; font-weight: 700; color: #171512; cursor: default;">
+              <small style="display: block; color: var(--muted); font-size: 11px; margin-top: 4px;">Envíos disponibles exclusivamente en Tegucigalpa.</small>
+            </div>
+
+            <div class="checkout-form-group">
+              <label>Dirección exacta (Selecciona el Mall de entrega) *</label>
+              <select id="custAddress" class="checkout-input" required style="font-weight: 600;">
+                <option value="" disabled selected>-- Selecciona un Mall de Tegucigalpa --</option>
+                <option value="Multiplaza Tegucigalpa">Multiplaza Tegucigalpa</option>
+                <option value="Cascadas Mall">Cascadas Mall</option>
+                <option value="City Mall Tegucigalpa">City Mall Tegucigalpa</option>
+                <option value="Mall Premier">Mall Premier</option>
+                <option value="MetroMall">MetroMall</option>
+                <option value="Novacentro (Los Próceres)">Novacentro (Los Próceres)</option>
+                <option value="Mall El Dorado">Mall El Dorado</option>
+                <option value="Plaza Miraflores">Plaza Miraflores</option>
+                <option value="Mall Las Galerías">Mall Las Galerías</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="checkout-form-group" style="margin-top: 4px;">
+            <label>Punto de encuentro en el Mall (Opcional):</label>
+            <input type="text" id="custMallSpot" class="checkout-input" placeholder="Ej: Food court, entrada principal, farmacia, etc.">
+          </div>
+
+          <div class="checkout-step-title"><i class="fa-solid fa-money-bill-wave"></i> 3. Método de Pago Preferido</div>
+          
+          <label class="payment-option-card">
+            <input type="radio" name="paymentMethod" value="Transferencia Bancaria (BAC, Ficohsa, Atlántida)" checked>
+            <div>
+              <strong>Transferencia Bancaria</strong>
+              <small style="display: block; color: var(--muted);">BAC Credomatic, Banco Ficohsa, Banco Atlántida o Banpaís</small>
+            </div>
+          </label>
+
+          <label class="payment-option-card">
+            <input type="radio" name="paymentMethod" value="Pago Contra Entrega (Efectivo)">
+            <div>
+              <strong>Pago Contra Entrega / Efectivo</strong>
+              <small style="display: block; color: var(--muted);">Pagas en efectivo al recibir tu paquete en el Mall</small>
+            </div>
+          </label>
+
+          <label class="payment-option-card">
+            <input type="radio" name="paymentMethod" value="Billetera Digital (Tigo Money / Tengo)">
+            <div>
+              <strong>Billetera Móvil</strong>
+              <small style="display: block; color: var(--muted);">Tigo Money o Tengo</small>
+            </div>
+          </label>
+
+          <div class="checkout-form-group" style="margin-top: 14px;">
+            <label>Instrucciones o notas adicionales (Opcional):</label>
+            <input type="text" id="custNotes" class="checkout-input" placeholder="Ej: Empacar para regalo, entregar por la tarde...">
+          </div>
+
+          <!-- RESUMEN DE LA ORDEN -->
+          <div class="order-summary-box">
+            <div style="font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between;">
+              <span>Resumen de Productos:</span>
+              <span id="checkoutItemsCount">0 prendas</span>
+            </div>
+            <div id="checkoutSummaryList" style="color: var(--muted); font-size: 12px; margin-bottom: 10px;"></div>
+            <div style="border-top: 1px solid rgba(0,0,0,.1); padding-top: 8px; display: flex; justify-content: space-between; font-weight: 800; font-size: 16px;">
+              <span>Total a Pagar:</span>
+              <span id="checkoutFinalTotal" style="color: var(--wine)">L. 0.00</span>
+            </div>
+          </div>
+
+          <button type="submit" id="btnConfirmOrder" class="btn-checkout" style="font-size: 15px; padding: 16px;">
+            <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> Confirmar Pedido por WhatsApp
+          </button>
+          <small style="display: block; text-align: center; color: var(--muted); margin-top: 8px; font-size: 12px;">
+            Al confirmar, tu pedido se registrará y se abrirá WhatsApp con el detalle listo para enviarnos.
+          </small>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PEDIDO COMPLETADO -->
+  <div id="orderSuccessModal" class="shop-modal-backdrop">
+    <div class="shop-modal-card" style="max-width: 500px; text-align: center; padding: 32px 24px;">
+      <div style="width: 70px; height: 70px; background: #ecfdf5; color: #10b981; border-radius: 50%; display: grid; place-items: center; font-size: 32px; margin: 0 auto 16px;">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2 style="font-family: 'Manrope', sans-serif; margin-bottom: 8px;">¡Pedido Recibido!</h2>
+      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">
+        Tu orden ha sido registrada con el código: <strong id="successOrderNumber" style="color: var(--wine)">#MC-0000</strong>
+      </p>
+      
+      <div style="background: #f8f4ee; border-radius: 12px; padding: 16px; text-align: left; font-size: 13px; line-height: 1.6; margin-bottom: 20px;">
+        <strong>Siguientes pasos:</strong><br>
+        1. Se abrió una ventana de WhatsApp para enviar los datos de tu pedido.<br>
+        2. Un asesor de Moda Casual te confirmará la hora exacta de entrega en el Mall.<br>
+        3. Si no se abrió WhatsApp automáticamente, toca el botón de abajo.
+      </div>
+
+      <a id="successWhatsappBtn" href="#" target="_blank" class="btn-checkout" style="margin-bottom: 12px;">
+        <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp del Pedido
+      </a>
+      
+      <button type="button" class="btn-view-card" style="width: 100%; border-radius: 999px; height: 42px; font-size: 13px; font-weight: 700;" onclick="closeSuccessModal()">
+        Seguir viendo el catálogo
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts diferidos -->
+  <script defer src="js/store.js?v=3.2"></script>
+  <script defer src="js/app.js?v=3.2"></script>
+
+</body>
+</html>
