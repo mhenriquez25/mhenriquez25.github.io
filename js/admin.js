@@ -159,6 +159,7 @@ function openProductModal(prod = null) {
   document.getElementById("prodPrice").value = prod ? prod.price : "";
   document.getElementById("prodOriginalPrice").value = prod && prod.originalPrice ? prod.originalPrice : "";
   document.getElementById("prodCategory").value = prod ? prod.category : "cristiana";
+  document.getElementById("prodGender").value = prod && prod.gender ? prod.gender : "unisex";
   document.getElementById("prodBadge").value = prod && prod.badge ? prod.badge : "";
   document.getElementById("prodImageUrl").value = prod ? prod.image : "";
   document.getElementById("prodColors").value = prod && prod.colors ? prod.colors.join(", ") : "Negro, Blanco";
@@ -245,6 +246,7 @@ async function handleProductSubmit(e) {
       price: parseFloat(document.getElementById("prodPrice").value),
       originalPrice: document.getElementById("prodOriginalPrice").value ? parseFloat(document.getElementById("prodOriginalPrice").value) : null,
       category: document.getElementById("prodCategory").value,
+      gender: document.getElementById("prodGender").value || "unisex",
       badge: document.getElementById("prodBadge").value.trim(),
       image: img,
       sizes: sizes.length > 0 ? sizes : ["Única"],

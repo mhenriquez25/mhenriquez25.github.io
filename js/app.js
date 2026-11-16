@@ -3,6 +3,8 @@
  */
 
 let catalogCurrentFilter = "all";
+let catalogCurrentGender = "all";
+let catalogCurrentPriceRange = "all";
 let catalogSearchQuery = "";
 let activeModalProduct = null;
 let selectedSize = "M";
@@ -215,12 +217,50 @@ function renderCatalog() {
 
   let list = window.store.products || [];
 
-  // Filtrar por categoría
+  // 1. Filtrar por género (hombre, mujer, niño)
+  if (catalogCurrentGender !== "all") {
+    list = list.filter(p => {
+      const g = (p.gender || "").toLowerCase();
+      const cat = (p.category || "").toLowerCase();
+      const name = (p.name || "").toLowerCase();
+      const desc = (p.description || "").toLowerCase();
+
+      if (catalogCurrentGender === "hombre") {
+        return g === "hombre" || g === "unisex" || cat === "hombre" || name.includes("hombre") || desc.includes("hombre") || desc.includes("caballero");
+      }
+      if (catalogCurrentGender === "mujer") {
+        return g === "mujer" || g === "unisex" || cat === "mujer" || name.includes("mujer") || name.includes("dama") || desc.includes("mujer") || desc.includes("dama");
+      }
+      if (catalogCurrentGender === "nino") {
+        return g === "nino" || g === "unisex" || cat === "nino" || name.includes("niño") || name.includes("niña") || name.includes("infantil") || desc.includes("niño") || desc.includes("niña") || desc.includes("infantil");
+      }
+      return true;
+    });
+  }
+
+  // 2. Filtrar por rango de precio (100-200, 300-400, 500-600)
+  if (catalogCurrentPriceRange !== "all") {
+    list = list.filter(p => {
+      const price = Number(p.price) || 0;
+      if (catalogCurrentPriceRange === "100-200") {
+        return price >= 100 && price <= 250;
+      }
+      if (catalogCurrentPriceRange === "300-400") {
+        return price >= 251 && price <= 450;
+      }
+      if (catalogCurrentPriceRange === "500-600") {
+        return price >= 451 && price <= 650;
+      }
+      return true;
+    });
+  }
+
+  // 3. Filtrar por categoría
   if (catalogCurrentFilter !== "all") {
     list = list.filter(p => p.category && p.category.toLowerCase() === catalogCurrentFilter.toLowerCase());
   }
 
-  // Filtrar por texto de búsqueda
+  // 4. Filtrar por texto de búsqueda
   if (catalogSearchQuery) {
     const q = catalogSearchQuery.toLowerCase();
     list = list.filter(p =>
@@ -230,12 +270,28 @@ function renderCatalog() {
     );
   }
 
+  // Actualizar visibilidad del botón Limpiar Filtros
+  const btnClear = document.getElementById("btnClearFilters");
+  if (btnClear) {
+    const hasActiveFilters = catalogCurrentGender !== "all" || catalogCurrentPriceRange !== "all" || catalogCurrentFilter !== "all" || catalogSearchQuery !== "";
+    btnClear.style.display = hasActiveFilters ? "inline-flex" : "none";
+  }
+
+  // Actualizar contador de resultados
+  const countEl = document.getElementById("catalogResultsCount");
+  if (countEl) {
+    countEl.textContent = `${list.length} ${list.length === 1 ? "prenda disponible" : "prendas disponibles"}`;
+  }
+
   if (list.length === 0) {
     container.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: #fff; border-radius: 20px; border: 1px solid rgba(0,0,0,.06);">
-        <i class="fa-solid fa-shirt" style="font-size: 40px; color: var(--muted); margin-bottom: 12px;"></i>
-        <h3 style="font-size: 18px; margin-bottom: 6px;">No se encontraron camisas en esta categoría</h3>
-        <p style="color: var(--muted); font-size: 14px;">Intenta seleccionando otra categoría o limpiando el buscador.</p>
+        <i class="fa-solid fa-filter-circle-xmark" style="font-size: 40px; color: var(--muted); margin-bottom: 12px;"></i>
+        <h3 style="font-size: 18px; margin-bottom: 6px;">No se encontraron prendas con estos filtros</h3>
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Prueba seleccionando otro rango de precio, género o limpiando los filtros.</p>
+        <button type="button" class="btn-primary" onclick="resetAllFilters()" style="padding: 10px 20px; font-size: 13px;">
+          <i class="fa-solid fa-rotate-left"></i> Restablecer Filtros
+        </button>
       </div>
     `;
     return;
@@ -280,6 +336,18 @@ function renderCatalog() {
   }).join("");
 }
 
+function filterByGender(gender, btn) {
+  catalogCurrentGender = gender;
+  document.querySelectorAll("[data-gender]").forEach(b => b.classList.toggle("active", b === btn));
+  renderCatalog();
+}
+
+function filterByPrice(range, btn) {
+  catalogCurrentPriceRange = range;
+  document.querySelectorAll("[data-price]").forEach(b => b.classList.toggle("active", b === btn));
+  renderCatalog();
+}
+
 function filterCatalog(category, btn) {
   catalogCurrentFilter = category;
   document.querySelectorAll(".filter-pill").forEach(b => b.classList.remove("active"));
@@ -289,6 +357,22 @@ function filterCatalog(category, btn) {
 
 function onCatalogSearch() {
   catalogSearchQuery = document.getElementById("catalogSearchInput").value.trim();
+  renderCatalog();
+}
+
+function resetAllFilters() {
+  catalogCurrentGender = "all";
+  catalogCurrentPriceRange = "all";
+  catalogCurrentFilter = "all";
+  catalogSearchQuery = "";
+
+  const searchInput = document.getElementById("catalogSearchInput");
+  if (searchInput) searchInput.value = "";
+
+  document.querySelectorAll("[data-gender]").forEach(b => b.classList.toggle("active", b.getAttribute("data-gender") === "all"));
+  document.querySelectorAll("[data-price]").forEach(b => b.classList.toggle("active", b.getAttribute("data-price") === "all"));
+  document.querySelectorAll(".filter-pill").forEach(b => b.classList.toggle("active", b.getAttribute("data-category") === "all" || !b.getAttribute("data-category")));
+
   renderCatalog();
 }
 

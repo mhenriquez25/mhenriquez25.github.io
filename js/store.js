@@ -88,31 +88,36 @@ class StoreManager {
       }
     }
 
-    // 2. Intentar desde LocalStorage (productos agregados o editados localmente)
+    // 2. Intentar desde LocalStorage
     const localData = localStorage.getItem(LS_KEYS.PRODUCTS);
+    let localParsed = null;
     if (localData) {
       try {
-        const parsed = JSON.parse(localData);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          this.products = parsed;
-          this.notifyListeners();
-          return this.products;
-        }
+        localParsed = JSON.parse(localData);
       } catch (e) {}
     }
 
-    // 3. Fallback a products.json
+    // 3. Cargar products.json y actualizar cache si hay nuevos productos
     try {
-      const res = await fetch("products.json");
+      const res = await fetch("products.json?v=3.5");
       if (res.ok) {
-        const data = await res.json();
-        this.products = data;
-        localStorage.setItem(LS_KEYS.PRODUCTS, JSON.stringify(this.products));
+        const seedData = await res.json();
+        if (!Array.isArray(localParsed) || localParsed.length < seedData.length) {
+          this.products = seedData;
+          localStorage.setItem(LS_KEYS.PRODUCTS, JSON.stringify(this.products));
+        } else {
+          this.products = localParsed;
+        }
         this.notifyListeners();
         return this.products;
       }
     } catch (e) {
       console.warn("No se pudo cargar products.json:", e);
+      if (Array.isArray(localParsed)) {
+        this.products = localParsed;
+        this.notifyListeners();
+        return this.products;
+      }
     }
 
     return this.products;

@@ -24,6 +24,97 @@
   }
 }
 
+/* BARRA DE FILTROS HORIZONTAL (LADO IZQUIERDO) */
+.catalog-filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px 24px;
+  background: #fff;
+  padding: 18px 24px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  margin: 24px 0 20px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-label i {
+  color: var(--wine);
+}
+
+.filter-pill-group {
+  display: inline-flex;
+  background: #f7f3ed;
+  padding: 4px;
+  border-radius: 999px;
+  gap: 4px;
+  border: 1px solid rgba(23, 21, 18, 0.06);
+}
+
+.filter-chip {
+  border: none;
+  background: transparent;
+  color: #5f5a53;
+  padding: 7px 15px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filter-chip:hover {
+  color: var(--wine);
+  background: rgba(161, 29, 49, 0.08);
+}
+
+.filter-chip.active {
+  background: var(--wine);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(161, 29, 49, 0.22);
+}
+
+.btn-clear-filters {
+  background: transparent;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.btn-clear-filters:hover {
+  border-color: var(--wine);
+  color: var(--wine);
+  background: #fff5f6;
+}
+
 /* BARRA DE HERRAMIENTAS Y FILTROS */
 .catalog-toolbar {
   display: flex;

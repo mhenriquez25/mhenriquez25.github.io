@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.3">
-  <link rel="stylesheet" href="css/store.css?v=3.3">
+  <link rel="stylesheet" href="css/main.css?v=3.5">
+  <link rel="stylesheet" href="css/store.css?v=3.5">
 
   <!-- Base de datos en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -79,20 +79,56 @@
           </p>
         </div>
 
-        <!-- FILTROS Y BUSCADOR -->
-        <div class="catalog-toolbar">
-          <div class="catalog-filters">
-            <button class="filter-pill active" onclick="filterCatalog('all', this)">Todas las camisas</button>
-            <button class="filter-pill" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
-            <button class="filter-pill" onclick="filterCatalog('hombre', this)">Hombre</button>
-            <button class="filter-pill" onclick="filterCatalog('mujer', this)">Mujer</button>
-            <button class="filter-pill" onclick="filterCatalog('casual', this)">Casual</button>
-            <button class="filter-pill" onclick="filterCatalog('personalizada', this)">🎨 Diseños Personalizados</button>
+        <!-- BARRA DE FILTROS HORIZONTAL EN EL LADO IZQUIERDO -->
+        <div class="catalog-filters-bar">
+          
+          <!-- 1. GÉNERO (Hombre, Mujer, Niño) -->
+          <div class="filter-group">
+            <span class="filter-label"><i class="fa-solid fa-user-group"></i> 1. Género:</span>
+            <div class="filter-pill-group">
+              <button type="button" class="filter-chip active" data-gender="all" onclick="filterByGender('all', this)">Todos</button>
+              <button type="button" class="filter-chip" data-gender="hombre" onclick="filterByGender('hombre', this)">Hombre</button>
+              <button type="button" class="filter-chip" data-gender="mujer" onclick="filterByGender('mujer', this)">Mujer</button>
+              <button type="button" class="filter-chip" data-gender="nino" onclick="filterByGender('nino', this)">Niño</button>
+            </div>
           </div>
 
-          <div class="catalog-search">
+          <!-- 2. PRECIO (100-200, 300-400, 500-600) -->
+          <div class="filter-group">
+            <span class="filter-label"><i class="fa-solid fa-tags"></i> 2. Precio:</span>
+            <div class="filter-pill-group">
+              <button type="button" class="filter-chip active" data-price="all" onclick="filterByPrice('all', this)">Todos</button>
+              <button type="button" class="filter-chip" data-price="100-200" onclick="filterByPrice('100-200', this)">L. 100 - 200</button>
+              <button type="button" class="filter-chip" data-price="300-400" onclick="filterByPrice('300-400', this)">L. 300 - 400</button>
+              <button type="button" class="filter-chip" data-price="500-600" onclick="filterByPrice('500-600', this)">L. 500 - 600</button>
+            </div>
+          </div>
+
+          <!-- BUSCADOR -->
+          <div class="catalog-search" style="margin-left: auto;">
             <i class="fa-solid fa-magnifying-glass" style="color: var(--muted)"></i>
-            <input type="text" id="catalogSearchInput" placeholder="Buscar camisa..." oninput="onCatalogSearch()">
+            <input type="text" id="catalogSearchInput" placeholder="Buscar prenda o diseño..." oninput="onCatalogSearch()">
+          </div>
+
+          <!-- BOTÓN LIMPIAR FILTROS -->
+          <button type="button" id="btnClearFilters" class="btn-clear-filters" onclick="resetAllFilters()" style="display: none;">
+            <i class="fa-solid fa-rotate-left"></i> Limpiar filtros
+          </button>
+
+        </div>
+
+        <!-- FILTROS SECUNDARIOS DE COLECCIÓN Y ESTILOS -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+          <div class="catalog-filters">
+            <button class="filter-pill active" data-category="all" onclick="filterCatalog('all', this)">Todas las colecciones</button>
+            <button class="filter-pill" data-category="cristiana" onclick="filterCatalog('cristiana', this)">✨ Colección Cristiana</button>
+            <button class="filter-pill" data-category="casual" onclick="filterCatalog('casual', this)">Casual</button>
+            <button class="filter-pill" data-category="americana" onclick="filterCatalog('americana', this)">🇺🇸 Ropa Americana</button>
+            <button class="filter-pill" data-category="personalizada" onclick="filterCatalog('personalizada', this)">🎨 Diseños Personalizados</button>
+          </div>
+
+          <div style="font-size: 13px; font-weight: 700; color: var(--muted);">
+            <span id="catalogResultsCount">Cargando prendas...</span>
           </div>
         </div>
 
@@ -339,8 +375,8 @@
   </div>
 
   <!-- Scripts diferidos -->
-  <script defer src="js/store.js?v=3.3"></script>
-  <script defer src="js/app.js?v=3.3"></script>
+  <script defer src="js/store.js?v=3.5"></script>
+  <script defer src="js/app.js?v=3.5"></script>
 
 </body>
 </html>
