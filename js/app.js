@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 2. Videos automáticos silenciosos
   initProcessVideos();
 
-  // 3. Menú scroll activo
-  initScrollNav();
+  // 3. Router de vistas independientes (Sobre Nosotros, Catálogo, Contacto)
+  initViewRouter();
 
   // 4. Cargar productos desde base de datos / cache
   await window.store.loadInitialProducts();
@@ -121,28 +121,79 @@ function initProcessVideos() {
 }
 
 /* ==================================================
-   3. MENÚ NAVEGACIÓN ACTIVO
+   3. SISTEMA DE VISTAS INDEPENDIENTES (SPA)
+   - Sobre Nosotros: Solo información del negocio
+   - Catálogo: Solo catálogo de productos y compra
+   - Contacto: Solo atención, WhatsApp y consultas
 ================================================== */
-function initScrollNav() {
-  const navLinks = [...document.querySelectorAll(".menu a[href^='#']")];
-  const sections = ["nosotros", "catalogo", "contacto"]
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
-
-  function setActive(id) {
-    navLinks.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + id));
+function navigateView(viewName, event) {
+  if (event && event.preventDefault) {
+    event.preventDefault();
   }
 
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio);
-    if (visible.length) setActive(visible[0].target.id);
-  }, { rootMargin: "-15% 0px -40% 0px", threshold: [0.01, 0.2] });
+  const validViews = ["nosotros", "catalogo", "contacto"];
+  if (!validViews.includes(viewName)) {
+    viewName = "nosotros";
+  }
 
-  sections.forEach(s => observer.observe(s));
+  // 1. Mostrar únicamente la vista seleccionada y ocultar las demás
+  validViews.forEach(v => {
+    const el = document.getElementById("view-" + v) || document.getElementById(v);
+    if (el) {
+      if (v === viewName) {
+        el.style.display = "block";
+        el.classList.add("active-view");
+      } else {
+        el.style.display = "none";
+        el.classList.remove("active-view");
+      }
+    }
+  });
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY < 150) setActive("nosotros");
-  }, { passive: true });
+  // 2. Resaltar pestaña activa en el menú superior y en el pie de página
+  document.querySelectorAll(".menu a, footer a[data-view]").forEach(link => {
+    const target = link.getAttribute("data-view") || link.getAttribute("href")?.replace("#", "");
+    if (target === viewName) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+
+  // 3. Sincronizar hash de la URL sin recarga
+  try {
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, null, "#" + viewName);
+    } else {
+      window.location.hash = "#" + viewName;
+    }
+  } catch (e) {}
+
+  // 4. Desplazar hacia arriba para ver el inicio de la vista
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // 5. Si la vista activa es el catálogo, renderizar productos
+  if (viewName === "catalogo") {
+    renderCatalog();
+  }
+}
+
+function initViewRouter() {
+  // Exponer globalmente
+  window.navigateView = navigateView;
+
+  // Detectar hash inicial (#nosotros, #catalogo, #contacto)
+  const hash = (window.location.hash || "").replace("#", "").toLowerCase();
+  const initialView = ["catalogo", "contacto", "nosotros"].includes(hash) ? hash : "nosotros";
+  navigateView(initialView);
+
+  // Escuchar botones de historial del navegador (Atrás / Adelante)
+  window.addEventListener("hashchange", () => {
+    const current = (window.location.hash || "").replace("#", "").toLowerCase();
+    if (["catalogo", "contacto", "nosotros"].includes(current)) {
+      navigateView(current);
+    }
+  });
 }
 
 /* ==================================================

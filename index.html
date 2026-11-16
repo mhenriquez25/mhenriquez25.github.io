@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.0">
-  <link rel="stylesheet" href="css/store.css?v=3.0">
+  <link rel="stylesheet" href="css/main.css?v=3.1">
+  <link rel="stylesheet" href="css/store.css?v=3.1">
 
   <!-- Base de datos gratuita en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -44,15 +44,15 @@
   <!-- HEADER (DE IZQUIERDA A DERECHA: SOBRE NOSOTROS, CATÁLOGO, CONTACTO) -->
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#nosotros">
+      <a class="brand" href="#nosotros" onclick="navigateView('nosotros', event)">
         <img src="assets/logo.png" alt="Moda Casual">
       </a>
 
       <!-- SOLO ESTOS 3 ELEMENTOS EN EL MENÚ -->
       <nav class="menu">
-        <a href="#nosotros"><i class="fa-solid fa-circle-info"></i> Sobre Nosotros</a>
-        <a href="#catalogo" class="active"><i class="fa-solid fa-shirt"></i> Catálogo</a>
-        <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
+        <a href="#nosotros" onclick="navigateView('nosotros', event)" data-view="nosotros" class="active"><i class="fa-solid fa-circle-info"></i> Sobre Nosotros</a>
+        <a href="#catalogo" onclick="navigateView('catalogo', event)" data-view="catalogo"><i class="fa-solid fa-shirt"></i> Catálogo</a>
+        <a href="#contacto" onclick="navigateView('contacto', event)" data-view="contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
       </nav>
 
       <div class="nav-actions">
@@ -67,9 +67,9 @@
   <main>
 
     <!-- ==============================================================
-         1. SOBRE NOSOTROS (ÚNICAMENTE INFORMACIÓN DEL NEGOCIO)
+         1. VISTA: SOBRE NOSOTROS (ÚNICAMENTE INFORMACIÓN DEL NEGOCIO)
     ============================================================== -->
-    <section id="nosotros" class="brand-section" style="padding: 50px 0 60px;">
+    <section id="view-nosotros" class="page-view active-view brand-section" style="padding: 50px 0 60px;">
       <div class="wrap">
 
         <!-- PANEL PRINCIPAL DE LA MARCA -->
@@ -107,9 +107,9 @@
             </div>
 
             <div style="margin-top: 28px;">
-              <a href="#catalogo" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 14px;">
-                <i class="fa-solid fa-shirt"></i> Ver Catálogo de Camisas ↓
-              </a>
+              <button type="button" onclick="navigateView('catalogo', event)" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 14px; border: none; cursor: pointer;">
+                <i class="fa-solid fa-shirt"></i> Ver Catálogo de Camisas →
+              </button>
             </div>
           </div>
         </div>
@@ -151,9 +151,9 @@
     </section>
 
     <!-- ==============================================================
-         2. CATÁLOGO (SELECCIÓN DE PRENDAS, FILTROS, PRECIOS Y COMPRA)
+         2. VISTA: CATÁLOGO (CATÁLOGO DE CAMISAS, FILTROS Y COMPRA)
     ============================================================== -->
-    <section id="catalogo" style="background: #fffaf3; padding: 50px 0 60px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <section id="view-catalogo" class="page-view" style="background: #fffaf3; padding: 50px 0 60px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
       <div class="wrap">
 
         <div class="section-head">
@@ -192,10 +192,64 @@
     </section>
 
     <!-- ==============================================================
-         3. CONTACTO (ATENCIÓN DIRECTA Y PEDIDOS PERSONALIZADOS)
+         3. VISTA: CONTACTO (ATENCIÓN DIRECTA Y PEDIDOS PERSONALIZADOS)
     ============================================================== -->
-    <section id="contacto" style="padding: 60px 0;">
+    <section id="view-contacto" class="page-view" style="padding: 60px 0 70px;">
       <div class="wrap">
+
+        <div class="section-head" style="margin-bottom: 32px;">
+          <div>
+            <span class="eyebrow">Atención al Cliente</span>
+            <h2>Contacto Directo</h2>
+          </div>
+          <p>
+            Comunícate con nuestro equipo para cotizaciones, pedidos por mayor o consultas sobre entregas en Tegucigalpa.
+          </p>
+        </div>
+
+        <!-- TARJETAS INFORMATIVAS DE CONTACTO -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 36px;">
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #ecfdf5; color: #10b981; display: grid; place-items: center; font-size: 24px; margin-bottom: 14px;">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">WhatsApp Oficial</h3>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.5;">
+              Atención inmediata para resolver dudas sobre diseños, tallas y coordinar tus compras.
+            </p>
+            <a href="https://wa.me/50400000000?text=Hola,%20quiero%20información%20sobre%20las%20camisas" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #10b981; text-decoration: none;">
+              Escribir por WhatsApp →
+            </a>
+          </div>
+
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #fdf2f2; color: var(--wine); display: grid; place-items: center; font-size: 22px; margin-bottom: 14px;">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">Ubicación y Entregas</h3>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.5;">
+              <strong>Tegucigalpa, Honduras</strong>
+            </p>
+            <p style="font-size: 12px; color: #827a71; line-height: 1.5;">
+              Puntos de entrega en los principales centros comerciales de la ciudad (Malls).
+            </p>
+          </div>
+
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #fff8eb; color: #d97706; display: grid; place-items: center; font-size: 22px; margin-bottom: 14px;">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">Horario de Atención</h3>
+            <p style="font-size: 13px; color: var(--muted); margin-bottom: 4px; line-height: 1.5;">
+              Lunes a Sábado: 8:00 AM – 6:00 PM
+            </p>
+            <p style="font-size: 12px; color: #827a71; line-height: 1.5;">
+              Atención a pedidos y consultas en línea.
+            </p>
+          </div>
+        </div>
+
+        <!-- BANNER DE CONTACTO RÁPIDO -->
         <div class="cta-box">
           <div>
             <span class="eyebrow" style="color: #171512; margin-bottom: 6px; display: inline-block;">Atención Personalizada</span>
@@ -223,9 +277,9 @@
 
       <!-- SOLO ESTOS 3 ELEMENTOS -->
       <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px;">
-        <a href="#nosotros" style="color: #fff; text-decoration: underline;">Sobre Nosotros</a>
-        <a href="#catalogo" style="color: #fff; text-decoration: underline;">Catálogo</a>
-        <a href="#contacto" style="color: #fff; text-decoration: underline;">Contacto</a>
+        <a href="#nosotros" onclick="navigateView('nosotros', event)" data-view="nosotros" style="color: #fff; text-decoration: underline;">Sobre Nosotros</a>
+        <a href="#catalogo" onclick="navigateView('catalogo', event)" data-view="catalogo" style="color: #fff; text-decoration: underline;">Catálogo</a>
+        <a href="#contacto" onclick="navigateView('contacto', event)" data-view="contacto" style="color: #fff; text-decoration: underline;">Contacto</a>
       </div>
 
       <div>
@@ -456,8 +510,8 @@
   </div>
 
   <!-- Scripts diferidos ultrarrápidos -->
-  <script defer src="js/store.js?v=3.0"></script>
-  <script defer src="js/app.js?v=3.0"></script>
+  <script defer src="js/store.js?v=3.1"></script>
+  <script defer src="js/app.js?v=3.1"></script>
 
 </body>
 </html>
