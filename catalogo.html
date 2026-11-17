@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.6">
-  <link rel="stylesheet" href="css/store.css?v=3.6">
+  <link rel="stylesheet" href="css/main.css?v=3.7">
+  <link rel="stylesheet" href="css/store.css?v=3.7">
 
   <!-- Base de datos en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -318,25 +318,15 @@
             </div>
 
             <div class="checkout-form-group">
-              <label>Dirección exacta (Selecciona el Mall de entrega) *</label>
-              <select id="custAddress" class="checkout-input" required style="font-weight: 600;">
-                <option value="" disabled selected>-- Selecciona un Mall de Tegucigalpa --</option>
-                <option value="Multiplaza Tegucigalpa">Multiplaza Tegucigalpa</option>
-                <option value="Cascadas Mall">Cascadas Mall</option>
-                <option value="City Mall Tegucigalpa">City Mall Tegucigalpa</option>
-                <option value="Mall Premier">Mall Premier</option>
-                <option value="MetroMall">MetroMall</option>
-                <option value="Novacentro (Los Próceres)">Novacentro (Los Próceres)</option>
-                <option value="Mall El Dorado">Mall El Dorado</option>
-                <option value="Plaza Miraflores">Plaza Miraflores</option>
-                <option value="Mall Las Galerías">Mall Las Galerías</option>
-              </select>
+              <label>Dirección exacta *</label>
+              <input type="text" id="custAddress" class="checkout-input" value="Acordar por WhatsApp" readonly style="background: #f7eee4; font-weight: 700; color: #171512; cursor: default;">
+              <small style="display: block; color: var(--muted); font-size: 11px; margin-top: 4px;">El punto de entrega y la hora se coordinan directamente por WhatsApp.</small>
             </div>
           </div>
 
           <div class="checkout-form-group" style="margin-top: 4px;">
-            <label>Punto de encuentro en el Mall (Opcional):</label>
-            <input type="text" id="custMallSpot" class="checkout-input" placeholder="Ej: Food court, entrada principal, farmacia, etc.">
+            <label>Lugar de referencia o preferencia (Opcional):</label>
+            <input type="text" id="custMallSpot" class="checkout-input" placeholder="Ej: Cerca de Multiplaza, Cascadas, mi colonia o trabajo...">
           </div>
 
           <div class="checkout-step-title"><i class="fa-solid fa-money-bill-wave"></i> 3. Método de Pago Preferido</div>
@@ -353,7 +343,7 @@
             <input type="radio" name="paymentMethod" value="Pago Contra Entrega (Efectivo)">
             <div>
               <strong>Pago Contra Entrega / Efectivo</strong>
-              <small style="display: block; color: var(--muted);">Pagas en efectivo al recibir tu paquete en el Mall</small>
+              <small style="display: block; color: var(--muted);">Pagas en efectivo al recibir tu paquete</small>
             </div>
           </label>
 
@@ -400,7 +390,7 @@
       <div style="background: #f8f4ee; border-radius: 12px; padding: 16px; text-align: left; font-size: 13px; line-height: 1.6; margin-bottom: 20px;">
         <strong>Siguientes pasos:</strong><br>
         1. Se abrió una ventana de WhatsApp para enviar los datos de tu pedido.<br>
-        2. Un asesor de Moda Casual te confirmará la hora exacta de entrega en el Mall.<br>
+        2. Un asesor de Moda Casual te confirmará los detalles y entrega acordada por chat.<br>
         3. Si no se abrió WhatsApp automáticamente, toca el botón de abajo.
       </div>
 
@@ -415,8 +405,8 @@
   </div>
 
   <!-- Scripts diferidos -->
-  <script defer src="js/store.js?v=3.6"></script>
-  <script defer src="js/app.js?v=3.6"></script>
+  <script defer src="js/store.js?v=3.7"></script>
+  <script defer src="js/app.js?v=3.7"></script>
 
 </body>
 </html>

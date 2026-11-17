@@ -623,9 +623,9 @@ async function handleCheckoutSubmit(e) {
 
   try {
     const paymentMethodEl = document.querySelector('input[name="paymentMethod"]:checked');
-    const mallValue = document.getElementById("custAddress")?.value || "Tegucigalpa";
+    const mallValue = document.getElementById("custAddress")?.value || "Acordar por WhatsApp";
     const spotValue = document.getElementById("custMallSpot")?.value.trim() || "";
-    const fullAddress = spotValue ? `${mallValue} (Punto: ${spotValue})` : mallValue;
+    const fullAddress = spotValue ? `${mallValue} (Referencia: ${spotValue})` : mallValue;
 
     const customerData = {
       name: document.getElementById("custName").value.trim(),
