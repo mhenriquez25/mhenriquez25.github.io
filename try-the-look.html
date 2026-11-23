@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Try the Look · Moda Casual</title>
+  
+  <!-- Tipografía moderna Inter & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* =========================================================
+       VARIABLES Y RESET MINIMALISTA PREMIUM
+    ========================================================= */
+    :root {
+      --bg-canvas: #f4f4f2;
+      --bg-stage: radial-gradient(circle at 50% 38%, #ffffff 0%, #f4f4f2 68%, #eaeae6 100%);
+      --text-main: #121212;
+      --text-muted: #737373;
+      --text-light: #a3a3a3;
+      --border-subtle: rgba(0, 0, 0, 0.07);
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --accent: #121212;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --cubic-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+      --anim-duration: 580ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* =========================================================
+       BARRA DE NAVEGACIÓN SUPERIOR
+    ========================================================= */
+    .site-nav {
+      position: relative;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: transparent;
+    }
+
+    .brand-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--text-main);
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-main);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-action-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 15px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-action-btn:hover {
+      opacity: 0.75;
+      transform: translateY(-1px);
+    }
+
+    .bag-counter-badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background: var(--text-main);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* =========================================================
+       HERO: TRY THE LOOK (LAYOUT PRINCIPAL)
+    ========================================================= */
+    .hero-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 36px;
+      padding: 10px 48px 48px 48px;
+      max-width: 1620px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Columna Izquierda: Escenario del Carrusel */
+    .carousel-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      min-height: 640px;
+    }
+
+    /* Header de la sección */
+    .hero-header {
+      margin-bottom: 12px;
+      animation: fadeUp 0.8s var(--cubic-smooth) forwards;
+    }
+
+    .hero-title {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .hero-subtitle {
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+    }
+
+    /* =========================================================
+       ESCENARIO DEL CARRUSEL INTERACTIVO CON INERCIA
+    ========================================================= */
+    .carousel-stage {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--bg-stage);
+      touch-action: pan-y;
+      user-select: none;
+      cursor: grab;
+      min-height: 520px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.05);
+    }
+
+    .carousel-stage.is-dragging {
+      cursor: grabbing;
+    }
+
+    /* Luz de estudio central */
+    .stage-ambient-spotlight {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 480px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Pista donde residen los modelos */
+    .carousel-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 30px;
+      pointer-events: none;
+    }
+
+    /* Tarjeta individual de modelo */
+    .model-card {
+      position: absolute;
+      bottom: 24px;
+      width: 250px;
+      height: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform var(--anim-duration) var(--cubic-smooth),
+                  opacity var(--anim-duration) var(--cubic-smooth),
+                  filter var(--anim-duration) var(--cubic-smooth);
+      will-change: transform, opacity, filter;
+    }
+
+    /* Animación de entrada inicial escalonada */
+    .model-card.intro-anim {
+      animation: modelEntrance 0.8s var(--cubic-smooth) backwards;
+    }
+
+    .model-figure-wrap {
+      width: 100%;
+      height: 440px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .model-svg-figure {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      transition: filter 0.3s ease;
+    }
+
+    /* Sombra de contacto suave en el suelo */
+    .model-floor-shadow {
+      width: 180px;
+      height: 22px;
+      background: radial-gradient(ellipse at center, rgba(18, 18, 18, 0.32) 0%, rgba(18, 18, 18, 0) 70%);
+      border-radius: 50%;
+      margin-top: -8px;
+      transition: transform var(--anim-duration) var(--cubic-smooth),
+                  opacity var(--anim-duration) var(--cubic-smooth);
+      pointer-events: none;
+    }
+
+    /* Estados de profundidad en perspectiva 3D */
+    .model-card[data-depth="0"] {
+      z-index: 10;
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      filter: blur(0px) grayscale(0%) brightness(1);
+    }
+    .model-card[data-depth="0"] .model-svg-figure {
+      filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.16));
+    }
+    .model-card[data-depth="0"] .model-floor-shadow {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .model-card[data-depth="-1"] {
+      z-index: 5;
+      transform: translateX(-195px) scale(0.82);
+      opacity: 0.45;
+      filter: blur(2px) grayscale(60%) brightness(0.95);
+    }
+    .model-card[data-depth="1"] {
+      z-index: 5;
+      transform: translateX(195px) scale(0.82);
+      opacity: 0.45;
+      filter: blur(2px) grayscale(60%) brightness(0.95);
+    }
+
+    .model-card[data-depth="-2"] {
+      z-index: 3;
+      transform: translateX(-355px) scale(0.70);
+      opacity: 0.22;
+      filter: blur(4.5px) grayscale(85%) brightness(0.90);
+    }
+    .model-card[data-depth="2"] {
+      z-index: 3;
+      transform: translateX(355px) scale(0.70);
+      opacity: 0.22;
+      filter: blur(4.5px) grayscale(85%) brightness(0.90);
+    }
+
+    .model-card[data-depth="-3"] {
+      z-index: 1;
+      transform: translateX(-490px) scale(0.60);
+      opacity: 0.08;
+      filter: blur(6.5px) grayscale(100%) brightness(0.85);
+    }
+    .model-card[data-depth="3"] {
+      z-index: 1;
+      transform: translateX(490px) scale(0.60);
+      opacity: 0.08;
+      filter: blur(6.5px) grayscale(100%) brightness(0.85);
+    }
+
+    .model-card[data-depth="hidden"] {
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.5);
+    }
+
+    /* Etiqueta flotante del outfit en el look activo */
+    .model-badge-tag {
+      position: absolute;
+      top: 10px;
+      background: rgba(18, 18, 18, 0.90);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+
+    .model-card[data-depth="0"] .model-badge-tag {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Cursor personalizado "DRAG" al pasar sobre el carrusel */
+    .drag-bubble-cursor {
+      position: fixed;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(18, 18, 18, 0.88);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      pointer-events: none;
+      z-index: 200;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.22s var(--cubic-smooth), opacity 0.22s ease;
+      opacity: 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .drag-bubble-cursor.visible {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .drag-bubble-cursor.grabbing {
+      transform: translate(-50%, -50%) scale(0.85);
+      background: #000;
+    }
+
+    /* =========================================================
+       BARRA DE PROGRESO Y CONTROLES INFERIORES
+    ========================================================= */
+    .carousel-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 18px;
+      padding: 0 8px;
+    }
+
+    .carousel-nav-arrows {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-arrow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.25s var(--cubic-smooth);
+    }
+
+    .nav-arrow-btn:hover {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
+      transform: scale(1.05);
+    }
+
+    .nav-arrow-btn:active {
+      transform: scale(0.95);
+    }
+
+    .progress-track-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      max-width: 320px;
+      margin: 0 24px;
+    }
+
+    .progress-rail {
+      flex: 1;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 16.66%;
+      background: var(--text-main);
+      border-radius: 2px;
+      transition: width var(--anim-duration) var(--cubic-smooth);
+    }
+
+    .progress-counter {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* =========================================================
+       PANEL LATERAL: "IN THIS LOOK"
+    ========================================================= */
+    .sidebar-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .in-this-look-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.06);
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .look-header-meta {
+      margin-bottom: 22px;
+    }
+
+    .look-micro-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .look-headline {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text-main);
+    }
+
+    /* Lista de 3 prendas del outfit activo */
+    .look-products-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .product-row-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: rgba(244, 244, 242, 0.65);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease, background 0.25s ease;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .product-row-item:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Animación de entrada escalonada al cambiar de look */
+    .product-row-item.anim-in {
+      animation: itemFadeSlide 0.45s var(--cubic-smooth) forwards;
+    }
+    .product-row-item:nth-child(1) { animation-delay: 40ms; }
+    .product-row-item:nth-child(2) { animation-delay: 90ms; }
+    .product-row-item:nth-child(3) { animation-delay: 140ms; }
+
+    .product-thumb-box {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .product-thumb-box img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+    }
+
+    .product-info-box {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .product-cat-pill {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: inline-block;
+      margin-bottom: 3px;
+    }
+
+    .product-name-txt {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .product-size-tag {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .product-price-txt {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    /* Resumen total y botón de compra */
+    .look-footer-checkout {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+    }
+
+    .outfit-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .outfit-total-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .outfit-total-amount {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+
+    .add-to-bag-btn {
+      width: 100%;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--text-main);
+      color: #ffffff;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s var(--cubic-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .add-to-bag-btn:hover {
+      background: #2a2a2a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .add-to-bag-btn:active {
+      transform: translateY(0);
+    }
+
+    .add-to-bag-btn.added-state {
+      background: #15803d;
+    }
+
+    /* Toast flotante de notificación */
+    .cart-toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #121212;
+      color: #ffffff;
+      padding: 14px 22px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s var(--cubic-smooth);
+      z-index: 999;
+    }
+
+    .cart-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* =========================================================
+       ANIMACIONES KEYFRAMES
+    ========================================================= */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes modelEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(45px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes itemFadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE DESIGN (TABLETS Y MÓVILES)
+    ========================================================= */
+    @media (max-width: 1100px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        padding: 0 24px 36px 24px;
+        gap: 28px;
+      }
+
+      .site-nav {
+        padding: 18px 24px;
+      }
+
+      .carousel-column {
+        min-height: 520px;
+      }
+
+      .sidebar-column {
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Menú simplificado en móvil */
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .model-card[data-depth="-2"],
+      .model-card[data-depth="2"] {
+        display: none;
+      }
+
+      .model-card[data-depth="-1"] {
+        transform: translateX(-130px) scale(0.78);
+      }
+
+      .model-card[data-depth="1"] {
+        transform: translateX(130px) scale(0.78);
+      }
+
+      .progress-track-wrapper {
+        margin: 0 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       BARRA DE NAVEGACIÓN
+  ========================================================= -->
+  <header class="site-nav">
+    <a href="index.html" class="brand-logo" aria-label="Ir al inicio">
+      <span class="brand-dot"></span>
+      MODA CASUAL
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="nav-links">
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="catalogo.html?cat=hombre">Caballeros</a></li>
+        <li><a href="catalogo.html?cat=mujer">Damas</a></li>
+        <li><a href="try-the-look.html" class="active">Try the Look</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button type="button" class="nav-action-btn" aria-label="Buscar productos">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button type="button" class="nav-action-btn" aria-label="Ver bolsa de compras" onclick="showToast('Bolsa actualizada')">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="bag-counter-badge" id="bagCounter">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO CONTAINER: TRY THE LOOK
+  ========================================================= -->
+  <main class="hero-container" role="main">
+
+    <!-- COLUMNA IZQUIERDA: CARRUSEL CENTRAL 3D -->
+    <section class="carousel-column" aria-label="Pasarela interactiva Try the Look">
+      
+      <!-- Título de la sección -->
+      <div class="hero-header">
+        <h1 class="hero-title">Try the Look.</h1>
+        <p class="hero-subtitle">Arrastra para explorar, toca un look para ver las prendas.</p>
+      </div>
+
+      <!-- ESCENARIO DEL CARRUSEL INTERACTIVO -->
+      <div class="carousel-stage" id="carouselStage"
+           tabindex="0"
+           role="region"
+           aria-roledescription="carousel"
+           aria-label="Carrusel de outfits de temporada">
+
+        <div class="stage-ambient-spotlight"></div>
+
+        <div class="carousel-track" id="carouselTrack" aria-live="polite">
+          <!-- Las tarjetas de los modelos se inyectan dinámicamente desde LOOKS_DATA -->
+        </div>
+
+      </div>
+
+      <!-- CONTROLES INFERIORES Y BARRA DE PROGRESO -->
+      <div class="carousel-footer">
+        
+        <div class="carousel-nav-arrows">
+          <button type="button" class="nav-arrow-btn" id="prevBtn" aria-label="Look anterior" onclick="navigateLook(-1)">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button type="button" class="nav-arrow-btn" id="nextBtn" aria-label="Siguiente look" onclick="navigateLook(1)">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="progress-track-wrapper">
+          <div class="progress-rail">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-counter" id="progressCounter">01 / 06</span>
+        </div>
+
+        <div style="font-size: 11px; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 6px;">
+          <i class="fa-regular fa-hand-pointer"></i> Desliza o usa teclado
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- COLUMNA DERECHA: PANEL "IN THIS LOOK" -->
+    <aside class="sidebar-column" aria-label="Prendas del look activo">
+      <div class="in-this-look-card">
+        
+        <div class="look-header-meta">
+          <span class="look-micro-tag">In this look</span>
+          <h2 class="look-headline" id="lookHeadline">Downtown Monochrome</h2>
+        </div>
+
+        <!-- LISTA DE LAS 3 PRENDAS DEL OUTFIT -->
+        <ul class="look-products-list" id="productsList">
+          <!-- Renderizado dinámico con animación escalonada -->
+        </ul>
+
+        <!-- TOTAL Y BOTÓN DE COMPRA -->
+        <div class="look-footer-checkout">
+          <div class="outfit-total-row">
+            <span class="outfit-total-label">Total del outfit:</span>
+            <span class="outfit-total-amount" id="outfitTotal">L. 1,450.00</span>
+          </div>
+
+          <button type="button" class="add-to-bag-btn" id="addToBagBtn" onclick="addOutfitToBag()">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Add to bag</span>
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Cursor interactivo tipo burbuja "DRAG" -->
+  <div class="drag-bubble-cursor" id="dragCursor">DRAG</div>
+
+  <!-- Toast flotante de confirmación -->
+  <div class="cart-toast" id="cartToast">
+    <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+    <span id="toastMsg">Outfit agregado a la bolsa</span>
+  </div>
+
+  <!-- =========================================================
+       JAVASCRIPT: DATOS, INERCIA, ARRASTRE Y ANIMACIONES
+  ========================================================= -->
+  <script>
+    /* =========================================================
+       1. ARRAY DE LOOKS (DATOS EXTENSIBLES Y FÁCILES DE REEMPLAZAR)
+    ========================================================= */
+    const LOOKS_DATA = [
+      {
+        id: "look-01",
+        title: "Downtown Monochrome",
+        badge: "Look 01",
+        shirtColor: "#171512",
+        denimColor: "#759bbd",
+        products: [
+          {
+            category: "T-Shirt",
+            name: "Oversized Heavy Tee Negro",
+            size: "L",
+            price: 350.00,
+            image: "assets/negr.png"
+          },
+          {
+            category: "Denim",
+            name: "Baggy Relaxed Skate Jeans",
+            size: "32",
+            price: 680.00,
+            image: "assets/verd1.png"
+          },
+          {
+            category: "Sneakers",
+            name: "Chunky Retro Street Runners",
+            size: "42",
+            price: 420.00,
+            image: "assets/tal 2.png"
+          }
+        ]
+      },
+      {
+        id: "look-02",
+        title: "Olive Earth Casual",
+        badge: "Look 02",
+        shirtColor: "#2d4a22",
+        denimColor: "#8da5b8",
+        products: [
+          {
+            category: "Tee DTF",
+            name: "Camisa Verde Oliva Casual DTF",
+            size: "M",
+            price: 290.00,
+            image: "assets/verd1.png"
+          },
+          {
+            category: "Pants",
+            name: "Loose Wide-Leg Canvas Pants",
+            size: "30",
+            price: 620.00,
+            image: "assets/JS.png"
+          },
+          {
+            category: "Footwear",
+            name: "Classic Platform Off-White",
+            size: "41",
+            price: 390.00,
+            image: "assets/tal 2.png"
+          }
+        ]
+      },
+      {
+        id: "look-03",
+        title: "Burgundy Velvet Flow",
+        badge: "Look 03",
+        shirtColor: "#6b1426",
+        denimColor: "#6c8da8",
+        products: [
+          {
+            category: "Prenda Superior",
+            name: "Camisa Vino Elegante Premium",
+            size: "XL",
+            price: 310.00,
+            image: "assets/vino.png"
+          },
+          {
+            category: "Denim",
+            name: "Faded Indigo Baggy Fit",
+            size: "34",
+            price: 710.00,
+            image: "assets/negr.png"
+          },
+          {
+            category: "Accessory",
+            name: "Minimalist Leather Strap & Cap",
+            size: "Única",
+            price: 180.00,
+            image: "assets/cat1.jpg"
+          }
+        ]
+      },
+      {
+        id: "look-04",
+        title: "Vibrant Tangerine Chic",
+        badge: "Look 04",
+        shirtColor: "#d9531e",
+        denimColor: "#7e9cb6",
+        products: [
+          {
+            category: "Crop / Tee",
+            name: "Camisa Naranja Vibrante Dama",
+            size: "S",
+            price: 300.00,
+            image: "assets/cat.jpg"
+          },
+          {
+            category: "Pants",
+            name: "High-Waist Wide Cargo Denim",
+            size: "28",
+            price: 650.00,
+            image: "assets/bat.jpg"
+          },
+          {
+            category: "Footwear",
+            name: "Pure White Court Low Sneakers",
+            size: "38",
+            price: 450.00,
+            image: "assets/bat1.jpg"
+          }
+        ]
+      },
+      {
+        id: "look-05",
+        title: "Heritage Christian Cut",
+        badge: "Look 05",
+        shirtColor: "#1a1a1a",
+        denimColor: "#829eb7",
+        products: [
+          {
+            category: "Tee DTF",
+            name: "Colección Cristiana Familiar JS",
+            size: "M",
+            price: 320.00,
+            image: "assets/JS.png"
+          },
+          {
+            category: "Denim",
+            name: "Vintage Bleached Straight Trousers",
+            size: "31",
+            price: 690.00,
+            image: "assets/verd1.png"
+          },
+          {
+            category: "Sneakers",
+            name: "Triple-White Chunky Street Sole",
+            size: "42",
+            price: 440.00,
+            image: "assets/tal 2.png"
+          }
+        ]
+      },
+      {
+        id: "look-06",
+        title: "Sunset Terracotta Modern",
+        badge: "Look 06",
+        shirtColor: "#b45309",
+        denimColor: "#688aa6",
+        products: [
+          {
+            category: "Oversized Tee",
+            name: "Camiseta Mostaza Warm Casual",
+            size: "L",
+            price: 330.00,
+            image: "assets/cat.jpg"
+          },
+          {
+            category: "Jeans",
+            name: "90s Raw Indigo Loose Skater",
+            size: "33",
+            price: 720.00,
+            image: "assets/vino.png"
+          },
+          {
+            category: "Footwear",
+            name: "Grey Accent Skate Runners",
+            size: "43",
+            price: 410.00,
+            image: "assets/tal 2.png"
+          }
+        ]
+      }
+    ];
+
+    /* =========================================================
+       2. GENERADOR DE FIGURA HUMANA COMPLETA (MODELO SVG)
+       Permite mostrar modelos de cuerpo entero con prendas a medida
+    ========================================================= */
+    function renderModelFigureSVG(look) {
+      const shirtCol = look.shirtColor || "#171512";
+      const denimCol = look.denimColor || "#759bbd";
+      const isWhite = shirtCol.toLowerCase() === "#ffffff" || shirtCol.toLowerCase() === "#f8f9fa";
+      const mainGraphic = look.products[0].image || "assets/verd1.png";
+      const uid = `svg-${look.id}`;
+
+      return `
+      <svg class="model-svg-figure" viewBox="0 0 260 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="shirtClip-${uid}">
+            <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z" />
+          </clipPath>
+          <linearGradient id="fabricShade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.16'}" />
+            <stop offset="45%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.14' : '0.35'}" />
+          </linearGradient>
+        </defs>
+
+        <!-- CABEZA, CUELLO Y GAFAS DE SOL STREETWEAR -->
+        <path d="M 118 78 L 118 102 Q 130 108 142 102 L 142 78 Z" fill="#9e6945"/>
+        <path d="M 118 78 Q 130 88 142 78 L 142 84 Q 130 94 118 84 Z" fill="rgba(0,0,0,0.12)"/>
+
+        <ellipse cx="130" cy="54" rx="18" ry="23" fill="#b37c54"/>
+        <!-- Fade cut oscuro -->
+        <path d="M 112 50 C 112 32 120 26 130 26 C 140 26 148 32 148 50 C 148 42 144 34 130 34 C 116 34 112 42 112 50 Z" fill="#1b1614"/>
+        <ellipse cx="111" cy="56" rx="3.5" ry="6" fill="#a46f48"/>
+        <ellipse cx="149" cy="56" rx="3.5" ry="6" fill="#a46f48"/>
+
+        <!-- Gafas de sol negras chic -->
+        <rect x="114" y="48" width="14" height="9" rx="2" fill="#111111"/>
+        <rect x="132" y="48" width="14" height="9" rx="2" fill="#111111"/>
+        <line x1="127" y1="51" x2="133" y2="51" stroke="#111111" stroke-width="2"/>
+        <line x1="116" y1="50" x2="122" y2="48" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
+        <line x1="134" y1="50" x2="140" y2="48" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
+
+        <!-- Cadena sutil dorada -->
+        <path d="M 122 92 Q 130 108 138 92" stroke="#d4af37" stroke-width="1.8" fill="none" opacity="0.9"/>
+
+        <!-- BRAZOS Y MANOS -->
+        <path d="M 60 176 L 54 252 C 53 260 55 272 58 280 C 62 284 66 284 68 278 L 74 252 L 80 180 Z" fill="#9e6945"/>
+        <path d="M 200 176 L 206 252 C 207 260 205 272 202 280 C 198 284 194 284 192 278 L 186 252 L 180 180 Z" fill="#9e6945"/>
+
+        <!-- PANTALONES BAGGY DENIM STREETWEAR (WIDE-LEG) -->
+        <g>
+          <path d="M 82 254 L 68 335 L 62 454 Q 92 460 124 454 L 128 340 L 130 274 Z" fill="${denimCol}"/>
+          <path d="M 178 254 L 192 335 L 198 454 Q 168 460 136 454 L 132 340 L 130 274 Z" fill="${denimCol}" filter="brightness(1.05)"/>
+          
+          <path d="M 82 254 Q 130 262 178 254 L 178 280 Q 130 286 82 280 Z" fill="rgba(0,0,0,0.12)"/>
+          <line x1="130" y1="258" x2="130" y2="305" stroke="rgba(0,0,0,0.2)" stroke-width="2"/>
+
+          <!-- Pliegues y arrugas de mezclilla holgada -->
+          <path d="M 66 385 Q 92 398 122 390" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
+          <path d="M 64 425 Q 92 438 124 430" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
+          <path d="M 138 390 Q 168 398 194 385" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
+          <path d="M 136 430 Q 168 438 196 425" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
+
+          <path d="M 60 450 Q 92 462 126 450 L 125 456 Q 92 468 61 456 Z" fill="rgba(0,0,0,0.22)"/>
+          <path d="M 134 450 Q 168 462 200 450 L 199 456 Q 168 468 135 456 Z" fill="rgba(0,0,0,0.22)"/>
+        </g>
+
+        <!-- SNEAKERS BLANCAS CHUNKY STREETWEAR -->
+        <path d="M 68 452 L 58 472 C 56 480 60 486 72 486 L 118 486 C 126 486 128 480 126 472 L 120 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+        <path d="M 58 476 L 126 476 L 124 486 L 60 486 Z" fill="#e2e8f0"/>
+        <line x1="76" y1="464" x2="106" y2="464" stroke="#cbd5e1" stroke-width="1.8"/>
+
+        <path d="M 140 452 L 134 472 C 132 480 134 486 146 486 L 192 486 C 202 486 204 480 202 472 L 192 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+        <path d="M 134 476 L 202 476 L 200 486 L 136 486 Z" fill="#e2e8f0"/>
+        <line x1="154" y1="464" x2="184" y2="464" stroke="#cbd5e1" stroke-width="1.8"/>
+
+        <!-- CAMISA / CAMISETA OVERSIZED VESTIDA POR EL MODELO -->
+        <g>
+          <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z"
+            fill="${shirtCol}"
+          />
+          <path d="M 106 96 Q 130 112 154 96 Q 130 117 106 96" fill="rgba(0,0,0,${isWhite ? '0.1' : '0.28'})"/>
+
+          <!-- Estampado DTF / Gráfico centrado en el pecho -->
+          <g clip-path="url(#shirtClip-${uid})">
+            <image href="${mainGraphic}" x="88" y="122" width="84" height="92" preserveAspectRatio="xMidYMid contain" />
+          </g>
+
+          <!-- Sombra volumétrica del tejido -->
+          <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z"
+            fill="url(#fabricShade-${uid})"
+            pointer-events="none"
+          />
+
+          <!-- Costuras -->
+          <path d="M 86 172 Q 108 190 130 184" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.28'})" stroke-width="1.4" fill="none"/>
+          <path d="M 174 172 Q 152 190 130 184" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.28'})" stroke-width="1.4" fill="none"/>
+          <path d="M 82 252 Q 130 258 178 252" stroke="rgba(0,0,0,${isWhite ? '0.1' : '0.2'})" stroke-width="1.2" fill="none"/>
+        </g>
+      </svg>
+      `;
+    }
+
+    /* =========================================================
+       3. ESTADO GLOBAL Y LÓGICA DE NAVEGACIÓN
+    ========================================================= */
+    let activeIndex = 0;
+    const totalLooks = LOOKS_DATA.length;
+    let bagTotalCount = 0;
+
+    const trackEl = document.getElementById("carouselTrack");
+    const stageEl = document.getElementById("carouselStage");
+    const progressFillEl = document.getElementById("progressFill");
+    const progressCounterEl = document.getElementById("progressCounter");
+    const headlineEl = document.getElementById("lookHeadline");
+    const productsListEl = document.getElementById("productsList");
+    const outfitTotalEl = document.getElementById("outfitTotal");
+    const dragCursorEl = document.getElementById("dragCursor");
+    const bagCounterEl = document.getElementById("bagCounter");
+
+    // Inicializar carrusel en el DOM
+    function initCarouselDOM() {
+      trackEl.innerHTML = LOOKS_DATA.map((look, idx) => `
+        <div class="model-card intro-anim"
+             id="card-${idx}"
+             data-index="${idx}"
+             style="animation-delay: ${idx * 65}ms;"
+             onclick="onCardClick(${idx})"
+             tabindex="0"
+             role="button"
+             aria-label="Ver ${look.title}">
+          <span class="model-badge-tag"><i class="fa-solid fa-sparkles"></i> ${look.title}</span>
+          <div class="model-figure-wrap">
+            ${renderModelFigureSVG(look)}
+          </div>
+          <div class="model-floor-shadow"></div>
+        </div>
+      `).join("");
+
+      updatePositions();
+      updateSidebar(LOOKS_DATA[activeIndex]);
+    }
+
+    // Actualizar posiciones 3D relativas
+    function updatePositions() {
+      const cards = trackEl.querySelectorAll(".model-card");
+      cards.forEach((card, idx) => {
+        const diff = idx - activeIndex;
+        if (diff === 0) {
+          card.setAttribute("data-depth", "0");
+        } else if (diff === -1) {
+          card.setAttribute("data-depth", "-1");
+        } else if (diff === 1) {
+          card.setAttribute("data-depth", "1");
+        } else if (diff === -2) {
+          card.setAttribute("data-depth", "-2");
+        } else if (diff === 2) {
+          card.setAttribute("data-depth", "2");
+        } else if (diff === -3) {
+          card.setAttribute("data-depth", "-3");
+        } else if (diff === 3) {
+          card.setAttribute("data-depth", "3");
+        } else {
+          card.setAttribute("data-depth", "hidden");
+        }
+      });
+
+      // Actualizar barra de progreso y contador
+      const pct = ((activeIndex + 1) / totalLooks) * 100;
+      progressFillEl.style.width = `${pct}%`;
+      progressCounterEl.innerText = `${String(activeIndex + 1).padStart(2, '0')} / ${String(totalLooks).padStart(2, '0')}`;
+    }
+
+    // Navegar a un índice específico con animación
+    function goToLook(idx) {
+      if (idx < 0) idx = totalLooks - 1;
+      if (idx >= totalLooks) idx = 0;
+      if (idx === activeIndex) return;
+
+      activeIndex = idx;
+      updatePositions();
+      updateSidebar(LOOKS_DATA[activeIndex]);
+    }
+
+    function navigateLook(delta) {
+      goToLook(activeIndex + delta);
+    }
+
+    function onCardClick(idx) {
+      if (isDragMoved) return; // Evitar click accidental si se estaba arrastrando
+      goToLook(idx);
+    }
+
+    /* =========================================================
+       4. ACTUALIZACIÓN DEL PANEL LATERAL "IN THIS LOOK"
+    ========================================================= */
+    function updateSidebar(look) {
+      if (!look) return;
+
+      // Actualizar Título
+      headlineEl.innerText = look.title;
+
+      // Calcular Total del Outfit
+      const totalAmount = look.products.reduce((acc, it) => acc + it.price, 0);
+      outfitTotalEl.innerText = `L. ${totalAmount.toFixed(2)}`;
+
+      // Renderizar 3 productos con animación escalonada
+      productsListEl.innerHTML = look.products.map(p => `
+        <li class="product-row-item anim-in">
+          <div class="product-thumb-box">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='assets/verd1.png'">
+          </div>
+          <div class="product-info-box">
+            <span class="product-cat-pill">${p.category}</span>
+            <h3 class="product-name-txt" title="${p.name}">${p.name}</h3>
+            <span class="product-size-tag">Talla: ${p.size}</span>
+          </div>
+          <span class="product-price-txt">L. ${p.price.toFixed(2)}</span>
+        </li>
+      `).join("");
+    }
+
+    /* =========================================================
+       5. FÍSICA DE ARRASTRE CON INERCIA Y SNAP
+    ========================================================= */
+    let isPointerDown = false;
+    let isDragMoved = false;
+    let startX = 0;
+    let lastX = 0;
+    let lastTimestamp = 0;
+    let velocityX = 0;
+    const DRAG_THRESHOLD = 45;
+
+    // Mouse / Touch Start
+    stageEl.addEventListener("pointerdown", (e) => {
+      isPointerDown = true;
+      isDragMoved = false;
+      startX = e.clientX;
+      lastX = e.clientX;
+      lastTimestamp = performance.now();
+      velocityX = 0;
+      stageEl.classList.add("is-dragging");
+      dragCursorEl.classList.add("grabbing");
+    });
+
+    // Mouse / Touch Move
+    window.addEventListener("pointermove", (e) => {
+      // Mover el cursor personalizado "DRAG"
+      dragCursorEl.style.left = `${e.clientX}px`;
+      dragCursorEl.style.top = `${e.clientY}px`;
+
+      if (!isPointerDown) return;
+
+      const currentX = e.clientX;
+      const deltaX = currentX - lastX;
+      const now = performance.now();
+      const dt = now - lastTimestamp;
+
+      if (dt > 0) {
+        velocityX = deltaX / dt;
+      }
+
+      if (Math.abs(currentX - startX) > 8) {
+        isDragMoved = true;
+      }
+
+      lastX = currentX;
+      lastTimestamp = now;
+    });
+
+    // Mouse / Touch End con Inercia & Snap
+    window.addEventListener("pointerup", (e) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      stageEl.classList.remove("is-dragging");
+      dragCursorEl.classList.remove("grabbing");
+
+      const totalDeltaX = e.clientX - startX;
+
+      // Si la inercia (velocidad) o la distancia superan el umbral, avanzar o retroceder
+      if (Math.abs(velocityX) > 0.35 || Math.abs(totalDeltaX) > DRAG_THRESHOLD) {
+        if (velocityX > 0.35 || totalDeltaX > DRAG_THRESHOLD) {
+          navigateLook(-1); // Hacia la derecha = look anterior
+        } else if (velocityX < -0.35 || totalDeltaX < -DRAG_THRESHOLD) {
+          navigateLook(1);  // Hacia la izquierda = look siguiente
+        }
+      }
+
+      // Resetear flag de movimiento tras un tick para evitar falsos clicks
+      setTimeout(() => { isDragMoved = false; }, 50);
+    });
+
+    // Mostrar / ocultar cursor DRAG al entrar al escenario
+    stageEl.addEventListener("mouseenter", () => {
+      dragCursorEl.classList.add("visible");
+    });
+    stageEl.addEventListener("mouseleave", () => {
+      dragCursorEl.classList.remove("visible");
+    });
+
+    /* =========================================================
+       6. NAVEGACIÓN POR TECLADO Y ACCESIBILIDAD
+    ========================================================= */
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        navigateLook(-1);
+      } else if (e.key === "ArrowRight") {
+        navigateLook(1);
+      }
+    });
+
+    /* =========================================================
+       7. AGREGAR OUTFIT A LA BOLSA Y FEEDBACK
+    ========================================================= */
+    function addOutfitToBag() {
+      const activeLook = LOOKS_DATA[activeIndex];
+      bagTotalCount += activeLook.products.length;
+      bagCounterEl.innerText = bagTotalCount;
+
+      // Animación en badge de la bolsa
+      bagCounterEl.style.transform = "scale(1.4)";
+      setTimeout(() => { bagCounterEl.style.transform = "scale(1)"; }, 250);
+
+      // Botón estado feedback
+      const btn = document.getElementById("addToBagBtn");
+      btn.classList.add("added-state");
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>¡Agregado a la bolsa!</span>';
+
+      showToast(`Outfit "${activeLook.title}" agregado (${activeLook.products.length} prendas)`);
+
+      setTimeout(() => {
+        btn.classList.remove("added-state");
+        btn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> <span>Add to bag</span>';
+      }, 2000);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("cartToast");
+      const txt = document.getElementById("toastMsg");
+      txt.innerText = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    // Inicializar al cargar
+    document.addEventListener("DOMContentLoaded", () => {
+      initCarouselDOM();
+    });
+  </script>
+</body>
+</html>
