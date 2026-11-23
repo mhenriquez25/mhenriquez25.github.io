@@ -281,6 +281,66 @@
     }
 
     /* Sombra de contacto suave en el suelo */
+    
+    .model-3d-character-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .model-3d-render-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.22));
+      transition: transform var(--anim-duration) var(--cubic-smooth), filter var(--anim-duration) var(--cubic-smooth);
+    }
+
+    .model-card[data-depth="0"] .model-3d-render-img,
+    .runway-model-card.active-look .model-3d-render-img {
+      filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.28));
+      transform: translateY(-4px);
+    }
+
+    .model-3d-apparel-tint {
+      position: absolute;
+      top: 23%;
+      left: 29%;
+      width: 42%;
+      height: 25%;
+      border-radius: 12px;
+      clip-path: polygon(18% 0%, 82% 0%, 100% 45%, 88% 100%, 12% 100%, 0% 45%);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      transition: background-color 0.35s ease, opacity 0.35s ease;
+      z-index: 2;
+    }
+
+    .model-3d-chest-dtf {
+      position: absolute;
+      top: 27%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22%;
+      height: 18%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .model-3d-chest-dtf img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
+    }
+
     .model-floor-shadow {
       width: 180px;
       height: 22px;
@@ -1127,122 +1187,28 @@
        2. GENERADOR DE FIGURA HUMANA COMPLETA (MODELO SVG)
        Permite mostrar modelos de cuerpo entero con prendas a medida
     ========================================================= */
-    function renderModelFigureSVG(look) {
+    function renderModelFigure(look) {
       const shirtCol = look.shirtColor || "#171512";
-      const denimCol = look.denimColor || "#759bbd";
       const isWhite = shirtCol.toLowerCase() === "#ffffff" || shirtCol.toLowerCase() === "#f8f9fa";
-      const mainGraphic = look.products[0].image || "assets/verd1.png";
-      const uid = `svg-${look.id}`;
+      const mainGraphic = (look.products && look.products[0] && look.products[0].image) || "assets/verd1.png";
+      const uid = `m3d-${look.id}`;
 
       return `
-      <svg class="model-svg-figure" viewBox="0 0 260 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="shirtClip-${uid}">
-            <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z" />
-          </clipPath>
-          <linearGradient id="fabricShade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.16'}" />
-            <stop offset="45%" stop-color="#000000" stop-opacity="0" />
-            <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.14' : '0.35'}" />
-          </linearGradient>
-        </defs>
+        <div class="model-3d-character-wrap" id="wrap-${uid}">
+          <!-- Personaje 3D Real Renderizado -->
+          <img src="assets/model-3d.webp" alt="${look.title}" class="model-3d-render-img">
 
-        <!-- CABEZA, CUELLO Y GAFAS DE SOL STREETWEAR -->
-        <path d="M 118 78 L 118 102 Q 130 108 142 102 L 142 78 Z" fill="#9e6945"/>
-        <path d="M 118 78 Q 130 88 142 78 L 142 84 Q 130 94 118 84 Z" fill="rgba(0,0,0,0.12)"/>
+          <!-- Capa de color de prenda con iluminación 3D -->
+          <div class="model-3d-apparel-tint" style="background-color: ${shirtCol}; opacity: ${shirtCol === '#171512' ? '0.75' : (isWhite ? '0.18' : '0.62')};"></div>
 
-        <ellipse cx="130" cy="54" rx="18" ry="23" fill="#b37c54"/>
-        <!-- Fade cut oscuro -->
-        <path d="M 112 50 C 112 32 120 26 130 26 C 140 26 148 32 148 50 C 148 42 144 34 130 34 C 116 34 112 42 112 50 Z" fill="#1b1614"/>
-        <ellipse cx="111" cy="56" rx="3.5" ry="6" fill="#a46f48"/>
-        <ellipse cx="149" cy="56" rx="3.5" ry="6" fill="#a46f48"/>
-
-        <!-- Gafas de sol negras chic -->
-        <rect x="114" y="48" width="14" height="9" rx="2" fill="#111111"/>
-        <rect x="132" y="48" width="14" height="9" rx="2" fill="#111111"/>
-        <line x1="127" y1="51" x2="133" y2="51" stroke="#111111" stroke-width="2"/>
-        <line x1="116" y1="50" x2="122" y2="48" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-        <line x1="134" y1="50" x2="140" y2="48" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-
-        <!-- Cadena sutil dorada -->
-        <path d="M 122 92 Q 130 108 138 92" stroke="#d4af37" stroke-width="1.8" fill="none" opacity="0.9"/>
-
-        <!-- BRAZOS Y MANOS -->
-        <path d="M 60 176 L 54 252 C 53 260 55 272 58 280 C 62 284 66 284 68 278 L 74 252 L 80 180 Z" fill="#9e6945"/>
-        <path d="M 200 176 L 206 252 C 207 260 205 272 202 280 C 198 284 194 284 192 278 L 186 252 L 180 180 Z" fill="#9e6945"/>
-
-        <!-- PANTALONES BAGGY DENIM STREETWEAR (WIDE-LEG) -->
-        <g>
-          <path d="M 82 254 L 68 335 L 62 454 Q 92 460 124 454 L 128 340 L 130 274 Z" fill="${denimCol}"/>
-          <path d="M 178 254 L 192 335 L 198 454 Q 168 460 136 454 L 132 340 L 130 274 Z" fill="${denimCol}" filter="brightness(1.05)"/>
-          
-          <path d="M 82 254 Q 130 262 178 254 L 178 280 Q 130 286 82 280 Z" fill="rgba(0,0,0,0.12)"/>
-          <line x1="130" y1="258" x2="130" y2="305" stroke="rgba(0,0,0,0.2)" stroke-width="2"/>
-
-          <!-- Pliegues y arrugas de mezclilla holgada -->
-          <path d="M 66 385 Q 92 398 122 390" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
-          <path d="M 64 425 Q 92 438 124 430" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
-          <path d="M 138 390 Q 168 398 194 385" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
-          <path d="M 136 430 Q 168 438 196 425" stroke="rgba(0,0,0,0.18)" stroke-width="1.8" fill="none"/>
-
-          <path d="M 60 450 Q 92 462 126 450 L 125 456 Q 92 468 61 456 Z" fill="rgba(0,0,0,0.22)"/>
-          <path d="M 134 450 Q 168 462 200 450 L 199 456 Q 168 468 135 456 Z" fill="rgba(0,0,0,0.22)"/>
-        </g>
-
-        <!-- SNEAKERS BLANCAS CHUNKY STREETWEAR -->
-        <path d="M 68 452 L 58 472 C 56 480 60 486 72 486 L 118 486 C 126 486 128 480 126 472 L 120 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
-        <path d="M 58 476 L 126 476 L 124 486 L 60 486 Z" fill="#e2e8f0"/>
-        <line x1="76" y1="464" x2="106" y2="464" stroke="#cbd5e1" stroke-width="1.8"/>
-
-        <path d="M 140 452 L 134 472 C 132 480 134 486 146 486 L 192 486 C 202 486 204 480 202 472 L 192 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
-        <path d="M 134 476 L 202 476 L 200 486 L 136 486 Z" fill="#e2e8f0"/>
-        <line x1="154" y1="464" x2="184" y2="464" stroke="#cbd5e1" stroke-width="1.8"/>
-
-        <!-- CAMISA / CAMISETA OVERSIZED VESTIDA POR EL MODELO -->
-        <g>
-          <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z"
-            fill="${shirtCol}"
-          />
-          <path d="M 106 96 Q 130 112 154 96 Q 130 117 106 96" fill="rgba(0,0,0,${isWhite ? '0.1' : '0.28'})"/>
-
-          <!-- Estampado DTF / Gráfico centrado en el pecho -->
-          <g clip-path="url(#shirtClip-${uid})">
-            <image href="${mainGraphic}" x="88" y="122" width="84" height="92" preserveAspectRatio="xMidYMid contain" />
-          </g>
-
-          <!-- Sombra volumétrica del tejido -->
-          <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z"
-            fill="url(#fabricShade-${uid})"
-            pointer-events="none"
-          />
-
-          <!-- Costuras -->
-          <path d="M 86 172 Q 108 190 130 184" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.28'})" stroke-width="1.4" fill="none"/>
-          <path d="M 174 172 Q 152 190 130 184" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.28'})" stroke-width="1.4" fill="none"/>
-          <path d="M 82 252 Q 130 258 178 252" stroke="rgba(0,0,0,${isWhite ? '0.1' : '0.2'})" stroke-width="1.2" fill="none"/>
-        </g>
-      </svg>
+          <!-- Estampado DTF / Gráfico sobre el pecho del modelo 3D -->
+          <div class="model-3d-chest-dtf">
+            <img src="${mainGraphic}" alt="${look.title}">
+          </div>
+        </div>
       `;
     }
 
-    /* =========================================================
-       3. ESTADO GLOBAL Y LÓGICA DE NAVEGACIÓN
-    ========================================================= */
-    let activeIndex = 0;
-    const totalLooks = LOOKS_DATA.length;
-    let bagTotalCount = 0;
-
-    const trackEl = document.getElementById("carouselTrack");
-    const stageEl = document.getElementById("carouselStage");
-    const progressFillEl = document.getElementById("progressFill");
-    const progressCounterEl = document.getElementById("progressCounter");
-    const headlineEl = document.getElementById("lookHeadline");
-    const productsListEl = document.getElementById("productsList");
-    const outfitTotalEl = document.getElementById("outfitTotal");
-    const dragCursorEl = document.getElementById("dragCursor");
-    const bagCounterEl = document.getElementById("bagCounter");
-
-    // Inicializar carrusel en el DOM
     function initCarouselDOM() {
       trackEl.innerHTML = LOOKS_DATA.map((look, idx) => `
         <div class="model-card intro-anim"
@@ -1255,7 +1221,7 @@
              aria-label="Ver ${look.title}">
           <span class="model-badge-tag"><i class="fa-solid fa-sparkles"></i> ${look.title}</span>
           <div class="model-figure-wrap">
-            ${renderModelFigureSVG(look)}
+            ${renderModelFigure(look)}
           </div>
           <div class="model-floor-shadow"></div>
         </div>

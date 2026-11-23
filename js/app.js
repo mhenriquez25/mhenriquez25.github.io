@@ -609,6 +609,11 @@ function goToLookIndex(idx) {
     const shirt = activeCard.querySelector(".runway-model-shirt-fill");
     const hex = COLOR_HEX_MAP[tryLookColor.toLowerCase().trim()] || "#171512";
     if (shirt) shirt.setAttribute("fill", hex);
+    const tint = activeCard.querySelector(".model-3d-apparel-tint");
+    if (tint) {
+      tint.style.backgroundColor = hex;
+      tint.style.opacity = hex === '#171512' ? '0.75' : (hex === '#ffffff' || hex === '#f8f9fa' ? '0.18' : '0.62');
+    }
   }
 }
 
