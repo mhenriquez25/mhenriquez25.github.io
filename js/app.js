@@ -390,29 +390,60 @@ function updateFittingModelDisplay() {
   const currency = (window.store.settings && window.store.settings.currency) || "L.";
   const price = Number(p.price) || 0;
 
-  // Imagen del modelo
-  const modelImg = document.getElementById("fittingModelImg");
-  if (modelImg) {
-    modelImg.style.opacity = "0.5";
-    setTimeout(() => {
-      modelImg.src = p.image || (fittingCurrentGender === "mujer" ? "assets/cat.jpg" : "assets/verd1.png");
-      modelImg.style.opacity = "1";
-    }, 120);
+  // 1. Maniquí base: ajustar proporciones según el género sin mover el pedestal ni el maniquí
+  const torsoPath = document.getElementById("mannequinTorsoPath");
+  const shirtPath = document.getElementById("shirtSilhouette");
+  const shadingPath = document.getElementById("shirtShadingPath");
+  const badgeText = document.getElementById("modelStageBadgeText");
+
+  const isWoman = fittingCurrentGender === "mujer";
+  if (badgeText) {
+    badgeText.innerText = isWoman ? "Maniquí Femenino de Alta Costura" : "Maniquí Masculino de Alta Costura";
   }
 
-  // Tinte de color sobre el modelo
-  const tintEl = document.getElementById("modelColorTint");
-  if (tintEl) {
-    const hex = COLOR_HEX_MAP[fittingCurrentColor.toLowerCase().trim()];
-    if (hex && hex !== "#ffffff") {
-      tintEl.style.backgroundColor = hex;
-      tintEl.style.opacity = "0.18";
+  if (torsoPath) {
+    if (isWoman) {
+      torsoPath.setAttribute("d", "M185 70 L215 70 L230 78 L285 110 C275 140 262 170 258 200 C254 235 258 270 268 310 C268 335 240 348 200 348 C160 348 132 335 132 310 C142 270 146 235 142 200 C138 170 125 140 115 110 L170 78 Z");
     } else {
-      tintEl.style.opacity = "0";
+      torsoPath.setAttribute("d", "M185 70 L215 70 L232 78 L296 108 C286 142 278 175 272 205 C268 240 268 275 270 310 C270 335 242 348 200 348 C158 348 130 335 130 310 C132 275 132 240 128 205 C122 175 114 142 104 108 L168 78 Z");
     }
   }
 
-  // Tags sobre el modelo
+  // 2. Silueta y color de la camisa vestida en el maniquí
+  const shirtWomanD = "M172 74 Q200 92 228 74 L276 96 L315 152 L284 178 L264 160 L265 315 Q200 326 135 315 L136 160 L116 178 L85 152 L124 96 Z";
+  const shirtManD = "M170 74 Q200 92 230 74 L288 96 L328 152 L296 178 L272 160 L272 315 Q200 326 128 315 L128 160 L104 178 L72 152 L112 96 Z";
+  const activeShirtD = isWoman ? shirtWomanD : shirtManD;
+
+  if (shirtPath) {
+    shirtPath.setAttribute("d", activeShirtD);
+    const hex = COLOR_HEX_MAP[fittingCurrentColor.toLowerCase().trim()] || "#f97316";
+    shirtPath.setAttribute("fill", hex);
+  }
+  if (shadingPath) {
+    shadingPath.setAttribute("d", activeShirtD);
+  }
+
+  // 3. Estampado / diseño DTF de la camisa en el pecho del maniquí
+  const graphicImg = document.getElementById("shirtGraphicImage");
+  if (graphicImg) {
+    graphicImg.style.opacity = "0.2";
+    setTimeout(() => {
+      graphicImg.setAttribute("href", p.image || "assets/cat.jpg");
+      graphicImg.style.opacity = "1";
+    }, 100);
+  }
+
+  // 4. Efecto de talla sobre la camisa
+  const shirtGroup = document.getElementById("mannequinShirtGroup");
+  if (shirtGroup) {
+    const sizeScaleMap = { "S": 0.96, "M": 1.0, "L": 1.03, "XL": 1.06, "XXL": 1.09 };
+    const scale = sizeScaleMap[fittingCurrentSize] || 1.0;
+    shirtGroup.style.transformOrigin = "200px 180px";
+    shirtGroup.style.transform = `scale(${scale})`;
+    shirtGroup.style.transition = "transform 0.25s ease, opacity 0.25s ease";
+  }
+
+  // 5. Tags flotantes sobre el maniquí
   const tagName = document.getElementById("modelTagName");
   const tagSize = document.getElementById("modelTagSize");
   const tagColor = document.getElementById("modelTagColor");

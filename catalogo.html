@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.8">
-  <link rel="stylesheet" href="css/store.css?v=3.8">
+  <link rel="stylesheet" href="css/main.css?v=3.9">
+  <link rel="stylesheet" href="css/store.css?v=3.9">
 
   <!-- Base de datos en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -131,21 +131,157 @@
               </div>
             </div>
 
-            <!-- 2. COLUMNA CENTRAL: EL MODELO EN MEDIO -->
+            <!-- 2. COLUMNA CENTRAL: EL MANIQUÍ EN MEDIO (FIJO) Y LA CAMISA QUE CAMBIA -->
             <div class="fitting-col-model">
               <div class="model-stage-card">
                 <div class="model-stage-badge" id="modelStageBadge">
-                  <i class="fa-solid fa-camera"></i> <span id="modelStageBadgeText">Modelo Femenina</span>
+                  <i class="fa-solid fa-vest"></i> <span id="modelStageBadgeText">Maniquí Femenino de Alta Moda</span>
                 </div>
 
-                <div class="model-view-viewport">
-                  <!-- Contenedor con la foto del modelo y capa de color -->
-                  <div class="model-image-container" id="modelImageContainer">
-                    <img id="fittingModelImg" src="assets/cat.jpg" alt="Modelo luciendo camisa" class="fitting-model-photo">
-                    <div class="model-color-tint" id="modelColorTint"></div>
-                  </div>
+                <div class="model-view-viewport mannequin-viewport-card" id="mannequinViewport">
+                  <!-- Spotlight / Iluminación de pasarela -->
+                  <div class="mannequin-spotlight"></div>
 
-                  <!-- Overlay flotante con detalle de la prenda sobre el modelo -->
+                  <!-- SVG INTERACTIVO: EL MANIQUÍ PERMANENTE + LA CAMISA INTERCAMBIABLE -->
+                  <svg class="mannequin-interactive-svg" viewBox="0 0 400 550" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="mqWoodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#c68a4c" />
+                        <stop offset="50%" stop-color="#9a622e" />
+                        <stop offset="100%" stop-color="#5a3312" />
+                      </linearGradient>
+
+                      <linearGradient id="mqPoleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#1c1917" />
+                        <stop offset="40%" stop-color="#3d3732" />
+                        <stop offset="70%" stop-color="#574f47" />
+                        <stop offset="100%" stop-color="#1c1917" />
+                      </linearGradient>
+
+                      <linearGradient id="mqLinenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#ded4c5" />
+                        <stop offset="35%" stop-color="#f8f2e9" />
+                        <stop offset="75%" stop-color="#ede3d5" />
+                        <stop offset="100%" stop-color="#cfc4b2" />
+                      </linearGradient>
+
+                      <linearGradient id="mqShirtShade" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#000000" stop-opacity="0.28" />
+                        <stop offset="25%" stop-color="#ffffff" stop-opacity="0.14" />
+                        <stop offset="60%" stop-color="#000000" stop-opacity="0" />
+                        <stop offset="85%" stop-color="#ffffff" stop-opacity="0.16" />
+                        <stop offset="100%" stop-color="#000000" stop-opacity="0.32" />
+                      </linearGradient>
+
+                      <filter id="mqSoftShadow" x="-10%" y="-10%" width="130%" height="130%">
+                        <feDropShadow dx="0" dy="6" stdDeviation="7" flood-opacity="0.14" />
+                      </filter>
+
+                      <filter id="mqShirtShadow" x="-10%" y="-10%" width="130%" height="130%">
+                        <feDropShadow dx="0" dy="7" stdDeviation="9" flood-opacity="0.22" />
+                      </filter>
+
+                      <clipPath id="shirtGraphicClip">
+                        <rect x="142" y="145" width="116" height="130" rx="8" />
+                      </clipPath>
+                    </defs>
+
+                    <!-- 1. BASE Y PEDESTAL FIJO DEL MANIQUÍ -->
+                    <!-- Sombra en el suelo -->
+                    <ellipse cx="200" cy="528" rx="85" ry="16" fill="rgba(23, 21, 18, 0.12)" />
+                    <ellipse cx="200" cy="526" rx="55" ry="10" fill="rgba(23, 21, 18, 0.20)" />
+
+                    <!-- Base circular de madera noble/metal -->
+                    <ellipse cx="200" cy="520" rx="56" ry="11" fill="url(#mqPoleGrad)" />
+                    <ellipse cx="200" cy="518" rx="53" ry="9" fill="#2d2824" />
+                    <ellipse cx="200" cy="517" rx="18" ry="4" fill="#524a43" />
+                    <!-- Poste central del pedestal -->
+                    <rect x="195" y="340" width="10" height="178" rx="3" fill="url(#mqPoleGrad)" />
+                    <rect x="197" y="340" width="2" height="178" fill="rgba(255,255,255,0.22)" />
+
+                    <!-- 2. CUERPO DEL MANIQUÍ (PERMANENTE Y FIJO) -->
+                    <g id="mannequinBodyGroup" filter="url(#mqSoftShadow)">
+                      <!-- Silueta del torso del maniquí -->
+                      <path id="mannequinTorsoPath" d="M185 70 L215 70 L230 78 L285 110 C275 140 262 170 258 200 C254 235 258 270 268 310 C268 335 240 348 200 348 C160 348 132 335 132 310 C142 270 146 235 142 200 C138 170 125 140 115 110 L170 78 Z" fill="url(#mqLinenGrad)" stroke="#cbbfae" stroke-width="1.5" />
+
+                      <!-- Costuras artesanales del maniquí de costura -->
+                      <path id="mannequinSeamLeft" d="M148 115 C162 180 162 250 152 325" fill="none" stroke="#baad9b" stroke-width="1.2" stroke-dasharray="3,3" />
+                      <path id="mannequinSeamRight" d="M252 115 C238 180 238 250 248 325" fill="none" stroke="#baad9b" stroke-width="1.2" stroke-dasharray="3,3" />
+                      <line x1="200" y1="75" x2="200" y2="346" stroke="#baad9b" stroke-width="1" stroke-dasharray="4,4" opacity="0.6" />
+
+                      <!-- Cuello de tela del maniquí -->
+                      <path d="M185 45 L215 45 L218 72 L182 72 Z" fill="url(#mqLinenGrad)" stroke="#cbbfae" stroke-width="1.2" />
+
+                      <!-- Remate superior de madera noble del maniquí -->
+                      <ellipse cx="200" cy="45" rx="18" ry="7" fill="url(#mqWoodGrad)" />
+                      <ellipse cx="200" cy="38" rx="13" ry="8" fill="url(#mqWoodGrad)" stroke="#553010" stroke-width="1" />
+                      <ellipse cx="200" cy="35" rx="7" ry="4" fill="#d99f60" opacity="0.6" />
+                    </g>
+
+                    <!-- 3. LA CAMISA VESTIDA EN EL MANIQUÍ (SOLO ESTO SE CAMBIA) -->
+                    <g id="mannequinShirtGroup" filter="url(#mqShirtShadow)">
+                      <!-- Tela / silueta de la camisa (cambia de color dinámicamente) -->
+                      <path id="shirtSilhouette" class="shirt-fabric" d="
+                        M172 74
+                        Q200 92 228 74
+                        L276 96
+                        L315 152
+                        L284 178
+                        L264 160
+                        L265 315
+                        Q200 326 135 315
+                        L136 160
+                        L116 178
+                        L85 152
+                        L124 96
+                        Z
+                      " fill="#f97316" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
+
+                      <!-- Volumen y sombras 3D realistas de la tela de algodón -->
+                      <path id="shirtShadingPath" d="
+                        M172 74
+                        Q200 92 228 74
+                        L276 96
+                        L315 152
+                        L284 178
+                        L264 160
+                        L265 315
+                        Q200 326 135 315
+                        L136 160
+                        L116 178
+                        L85 152
+                        L124 96
+                        Z
+                      " fill="url(#mqShirtShade)" pointer-events="none" />
+
+                      <!-- Pliegues realistas de caída textil -->
+                      <path d="M136 162 Q152 188 150 220" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="2" stroke-linecap="round" />
+                      <path d="M136 162 Q152 188 150 220" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-linecap="round" />
+                      <path d="M264 162 Q248 188 250 220" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="2" stroke-linecap="round" />
+                      <path d="M264 162 Q248 188 250 220" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-linecap="round" />
+                      <path d="M148 245 Q200 258 252 245" fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="2" stroke-linecap="round" />
+                      <path d="M152 278 Q200 292 248 278" fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="2" stroke-linecap="round" />
+                      <path d="M138 310 Q200 320 262 310" fill="none" stroke="rgba(0,0,0,0.16)" stroke-width="1" stroke-dasharray="3,2" />
+
+                      <!-- Cuello acanalado de la camisa (Crewneck) -->
+                      <path d="M170 73 Q200 95 230 73 Q200 87 170 73 Z" fill="rgba(0,0,0,0.16)" />
+                      <path d="M171 73 Q200 93 229 73" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2" />
+                      <path d="M174 76 Q200 96 226 76" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="2,2" />
+
+                      <!-- Costuras de las mangas -->
+                      <line x1="86" y1="151" x2="115" y2="177" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
+                      <line x1="88" y1="147" x2="117" y2="173" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2,2" />
+                      <line x1="314" y1="151" x2="285" y2="177" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
+                      <line x1="312" y1="147" x2="283" y2="173" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2,2" />
+
+                      <!-- 4. ÁREA DEL ESTAMPADO / DISEÑO DTF EN EL PECHO -->
+                      <g id="shirtGraphicContainer" clip-path="url(#shirtGraphicClip)">
+                        <image id="shirtGraphicImage" href="assets/cat.jpg" x="145" y="148" width="110" height="120" preserveAspectRatio="xMidYMid meet" style="transition: opacity 0.25s ease;" />
+                      </g>
+                    </g>
+                  </svg>
+
+                  <!-- Overlay flotante con detalle de la prenda sobre el maniquí -->
                   <div class="model-overlay-tag">
                     <div class="model-tag-name" id="modelTagName">Camisa Naranja Vibrante Dama</div>
                     <div class="model-tag-meta">
@@ -156,7 +292,7 @@
                 </div>
 
                 <div class="model-stage-footer">
-                  <span><i class="fa-solid fa-sparkles"></i> Vista interactiva en modelo</span>
+                  <span><i class="fa-solid fa-vest"></i> Maniquí fijo · Solo cambia la camisa</span>
                   <span id="modelPriceTag" class="model-price-tag">L. 300.00</span>
                 </div>
               </div>
@@ -585,8 +721,8 @@
   </div>
 
   <!-- Scripts diferidos -->
-  <script defer src="js/store.js?v=3.8"></script>
-  <script defer src="js/app.js?v=3.8"></script>
+  <script defer src="js/store.js?v=3.9"></script>
+  <script defer src="js/app.js?v=3.9"></script>
 
 </body>
 </html>
