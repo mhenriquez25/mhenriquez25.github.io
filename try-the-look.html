@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Try the Look · Moda Casual</title>
   
-  <!-- Tipografía moderna Inter & FontAwesome -->
+  <!-- Tipografía moderna Inter & FontAwesome 6 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,23 +13,19 @@
 
   <style>
     /* =========================================================
-       VARIABLES Y RESET MINIMALISTA PREMIUM
+       1. VARIABLES Y RESET MINIMALISTA PREMIUM
     ========================================================= */
     :root {
-      --bg-canvas: #f4f4f2;
-      --bg-stage: radial-gradient(circle at 50% 38%, #ffffff 0%, #f4f4f2 68%, #eaeae6 100%);
+      --bg-body: #f4f4f2;
+      --bg-stage: radial-gradient(ellipse at 50% 40%, #ffffff 0%, #f4f4f2 68%, #e8e8e4 100%);
       --text-main: #121212;
       --text-muted: #737373;
       --text-light: #a3a3a3;
-      --border-subtle: rgba(0, 0, 0, 0.07);
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --accent: #121212;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 24px;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --cubic-smooth: cubic-bezier(0.22, 1, 0.36, 1);
-      --anim-duration: 580ms;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --card-glass: rgba(255, 255, 255, 0.94);
+      --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+      --anim-time: 600ms;
+      --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     *, *::before, *::after {
@@ -39,8 +35,8 @@
     }
 
     body {
-      font-family: var(--font-sans);
-      background-color: var(--bg-canvas);
+      font-family: var(--font-inter);
+      background-color: var(--bg-body);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -51,20 +47,22 @@
     }
 
     /* =========================================================
-       BARRA DE NAVEGACIÓN SUPERIOR
+       2. NAVEGACIÓN SUPERIOR MINIMALISTA
     ========================================================= */
     .site-nav {
-      position: relative;
-      z-index: 100;
+      width: 100%;
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 24px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 48px;
-      background: transparent;
+      position: relative;
+      z-index: 50;
     }
 
     .brand-logo {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 2.2px;
       text-transform: uppercase;
@@ -95,7 +93,7 @@
       color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s ease;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
     .nav-links a:hover,
@@ -106,59 +104,72 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .nav-action-btn {
-      background: none;
-      border: none;
+    .bag-icon-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      font-size: 15px;
-      cursor: pointer;
-      position: relative;
-      padding: 6px;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .nav-action-btn:hover {
-      opacity: 0.75;
-      transform: translateY(-1px);
-    }
-
-    .bag-counter-badge {
-      position: absolute;
-      top: 0px;
-      right: -2px;
-      background: var(--text-main);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      width: 16px;
-      height: 16px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s var(--ease-smooth);
+    }
+
+    .bag-icon-btn:hover {
+      background: var(--text-main);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .bag-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--text-main);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
+    .bag-icon-btn:hover .bag-badge {
+      background: #ffffff;
+      color: var(--text-main);
+      border-color: var(--text-main);
+    }
+
     /* =========================================================
-       HERO: TRY THE LOOK (LAYOUT PRINCIPAL)
+       3. ESTRUCTURA HERO: TRY THE LOOK
     ========================================================= */
-    .hero-container {
+    .hero-layout {
       flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 390px;
-      gap: 36px;
-      padding: 10px 48px 48px 48px;
-      max-width: 1620px;
-      margin: 0 auto;
       width: 100%;
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 10px 40px 40px 40px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 36px;
       position: relative;
     }
 
-    /* Columna Izquierda: Escenario del Carrusel */
-    .carousel-column {
+    .stage-column {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -166,10 +177,10 @@
       min-height: 640px;
     }
 
-    /* Header de la sección */
+    /* Header superior izquierdo */
     .hero-header {
-      margin-bottom: 12px;
-      animation: fadeUp 0.8s var(--cubic-smooth) forwards;
+      margin-bottom: 16px;
+      animation: entranceHeader 0.7s var(--ease-smooth) forwards;
     }
 
     .hero-title {
@@ -182,14 +193,14 @@
     }
 
     .hero-subtitle {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 400;
       color: var(--text-muted);
-      letter-spacing: 0.2px;
+      letter-spacing: 0.1px;
     }
 
     /* =========================================================
-       ESCENARIO DEL CARRUSEL INTERACTIVO CON INERCIA
+       4. ESCENARIO DEL CARRUSEL CENTRAL (PERSPECTIVA 3D)
     ========================================================= */
     .carousel-stage {
       flex: 1;
@@ -198,14 +209,14 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      border-radius: var(--radius-lg);
+      border-radius: 24px;
       background: var(--bg-stage);
       touch-action: pan-y;
       user-select: none;
       cursor: grab;
-      min-height: 520px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.05);
+      min-height: 530px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 20px 48px -24px rgba(0, 0, 0, 0.06);
     }
 
     .carousel-stage.is-dragging {
@@ -213,19 +224,19 @@
     }
 
     /* Luz de estudio central */
-    .stage-ambient-spotlight {
+    .stage-ambient-light {
       position: absolute;
-      top: 10%;
+      top: 12%;
       left: 50%;
       transform: translateX(-50%);
-      width: 480px;
-      height: 380px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%);
+      width: 520px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 72%);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Pista donde residen los modelos */
+    /* Pista donde se colocan los modelos */
     .carousel-track {
       position: absolute;
       top: 0;
@@ -235,15 +246,15 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding-bottom: 30px;
+      padding-bottom: 24px;
       pointer-events: none;
     }
 
-    /* Tarjeta individual de modelo */
+    /* Tarjeta individual del modelo */
     .model-card {
       position: absolute;
-      bottom: 24px;
-      width: 250px;
+      bottom: 20px;
+      width: 260px;
       height: 480px;
       display: flex;
       flex-direction: column;
@@ -251,18 +262,18 @@
       justify-content: flex-end;
       pointer-events: auto;
       cursor: pointer;
-      transition: transform var(--anim-duration) var(--cubic-smooth),
-                  opacity var(--anim-duration) var(--cubic-smooth),
-                  filter var(--anim-duration) var(--cubic-smooth);
+      transition: transform var(--anim-time) var(--ease-smooth),
+                  opacity var(--anim-time) var(--ease-smooth),
+                  filter var(--anim-time) var(--ease-smooth);
       will-change: transform, opacity, filter;
     }
 
-    /* Animación de entrada inicial escalonada */
-    .model-card.intro-anim {
-      animation: modelEntrance 0.8s var(--cubic-smooth) backwards;
+    /* Animación de entrada escalonada al cargar */
+    .model-card.anim-entrance {
+      animation: modelEntrance 0.8s var(--ease-smooth) backwards;
     }
 
-    .model-figure-wrap {
+    .model-figure-container {
       width: 100%;
       height: 440px;
       position: relative;
@@ -271,139 +282,87 @@
       justify-content: center;
     }
 
-    .model-svg-figure {
-      width: 100%;
-      height: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      pointer-events: none;
-      transition: filter 0.3s ease;
-    }
-
-    /* Sombra de contacto suave en el suelo */
-    
-    .model-3d-character-wrap {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .model-3d-render-img {
+    .model-3d-base-img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       pointer-events: none;
-      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.22));
-      transition: transform var(--anim-duration) var(--cubic-smooth), filter var(--anim-duration) var(--cubic-smooth);
+      filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.18));
+      transition: filter 0.35s ease, transform 0.35s ease;
     }
 
-    .model-card[data-depth="0"] .model-3d-render-img,
-    .runway-model-card.active-look .model-3d-render-img {
-      filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.28));
-      transform: translateY(-4px);
-    }
-
-    .model-3d-apparel-tint {
+    /* SVG de la camiseta ajustada sobre el torso del modelo 3D */
+    .model-3d-tshirt-svg {
       position: absolute;
-      top: 23%;
-      left: 29%;
-      width: 42%;
-      height: 25%;
-      border-radius: 12px;
-      clip-path: polygon(18% 0%, 82% 0%, 100% 45%, 88% 100%, 12% 100%, 0% 45%);
-      mix-blend-mode: multiply;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      transition: background-color 0.35s ease, opacity 0.35s ease;
-      z-index: 2;
     }
 
-    .model-3d-chest-dtf {
-      position: absolute;
-      top: 27%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 22%;
-      height: 18%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .model-3d-chest-dtf img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
-    }
-
+    /* Sombra suave de contacto en el suelo */
     .model-floor-shadow {
       width: 180px;
       height: 22px;
       background: radial-gradient(ellipse at center, rgba(18, 18, 18, 0.32) 0%, rgba(18, 18, 18, 0) 70%);
       border-radius: 50%;
       margin-top: -8px;
-      transition: transform var(--anim-duration) var(--cubic-smooth),
-                  opacity var(--anim-duration) var(--cubic-smooth);
+      transition: transform var(--anim-time) var(--ease-smooth),
+                  opacity var(--anim-time) var(--ease-smooth);
       pointer-events: none;
     }
 
-    /* Estados de profundidad en perspectiva 3D */
+    /* =========================================================
+       ESTADOS DEL MODELO EN LA PASARELA SEGÚN PROFUNDIDAD
+       (Centro: activo 100%, lados: scale 0.8-0.7, opacity 0.4-0.2, blur 2-6px, desaturado)
+    ========================================================= */
     .model-card[data-depth="0"] {
       z-index: 10;
       transform: translateX(0) scale(1);
       opacity: 1;
       filter: blur(0px) grayscale(0%) brightness(1);
     }
-    .model-card[data-depth="0"] .model-svg-figure {
-      filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.16));
+    .model-card[data-depth="0"] .model-3d-base-img {
+      filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.24));
     }
     .model-card[data-depth="0"] .model-floor-shadow {
-      transform: scale(1.1);
+      transform: scale(1.15);
       opacity: 1;
     }
 
     .model-card[data-depth="-1"] {
       z-index: 5;
-      transform: translateX(-195px) scale(0.82);
-      opacity: 0.45;
-      filter: blur(2px) grayscale(60%) brightness(0.95);
+      transform: translateX(-195px) scale(0.80);
+      opacity: 0.40;
+      filter: blur(2px) grayscale(65%) brightness(0.95);
     }
     .model-card[data-depth="1"] {
       z-index: 5;
-      transform: translateX(195px) scale(0.82);
-      opacity: 0.45;
-      filter: blur(2px) grayscale(60%) brightness(0.95);
+      transform: translateX(195px) scale(0.80);
+      opacity: 0.40;
+      filter: blur(2px) grayscale(65%) brightness(0.95);
     }
 
     .model-card[data-depth="-2"] {
       z-index: 3;
       transform: translateX(-355px) scale(0.70);
-      opacity: 0.22;
-      filter: blur(4.5px) grayscale(85%) brightness(0.90);
+      opacity: 0.20;
+      filter: blur(5px) grayscale(90%) brightness(0.90);
     }
     .model-card[data-depth="2"] {
       z-index: 3;
       transform: translateX(355px) scale(0.70);
-      opacity: 0.22;
-      filter: blur(4.5px) grayscale(85%) brightness(0.90);
+      opacity: 0.20;
+      filter: blur(5px) grayscale(90%) brightness(0.90);
     }
 
-    .model-card[data-depth="-3"] {
-      z-index: 1;
-      transform: translateX(-490px) scale(0.60);
-      opacity: 0.08;
-      filter: blur(6.5px) grayscale(100%) brightness(0.85);
-    }
+    .model-card[data-depth="-3"],
     .model-card[data-depth="3"] {
       z-index: 1;
-      transform: translateX(490px) scale(0.60);
-      opacity: 0.08;
-      filter: blur(6.5px) grayscale(100%) brightness(0.85);
+      transform: translateX(0) scale(0.60);
+      opacity: 0.05;
+      filter: blur(7px) grayscale(100%);
     }
 
     .model-card[data-depth="hidden"] {
@@ -413,7 +372,7 @@
       transform: scale(0.5);
     }
 
-    /* Etiqueta flotante del outfit en el look activo */
+    /* Badge flotante del look activo */
     .model-badge-tag {
       position: absolute;
       top: 10px;
@@ -438,8 +397,10 @@
       transform: translateY(0);
     }
 
-    /* Cursor personalizado "DRAG" al pasar sobre el carrusel */
-    .drag-bubble-cursor {
+    /* =========================================================
+       5. CURSOR PERSONALIZADO "DRAG"
+    ========================================================= */
+    .drag-cursor {
       position: fixed;
       width: 52px;
       height: 52px;
@@ -455,29 +416,29 @@
       pointer-events: none;
       z-index: 200;
       transform: translate(-50%, -50%) scale(0);
-      transition: transform 0.22s var(--cubic-smooth), opacity 0.22s ease;
+      transition: transform 0.22s var(--ease-smooth), opacity 0.22s ease;
       opacity: 0;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
-    .drag-bubble-cursor.visible {
+    .drag-cursor.visible {
       transform: translate(-50%, -50%) scale(1);
       opacity: 1;
     }
 
-    .drag-bubble-cursor.grabbing {
+    .drag-cursor.grabbing {
       transform: translate(-50%, -50%) scale(0.85);
-      background: #000;
+      background: #000000;
     }
 
     /* =========================================================
-       BARRA DE PROGRESO Y CONTROLES INFERIORES
+       6. BARRA DE PROGRESO Y CONTROLES INFERIORES
     ========================================================= */
     .carousel-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 18px;
+      margin-top: 20px;
       padding: 0 8px;
     }
 
@@ -498,7 +459,7 @@
       justify-content: center;
       cursor: pointer;
       font-size: 14px;
-      transition: all 0.25s var(--cubic-smooth);
+      transition: all 0.25s var(--ease-smooth);
     }
 
     .nav-arrow-btn:hover {
@@ -538,7 +499,7 @@
       width: 16.66%;
       background: var(--text-main);
       border-radius: 2px;
-      transition: width var(--anim-duration) var(--cubic-smooth);
+      transition: width var(--anim-time) var(--ease-smooth);
     }
 
     .progress-counter {
@@ -550,7 +511,7 @@
     }
 
     /* =========================================================
-       PANEL LATERAL: "IN THIS LOOK"
+       7. PANEL LATERAL: "IN THIS LOOK"
     ========================================================= */
     .sidebar-column {
       display: flex;
@@ -558,10 +519,10 @@
     }
 
     .in-this-look-card {
-      background: var(--card-bg);
+      background: var(--card-glass);
       backdrop-filter: blur(16px);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
+      border-radius: 24px;
       padding: 30px 28px;
       display: flex;
       flex-direction: column;
@@ -606,7 +567,7 @@
       align-items: center;
       gap: 16px;
       padding: 12px;
-      border-radius: var(--radius-md);
+      border-radius: 14px;
       background: rgba(244, 244, 242, 0.65);
       border: 1px solid rgba(0, 0, 0, 0.04);
       transition: transform 0.25s ease, background 0.25s ease;
@@ -622,7 +583,7 @@
 
     /* Animación de entrada escalonada al cambiar de look */
     .product-row-item.anim-in {
-      animation: itemFadeSlide 0.45s var(--cubic-smooth) forwards;
+      animation: itemFadeSlide 0.45s var(--ease-smooth) forwards;
     }
     .product-row-item:nth-child(1) { animation-delay: 40ms; }
     .product-row-item:nth-child(2) { animation-delay: 90ms; }
@@ -631,7 +592,7 @@
     .product-thumb-box {
       width: 64px;
       height: 64px;
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       background: #ffffff;
       display: flex;
       align-items: center;
@@ -718,7 +679,7 @@
     .add-to-bag-btn {
       width: 100%;
       height: 52px;
-      border-radius: var(--radius-md);
+      border-radius: 14px;
       background: var(--text-main);
       color: #ffffff;
       border: none;
@@ -730,7 +691,7 @@
       justify-content: center;
       gap: 10px;
       cursor: pointer;
-      transition: all 0.3s var(--cubic-smooth);
+      transition: all 0.3s var(--ease-smooth);
       position: relative;
       overflow: hidden;
     }
@@ -757,7 +718,7 @@
       background: #121212;
       color: #ffffff;
       padding: 14px 22px;
-      border-radius: var(--radius-md);
+      border-radius: 14px;
       font-size: 13px;
       font-weight: 500;
       display: flex;
@@ -766,7 +727,7 @@
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
       transform: translateY(100px);
       opacity: 0;
-      transition: all 0.4s var(--cubic-smooth);
+      transition: all 0.4s var(--ease-smooth);
       z-index: 999;
     }
 
@@ -776,59 +737,38 @@
     }
 
     /* =========================================================
-       ANIMACIONES KEYFRAMES
+       8. KEYFRAMES
     ========================================================= */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes entranceHeader {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes modelEntrance {
-      from {
-        opacity: 0;
-        transform: translateY(45px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(45px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes itemFadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* =========================================================
-       RESPONSIVE DESIGN (TABLETS Y MÓVILES)
+       9. RESPONSIVE DESIGN
     ========================================================= */
     @media (max-width: 1100px) {
-      .hero-container {
+      .hero-layout {
         grid-template-columns: 1fr;
         padding: 0 24px 36px 24px;
         gap: 28px;
       }
-
       .site-nav {
         padding: 18px 24px;
       }
-
-      .carousel-column {
+      .stage-column {
         min-height: 520px;
       }
-
       .sidebar-column {
         max-width: 600px;
         margin: 0 auto;
@@ -838,26 +778,21 @@
 
     @media (max-width: 768px) {
       .nav-links {
-        display: none; /* Menú simplificado en móvil */
+        display: none;
       }
-
       .hero-title {
         font-size: 28px;
       }
-
       .model-card[data-depth="-2"],
       .model-card[data-depth="2"] {
         display: none;
       }
-
       .model-card[data-depth="-1"] {
         transform: translateX(-130px) scale(0.78);
       }
-
       .model-card[data-depth="1"] {
         transform: translateX(130px) scale(0.78);
       }
-
       .progress-track-wrapper {
         margin: 0 12px;
       }
@@ -867,10 +802,10 @@
 <body>
 
   <!-- =========================================================
-       BARRA DE NAVEGACIÓN
+       NAVEGACIÓN SUPERIOR
   ========================================================= -->
   <header class="site-nav">
-    <a href="index.html" class="brand-logo" aria-label="Ir al inicio">
+    <a href="index.html" class="brand-logo" aria-label="Ir al inicio de Moda Casual">
       <span class="brand-dot"></span>
       MODA CASUAL
     </a>
@@ -886,12 +821,9 @@
     </nav>
 
     <div class="nav-actions">
-      <button type="button" class="nav-action-btn" aria-label="Buscar productos">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-      <button type="button" class="nav-action-btn" aria-label="Ver bolsa de compras" onclick="showToast('Bolsa actualizada')">
+      <button type="button" class="bag-icon-btn" aria-label="Ver bolsa de compras" onclick="showToast('Bolsa de compras abierta')">
         <i class="fa-solid fa-bag-shopping"></i>
-        <span class="bag-counter-badge" id="bagCounter">0</span>
+        <span class="bag-badge" id="bagCounter">0</span>
       </button>
     </div>
   </header>
@@ -899,33 +831,33 @@
   <!-- =========================================================
        HERO CONTAINER: TRY THE LOOK
   ========================================================= -->
-  <main class="hero-container" role="main">
+  <main class="hero-layout" role="main">
 
     <!-- COLUMNA IZQUIERDA: CARRUSEL CENTRAL 3D -->
-    <section class="carousel-column" aria-label="Pasarela interactiva Try the Look">
+    <section class="stage-column" aria-label="Pasarela interactiva Try the Look">
       
-      <!-- Título de la sección -->
+      <!-- Encabezado superior izquierdo -->
       <div class="hero-header">
         <h1 class="hero-title">Try the Look.</h1>
         <p class="hero-subtitle">Arrastra para explorar, toca un look para ver las prendas.</p>
       </div>
 
-      <!-- ESCENARIO DEL CARRUSEL INTERACTIVO -->
+      <!-- Escenario del carrusel interactivo -->
       <div class="carousel-stage" id="carouselStage"
            tabindex="0"
            role="region"
            aria-roledescription="carousel"
-           aria-label="Carrusel de outfits de temporada">
+           aria-label="Carrusel de outfits Try the Look">
 
-        <div class="stage-ambient-spotlight"></div>
+        <div class="stage-ambient-light"></div>
 
         <div class="carousel-track" id="carouselTrack" aria-live="polite">
-          <!-- Las tarjetas de los modelos se inyectan dinámicamente desde LOOKS_DATA -->
+          <!-- Modelos inyectados dinámicamente -->
         </div>
 
       </div>
 
-      <!-- CONTROLES INFERIORES Y BARRA DE PROGRESO -->
+      <!-- Barra de progreso y controles inferiores -->
       <div class="carousel-footer">
         
         <div class="carousel-nav-arrows">
@@ -945,7 +877,7 @@
         </div>
 
         <div style="font-size: 11px; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 6px;">
-          <i class="fa-regular fa-hand-pointer"></i> Desliza o usa teclado
+          <i class="fa-regular fa-hand-pointer"></i> Desliza o usa flechas
         </div>
 
       </div>
@@ -958,15 +890,15 @@
         
         <div class="look-header-meta">
           <span class="look-micro-tag">In this look</span>
-          <h2 class="look-headline" id="lookHeadline">Downtown Monochrome</h2>
+          <h2 class="look-headline" id="lookHeadline">Graphite Everyday</h2>
         </div>
 
-        <!-- LISTA DE LAS 3 PRENDAS DEL OUTFIT -->
+        <!-- Lista de 3 prendas del outfit -->
         <ul class="look-products-list" id="productsList">
-          <!-- Renderizado dinámico con animación escalonada -->
+          <!-- Inyectado dinámicamente -->
         </ul>
 
-        <!-- TOTAL Y BOTÓN DE COMPRA -->
+        <!-- Total y botón de compra -->
         <div class="look-footer-checkout">
           <div class="outfit-total-row">
             <span class="outfit-total-label">Total del outfit:</span>
@@ -985,7 +917,7 @@
   </main>
 
   <!-- Cursor interactivo tipo burbuja "DRAG" -->
-  <div class="drag-bubble-cursor" id="dragCursor">DRAG</div>
+  <div class="drag-cursor" id="dragCursor">DRAG</div>
 
   <!-- Toast flotante de confirmación -->
   <div class="cart-toast" id="cartToast">
@@ -994,19 +926,18 @@
   </div>
 
   <!-- =========================================================
-       JAVASCRIPT: DATOS, INERCIA, ARRASTRE Y ANIMACIONES
-  ========================================================= -->
+       JAVASCRIPT: DATOS, FÍSICA DE INERCIA, SNAP Y CONTROL
+  ========================================================= */
+  -->
   <script>
     /* =========================================================
-       1. ARRAY DE LOOKS (DATOS EXTENSIBLES Y FÁCILES DE REEMPLAZAR)
+       A. ARRAY DE LOOKS (FÁCIL DE MODIFICAR Y REEMPLAZAR)
     ========================================================= */
     const LOOKS_DATA = [
       {
         id: "look-01",
         title: "Downtown Monochrome",
-        badge: "Look 01",
         shirtColor: "#171512",
-        denimColor: "#759bbd",
         products: [
           {
             category: "T-Shirt",
@@ -1034,9 +965,7 @@
       {
         id: "look-02",
         title: "Olive Earth Casual",
-        badge: "Look 02",
         shirtColor: "#2d4a22",
-        denimColor: "#8da5b8",
         products: [
           {
             category: "Tee DTF",
@@ -1064,9 +993,7 @@
       {
         id: "look-03",
         title: "Burgundy Velvet Flow",
-        badge: "Look 03",
         shirtColor: "#6b1426",
-        denimColor: "#6c8da8",
         products: [
           {
             category: "Prenda Superior",
@@ -1094,9 +1021,7 @@
       {
         id: "look-04",
         title: "Vibrant Tangerine Chic",
-        badge: "Look 04",
         shirtColor: "#d9531e",
-        denimColor: "#7e9cb6",
         products: [
           {
             category: "Crop / Tee",
@@ -1124,9 +1049,7 @@
       {
         id: "look-05",
         title: "Heritage Christian Cut",
-        badge: "Look 05",
         shirtColor: "#1a1a1a",
-        denimColor: "#829eb7",
         products: [
           {
             category: "Tee DTF",
@@ -1154,9 +1077,7 @@
       {
         id: "look-06",
         title: "Sunset Terracotta Modern",
-        badge: "Look 06",
         shirtColor: "#b45309",
-        denimColor: "#688aa6",
         products: [
           {
             category: "Oversized Tee",
@@ -1184,81 +1105,99 @@
     ];
 
     /* =========================================================
-       2. GENERADOR DE FIGURA HUMANA COMPLETA (MODELO SVG)
-       Permite mostrar modelos de cuerpo entero con prendas a medida
+       B. GENERADOR DEL MODELO 3D CON CAMISETA Y ESTAMPADO
     ========================================================= */
-    function renderModelFigure(look) {
+    function renderModelCardHTML(look, idx) {
       const shirtCol = look.shirtColor || "#171512";
       const isWhite = shirtCol.toLowerCase() === "#ffffff" || shirtCol.toLowerCase() === "#f8f9fa";
       const mainGraphic = (look.products && look.products[0] && look.products[0].image) || "assets/verd1.png";
       const uid = `m3d-${look.id}`;
 
       return `
-        <div class="model-3d-character-wrap" id="wrap-${uid}">
-          <!-- Personaje 3D Real Renderizado -->
-          <img src="assets/model-3d.webp" alt="${look.title}" class="model-3d-render-img">
-
-          <!-- Camiseta DTF sobre el torso del modelo 3D -->
-          <svg class="model-3d-tshirt-svg" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <clipPath id="clip-${uid}">
-                <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z" />
-              </clipPath>
-              <linearGradient id="shade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.18'}" />
-                <stop offset="50%" stop-color="#000000" stop-opacity="0" />
-                <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.12' : '0.36'}" />
-              </linearGradient>
-            </defs>
-
-            <path class="model-3d-shirt-path"
-              d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
-              fill="${shirtCol}"
-              style="transition: fill 0.35s ease;"
-            />
-
-            <path d="M 440 238 Q 512 280 584 238 Q 512 292 440 238" fill="rgba(0,0,0,${isWhite ? '0.15' : '0.3'})"/>
-
-            <g clip-path="url(#clip-${uid})">
-              <image href="${mainGraphic}" x="420" y="285" width="184" height="175" preserveAspectRatio="xMidYMid contain" />
-            </g>
-
-            <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
-              fill="url(#shade-${uid})"
-              pointer-events="none"
-            />
-
-            <path d="M 398 360 Q 450 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
-            <path d="M 626 360 Q 574 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
-            <path d="M 392 485 Q 512 498 632 485" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.22'})" stroke-width="2" fill="none"/>
-          </svg>
-        </div>
-      `;
-    }
-
-    function initCarouselDOM() {
-      trackEl.innerHTML = LOOKS_DATA.map((look, idx) => `
-        <div class="model-card intro-anim"
+        <div class="model-card anim-entrance"
              id="card-${idx}"
              data-index="${idx}"
              style="animation-delay: ${idx * 65}ms;"
              onclick="onCardClick(${idx})"
              tabindex="0"
              role="button"
-             aria-label="Ver ${look.title}">
+             aria-label="Ver outfit ${look.title}">
+          
           <span class="model-badge-tag"><i class="fa-solid fa-sparkles"></i> ${look.title}</span>
-          <div class="model-figure-wrap">
-            ${renderModelFigure(look)}
+          
+          <div class="model-figure-container">
+            <!-- Modelo 3D Render Real -->
+            <img src="assets/model-3d.webp" alt="${look.title}" class="model-3d-base-img">
+
+            <!-- Camiseta DTF colocada directamente sobre el torso del modelo 3D -->
+            <svg class="model-3d-tshirt-svg" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <clipPath id="clip-${uid}">
+                  <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z" />
+                </clipPath>
+                <linearGradient id="shade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.18'}" />
+                  <stop offset="50%" stop-color="#000000" stop-opacity="0" />
+                  <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.12' : '0.36'}" />
+                </linearGradient>
+              </defs>
+
+              <!-- Silueta de la camiseta sobre el torso con color dinámico -->
+              <path class="model-3d-shirt-path"
+                d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
+                fill="${shirtCol}"
+                style="transition: fill 0.35s ease;"
+              />
+
+              <!-- Cuello acanalado de la playera -->
+              <path d="M 440 238 Q 512 280 584 238 Q 512 292 440 238" fill="rgba(0,0,0,${isWhite ? '0.15' : '0.3'})"/>
+
+              <!-- ESTAMPADO DTF DE LA CAMISA EN EL PECHO DEL MODELO 3D -->
+              <g clip-path="url(#clip-${uid})">
+                <image href="${mainGraphic}" x="420" y="285" width="184" height="175" preserveAspectRatio="xMidYMid contain" />
+              </g>
+
+              <!-- Sombreado realista del tejido de la camiseta -->
+              <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
+                fill="url(#shade-${uid})"
+                pointer-events="none"
+              />
+
+              <!-- Pliegues y arrugas suaves en sisa y torso -->
+              <path d="M 398 360 Q 450 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
+              <path d="M 626 360 Q 574 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
+              <path d="M 392 485 Q 512 498 632 485" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.22'})" stroke-width="2" fill="none"/>
+            </svg>
           </div>
+
           <div class="model-floor-shadow"></div>
         </div>
-      `).join("");
+      `;
+    }
 
+    /* =========================================================
+       C. ESTADO DEL CARRUSEL Y NAVEGACIÓN
+    ========================================================= */
+    let activeIndex = 0;
+    const totalLooks = LOOKS_DATA.length;
+    let bagTotalCount = 0;
+
+    const trackEl = document.getElementById("carouselTrack");
+    const stageEl = document.getElementById("carouselStage");
+    const progressFillEl = document.getElementById("progressFill");
+    const progressCounterEl = document.getElementById("progressCounter");
+    const headlineEl = document.getElementById("lookHeadline");
+    const productsListEl = document.getElementById("productsList");
+    const outfitTotalEl = document.getElementById("outfitTotal");
+    const dragCursorEl = document.getElementById("dragCursor");
+    const bagCounterEl = document.getElementById("bagCounter");
+
+    function initCarouselDOM() {
+      trackEl.innerHTML = LOOKS_DATA.map((look, idx) => renderModelCardHTML(look, idx)).join("");
       updatePositions();
       updateSidebar(LOOKS_DATA[activeIndex]);
     }
 
-    // Actualizar posiciones 3D relativas
     function updatePositions() {
       const cards = trackEl.querySelectorAll(".model-card");
       cards.forEach((card, idx) => {
@@ -1288,7 +1227,6 @@
       progressCounterEl.innerText = `${String(activeIndex + 1).padStart(2, '0')} / ${String(totalLooks).padStart(2, '0')}`;
     }
 
-    // Navegar a un índice específico con animación
     function goToLook(idx) {
       if (idx < 0) idx = totalLooks - 1;
       if (idx >= totalLooks) idx = 0;
@@ -1304,24 +1242,21 @@
     }
 
     function onCardClick(idx) {
-      if (isDragMoved) return; // Evitar click accidental si se estaba arrastrando
+      if (isDragMoved) return;
       goToLook(idx);
     }
 
     /* =========================================================
-       4. ACTUALIZACIÓN DEL PANEL LATERAL "IN THIS LOOK"
+       D. PANEL LATERAL: "IN THIS LOOK" CON ANIMACIÓN ESCALONADA
     ========================================================= */
     function updateSidebar(look) {
       if (!look) return;
 
-      // Actualizar Título
       headlineEl.innerText = look.title;
 
-      // Calcular Total del Outfit
       const totalAmount = look.products.reduce((acc, it) => acc + it.price, 0);
       outfitTotalEl.innerText = `L. ${totalAmount.toFixed(2)}`;
 
-      // Renderizar 3 productos con animación escalonada
       productsListEl.innerHTML = look.products.map(p => `
         <li class="product-row-item anim-in">
           <div class="product-thumb-box">
@@ -1338,7 +1273,7 @@
     }
 
     /* =========================================================
-       5. FÍSICA DE ARRASTRE CON INERCIA Y SNAP
+       E. FÍSICA DE ARRASTRE CON INERCIA Y SNAP
     ========================================================= */
     let isPointerDown = false;
     let isDragMoved = false;
@@ -1348,7 +1283,6 @@
     let velocityX = 0;
     const DRAG_THRESHOLD = 45;
 
-    // Mouse / Touch Start
     stageEl.addEventListener("pointerdown", (e) => {
       isPointerDown = true;
       isDragMoved = false;
@@ -1360,9 +1294,7 @@
       dragCursorEl.classList.add("grabbing");
     });
 
-    // Mouse / Touch Move
     window.addEventListener("pointermove", (e) => {
-      // Mover el cursor personalizado "DRAG"
       dragCursorEl.style.left = `${e.clientX}px`;
       dragCursorEl.style.top = `${e.clientY}px`;
 
@@ -1385,7 +1317,6 @@
       lastTimestamp = now;
     });
 
-    // Mouse / Touch End con Inercia & Snap
     window.addEventListener("pointerup", (e) => {
       if (!isPointerDown) return;
       isPointerDown = false;
@@ -1394,20 +1325,18 @@
 
       const totalDeltaX = e.clientX - startX;
 
-      // Si la inercia (velocidad) o la distancia superan el umbral, avanzar o retroceder
+      // Inercia / velocidad o distancia excedida para snap al siguiente o anterior look
       if (Math.abs(velocityX) > 0.35 || Math.abs(totalDeltaX) > DRAG_THRESHOLD) {
         if (velocityX > 0.35 || totalDeltaX > DRAG_THRESHOLD) {
-          navigateLook(-1); // Hacia la derecha = look anterior
+          navigateLook(-1);
         } else if (velocityX < -0.35 || totalDeltaX < -DRAG_THRESHOLD) {
-          navigateLook(1);  // Hacia la izquierda = look siguiente
+          navigateLook(1);
         }
       }
 
-      // Resetear flag de movimiento tras un tick para evitar falsos clicks
       setTimeout(() => { isDragMoved = false; }, 50);
     });
 
-    // Mostrar / ocultar cursor DRAG al entrar al escenario
     stageEl.addEventListener("mouseenter", () => {
       dragCursorEl.classList.add("visible");
     });
@@ -1416,7 +1345,7 @@
     });
 
     /* =========================================================
-       6. NAVEGACIÓN POR TECLADO Y ACCESIBILIDAD
+       F. ACCESIBILIDAD Y TECLADO
     ========================================================= */
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
@@ -1427,18 +1356,16 @@
     });
 
     /* =========================================================
-       7. AGREGAR OUTFIT A LA BOLSA Y FEEDBACK
+       G. AGREGAR A LA BOLSA Y FEEDBACK
     ========================================================= */
     function addOutfitToBag() {
       const activeLook = LOOKS_DATA[activeIndex];
       bagTotalCount += activeLook.products.length;
       bagCounterEl.innerText = bagTotalCount;
 
-      // Animación en badge de la bolsa
       bagCounterEl.style.transform = "scale(1.4)";
       setTimeout(() => { bagCounterEl.style.transform = "scale(1)"; }, 250);
 
-      // Botón estado feedback
       const btn = document.getElementById("addToBagBtn");
       btn.classList.add("added-state");
       btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>¡Agregado a la bolsa!</span>';
