@@ -1198,13 +1198,40 @@
           <!-- Personaje 3D Real Renderizado -->
           <img src="assets/model-3d.webp" alt="${look.title}" class="model-3d-render-img">
 
-          <!-- Capa de color de prenda con iluminación 3D -->
-          <div class="model-3d-apparel-tint" style="background-color: ${shirtCol}; opacity: ${shirtCol === '#171512' ? '0.75' : (isWhite ? '0.18' : '0.62')};"></div>
+          <!-- Camiseta DTF sobre el torso del modelo 3D -->
+          <svg class="model-3d-tshirt-svg" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <clipPath id="clip-${uid}">
+                <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z" />
+              </clipPath>
+              <linearGradient id="shade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.18'}" />
+                <stop offset="50%" stop-color="#000000" stop-opacity="0" />
+                <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.12' : '0.36'}" />
+              </linearGradient>
+            </defs>
 
-          <!-- Estampado DTF / Gráfico sobre el pecho del modelo 3D -->
-          <div class="model-3d-chest-dtf">
-            <img src="${mainGraphic}" alt="${look.title}">
-          </div>
+            <path class="model-3d-shirt-path"
+              d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
+              fill="${shirtCol}"
+              style="transition: fill 0.35s ease;"
+            />
+
+            <path d="M 440 238 Q 512 280 584 238 Q 512 292 440 238" fill="rgba(0,0,0,${isWhite ? '0.15' : '0.3'})"/>
+
+            <g clip-path="url(#clip-${uid})">
+              <image href="${mainGraphic}" x="420" y="285" width="184" height="175" preserveAspectRatio="xMidYMid contain" />
+            </g>
+
+            <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
+              fill="url(#shade-${uid})"
+              pointer-events="none"
+            />
+
+            <path d="M 398 360 Q 450 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
+            <path d="M 626 360 Q 574 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
+            <path d="M 392 485 Q 512 498 632 485" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.22'})" stroke-width="2" fill="none"/>
+          </svg>
         </div>
       `;
     }

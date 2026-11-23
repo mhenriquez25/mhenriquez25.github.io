@@ -1700,3 +1700,12 @@
   object-fit: contain;
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
 }
+
+.model-3d-tshirt-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

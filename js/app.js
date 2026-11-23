@@ -215,7 +215,7 @@ function initViewRouter() {
 /* ==================================================
    EXPERIENCIA 2026: TRY THE LOOK (CARRUSEL 3D EN PASARELA)
 ================================================== */
-let tryLookCurrentGender = "mujer";
+let tryLookCurrentGender = "hombre";
 let tryLookActiveIndex = 0;
 let tryLookColor = "";
 let tryLookSize = "M";
@@ -320,202 +320,60 @@ function setTryLookGender(gender) {
 
 function generateFullBodyModelSVG(product, gender, isCenter, activeColor) {
   const isWoman = gender === "mujer";
-  const defaultCol = (product.colors && product.colors[0]) || (isWoman ? "Naranja" : "Negro");
+  const defaultCol = (product.colors && product.colors[0]) || "Negro";
   const colorName = (isCenter && activeColor) ? activeColor : defaultCol;
   const shirtHex = COLOR_HEX_MAP[colorName.toLowerCase().trim()] || "#171512";
   const isWhite = shirtHex.toLowerCase() === "#ffffff" || shirtHex.toLowerCase() === "#f8f9fa";
-  const imgUrl = product.image || (isWoman ? "assets/cat.jpg" : "assets/verd1.png");
-  const uid = `${product.id || 'p'}-${gender}-${isCenter ? 'ctr' : 'side'}-${Math.floor(Math.random()*10000)}`;
+  const imgUrl = product.image || "assets/verd1.png";
+  const uid = `m3d-${product.id || 'p'}-${isCenter ? 'ctr' : 'side'}-${Math.floor(Math.random()*10000)}`;
 
-  if (isWoman) {
-    return `
-    <svg class="full-body-model-svg" viewBox="0 0 260 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- Clip path para que el estampado DTF no se salga del torso -->
-        <clipPath id="torsoClip-${uid}">
-          <path d="M 108 102 Q 130 114 152 102 L 180 114 L 198 172 L 174 182 L 166 168 L 166 250 Q 130 256 94 250 L 94 168 L 86 182 L 62 172 L 80 114 Z" />
-        </clipPath>
-        <!-- Gradiente de sombra del tejido -->
-        <linearGradient id="fabricShade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.18'}" />
-          <stop offset="50%" stop-color="#000000" stop-opacity="0" />
-          <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.12' : '0.32'}" />
-        </linearGradient>
-      </defs>
+  // MODELO 3D REAL CON CAMISETA Y ESTAMPADO DTF DINÁMICO
+  return `
+    <div class="model-3d-character-wrap" id="wrap-${uid}">
+      <!-- Personaje 3D Real Renderizado -->
+      <img src="assets/model-3d.webp" alt="${product.name}" class="model-3d-render-img">
 
-      <!-- CABELLO TRASERO Y CUELLO DE MUJER -->
-      <path d="M 112 52 C 105 75 106 100 110 115 C 114 116 117 114 117 108 C 117 85 119 65 125 52 Z" fill="#241a15"/>
-      <path d="M 148 52 C 155 75 154 100 150 115 C 146 116 143 114 143 108 C 143 85 141 65 135 52 Z" fill="#241a15"/>
+      <!-- Camiseta DTF colocada directamente sobre el torso del modelo 3D -->
+      <svg class="model-3d-tshirt-svg" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <clipPath id="tshirtClip-${uid}">
+            <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z" />
+          </clipPath>
+          <linearGradient id="tshirtShade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.18'}" />
+            <stop offset="50%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.12' : '0.36'}" />
+          </linearGradient>
+        </defs>
 
-      <!-- Cuello -->
-      <path d="M 122 80 L 122 104 Q 130 108 138 104 L 138 80 Z" fill="#d89f77"/>
-      <path d="M 122 80 Q 130 89 138 80 L 138 86 Q 130 94 122 86 Z" fill="rgba(0,0,0,0.08)"/>
-
-      <!-- Cabeza / Rostro -->
-      <ellipse cx="130" cy="56" rx="16" ry="21" fill="#e5ad85"/>
-
-      <!-- Cabello frontal peinado chic (look moderno 2026) -->
-      <path d="M 114 54 C 114 36 122 30 130 30 C 138 30 146 36 146 54 C 146 45 140 40 130 40 C 120 40 114 45 114 54 Z" fill="#2b1e17"/>
-      <ellipse cx="130" cy="27" rx="10" ry="7" fill="#2b1e17"/>
-
-      <!-- Gafas de sol negras chic (estilo cat-eye) -->
-      <path d="M 117 52 Q 123 48 128 52 L 127 58 Q 121 60 117 56 Z" fill="#141414"/>
-      <path d="M 132 52 Q 137 48 143 52 L 143 56 Q 139 60 133 58 Z" fill="#141414"/>
-      <line x1="128" y1="53" x2="132" y2="53" stroke="#141414" stroke-width="1.5"/>
-      <line x1="119" y1="52" x2="124" y2="50" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-      <line x1="134" y1="52" x2="139" y2="50" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-
-      <!-- Aretes dorados -->
-      <circle cx="113" cy="62" r="3" stroke="#eab308" stroke-width="1.2" fill="none"/>
-      <circle cx="147" cy="62" r="3" stroke="#eab308" stroke-width="1.2" fill="none"/>
-
-      <!-- BRAZOS Y MANOS -->
-      <path d="M 72 172 L 64 245 C 63 252 64 265 67 274 C 70 277 73 277 74 272 L 78 245 L 82 176 Z" fill="#d89f77"/>
-      <path d="M 188 172 L 196 245 C 197 252 196 265 193 274 C 190 277 187 277 186 272 L 182 245 L 178 176 Z" fill="#d89f77"/>
-
-      <!-- PANTALONES BAGGY STREETWEAR DE MUJER (DENIM AZUL CLARO RELAJADO 2026) -->
-      <g>
-        <path d="M 94 246 L 82 320 L 76 452 Q 98 456 122 452 L 126 330 L 128 270 Z" fill="#7ba0c0"/>
-        <path d="M 166 246 L 178 320 L 184 452 Q 162 456 138 452 L 134 330 L 132 270 Z" fill="#84a7c8"/>
-        <path d="M 94 246 Q 130 252 166 246 L 166 272 Q 130 278 94 272 Z" fill="#6f93b5"/>
-        <line x1="130" y1="248" x2="130" y2="295" stroke="#527494" stroke-width="1.8"/>
-
-        <!-- Costuras y pliegues 3D -->
-        <path d="M 80 370 Q 98 382 120 375" stroke="#5e82a5" stroke-width="1.5" fill="none" opacity="0.7"/>
-        <path d="M 78 415 Q 98 428 122 420" stroke="#5e82a5" stroke-width="1.5" fill="none" opacity="0.7"/>
-        <path d="M 140 375 Q 162 382 180 370" stroke="#5e82a5" stroke-width="1.5" fill="none" opacity="0.7"/>
-        <path d="M 138 420 Q 162 428 182 415" stroke="#5e82a5" stroke-width="1.5" fill="none" opacity="0.7"/>
-        <path d="M 74 448 Q 98 458 124 448 L 123 454 Q 98 463 75 454 Z" fill="#587a9c"/>
-        <path d="M 136 448 Q 162 458 186 448 L 185 454 Q 162 463 137 454 Z" fill="#587a9c"/>
-      </g>
-
-      <!-- SNEAKERS URBANAS BLANCAS -->
-      <path d="M 80 452 L 72 470 C 70 478 74 484 84 484 L 118 484 C 124 484 126 478 124 470 L 118 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
-      <path d="M 72 474 L 124 474 L 122 484 L 74 484 Z" fill="#e2e8f0"/>
-      <line x1="88" y1="462" x2="108" y2="462" stroke="#cbd5e1" stroke-width="1.5"/>
-
-      <path d="M 142 452 L 136 470 C 134 478 136 484 146 484 L 180 484 C 188 484 190 478 188 470 L 180 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
-      <path d="M 136 474 L 188 474 L 186 484 L 138 484 Z" fill="#e2e8f0"/>
-      <line x1="152" y1="462" x2="172" y2="462" stroke="#cbd5e1" stroke-width="1.5"/>
-
-      <!-- CAMISA / CAMISETA DE LA MODELO -->
-      <g>
-        <path class="runway-model-shirt-fill" id="runwayShirt-${uid}"
-          d="M 108 102 Q 130 114 152 102 L 180 114 L 198 172 L 174 182 L 166 168 L 166 250 Q 130 256 94 250 L 94 168 L 86 182 L 62 172 L 80 114 Z"
+        <!-- Silueta de la camiseta sobre el torso con color dinámico -->
+        <path class="model-3d-shirt-path" id="shirtPath-${uid}"
+          d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
           fill="${shirtHex}"
           style="transition: fill 0.35s ease;"
         />
-        <path d="M 108 102 Q 130 115 152 102 Q 130 119 108 102" fill="rgba(0,0,0,${isWhite ? '0.1' : '0.25'})"/>
 
-        <!-- ESTAMPADO DTF DE LA PRENDA EN EL PECHO -->
-        <g clip-path="url(#torsoClip-${uid})">
-          <image class="runway-model-graphic" href="${imgUrl}" x="95" y="125" width="70" height="85" preserveAspectRatio="xMidYMid contain" />
+        <!-- Cuello acanalado de la playera -->
+        <path d="M 440 238 Q 512 280 584 238 Q 512 292 440 238" fill="rgba(0,0,0,${isWhite ? '0.15' : '0.3'})"/>
+
+        <!-- ESTAMPADO DTF DE LA CAMISA EN EL PECHO DEL MODELO 3D -->
+        <g clip-path="url(#tshirtClip-${uid})">
+          <image class="model-3d-dtf-image" href="${imgUrl}" x="420" y="285" width="184" height="175" preserveAspectRatio="xMidYMid contain" />
         </g>
 
-        <!-- Sombra realista de tejido -->
-        <path d="M 108 102 Q 130 114 152 102 L 180 114 L 198 172 L 174 182 L 166 168 L 166 250 Q 130 256 94 250 L 94 168 L 86 182 L 62 172 L 80 114 Z"
-          fill="url(#fabricShade-${uid})"
+        <!-- Sombreado realista del tejido de la camiseta -->
+        <path d="M 440 238 Q 512 280 584 238 L 664 254 L 712 376 L 648 402 L 626 360 L 632 494 Q 512 506 392 494 L 398 360 L 376 402 L 312 376 L 360 254 Z"
+          fill="url(#tshirtShade-${uid})"
           pointer-events="none"
         />
 
-        <path d="M 94 168 Q 112 185 130 180" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.25'})" stroke-width="1.2" fill="none"/>
-        <path d="M 166 168 Q 148 185 130 180" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.25'})" stroke-width="1.2" fill="none"/>
-      </g>
-    </svg>
-    `;
-  } else {
-    // MODELO HOMBRE STREETWEAR 2026 (FIGURA HUMANA COMPLETA)
-    return `
-    <svg class="full-body-model-svg" viewBox="0 0 260 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="torsoClip-${uid}">
-          <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z" />
-        </clipPath>
-        <linearGradient id="fabricShade-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="${isWhite ? '0.35' : '0.16'}" />
-          <stop offset="45%" stop-color="#000000" stop-opacity="0" />
-          <stop offset="100%" stop-color="#000000" stop-opacity="${isWhite ? '0.14' : '0.35'}" />
-        </linearGradient>
-      </defs>
-
-      <!-- CUELLO Y CABEZA -->
-      <path d="M 118 78 L 118 102 Q 130 108 142 102 L 142 78 Z" fill="#9e6945"/>
-      <path d="M 118 78 Q 130 88 142 78 L 142 84 Q 130 94 118 84 Z" fill="rgba(0,0,0,0.12)"/>
-
-      <ellipse cx="130" cy="54" rx="18" ry="23" fill="#b37c54"/>
-      <path d="M 112 50 C 112 32 120 26 130 26 C 140 26 148 32 148 50 C 148 42 144 34 130 34 C 116 34 112 42 112 50 Z" fill="#1b1614"/>
-      <ellipse cx="111" cy="56" rx="3.5" ry="6" fill="#a46f48"/>
-      <ellipse cx="149" cy="56" rx="3.5" ry="6" fill="#a46f48"/>
-
-      <!-- Gafas de sol negras rectangulares -->
-      <rect x="114" y="48" width="14" height="9" rx="2" fill="#111111"/>
-      <rect x="132" y="48" width="14" height="9" rx="2" fill="#111111"/>
-      <line x1="127" y1="51" x2="133" y2="51" stroke="#111111" stroke-width="2"/>
-      <line x1="116" y1="50" x2="122" y2="48" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-      <line x1="134" y1="50" x2="140" y2="48" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-
-      <!-- Cadena de oro/plata sutil -->
-      <path d="M 122 92 Q 130 108 138 92" stroke="#d4af37" stroke-width="1.8" fill="none" opacity="0.9"/>
-
-      <!-- BRAZOS Y MANOS -->
-      <path d="M 60 176 L 54 252 C 53 260 55 272 58 280 C 62 284 66 284 68 278 L 74 252 L 80 180 Z" fill="#9e6945"/>
-      <path d="M 200 176 L 206 252 C 207 260 205 272 202 280 C 198 284 194 284 192 278 L 186 252 L 180 180 Z" fill="#9e6945"/>
-
-      <!-- PANTALONES BAGGY DENIM (ESTILO STREETWEAR 2026) -->
-      <g>
-        <path d="M 82 254 L 68 335 L 62 454 Q 92 460 124 454 L 128 340 L 130 274 Z" fill="#759bbd"/>
-        <path d="M 178 254 L 192 335 L 198 454 Q 168 460 136 454 L 132 340 L 130 274 Z" fill="#7eA3c6"/>
-        <path d="M 82 254 Q 130 262 178 254 L 178 280 Q 130 286 82 280 Z" fill="#678dae"/>
-        <line x1="130" y1="258" x2="130" y2="305" stroke="#486e8f" stroke-width="2"/>
-
-        <path d="M 86 264 Q 106 270 102 288" stroke="#527899" stroke-width="1.5" fill="none"/>
-        <path d="M 174 264 Q 154 270 158 288" stroke="#527899" stroke-width="1.5" fill="none"/>
-
-        <path d="M 66 385 Q 92 398 122 390" stroke="#567c9d" stroke-width="1.8" fill="none" opacity="0.75"/>
-        <path d="M 64 425 Q 92 438 124 430" stroke="#567c9d" stroke-width="1.8" fill="none" opacity="0.75"/>
-        <path d="M 138 390 Q 168 398 194 385" stroke="#567c9d" stroke-width="1.8" fill="none" opacity="0.75"/>
-        <path d="M 136 430 Q 168 438 196 425" stroke="#567c9d" stroke-width="1.8" fill="none" opacity="0.75"/>
-
-        <path d="M 60 450 Q 92 462 126 450 L 125 456 Q 92 468 61 456 Z" fill="#4d7394"/>
-        <path d="M 134 450 Q 168 462 200 450 L 199 456 Q 168 468 135 456 Z" fill="#4d7394"/>
-      </g>
-
-      <!-- SNEAKERS URBANAS BLANCAS -->
-      <path d="M 68 452 L 58 472 C 56 480 60 486 72 486 L 118 486 C 126 486 128 480 126 472 L 120 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
-      <path d="M 58 476 L 126 476 L 124 486 L 60 486 Z" fill="#e2e8f0"/>
-      <line x1="76" y1="464" x2="106" y2="464" stroke="#cbd5e1" stroke-width="1.8"/>
-
-      <path d="M 140 452 L 134 472 C 132 480 134 486 146 486 L 192 486 C 202 486 204 480 202 472 L 192 452 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
-      <path d="M 134 476 L 202 476 L 200 486 L 136 486 Z" fill="#e2e8f0"/>
-      <line x1="154" y1="464" x2="184" y2="464" stroke="#cbd5e1" stroke-width="1.8"/>
-
-      <!-- CAMISETA OVERSIZED BOXY STREETWEAR (COLOR DINÁMICO + ESTAMPADO DTF) -->
-      <g>
-        <path class="runway-model-shirt-fill" id="runwayShirt-${uid}"
-          d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z"
-          fill="${shirtHex}"
-          style="transition: fill 0.35s ease;"
-        />
-        <path d="M 106 96 Q 130 112 154 96 Q 130 117 106 96" fill="rgba(0,0,0,${isWhite ? '0.1' : '0.28'})"/>
-
-        <!-- ESTAMPADO DTF EN EL PECHO -->
-        <g clip-path="url(#torsoClip-${uid})">
-          <image class="runway-model-graphic" href="${imgUrl}" x="88" y="122" width="84" height="92" preserveAspectRatio="xMidYMid contain" />
-        </g>
-
-        <!-- Sombra realista de tejido -->
-        <path d="M 106 96 Q 130 112 154 96 L 186 106 L 210 174 L 182 186 L 174 172 L 178 258 Q 130 264 82 258 L 86 172 L 78 186 L 50 174 L 74 106 Z"
-          fill="url(#fabricShade-${uid})"
-          pointer-events="none"
-        />
-
-        <path d="M 86 172 Q 108 190 130 184" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.28'})" stroke-width="1.4" fill="none"/>
-        <path d="M 174 172 Q 152 190 130 184" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.28'})" stroke-width="1.4" fill="none"/>
-        <path d="M 82 252 Q 130 258 178 252" stroke="rgba(0,0,0,${isWhite ? '0.1' : '0.2'})" stroke-width="1.2" fill="none"/>
-      </g>
-    </svg>
-    `;
-  }
+        <!-- Pliegues y arrugas suaves en sisa y torso -->
+        <path d="M 398 360 Q 450 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
+        <path d="M 626 360 Q 574 395 512 385" stroke="rgba(0,0,0,${isWhite ? '0.14' : '0.28'})" stroke-width="2.5" fill="none"/>
+        <path d="M 392 485 Q 512 498 632 485" stroke="rgba(0,0,0,${isWhite ? '0.12' : '0.22'})" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+  `;
 }
 
 function renderTryLook() {
@@ -719,12 +577,12 @@ function selectLookColor(c) {
     el.classList.toggle("active", el.innerText.trim() === c);
   });
 
-  // Cambiar el color de la camisa en la persona central en vivo
+  // Cambiar el color de la playera en el modelo 3D en tiempo real
   const activeCard = document.querySelector(".runway-model-card.active-look");
   if (activeCard) {
-    const shirt = activeCard.querySelector(".runway-model-shirt-fill");
     const hex = COLOR_HEX_MAP[c.toLowerCase().trim()] || "#171512";
-    if (shirt) shirt.setAttribute("fill", hex);
+    const shirtPath = activeCard.querySelector(".model-3d-shirt-path, .runway-model-shirt-fill");
+    if (shirtPath) shirtPath.setAttribute("fill", hex);
   }
 }
 
