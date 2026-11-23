@@ -23,9 +23,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 4. Cargar productos desde base de datos / cache
   await window.store.loadInitialProducts();
 
+  // Inicializar probador virtual interactivo en modelo
+  initFittingRoom();
+
   // 5. Escuchar cambios de productos en tiempo real
   window.store.listenToProducts(() => {
     renderCatalog();
+    renderFittingRoom();
   });
 
   // 6. Actualizar contadores del carrito
@@ -209,6 +213,367 @@ function initViewRouter() {
 }
 
 /* ==================================================
+   PROBADOR VIRTUAL / SIMULADOR EN EL MODELO (MUJER / HOMBRE)
+================================================== */
+let fittingCurrentGender = "mujer"; // "mujer" predeterminada
+let fittingCurrentProduct = null;
+let fittingCurrentColor = "";
+let fittingCurrentSize = "M";
+let fittingCurrentQty = 1;
+
+const COLOR_HEX_MAP = {
+  "negro": "#171512",
+  "blanco": "#ffffff",
+  "naranja": "#f97316",
+  "vino": "#7f1d1d",
+  "burdeos": "#7f1d1d",
+  "verde": "#166534",
+  "verde oliva": "#4d7c0f",
+  "azul": "#1d4ed8",
+  "azul marino": "#1e3a8a",
+  "gris": "#9ca3af",
+  "rosa": "#f472b6",
+  "amarillo": "#eab308",
+  "mostaza": "#ca8a04",
+  "rojo": "#dc2626",
+  "estampado": "#c084fc",
+  "casual": "#a855f7"
+};
+
+function getGenderProducts(gender) {
+  const all = window.store.products || [];
+  return all.filter(p => {
+    const g = (p.gender || "").toLowerCase();
+    const cat = (p.category || "").toLowerCase();
+    const name = (p.name || "").toLowerCase();
+    const desc = (p.description || "").toLowerCase();
+
+    if (gender === "mujer") {
+      return g === "mujer" || g === "unisex" || cat === "mujer" || name.includes("mujer") || name.includes("dama") || desc.includes("mujer") || desc.includes("dama");
+    } else {
+      return g === "hombre" || g === "unisex" || cat === "hombre" || name.includes("hombre") || desc.includes("hombre") || desc.includes("caballero");
+    }
+  });
+}
+
+function setInteractiveGender(gender) {
+  fittingCurrentGender = gender;
+
+  // Actualizar tarjetas de género
+  const btnMujer = document.getElementById("btnGenderMujer");
+  const btnHombre = document.getElementById("btnGenderHombre");
+  if (btnMujer) btnMujer.classList.toggle("active", gender === "mujer");
+  if (btnHombre) btnHombre.classList.toggle("active", gender === "hombre");
+
+  // Resetear producto activo para que tome el primero del nuevo género
+  fittingCurrentProduct = null;
+  fittingCurrentQty = 1;
+
+  // Sincronizar también el filtro del catálogo inferior
+  catalogCurrentGender = gender;
+  const labelEl = document.getElementById("selectedGenderText");
+  if (labelEl) labelEl.innerText = gender === "mujer" ? "Mujer" : "Hombre";
+  
+  const container = document.getElementById("dropdownGender");
+  if (container) {
+    container.querySelectorAll(".dropdown-item").forEach(b => {
+      b.classList.toggle("active", b.getAttribute("data-gender") === gender);
+    });
+  }
+
+  // Renderizar probador y catálogo
+  renderFittingRoom();
+  renderCatalog();
+}
+
+function initFittingRoom() {
+  const section = document.getElementById("fittingRoomSection");
+  if (!section) return;
+  setInteractiveGender(fittingCurrentGender);
+}
+
+function renderFittingRoom() {
+  const listContainer = document.getElementById("fittingShirtsList");
+  if (!listContainer) return;
+
+  const available = getGenderProducts(fittingCurrentGender);
+
+  // Actualizar textos de cabecera
+  const heading = document.getElementById("fittingRoomHeading");
+  const countTitle = document.getElementById("fittingShirtsCountTitle");
+  const stageBadgeText = document.getElementById("modelStageBadgeText");
+
+  if (heading) {
+    heading.innerText = fittingCurrentGender === "mujer" 
+      ? "Probador de Camisas para Mujer" 
+      : "Probador de Camisas para Hombre";
+  }
+
+  if (countTitle) {
+    countTitle.innerText = `Camisas Disponibles (${available.length})`;
+  }
+
+  if (stageBadgeText) {
+    stageBadgeText.innerText = fittingCurrentGender === "mujer" ? "Modelo Femenina" : "Modelo Masculino";
+  }
+
+  if (available.length === 0) {
+    listContainer.innerHTML = `<p style="padding: 16px; font-size: 13px; color: var(--muted);">No hay camisas registradas en este género.</p>`;
+    return;
+  }
+
+  // Si no hay producto actual o no pertenece a la lista actual, seleccionar el primero
+  if (!fittingCurrentProduct || !available.some(p => p.id === fittingCurrentProduct.id)) {
+    fittingCurrentProduct = available[0];
+    fittingCurrentColor = (fittingCurrentProduct.colors && fittingCurrentProduct.colors[0]) || "Predeterminado";
+    fittingCurrentSize = (fittingCurrentProduct.sizes && fittingCurrentProduct.sizes[0]) || "M";
+    fittingCurrentQty = 1;
+  }
+
+  // 1. Renderizar lista de camisas disponibles
+  const currency = (window.store.settings && window.store.settings.currency) || "L.";
+  listContainer.innerHTML = available.map(p => {
+    const isActive = p.id === fittingCurrentProduct.id;
+    const price = Number(p.price) || 0;
+    const img = p.image || (fittingCurrentGender === "mujer" ? "assets/cat.jpg" : "assets/verd1.png");
+
+    return `
+      <button type="button" class="fitting-shirt-item ${isActive ? 'active' : ''}" onclick="selectFittingProduct('${p.id}')">
+        <div class="fitting-shirt-thumb">
+          <img src="${img}" alt="${p.name}" onerror="this.src='assets/verd1.png'">
+        </div>
+        <div class="fitting-shirt-details">
+          <strong>${p.name}</strong>
+          <div class="fitting-shirt-meta">
+            <span class="fitting-shirt-cat">${p.category || 'Casual'}</span>
+            <span class="fitting-shirt-price">${currency} ${price.toFixed(2)}</span>
+          </div>
+        </div>
+        <div class="fitting-shirt-select-dot"></div>
+      </button>
+    `;
+  }).join("");
+
+  // 2. Actualizar el modelo en medio
+  updateFittingModelDisplay();
+
+  // 3. Actualizar panel de personalización (derecha)
+  updateFittingControls();
+}
+
+function selectFittingProduct(prodId) {
+  const p = (window.store.products || []).find(it => it.id === prodId);
+  if (!p) return;
+
+  fittingCurrentProduct = p;
+  fittingCurrentColor = (p.colors && p.colors[0]) || "Predeterminado";
+  fittingCurrentSize = (p.sizes && p.sizes[0]) || "M";
+  fittingCurrentQty = 1;
+
+  // Actualizar clase activa en la lista
+  const listContainer = document.getElementById("fittingShirtsList");
+  if (listContainer) {
+    listContainer.querySelectorAll(".fitting-shirt-item").forEach(el => {
+      const isCurrent = el.innerHTML.includes(p.name);
+      el.classList.toggle("active", isCurrent);
+    });
+  }
+
+  updateFittingModelDisplay();
+  updateFittingControls();
+}
+
+function updateFittingModelDisplay() {
+  if (!fittingCurrentProduct) return;
+
+  const p = fittingCurrentProduct;
+  const currency = (window.store.settings && window.store.settings.currency) || "L.";
+  const price = Number(p.price) || 0;
+
+  // Imagen del modelo
+  const modelImg = document.getElementById("fittingModelImg");
+  if (modelImg) {
+    modelImg.style.opacity = "0.5";
+    setTimeout(() => {
+      modelImg.src = p.image || (fittingCurrentGender === "mujer" ? "assets/cat.jpg" : "assets/verd1.png");
+      modelImg.style.opacity = "1";
+    }, 120);
+  }
+
+  // Tinte de color sobre el modelo
+  const tintEl = document.getElementById("modelColorTint");
+  if (tintEl) {
+    const hex = COLOR_HEX_MAP[fittingCurrentColor.toLowerCase().trim()];
+    if (hex && hex !== "#ffffff") {
+      tintEl.style.backgroundColor = hex;
+      tintEl.style.opacity = "0.18";
+    } else {
+      tintEl.style.opacity = "0";
+    }
+  }
+
+  // Tags sobre el modelo
+  const tagName = document.getElementById("modelTagName");
+  const tagSize = document.getElementById("modelTagSize");
+  const tagColor = document.getElementById("modelTagColor");
+  const priceTag = document.getElementById("modelPriceTag");
+
+  if (tagName) tagName.innerText = p.name;
+  if (tagSize) tagSize.innerHTML = `<i class="fa-solid fa-ruler-combined"></i> Talla: <strong>${fittingCurrentSize}</strong>`;
+  if (tagColor) tagColor.innerHTML = `<i class="fa-solid fa-palette"></i> Color: <strong>${fittingCurrentColor}</strong>`;
+  if (priceTag) priceTag.innerText = `${currency} ${price.toFixed(2)}`;
+}
+
+function updateFittingControls() {
+  if (!fittingCurrentProduct) return;
+
+  const p = fittingCurrentProduct;
+  const currency = (window.store.settings && window.store.settings.currency) || "L.";
+  const price = Number(p.price) || 0;
+  const oldPrice = p.originalPrice ? Number(p.originalPrice) : null;
+
+  // Info básica
+  const itemCat = document.getElementById("fittingItemCat");
+  const itemTitle = document.getElementById("fittingItemTitle");
+  const itemPrice = document.getElementById("fittingItemPrice");
+  const itemOldPrice = document.getElementById("fittingItemOldPrice");
+  const itemDesc = document.getElementById("fittingItemDesc");
+
+  if (itemCat) itemCat.innerText = `${p.category || 'Casual'} · ${fittingCurrentGender === "mujer" ? "Mujer" : "Hombre"}`;
+  if (itemTitle) itemTitle.innerText = p.name;
+  if (itemPrice) itemPrice.innerText = `${currency} ${price.toFixed(2)}`;
+  if (itemOldPrice) {
+    itemOldPrice.innerText = oldPrice ? `${currency} ${oldPrice.toFixed(2)}` : "";
+    itemOldPrice.style.display = oldPrice ? "block" : "none";
+  }
+  if (itemDesc) itemDesc.innerText = p.description || "Camisa 100% algodón de alta calidad con estampado DTF.";
+
+  // Selector de Color
+  const colorContainer = document.getElementById("fittingColorSwatches");
+  const colorText = document.getElementById("fittingSelectedColorText");
+  if (colorText) colorText.innerText = fittingCurrentColor;
+
+  if (colorContainer) {
+    const colors = (p.colors && p.colors.length) ? p.colors : ["Negro", "Blanco"];
+    colorContainer.innerHTML = colors.map(c => {
+      const hex = COLOR_HEX_MAP[c.toLowerCase().trim()] || "#333333";
+      const isActive = c.toLowerCase() === fittingCurrentColor.toLowerCase();
+      return `
+        <button type="button" class="fitting-color-btn ${isActive ? 'active' : ''}" onclick="selectFittingColor('${c}', '${hex}')">
+          <span class="fitting-color-dot" style="background-color: ${hex}; ${hex === '#ffffff' ? 'border-color: #ccc;' : ''}"></span>
+          <span>${c}</span>
+        </button>
+      `;
+    }).join("");
+  }
+
+  // Selector de Talla
+  const sizeContainer = document.getElementById("fittingSizePills");
+  const sizeText = document.getElementById("fittingSelectedSizeText");
+  if (sizeText) sizeText.innerText = fittingCurrentSize;
+
+  if (sizeContainer) {
+    const sizes = (p.sizes && p.sizes.length) ? p.sizes : ["S", "M", "L", "XL"];
+    sizeContainer.innerHTML = sizes.map(s => {
+      const isActive = s === fittingCurrentSize;
+      return `
+        <button type="button" class="fitting-size-btn ${isActive ? 'active' : ''}" onclick="selectFittingSize('${s}')">
+          ${s}
+        </button>
+      `;
+    }).join("");
+  }
+
+  // Cantidad y subtotal
+  const qtyDisplay = document.getElementById("fittingQtyDisplay");
+  if (qtyDisplay) qtyDisplay.innerText = fittingCurrentQty;
+
+  const subtotalEl = document.getElementById("fittingSubtotalText");
+  if (subtotalEl) {
+    subtotalEl.innerText = `${currency} ${(price * fittingCurrentQty).toFixed(2)}`;
+  }
+}
+
+function selectFittingColor(colorName, hex) {
+  fittingCurrentColor = colorName;
+  updateFittingModelDisplay();
+  updateFittingControls();
+}
+
+function selectFittingSize(size) {
+  fittingCurrentSize = size;
+  updateFittingModelDisplay();
+  updateFittingControls();
+}
+
+function changeFittingQty(delta) {
+  const newQty = fittingCurrentQty + delta;
+  if (newQty >= 1 && newQty <= 20) {
+    fittingCurrentQty = newQty;
+    updateFittingControls();
+  }
+}
+
+function addFittingToCart(buyNow = false) {
+  if (!fittingCurrentProduct) return;
+
+  const p = fittingCurrentProduct;
+  window.store.addToCart({
+    productId: p.id,
+    name: p.name,
+    price: Number(p.price) || 0,
+    image: p.image || (fittingCurrentGender === "mujer" ? "assets/cat.jpg" : "assets/verd1.png"),
+    size: fittingCurrentSize,
+    color: fittingCurrentColor,
+    quantity: fittingCurrentQty
+  });
+
+  updateCartUI();
+
+  if (buyNow) {
+    openCheckout();
+  } else {
+    openCart();
+  }
+}
+
+function consultFittingOnWhatsApp() {
+  if (!fittingCurrentProduct) return;
+  const p = fittingCurrentProduct;
+  const phone = (window.store.settings && window.store.settings.whatsappNumber) || "50400000000";
+  const currency = (window.store.settings && window.store.settings.currency) || "L.";
+  const cleanPhone = phone.replace(/[^0-9]/g, "");
+
+  const msg = `¡Hola! Me gustó esta camisa que vi en el probador de su tienda:\n\n👕 *${p.name}*\n🎨 *Color:* ${fittingCurrentColor}\n📏 *Talla:* ${fittingCurrentSize}\n🔢 *Cantidad:* ${fittingCurrentQty}\n💰 *Precio:* ${currency} ${(Number(p.price) * fittingCurrentQty).toFixed(2)}\n\n¿Tienen disponibilidad para coordinar la entrega?`;
+
+  const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+
+function tryProductInFittingRoom(prodId) {
+  const p = (window.store.products || []).find(it => it.id === prodId);
+  if (!p) return;
+
+  const g = (p.gender || "").toLowerCase();
+  const cat = (p.category || "").toLowerCase();
+  const isWoman = g === "mujer" || cat === "mujer" || p.name.toLowerCase().includes("dama") || p.name.toLowerCase().includes("mujer");
+
+  // Ajustar género del probador si no coincide
+  const targetGender = isWoman ? "mujer" : "hombre";
+  if (fittingCurrentGender !== targetGender) {
+    setInteractiveGender(targetGender);
+  }
+
+  selectFittingProduct(prodId);
+
+  // Scroll suave al probador
+  const section = document.getElementById("fittingRoomSection");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+/* ==================================================
    4. CATÁLOGO DINÁMICO DE PRODUCTOS
 ================================================== */
 function renderCatalog() {
@@ -326,8 +691,8 @@ function renderCatalog() {
             <button class="btn-buy-card" onclick="openProductDetailModal('${prod.id}')">
               <i class="fa-solid fa-cart-plus"></i> Comprar
             </button>
-            <button class="btn-view-card" onclick="openProductDetailModal('${prod.id}')" title="Vista Rápida">
-              <i class="fa-solid fa-eye"></i>
+            <button class="btn-view-card" onclick="tryProductInFittingRoom('${prod.id}')" title="Probar en el Modelo" style="color: var(--wine);">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
             </button>
           </div>
         </div>

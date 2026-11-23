@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.7">
-  <link rel="stylesheet" href="css/store.css?v=3.7">
+  <link rel="stylesheet" href="css/main.css?v=3.8">
+  <link rel="stylesheet" href="css/store.css?v=3.8">
 
   <!-- Base de datos en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -72,11 +72,191 @@
         <div class="section-head">
           <div>
             <span class="eyebrow">Catálogo para Comprar</span>
-            <h2>Catálogo de Camisas</h2>
+            <h2>Catálogo de Camisas y Probador Virtual</h2>
           </div>
           <p>
-            Elige tu prenda favorita, selecciona tu talla (S a XXL), color y finaliza tu pedido de forma rápida.
+            Elige si buscas ropa para mujer u hombre, pruébala en el modelo en vivo, selecciona tu color, talla y cantidad preferida.
           </p>
+        </div>
+
+        <!-- SELECTOR INTERACTIVO PRINCIPAL: HOMBRE O MUJER -->
+        <div class="gender-selection-hero">
+          <div class="gender-selection-header">
+            <span class="gender-selection-tag"><i class="fa-solid fa-sparkles"></i> Experiencia Interactiva</span>
+            <h3 class="gender-selection-title">¿Para quién buscas camisas hoy?</h3>
+            <p class="gender-selection-subtitle">Selecciona una opción para ver las prendas disponibles y probarlas en el modelo en tiempo real:</p>
+          </div>
+
+          <div class="gender-toggle-cards">
+            <button type="button" id="btnGenderMujer" class="gender-card active" onclick="setInteractiveGender('mujer')">
+              <div class="gender-card-icon woman"><i class="fa-solid fa-person-dress"></i></div>
+              <div class="gender-card-info">
+                <strong>Moda Mujer</strong>
+                <span>Damas y juveniles · Ver en modelo femenina</span>
+              </div>
+              <span class="gender-card-badge"><i class="fa-solid fa-circle-check"></i> Activo</span>
+            </button>
+
+            <button type="button" id="btnGenderHombre" class="gender-card" onclick="setInteractiveGender('hombre')">
+              <div class="gender-card-icon man"><i class="fa-solid fa-person"></i></div>
+              <div class="gender-card-info">
+                <strong>Moda Hombre</strong>
+                <span>Caballeros y juveniles · Ver en modelo masculino</span>
+              </div>
+              <span class="gender-card-badge"><i class="fa-solid fa-circle-check"></i> Activo</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PROBADOR VIRTUAL INTERACTIVO CON EL MODELO EN MEDIO -->
+        <div class="fitting-room-wrapper" id="fittingRoomSection">
+          <div class="fitting-room-header">
+            <div>
+              <span class="fitting-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Probador en Vivo</span>
+              <h3 id="fittingRoomHeading">Probador de Camisas para Mujer</h3>
+            </div>
+            <p id="fittingRoomSubheading">Toca una camisa de la lista, cambia su color o talla y observa en el centro cómo le queda al modelo:</p>
+          </div>
+
+          <div class="fitting-room-grid">
+            
+            <!-- 1. COLUMNA IZQUIERDA: LISTA DE CAMISAS DISPONIBLES -->
+            <div class="fitting-col-shirts">
+              <div class="fitting-panel-title">
+                <i class="fa-solid fa-shirt"></i>
+                <span id="fittingShirtsCountTitle">Camisas Disponibles (Mujer)</span>
+              </div>
+              <div class="fitting-shirts-list" id="fittingShirtsList">
+                <!-- Se inyecta dinámicamente desde js/app.js -->
+              </div>
+            </div>
+
+            <!-- 2. COLUMNA CENTRAL: EL MODELO EN MEDIO -->
+            <div class="fitting-col-model">
+              <div class="model-stage-card">
+                <div class="model-stage-badge" id="modelStageBadge">
+                  <i class="fa-solid fa-camera"></i> <span id="modelStageBadgeText">Modelo Femenina</span>
+                </div>
+
+                <div class="model-view-viewport">
+                  <!-- Contenedor con la foto del modelo y capa de color -->
+                  <div class="model-image-container" id="modelImageContainer">
+                    <img id="fittingModelImg" src="assets/cat.jpg" alt="Modelo luciendo camisa" class="fitting-model-photo">
+                    <div class="model-color-tint" id="modelColorTint"></div>
+                  </div>
+
+                  <!-- Overlay flotante con detalle de la prenda sobre el modelo -->
+                  <div class="model-overlay-tag">
+                    <div class="model-tag-name" id="modelTagName">Camisa Naranja Vibrante Dama</div>
+                    <div class="model-tag-meta">
+                      <span id="modelTagSize"><i class="fa-solid fa-ruler-combined"></i> Talla: M</span> • 
+                      <span id="modelTagColor"><i class="fa-solid fa-palette"></i> Color: Naranja</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="model-stage-footer">
+                  <span><i class="fa-solid fa-sparkles"></i> Vista interactiva en modelo</span>
+                  <span id="modelPriceTag" class="model-price-tag">L. 300.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. COLUMNA DERECHA: SELECTOR DE TALLA, COLOR, CANTIDAD Y ACCIÓN -->
+            <div class="fitting-col-controls">
+              <div class="fitting-panel-title">
+                <i class="fa-solid fa-sliders"></i>
+                <span>Personaliza tu Pedido</span>
+              </div>
+
+              <div class="fitting-control-card">
+                <!-- CABECERA DE LA PRENDA SELECCIONADA -->
+                <div class="fitting-item-header">
+                  <div>
+                    <span id="fittingItemCat" class="fitting-category-pill">Casual · Mujer</span>
+                    <h4 id="fittingItemTitle" class="fitting-item-title">Camisa Naranja Vibrante Dama</h4>
+                  </div>
+                  <div class="fitting-item-price-box">
+                    <span id="fittingItemPrice" class="fitting-item-price">L. 300.00</span>
+                    <span id="fittingItemOldPrice" class="fitting-item-old-price">L. 340.00</span>
+                  </div>
+                </div>
+
+                <p id="fittingItemDesc" class="fitting-item-desc">
+                  Estilo llamativo y juvenil para mujer. Color intenso con tela transpirable de excelente caída.
+                </p>
+
+                <!-- SELECTOR DE COLOR -->
+                <div class="fitting-section-group">
+                  <label class="fitting-control-label">
+                    <i class="fa-solid fa-palette"></i> 1. Color disponible: 
+                    <strong id="fittingSelectedColorText">Naranja</strong>
+                  </label>
+                  <div class="fitting-color-swatches" id="fittingColorSwatches">
+                    <!-- Se inyecta dinámicamente -->
+                  </div>
+                </div>
+
+                <!-- SELECTOR DE TALLA -->
+                <div class="fitting-section-group">
+                  <label class="fitting-control-label">
+                    <i class="fa-solid fa-ruler-combined"></i> 2. Selecciona la Talla: 
+                    <strong id="fittingSelectedSizeText">M</strong>
+                  </label>
+                  <div class="fitting-size-pills" id="fittingSizePills">
+                    <!-- Se inyecta dinámicamente -->
+                  </div>
+                </div>
+
+                <!-- SELECTOR DE CANTIDAD -->
+                <div class="fitting-section-group">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="fitting-control-label" style="margin-bottom: 0;">
+                      <i class="fa-solid fa-arrow-up-9-1"></i> 3. Cantidad:
+                    </label>
+                    <div class="fitting-qty-ctrl">
+                      <button type="button" class="fitting-qty-btn" onclick="changeFittingQty(-1)">-</button>
+                      <span id="fittingQtyDisplay">1</span>
+                      <button type="button" class="fitting-qty-btn" onclick="changeFittingQty(1)">+</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ACCIONES DE COMPRA -->
+                <div class="fitting-actions-box">
+                  <div class="fitting-subtotal-row">
+                    <span>Subtotal a pagar:</span>
+                    <strong id="fittingSubtotalText">L. 300.00</strong>
+                  </div>
+
+                  <div class="fitting-btn-stack">
+                    <button type="button" class="btn-fitting-cart" onclick="addFittingToCart(false)">
+                      <i class="fa-solid fa-cart-shopping"></i> Agregar al Carrito
+                    </button>
+                    <button type="button" class="btn-fitting-buy" onclick="addFittingToCart(true)">
+                      <i class="fa-solid fa-bolt"></i> Comprar Ahora
+                    </button>
+                  </div>
+                  
+                  <button type="button" class="btn-fitting-whatsapp" onclick="consultFittingOnWhatsApp()">
+                    <i class="fa-brands fa-whatsapp"></i> Consultar esta prenda por WhatsApp
+                  </button>
+
+                  <small class="fitting-secure-note">
+                    <i class="fa-solid fa-truck-fast"></i> Envíos en Tegucigalpa • Dirección: Acordar por WhatsApp
+                  </small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SEPARADOR: O EXPLORA TODO EL CATÁLOGO COMPLETO -->
+        <div class="catalog-section-divider">
+          <div class="divider-line"></div>
+          <span class="divider-label"><i class="fa-solid fa-layer-group"></i> Catálogo Completo y Filtros Adicionales</span>
+          <div class="divider-line"></div>
         </div>
 
         <!-- BARRA DE FILTROS CON MENÚS DESPLEGABLES VERTICALES -->
@@ -405,8 +585,8 @@
   </div>
 
   <!-- Scripts diferidos -->
-  <script defer src="js/store.js?v=3.7"></script>
-  <script defer src="js/app.js?v=3.7"></script>
+  <script defer src="js/store.js?v=3.8"></script>
+  <script defer src="js/app.js?v=3.8"></script>
 
 </body>
 </html>
