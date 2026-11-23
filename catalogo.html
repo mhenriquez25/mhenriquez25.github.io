@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <link rel="stylesheet" href="css/main.css?v=3.9">
-  <link rel="stylesheet" href="css/store.css?v=3.9">
+  <link rel="stylesheet" href="css/main.css?v=4.0">
+  <link rel="stylesheet" href="css/store.css?v=4.0">
 
   <!-- Base de datos en la nube (Google Firebase) -->
   <script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -79,311 +79,137 @@
           </p>
         </div>
 
-        <!-- SELECTOR INTERACTIVO PRINCIPAL: HOMBRE O MUJER -->
-        <div class="gender-selection-hero">
-          <div class="gender-selection-header">
-            <span class="gender-selection-tag"><i class="fa-solid fa-sparkles"></i> Experiencia Interactiva</span>
-            <h3 class="gender-selection-title">¿Para quién buscas camisas hoy?</h3>
-            <p class="gender-selection-subtitle">Selecciona una opción para ver las prendas disponibles y probarlas en el modelo en tiempo real:</p>
-          </div>
-
-          <div class="gender-toggle-cards">
-            <button type="button" id="btnGenderMujer" class="gender-card active" onclick="setInteractiveGender('mujer')">
-              <div class="gender-card-icon woman"><i class="fa-solid fa-person-dress"></i></div>
-              <div class="gender-card-info">
-                <strong>Moda Mujer</strong>
-                <span>Damas y juveniles · Ver en modelo femenina</span>
-              </div>
-              <span class="gender-card-badge"><i class="fa-solid fa-circle-check"></i> Activo</span>
-            </button>
-
-            <button type="button" id="btnGenderHombre" class="gender-card" onclick="setInteractiveGender('hombre')">
-              <div class="gender-card-icon man"><i class="fa-solid fa-person"></i></div>
-              <div class="gender-card-info">
-                <strong>Moda Hombre</strong>
-                <span>Caballeros y juveniles · Ver en modelo masculino</span>
-              </div>
-              <span class="gender-card-badge"><i class="fa-solid fa-circle-check"></i> Activo</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- PROBADOR VIRTUAL INTERACTIVO CON EL MODELO EN MEDIO -->
-        <div class="fitting-room-wrapper" id="fittingRoomSection">
-          <div class="fitting-room-header">
+        <!-- ==========================================
+             EXPERIENCIA 2026: TRY THE LOOK (CARRUSEL 3D EN PASARELA)
+        =========================================== -->
+        <div class="try-look-wrapper" id="tryTheLookSection">
+          
+          <!-- CABECERA TRY THE LOOK Y SELECTOR DE GÉNERO -->
+          <div class="try-look-topbar">
             <div>
-              <span class="fitting-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Probador en Vivo</span>
-              <h3 id="fittingRoomHeading">Probador de Camisas para Mujer</h3>
+              <h2 class="try-look-title">Try the Look.</h2>
+              <p class="try-look-desc">Explora nuestros estilos en modelos reales. Desliza para cambiar de look y personaliza tu prenda.</p>
             </div>
-            <p id="fittingRoomSubheading">Toca una camisa de la lista, cambia su color o talla y observa en el centro cómo le queda al modelo:</p>
+
+            <!-- SELECTOR MUJER / HOMBRE -->
+            <div class="try-look-gender-switch">
+              <button type="button" id="pillGenderMujer" class="try-gender-btn active" onclick="setTryLookGender('mujer')">
+                <i class="fa-solid fa-person-dress"></i> Mujer
+              </button>
+              <button type="button" id="pillGenderHombre" class="try-gender-btn" onclick="setTryLookGender('hombre')">
+                <i class="fa-solid fa-person"></i> Hombre
+              </button>
+            </div>
           </div>
 
-          <div class="fitting-room-grid">
+          <!-- ESCENARIO PRINCIPAL: CARRUSEL HORIZONTAL EN EL CENTRO + PANEL "IN THIS LOOK" A LA DERECHA -->
+          <div class="try-look-main-stage">
             
-            <!-- 1. COLUMNA IZQUIERDA: LISTA DE CAMISAS DISPONIBLES -->
-            <div class="fitting-col-shirts">
-              <div class="fitting-panel-title">
-                <i class="fa-solid fa-shirt"></i>
-                <span id="fittingShirtsCountTitle">Camisas Disponibles (Mujer)</span>
-              </div>
-              <div class="fitting-shirts-list" id="fittingShirtsList">
-                <!-- Se inyecta dinámicamente desde js/app.js -->
-              </div>
-            </div>
-
-            <!-- 2. COLUMNA CENTRAL: EL MANIQUÍ EN MEDIO (FIJO) Y LA CAMISA QUE CAMBIA -->
-            <div class="fitting-col-model">
-              <div class="model-stage-card">
-                <div class="model-stage-badge" id="modelStageBadge">
-                  <i class="fa-solid fa-vest"></i> <span id="modelStageBadgeText">Maniquí Femenino de Alta Moda</span>
-                </div>
-
-                <div class="model-view-viewport mannequin-viewport-card" id="mannequinViewport">
-                  <!-- Spotlight / Iluminación de pasarela -->
-                  <div class="mannequin-spotlight"></div>
-
-                  <!-- SVG INTERACTIVO: EL MANIQUÍ PERMANENTE + LA CAMISA INTERCAMBIABLE -->
-                  <svg class="mannequin-interactive-svg" viewBox="0 0 400 550" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="mqWoodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#c68a4c" />
-                        <stop offset="50%" stop-color="#9a622e" />
-                        <stop offset="100%" stop-color="#5a3312" />
-                      </linearGradient>
-
-                      <linearGradient id="mqPoleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#1c1917" />
-                        <stop offset="40%" stop-color="#3d3732" />
-                        <stop offset="70%" stop-color="#574f47" />
-                        <stop offset="100%" stop-color="#1c1917" />
-                      </linearGradient>
-
-                      <linearGradient id="mqLinenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#ded4c5" />
-                        <stop offset="35%" stop-color="#f8f2e9" />
-                        <stop offset="75%" stop-color="#ede3d5" />
-                        <stop offset="100%" stop-color="#cfc4b2" />
-                      </linearGradient>
-
-                      <linearGradient id="mqShirtShade" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#000000" stop-opacity="0.28" />
-                        <stop offset="25%" stop-color="#ffffff" stop-opacity="0.14" />
-                        <stop offset="60%" stop-color="#000000" stop-opacity="0" />
-                        <stop offset="85%" stop-color="#ffffff" stop-opacity="0.16" />
-                        <stop offset="100%" stop-color="#000000" stop-opacity="0.32" />
-                      </linearGradient>
-
-                      <filter id="mqSoftShadow" x="-10%" y="-10%" width="130%" height="130%">
-                        <feDropShadow dx="0" dy="6" stdDeviation="7" flood-opacity="0.14" />
-                      </filter>
-
-                      <filter id="mqShirtShadow" x="-10%" y="-10%" width="130%" height="130%">
-                        <feDropShadow dx="0" dy="7" stdDeviation="9" flood-opacity="0.22" />
-                      </filter>
-
-                      <clipPath id="shirtGraphicClip">
-                        <rect x="142" y="145" width="116" height="130" rx="8" />
-                      </clipPath>
-                    </defs>
-
-                    <!-- 1. BASE Y PEDESTAL FIJO DEL MANIQUÍ -->
-                    <!-- Sombra en el suelo -->
-                    <ellipse cx="200" cy="528" rx="85" ry="16" fill="rgba(23, 21, 18, 0.12)" />
-                    <ellipse cx="200" cy="526" rx="55" ry="10" fill="rgba(23, 21, 18, 0.20)" />
-
-                    <!-- Base circular de madera noble/metal -->
-                    <ellipse cx="200" cy="520" rx="56" ry="11" fill="url(#mqPoleGrad)" />
-                    <ellipse cx="200" cy="518" rx="53" ry="9" fill="#2d2824" />
-                    <ellipse cx="200" cy="517" rx="18" ry="4" fill="#524a43" />
-                    <!-- Poste central del pedestal -->
-                    <rect x="195" y="340" width="10" height="178" rx="3" fill="url(#mqPoleGrad)" />
-                    <rect x="197" y="340" width="2" height="178" fill="rgba(255,255,255,0.22)" />
-
-                    <!-- 2. CUERPO DEL MANIQUÍ (PERMANENTE Y FIJO) -->
-                    <g id="mannequinBodyGroup" filter="url(#mqSoftShadow)">
-                      <!-- Silueta del torso del maniquí -->
-                      <path id="mannequinTorsoPath" d="M185 70 L215 70 L230 78 L285 110 C275 140 262 170 258 200 C254 235 258 270 268 310 C268 335 240 348 200 348 C160 348 132 335 132 310 C142 270 146 235 142 200 C138 170 125 140 115 110 L170 78 Z" fill="url(#mqLinenGrad)" stroke="#cbbfae" stroke-width="1.5" />
-
-                      <!-- Costuras artesanales del maniquí de costura -->
-                      <path id="mannequinSeamLeft" d="M148 115 C162 180 162 250 152 325" fill="none" stroke="#baad9b" stroke-width="1.2" stroke-dasharray="3,3" />
-                      <path id="mannequinSeamRight" d="M252 115 C238 180 238 250 248 325" fill="none" stroke="#baad9b" stroke-width="1.2" stroke-dasharray="3,3" />
-                      <line x1="200" y1="75" x2="200" y2="346" stroke="#baad9b" stroke-width="1" stroke-dasharray="4,4" opacity="0.6" />
-
-                      <!-- Cuello de tela del maniquí -->
-                      <path d="M185 45 L215 45 L218 72 L182 72 Z" fill="url(#mqLinenGrad)" stroke="#cbbfae" stroke-width="1.2" />
-
-                      <!-- Remate superior de madera noble del maniquí -->
-                      <ellipse cx="200" cy="45" rx="18" ry="7" fill="url(#mqWoodGrad)" />
-                      <ellipse cx="200" cy="38" rx="13" ry="8" fill="url(#mqWoodGrad)" stroke="#553010" stroke-width="1" />
-                      <ellipse cx="200" cy="35" rx="7" ry="4" fill="#d99f60" opacity="0.6" />
-                    </g>
-
-                    <!-- 3. LA CAMISA VESTIDA EN EL MANIQUÍ (SOLO ESTO SE CAMBIA) -->
-                    <g id="mannequinShirtGroup" filter="url(#mqShirtShadow)">
-                      <!-- Tela / silueta de la camisa (cambia de color dinámicamente) -->
-                      <path id="shirtSilhouette" class="shirt-fabric" d="
-                        M172 74
-                        Q200 92 228 74
-                        L276 96
-                        L315 152
-                        L284 178
-                        L264 160
-                        L265 315
-                        Q200 326 135 315
-                        L136 160
-                        L116 178
-                        L85 152
-                        L124 96
-                        Z
-                      " fill="#f97316" stroke="rgba(0,0,0,0.18)" stroke-width="1.5" />
-
-                      <!-- Volumen y sombras 3D realistas de la tela de algodón -->
-                      <path id="shirtShadingPath" d="
-                        M172 74
-                        Q200 92 228 74
-                        L276 96
-                        L315 152
-                        L284 178
-                        L264 160
-                        L265 315
-                        Q200 326 135 315
-                        L136 160
-                        L116 178
-                        L85 152
-                        L124 96
-                        Z
-                      " fill="url(#mqShirtShade)" pointer-events="none" />
-
-                      <!-- Pliegues realistas de caída textil -->
-                      <path d="M136 162 Q152 188 150 220" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="2" stroke-linecap="round" />
-                      <path d="M136 162 Q152 188 150 220" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-linecap="round" />
-                      <path d="M264 162 Q248 188 250 220" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="2" stroke-linecap="round" />
-                      <path d="M264 162 Q248 188 250 220" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-linecap="round" />
-                      <path d="M148 245 Q200 258 252 245" fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="2" stroke-linecap="round" />
-                      <path d="M152 278 Q200 292 248 278" fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="2" stroke-linecap="round" />
-                      <path d="M138 310 Q200 320 262 310" fill="none" stroke="rgba(0,0,0,0.16)" stroke-width="1" stroke-dasharray="3,2" />
-
-                      <!-- Cuello acanalado de la camisa (Crewneck) -->
-                      <path d="M170 73 Q200 95 230 73 Q200 87 170 73 Z" fill="rgba(0,0,0,0.16)" />
-                      <path d="M171 73 Q200 93 229 73" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2" />
-                      <path d="M174 76 Q200 96 226 76" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="2,2" />
-
-                      <!-- Costuras de las mangas -->
-                      <line x1="86" y1="151" x2="115" y2="177" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
-                      <line x1="88" y1="147" x2="117" y2="173" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2,2" />
-                      <line x1="314" y1="151" x2="285" y2="177" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
-                      <line x1="312" y1="147" x2="283" y2="173" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2,2" />
-
-                      <!-- 4. ÁREA DEL ESTAMPADO / DISEÑO DTF EN EL PECHO -->
-                      <g id="shirtGraphicContainer" clip-path="url(#shirtGraphicClip)">
-                        <image id="shirtGraphicImage" href="assets/cat.jpg" x="145" y="148" width="110" height="120" preserveAspectRatio="xMidYMid meet" style="transition: opacity 0.25s ease;" />
-                      </g>
-                    </g>
-                  </svg>
-
-                  <!-- Overlay flotante con detalle de la prenda sobre el maniquí -->
-                  <div class="model-overlay-tag">
-                    <div class="model-tag-name" id="modelTagName">Camisa Naranja Vibrante Dama</div>
-                    <div class="model-tag-meta">
-                      <span id="modelTagSize"><i class="fa-solid fa-ruler-combined"></i> Talla: M</span> • 
-                      <span id="modelTagColor"><i class="fa-solid fa-palette"></i> Color: Naranja</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="model-stage-footer">
-                  <span><i class="fa-solid fa-vest"></i> Maniquí fijo · Solo cambia la camisa</span>
-                  <span id="modelPriceTag" class="model-price-tag">L. 300.00</span>
+            <!-- PASARELA DEL CARRUSEL (MODELOS EN PERSPECTIVA) -->
+            <div class="runway-stage" id="runwayStage">
+              <!-- Fondo de estudio con luz ambiente suave -->
+              <div class="runway-ambient-light"></div>
+              
+              <!-- Pista de modelos -->
+              <div class="runway-track-viewport">
+                <div class="runway-track" id="runwayTrack">
+                  <!-- Se llena dinámicamente con los modelos del género seleccionado -->
                 </div>
               </div>
-            </div>
 
-            <!-- 3. COLUMNA DERECHA: SELECTOR DE TALLA, COLOR, CANTIDAD Y ACCIÓN -->
-            <div class="fitting-col-controls">
-              <div class="fitting-panel-title">
-                <i class="fa-solid fa-sliders"></i>
-                <span>Personaliza tu Pedido</span>
-              </div>
-
-              <div class="fitting-control-card">
-                <!-- CABECERA DE LA PRENDA SELECCIONADA -->
-                <div class="fitting-item-header">
-                  <div>
-                    <span id="fittingItemCat" class="fitting-category-pill">Casual · Mujer</span>
-                    <h4 id="fittingItemTitle" class="fitting-item-title">Camisa Naranja Vibrante Dama</h4>
-                  </div>
-                  <div class="fitting-item-price-box">
-                    <span id="fittingItemPrice" class="fitting-item-price">L. 300.00</span>
-                    <span id="fittingItemOldPrice" class="fitting-item-old-price">L. 340.00</span>
-                  </div>
-                </div>
-
-                <p id="fittingItemDesc" class="fitting-item-desc">
-                  Estilo llamativo y juvenil para mujer. Color intenso con tela transpirable de excelente caída.
-                </p>
-
-                <!-- SELECTOR DE COLOR -->
-                <div class="fitting-section-group">
-                  <label class="fitting-control-label">
-                    <i class="fa-solid fa-palette"></i> 1. Color disponible: 
-                    <strong id="fittingSelectedColorText">Naranja</strong>
-                  </label>
-                  <div class="fitting-color-swatches" id="fittingColorSwatches">
-                    <!-- Se inyecta dinámicamente -->
-                  </div>
-                </div>
-
-                <!-- SELECTOR DE TALLA -->
-                <div class="fitting-section-group">
-                  <label class="fitting-control-label">
-                    <i class="fa-solid fa-ruler-combined"></i> 2. Selecciona la Talla: 
-                    <strong id="fittingSelectedSizeText">M</strong>
-                  </label>
-                  <div class="fitting-size-pills" id="fittingSizePills">
-                    <!-- Se inyecta dinámicamente -->
-                  </div>
-                </div>
-
-                <!-- SELECTOR DE CANTIDAD -->
-                <div class="fitting-section-group">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <label class="fitting-control-label" style="margin-bottom: 0;">
-                      <i class="fa-solid fa-arrow-up-9-1"></i> 3. Cantidad:
-                    </label>
-                    <div class="fitting-qty-ctrl">
-                      <button type="button" class="fitting-qty-btn" onclick="changeFittingQty(-1)">-</button>
-                      <span id="fittingQtyDisplay">1</span>
-                      <button type="button" class="fitting-qty-btn" onclick="changeFittingQty(1)">+</button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- ACCIONES DE COMPRA -->
-                <div class="fitting-actions-box">
-                  <div class="fitting-subtotal-row">
-                    <span>Subtotal a pagar:</span>
-                    <strong id="fittingSubtotalText">L. 300.00</strong>
-                  </div>
-
-                  <div class="fitting-btn-stack">
-                    <button type="button" class="btn-fitting-cart" onclick="addFittingToCart(false)">
-                      <i class="fa-solid fa-cart-shopping"></i> Agregar al Carrito
-                    </button>
-                    <button type="button" class="btn-fitting-buy" onclick="addFittingToCart(true)">
-                      <i class="fa-solid fa-bolt"></i> Comprar Ahora
-                    </button>
-                  </div>
-                  
-                  <button type="button" class="btn-fitting-whatsapp" onclick="consultFittingOnWhatsApp()">
-                    <i class="fa-brands fa-whatsapp"></i> Consultar esta prenda por WhatsApp
+              <!-- CONTROLES INFERIORES: FLECHAS Y BARRA DE PROGRESO -->
+              <div class="runway-footer-controls">
+                <div class="runway-arrows-group">
+                  <button type="button" class="runway-nav-arrow" onclick="prevTryLook()" aria-label="Look anterior">
+                    <i class="fa-solid fa-arrow-left"></i>
                   </button>
+                  <button type="button" class="runway-nav-arrow" onclick="nextTryLook()" aria-label="Siguiente look">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
 
-                  <small class="fitting-secure-note">
-                    <i class="fa-solid fa-truck-fast"></i> Envíos en Tegucigalpa • Dirección: Acordar por WhatsApp
-                  </small>
+                <div class="runway-track-indicator">
+                  <div class="runway-progress-bar">
+                    <div class="runway-progress-fill" id="runwayProgressFill"></div>
+                  </div>
+                  <span class="runway-counter-text" id="runwayCounterText">01 / 05</span>
                 </div>
               </div>
             </div>
+
+            <!-- PANEL LATERAL FLOTANTE: "IN THIS LOOK" -->
+            <aside class="in-this-look-panel">
+              <div class="look-panel-tag">In this look</div>
+              
+              <!-- FICHA DEL PRODUCTO DEL LOOK ACTUAL -->
+              <div class="look-product-card">
+                <div class="look-product-thumb">
+                  <img id="lookProductImg" src="assets/cat.jpg" alt="Prenda del look">
+                </div>
+                <div class="look-product-meta">
+                  <h4 id="lookProductTitle" class="look-product-name">Camisa Naranja Vibrante Dama</h4>
+                  <div class="look-product-category" id="lookProductCat">Casual · Dama</div>
+                  <div class="look-price-row">
+                    <span id="lookProductPrice" class="look-current-price">L. 300.00</span>
+                    <span id="lookProductOldPrice" class="look-old-price">L. 340.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SELECTOR DE COLOR -->
+              <div class="look-custom-group">
+                <label class="look-custom-label">
+                  Color: <strong id="lookSelectedColorLabel">Naranja</strong>
+                </label>
+                <div class="look-color-swatches" id="lookColorSwatches">
+                  <!-- Se inyecta dinámicamente -->
+                </div>
+              </div>
+
+              <!-- SELECTOR DE TALLA -->
+              <div class="look-custom-group">
+                <label class="look-custom-label">
+                  Talla: <strong id="lookSelectedSizeLabel">M</strong>
+                </label>
+                <div class="look-size-pills" id="lookSizePills">
+                  <!-- Se inyecta dinámicamente -->
+                </div>
+              </div>
+
+              <!-- CANTIDAD -->
+              <div class="look-qty-section">
+                <span>Cantidad:</span>
+                <div class="look-qty-widget">
+                  <button type="button" class="look-qty-btn" onclick="changeLookQty(-1)">-</button>
+                  <span id="lookQtyVal">1</span>
+                  <button type="button" class="look-qty-btn" onclick="changeLookQty(1)">+</button>
+                </div>
+              </div>
+
+              <!-- BOTONES DE COMPRA Y WHATSAPP -->
+              <div class="look-checkout-stack">
+                <div class="look-total-line">
+                  <span>Total a pagar:</span>
+                  <strong id="lookTotalVal">L. 300.00</strong>
+                </div>
+
+                <button type="button" class="btn-look-add-bag" onclick="addCurrentLookToCart(false)">
+                  <i class="fa-solid fa-bag-shopping"></i> Agregar al Carrito
+                </button>
+
+                <button type="button" class="btn-look-buy-now" onclick="addCurrentLookToCart(true)">
+                  <i class="fa-solid fa-bolt"></i> Comprar Ahora
+                </button>
+
+                <button type="button" class="btn-look-whatsapp" onclick="consultLookOnWhatsApp()">
+                  <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
+                </button>
+
+                <small class="look-guarantee-note">
+                  <i class="fa-solid fa-truck-fast"></i> Envíos en Tegucigalpa • Dirección: Acordar por WhatsApp
+                </small>
+              </div>
+            </aside>
 
           </div>
         </div>
@@ -721,8 +547,8 @@
   </div>
 
   <!-- Scripts diferidos -->
-  <script defer src="js/store.js?v=3.9"></script>
-  <script defer src="js/app.js?v=3.9"></script>
+  <script defer src="js/store.js?v=4.0"></script>
+  <script defer src="js/app.js?v=4.0"></script>
 
 </body>
 </html>

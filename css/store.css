@@ -18,6 +18,7 @@
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -118,6 +119,7 @@
     opacity: 0;
     transform: translateY(-6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -926,741 +928,574 @@
 }
 
 /* ==================================================
-   SELECTOR INTERACTIVO DE GÉNERO (HOMBRE / MUJER)
+   EXPERIENCIA 2026: TRY THE LOOK (CARRUSEL 3D EN PASARELA)
 ================================================== */
-.gender-selection-hero {
-  background: linear-gradient(135deg, #ffffff 0%, #faf5ef 100%);
+.try-look-wrapper {
+  background: #fbf9f5;
   border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 24px 28px;
-  margin-bottom: 28px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-}
-
-.gender-selection-header {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 20px;
-}
-
-.gender-selection-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(161, 29, 49, 0.09);
-  color: var(--wine);
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 5px 14px;
-  border-radius: 999px;
-  margin-bottom: 8px;
-}
-
-.gender-selection-title {
-  font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 800;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-
-.gender-selection-subtitle {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.gender-toggle-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 740px;
-  margin: 0 auto;
-}
-
-.gender-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: #fff;
-  border: 2px solid rgba(23, 21, 18, 0.1);
-  border-radius: 18px;
-  padding: 18px 22px;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-align: left;
+  border-radius: 28px;
+  padding: 32px 36px;
+  margin-bottom: 38px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
-  font-family: inherit;
 }
 
-.gender-card:hover {
-  border-color: var(--wine);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(161, 29, 49, 0.12);
-}
-
-.gender-card.active {
-  border-color: var(--wine);
-  background: #fff8f8;
-  box-shadow: 0 10px 26px rgba(161, 29, 49, 0.16);
-}
-
-.gender-card-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  font-size: 24px;
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-}
-
-.gender-card-icon.woman {
-  background: #fdf2f8;
-  color: #db2777;
-}
-
-.gender-card-icon.man {
-  background: #eff6ff;
-  color: #2563eb;
-}
-
-.gender-card.active .gender-card-icon {
-  background: var(--wine);
-  color: #fff;
-  transform: scale(1.05);
-}
-
-.gender-card-info {
-  flex: 1;
-}
-
-.gender-card-info strong {
-  display: block;
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--ink);
-  margin-bottom: 3px;
-}
-
-.gender-card.active .gender-card-info strong {
-  color: var(--wine);
-}
-
-.gender-card-info span {
-  display: block;
-  font-size: 12.5px;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-.gender-card-badge {
-  display: none;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--wine);
-  background: rgba(161, 29, 49, 0.1);
-  padding: 4px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.gender-card.active .gender-card-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* ==================================================
-   PROBADOR VIRTUAL INTERACTIVO CON EL MODELO EN MEDIO
-================================================== */
-.fitting-room-wrapper {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  padding: 30px;
-  margin-bottom: 36px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
-  position: relative;
-}
-
-.fitting-room-header {
-  margin-bottom: 24px;
-  border-bottom: 1px solid rgba(23, 21, 18, 0.07);
-  padding-bottom: 18px;
+.try-look-topbar {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.fitting-badge {
+.try-look-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 800;
+  color: #171512;
+  letter-spacing: -0.8px;
+  margin-bottom: 4px;
+}
+
+.try-look-desc {
+  font-size: 14px;
+  color: #6e675f;
+  max-width: 540px;
+}
+
+/* GENDER SWITCH */
+.try-look-gender-switch {
+  display: inline-flex;
+  background: #ede6dc;
+  padding: 4px;
+  border-radius: 999px;
+  gap: 4px;
+}
+
+.try-gender-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #5a544d;
+  cursor: pointer;
+  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #fff5f6;
+}
+
+.try-gender-btn:hover {
+  color: #171512;
+}
+
+.try-gender-btn.active {
+  background: #fff;
   color: var(--wine);
-  font-size: 11.5px;
-  font-weight: 800;
-  padding: 4px 12px;
-  border-radius: 999px;
-  margin-bottom: 6px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
-.fitting-room-header h3 {
-  font-size: clamp(22px, 2.5vw, 28px);
-  font-weight: 800;
-  color: var(--ink);
-}
-
-.fitting-room-header p {
-  font-size: 14px;
-  color: var(--muted);
-  max-width: 480px;
-}
-
-/* GRID EN 3 COLUMNAS: CAMISAS | MODELO EN MEDIO | CONTROLES */
-.fitting-room-grid {
+/* ESCENARIO PRINCIPAL */
+.try-look-main-stage {
   display: grid;
-  grid-template-columns: 290px 1fr 340px;
-  gap: 24px;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
   align-items: stretch;
 }
 
-.fitting-panel-title {
+/* PASARELA DE MODELOS (CENTRO) */
+.runway-stage {
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, #ffffff 0%, #f4eee3 55%, #eae1d2 100%);
+  border-radius: 22px;
+  border: 1px solid rgba(23, 21, 18, 0.08);
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.03);
+}
+
+.runway-ambient-light {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 480px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.runway-track-viewport {
+  position: relative;
+  width: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--ink);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 14px;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  perspective: 1200px;
 }
 
-.fitting-panel-title i {
-  color: var(--wine);
+.runway-track {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 1. COLUMNA IZQUIERDA: LISTA DE CAMISAS DISPONIBLES */
-.fitting-col-shirts {
+/* TARJETA DEL MODELO EN LA PASARELA (EFECTO 3D EN PERSPECTIVA) */
+.runway-model-card {
+  position: absolute;
+  width: 250px;
+  height: 400px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity, filter;
+  user-select: none;
 }
 
-.fitting-shirts-list {
+.runway-model-img-wrap {
+  width: 100%;
+  height: 360px;
+  position: relative;
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.runway-model-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.18));
+  transition: transform 0.35s ease;
+  pointer-events: none;
+}
+
+/* Sombra de contacto suave en el suelo del estudio */
+.runway-model-shadow {
+  width: 170px;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(23, 21, 18, 0.28) 0%, rgba(23, 21, 18, 0) 70%);
+  border-radius: 50%;
+  margin-top: -6px;
+  pointer-events: none;
+  transition: all 0.35s ease;
+}
+
+/* ESTADOS DE LOS MODELOS SEGÚN POSICIÓN */
+.runway-model-card.active-look {
+  z-index: 10;
+  transform: translateX(0) scale(1.08);
+  opacity: 1;
+  filter: blur(0px) brightness(1);
+}
+
+.runway-model-card.active-look .runway-model-img {
+  transform: translateY(-4px);
+}
+
+.runway-model-card.active-look .runway-model-shadow {
+  width: 190px;
+  background: radial-gradient(ellipse at center, rgba(23, 21, 18, 0.35) 0%, rgba(23, 21, 18, 0) 70%);
+}
+
+.runway-model-card.pos-left-1 {
+  z-index: 5;
+  transform: translateX(-190px) scale(0.85);
+  opacity: 0.55;
+  filter: blur(0.8px) brightness(0.92);
+}
+
+.runway-model-card.pos-right-1 {
+  z-index: 5;
+  transform: translateX(190px) scale(0.85);
+  opacity: 0.55;
+  filter: blur(0.8px) brightness(0.92);
+}
+
+.runway-model-card.pos-left-2 {
+  z-index: 2;
+  transform: translateX(-340px) scale(0.70);
+  opacity: 0.25;
+  filter: blur(2px) brightness(0.85);
+}
+
+.runway-model-card.pos-right-2 {
+  z-index: 2;
+  transform: translateX(340px) scale(0.70);
+  opacity: 0.25;
+  filter: blur(2px) brightness(0.85);
+}
+
+.runway-model-card.pos-hidden {
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+}
+
+/* BADGE DEL LOOK ACTIVO EN EL MODELO CENTRAL */
+.runway-active-badge {
+  position: absolute;
+  top: 10px;
+  background: rgba(23, 21, 18, 0.85);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.runway-model-card.active-look .runway-active-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CONTROLES INFERIORES DE LA PASARELA */
+.runway-footer-controls {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 4;
+  border-top: 1px solid rgba(23, 21, 18, 0.06);
+}
+
+.runway-arrows-group {
+  display: flex;
   gap: 10px;
-  max-height: 520px;
-  overflow-y: auto;
-  padding-right: 6px;
 }
 
-/* Scrollbar estilizada */
-.fitting-shirts-list::-webkit-scrollbar {
-  width: 5px;
-}
-.fitting-shirts-list::-webkit-scrollbar-track {
-  background: #f8f5ee;
-  border-radius: 10px;
-}
-.fitting-shirts-list::-webkit-scrollbar-thumb {
-  background: rgba(161, 29, 49, 0.25);
-  border-radius: 10px;
-}
-.fitting-shirts-list::-webkit-scrollbar-thumb:hover {
-  background: var(--wine);
-}
-
-.fitting-shirt-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #fdfbf7;
-  border: 1.5px solid rgba(23, 21, 18, 0.08);
-  border-radius: 14px;
-  padding: 10px 12px;
+.runway-nav-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(23, 21, 18, 0.12);
+  color: #171512;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-align: left;
-  font-family: inherit;
-  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.fitting-shirt-item:hover {
-  background: #fff;
-  border-color: var(--wine);
-  transform: translateX(3px);
-  box-shadow: 0 4px 12px rgba(161, 29, 49, 0.1);
+.runway-nav-arrow:hover {
+  background: #171512;
+  color: #ffffff;
+  transform: scale(1.05);
 }
 
-.fitting-shirt-item.active {
-  background: #fff8f8;
-  border-color: var(--wine);
-  box-shadow: 0 4px 16px rgba(161, 29, 49, 0.16);
+.runway-track-indicator {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.fitting-shirt-thumb {
-  width: 54px;
-  height: 54px;
+.runway-progress-bar {
+  width: 140px;
+  height: 3px;
+  background: rgba(23, 21, 18, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.runway-progress-fill {
+  height: 100%;
+  background: var(--wine);
+  width: 20%;
+  transition: width 0.35s ease;
+}
+
+.runway-counter-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #5a544d;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==================================================
+   PANEL LATERAL: "IN THIS LOOK"
+================================================== */
+.in-this-look-panel {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.look-panel-tag {
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+/* FICHA DEL PRODUCTO */
+.look-product-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: #fdfbf7;
+  border: 1px solid rgba(23, 21, 18, 0.08);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.look-product-thumb {
+  width: 64px;
+  height: 64px;
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--line);
-  flex-shrink: 0;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
 }
 
-.fitting-shirt-thumb img {
+.look-product-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.fitting-shirt-details {
+.look-product-meta {
   flex: 1;
   min-width: 0;
 }
 
-.fitting-shirt-details strong {
-  display: block;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--ink);
+.look-product-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #171512;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 2px;
 }
 
-.fitting-shirt-item.active .fitting-shirt-details strong {
-  color: var(--wine);
-}
-
-.fitting-shirt-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-}
-
-.fitting-shirt-cat {
+.look-product-category {
+  font-size: 11.5px;
   color: var(--muted);
-  font-size: 11px;
-}
-
-.fitting-shirt-price {
-  font-weight: 800;
-  color: var(--wine);
-}
-
-.fitting-shirt-select-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid rgba(23, 21, 18, 0.2);
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.fitting-shirt-item.active .fitting-shirt-select-dot {
-  border-color: var(--wine);
-  background: var(--wine);
-  box-shadow: 0 0 0 3px rgba(161, 29, 49, 0.2);
-}
-
-/* 2. COLUMNA CENTRAL: EL MODELO EN MEDIO */
-.fitting-col-model {
-  display: flex;
-  flex-direction: column;
-}
-
-.model-stage-card {
-  background: radial-gradient(circle at 50% 30%, #ffffff 0%, #f7f1e7 100%);
-  border: 1.5px solid rgba(23, 21, 18, 0.09);
-  border-radius: 20px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(0, 0, 0, 0.05);
-  height: 100%;
-  min-height: 520px;
-}
-
-.model-stage-badge {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  z-index: 10;
-  background: rgba(23, 21, 18, 0.85);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.model-stage-badge i {
-  color: #f4d29a;
-}
-
-.model-view-viewport {
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #fff;
-  border: 1px solid rgba(23, 21, 18, 0.06);
-}
-
-.mannequin-viewport-card {
-  position: relative;
-  background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f6f0e6 65%, #ece3d4 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 520px;
-  overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid rgba(23, 21, 18, 0.08);
-}
-
-.mannequin-spotlight {
-  position: absolute;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px;
-  height: 420px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.mannequin-interactive-svg {
-  width: 100%;
-  max-width: 380px;
-  height: auto;
-  max-height: 490px;
-  display: block;
-  z-index: 2;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.09));
-}
-
-.shirt-fabric {
-  transition: fill 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-#shirtGraphicContainer image {
-  transition: opacity 0.25s ease;
-}
-
-.model-overlay-tag {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(23, 21, 18, 0.08);
-  border-radius: 14px;
-  padding: 10px 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  z-index: 5;
-}
-
-.model-tag-name {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.model-tag-meta {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.model-tag-meta span {
-  font-weight: 700;
-  color: var(--wine);
-}
-
-.model-stage-footer {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12.5px;
-  color: var(--muted);
-  font-weight: 600;
-  padding: 0 4px;
-}
-
-.model-price-tag {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--wine);
-}
-
-/* 3. COLUMNA DERECHA: PERSONALIZADOR Y ACCIONES */
-.fitting-col-controls {
-  display: flex;
-  flex-direction: column;
-}
-
-.fitting-control-card {
-  background: #fdfbf7;
-  border: 1.5px solid rgba(23, 21, 18, 0.09);
-  border-radius: 20px;
-  padding: 22px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.fitting-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.fitting-category-pill {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--wine);
   margin-bottom: 4px;
 }
 
-.fitting-item-title {
+.look-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.look-current-price {
   font-size: 17px;
-  font-weight: 800;
-  color: var(--ink);
-  line-height: 1.3;
-}
-
-.fitting-item-price-box {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.fitting-item-price {
-  display: block;
-  font-size: 20px;
   font-weight: 800;
   color: var(--wine);
 }
 
-.fitting-item-old-price {
-  display: block;
-  font-size: 13px;
+.look-old-price {
+  font-size: 12px;
   color: var(--muted);
   text-decoration: line-through;
 }
 
-.fitting-item-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 18px;
+/* SELECTORES DE COLOR Y TALLA */
+.look-custom-group {
+  margin-bottom: 14px;
 }
 
-.fitting-section-group {
-  margin-bottom: 18px;
-  background: #fff;
-  border: 1px solid rgba(23, 21, 18, 0.07);
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-
-.fitting-control-label {
+.look-custom-label {
   display: block;
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 10px;
+  color: #171512;
+  margin-bottom: 8px;
 }
 
-.fitting-control-label strong {
+.look-custom-label strong {
   color: var(--wine);
 }
 
-/* PALETA DE COLORES INTERACTIVOS */
-.fitting-color-swatches {
+.look-color-swatches {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
-.fitting-color-btn {
+.look-color-chip {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
+  gap: 6px;
+  padding: 5px 11px;
   border-radius: 999px;
-  background: #faf8f5;
-  border: 1.5px solid rgba(23, 21, 18, 0.12);
-  font-size: 12px;
+  background: #f8f5ee;
+  border: 1.5px solid rgba(23, 21, 18, 0.10);
+  font-size: 11.5px;
   font-weight: 700;
-  color: var(--ink);
+  color: #171512;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;
 }
 
-.fitting-color-btn:hover {
+.look-color-chip:hover {
   border-color: var(--wine);
   background: #fff;
 }
 
-.fitting-color-btn.active {
+.look-color-chip.active {
   border-color: var(--wine);
   background: #fff8f8;
   color: var(--wine);
-  box-shadow: 0 2px 8px rgba(161, 29, 49, 0.18);
 }
 
-.fitting-color-dot {
-  width: 14px;
-  height: 14px;
+.look-color-dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.15);
   flex-shrink: 0;
 }
 
-/* TALLAS */
-.fitting-size-pills {
+.look-size-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
-.fitting-size-btn {
-  min-width: 42px;
-  height: 38px;
-  padding: 0 12px;
-  border-radius: 10px;
-  background: #faf8f5;
-  border: 1.5px solid rgba(23, 21, 18, 0.12);
-  font-size: 13px;
+.look-size-btn {
+  min-width: 38px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 9px;
+  background: #f8f5ee;
+  border: 1.5px solid rgba(23, 21, 18, 0.10);
+  font-size: 12.5px;
   font-weight: 800;
-  color: var(--ink);
+  color: #171512;
   cursor: pointer;
-  transition: all 0.2s ease;
   display: grid;
   place-items: center;
+  transition: all 0.2s ease;
   font-family: inherit;
 }
 
-.fitting-size-btn:hover {
+.look-size-btn:hover {
   border-color: var(--wine);
   background: #fff;
 }
 
-.fitting-size-btn.active {
-  border-color: var(--wine);
+.look-size-btn.active {
   background: var(--wine);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(161, 29, 49, 0.25);
+  border-color: var(--wine);
+  color: #ffffff;
 }
 
 /* CANTIDAD */
-.fitting-qty-ctrl {
-  display: inline-flex;
+.look-qty-section {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  background: #faf8f5;
-  border: 1.5px solid rgba(23, 21, 18, 0.12);
-  border-radius: 999px;
-  padding: 3px 8px;
-  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #171512;
 }
 
-.fitting-qty-btn {
-  width: 28px;
-  height: 28px;
+.look-qty-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f5ee;
+  border: 1px solid rgba(23, 21, 18, 0.10);
+  border-radius: 999px;
+  padding: 2px 6px;
+}
+
+.look-qty-btn {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: none;
   background: #fff;
-  color: var(--ink);
-  font-size: 15px;
+  color: #171512;
+  font-size: 13px;
   font-weight: 800;
   cursor: pointer;
   display: grid;
   place-items: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
-.fitting-qty-btn:hover {
+.look-qty-btn:hover {
   background: var(--wine);
   color: #fff;
 }
 
-#fittingQtyDisplay {
-  font-size: 15px;
+#lookQtyVal {
+  font-size: 14px;
   font-weight: 800;
-  min-width: 18px;
+  min-width: 16px;
   text-align: center;
 }
 
-/* BOTONES DE COMPRA EN PROBADOR */
-.fitting-actions-box {
-  margin-top: 14px;
+/* ACCIONES DE CHECKOUT */
+.look-checkout-stack {
+  margin-top: 10px;
 }
 
-.fitting-subtotal-row {
+.look-total-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 13.5px;
   margin-bottom: 12px;
-  padding: 0 2px;
 }
 
-.fitting-subtotal-row strong {
-  font-size: 20px;
+.look-total-line strong {
+  font-size: 19px;
   font-weight: 800;
   color: var(--wine);
 }
 
-.fitting-btn-stack {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.btn-fitting-cart {
+.btn-look-add-bag {
+  width: 100%;
   background: #171512;
   color: #fff;
   border: none;
   border-radius: 12px;
-  padding: 13px 14px;
+  padding: 12px 14px;
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
@@ -1670,20 +1505,21 @@
   gap: 8px;
   transition: all 0.2s ease;
   font-family: inherit;
+  margin-bottom: 8px;
 }
 
-.btn-fitting-cart:hover {
+.btn-look-add-bag:hover {
   background: #2b2825;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
-.btn-fitting-buy {
+.btn-look-buy-now {
+  width: 100%;
   background: var(--wine);
   color: #fff;
   border: none;
   border-radius: 12px;
-  padding: 13px 14px;
+  padding: 12px 14px;
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
@@ -1693,22 +1529,22 @@
   gap: 8px;
   transition: all 0.2s ease;
   font-family: inherit;
+  margin-bottom: 8px;
 }
 
-.btn-fitting-buy:hover {
+.btn-look-buy-now:hover {
   background: #871324;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(161, 29, 49, 0.3);
 }
 
-.btn-fitting-whatsapp {
+.btn-look-whatsapp {
   width: 100%;
   background: #25d366;
   color: #fff;
   border: none;
   border-radius: 12px;
-  padding: 11px 14px;
-  font-size: 13px;
+  padding: 10px 14px;
+  font-size: 12.5px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -1720,19 +1556,18 @@
   margin-bottom: 8px;
 }
 
-.btn-fitting-whatsapp:hover {
+.btn-look-whatsapp:hover {
   background: #1eb855;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
 }
 
-.fitting-secure-note {
+.look-guarantee-note {
   display: block;
   text-align: center;
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--muted);
 }
 
-/* SEPARADOR DE SECCIÓN */
+/* SEPARADOR */
 .catalog-section-divider {
   display: flex;
   align-items: center;
@@ -1757,45 +1592,44 @@
   gap: 8px;
 }
 
-/* ==================================================
-   RESPONSIVE PARA EL PROBADOR VIRTUAL
-================================================== */
-@media (max-width: 1080px) {
-  .fitting-room-grid {
-    grid-template-columns: 260px 1fr 300px;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 900px) {
-  .fitting-room-grid {
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .try-look-main-stage {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
 
-  .fitting-col-model {
-    order: 1; /* Modelo en primer lugar o segundo */
-  }
-
-  .fitting-col-controls {
+  .in-this-look-panel {
     order: 2;
   }
 
-  .fitting-col-shirts {
-    order: 3;
+  .runway-stage {
+    order: 1;
+    min-height: 480px;
   }
 
-  .fitting-shirts-list {
-    max-height: 350px;
-  }
-
-  .model-stage-card {
-    min-height: 440px;
-  }
-
-  .gender-toggle-cards {
-    grid-template-columns: 1fr;
+  .runway-model-card {
+    width: 210px;
+    height: 360px;
   }
 }
 
+@media (max-width: 600px) {
+  .try-look-wrapper {
+    padding: 20px 16px;
+  }
 
+  .runway-model-card.pos-left-1 {
+    transform: translateX(-120px) scale(0.8);
+    opacity: 0.4;
+  }
+
+  .runway-model-card.pos-right-1 {
+    transform: translateX(120px) scale(0.8);
+    opacity: 0.4;
+  }
+
+  .runway-model-card.pos-left-2,
+  .runway-model-card.pos-right-2 {
+    display: none;
+  }
+}
